@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Light Industrial — Stop retyping supplier invoices</title>
+<meta name="description" content="Light Industrial reads the quotes, delivery notes and invoices your suppliers send — and pushes clean, matched data straight into your stock and accounts." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ---------- Tokens: Nocturne (variants/03-nocturne/design.md) ---------- */
+  :root {
+    --bg: #1E2024;
+    --bg-deep: #131418;
+    --bg-deep-rgb: 19,20,24;
+    --surface: #2A2D33;
+    --surface-rgb: 42,45,51;
+    --glass: rgba(255,255,255,0.05);
+    --glass-2: rgba(255,255,255,0.03);
+    --ink: #F2F5FA;
+    --ink-secondary: #A9B4C6;
+    --ink-muted: #6E7A8F;
+    --border: rgba(255,255,255,0.10);
+    --border-strong: rgba(255,255,255,0.16);
+    --anchor: #E0A24A;      /* graphite amber */
+    --anchor-rgb: 224,162,74;
+    --accent: #EFB86A;      /* lighter amber */
+    --accent-rgb: 239,184,106;
+    --accent-soft: rgba(var(--anchor-rgb),0.16);
+    --cool-rgb: 120,124,134; /* neutral cool glow */
+    --on-accent: #1a1406;   /* dark ink on solid amber */
+    --on-accent-rgb: 26,20,6;
+    --positive: #5FCDA0;    /* mint — Matched */
+    --caution: var(--accent); /* amber — Review */
+
+    --font-display: 'Lato', system-ui, sans-serif;
+    --font-body: 'Lato', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --tk-display: -0.008em; /* Lato heading tracking */
+
+    --section: 104px;
+    --container: 1200px;
+
+    --r-sm: 6px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px; --r-pill: 9999px;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --sh-card: 0 24px 60px -34px rgba(0,0,0,0.6);
+    --sh-float: 0 40px 90px -40px rgba(0,0,0,0.7);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--bg-deep); color: var(--ink); line-height: 1.7; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+  ::selection { background: var(--accent); color: var(--bg-deep); }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Signature: atmospheric background ---------- */
+  .atmos { position: fixed; inset: 0; z-index: -2; overflow: hidden; background:
+      radial-gradient(120% 90% at 50% -10%, var(--surface) 0%, var(--bg) 42%, var(--bg-deep) 100%); }
+  .atmos .ember { position: absolute; width: 75vw; height: 75vw; top: -22%; right: -12%;
+      background: radial-gradient(circle, rgba(var(--anchor-rgb),0.30), rgba(var(--anchor-rgb),0.07) 38%, transparent 64%);
+      filter: blur(18px); animation: drift1 26s var(--ease) infinite alternate; }
+  .atmos .cool { position: absolute; width: 85vw; height: 85vw; bottom: -34%; left: -22%;
+      background: radial-gradient(circle, rgba(var(--cool-rgb),0.22), transparent 58%);
+      filter: blur(30px); animation: drift2 34s var(--ease) infinite alternate; }
+  @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(-6%,7%) scale(1.14); } }
+  @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(9%,-5%) scale(1.1); } }
+  /* dither dot matrix + film grain */
+  .dither { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(rgba(255,255,255,0.045) 0.5px, transparent 0.6px);
+      background-size: 3px 3px; opacity: 0.5; }
+  .grain { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 40px; }
+  @media (max-width: 720px) { .container { padding: 0 22px; } }
+  section { position: relative; }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: var(--tk-display); line-height: 1.06; color: var(--ink); }
+  .eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+
+  .sys-tag { font-family: var(--font-body); font-size: 10.5px; font-weight: 600; letter-spacing: 0.02em; padding: 3px 9px; border-radius: var(--r-sm); background: var(--glass); border: 1px solid var(--border); color: var(--ink-secondary); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .sys-tag.matched { background: rgba(95,205,160,0.14); border-color: rgba(95,205,160,0.3); color: #86e0be; }
+  .sys-tag.review { background: rgba(var(--accent-rgb),0.16); border-color: rgba(var(--accent-rgb),0.35); color: color-mix(in srgb, var(--accent) 82%, white); }
+  .sys-tag .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+  /* Buttons */
+  .btn { font-family: var(--font-body); font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 24px; border-radius: var(--r-md); cursor: pointer; border: 1px solid transparent; transition: transform 220ms var(--ease), background-color 220ms var(--ease), color 220ms var(--ease), border-color 220ms var(--ease), box-shadow 220ms var(--ease); }
+  .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .btn .arw { transition: transform 220ms var(--ease); }
+  .btn:hover .arw { transform: translateX(3px); }
+  .btn-primary { background: var(--anchor); color: var(--on-accent); box-shadow: 0 16px 34px -18px rgba(var(--anchor-rgb),0.7); }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-outline { background: rgba(255,255,255,0.02); color: var(--ink); border-color: var(--border-strong); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* Circular icon badge */
+  .badge { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; background: var(--accent-soft); border: 1px solid rgba(var(--accent-rgb),0.3); }
+  .badge svg { width: 19px; height: 19px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Dark-glass system-UI inset */
+  .ui { background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-md); padding: 15px; backdrop-filter: blur(8px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+  .ui-label { font-family: var(--font-body); font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+  .avatar { width: 27px; height: 27px; border-radius: 7px; background: var(--accent-soft); border: 1px solid rgba(var(--accent-rgb),0.3); color: var(--accent); display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-secondary); background: var(--glass-2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 4px 9px; }
+  .ui-row { display: flex; align-items: center; gap: 10px; }
+  .ui-divide { height: 1px; background: var(--border); margin: 11px 0; }
+  .check { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--ink-secondary); padding: 4px 0; }
+  .check .box { width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid var(--ink-muted); flex-shrink: 0; position: relative; }
+  .check.done .box { background: var(--positive); border-color: var(--positive); }
+  .check.done .box::after { content: ""; position: absolute; left: 4.5px; top: 1px; width: 4px; height: 8px; border: solid var(--bg-deep); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+  .check.done { color: var(--ink); }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(var(--bg-deep-rgb),0.6); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--accent-soft); border: 1px solid rgba(var(--accent-rgb),0.3); display: grid; place-items: center; flex-shrink: 0; position: relative; }
+  .brand-mark span { width: 12px; height: 12px; border: 2px solid var(--accent); border-radius: 2px; }
+  .brand-mark::after { content: ""; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .brand-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand-name b { font-weight: 400; color: var(--ink-secondary); }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a.link { font-size: 14px; color: var(--ink-secondary); position: relative; padding: 4px 0; transition: color 200ms var(--ease); }
+  .nav-links a.link::after { content: ""; position: absolute; left: 0; bottom: 0; height: 1.5px; width: 0; background: var(--accent); transition: width 240ms var(--ease); }
+  .nav-links a.link:hover { color: var(--ink); }
+  .nav-links a.link:hover::after { width: 100%; }
+  .nav-links a.link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .nav-cta { font-size: 14px; padding: 10px 18px; }
+  @media (max-width: 900px) { .nav-links .link { display: none; } }
+
+  /* Hero */
+  .hero { padding: 80px 0 100px; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1.08fr; gap: 56px; align-items: center; }
+  @media (max-width: 1040px) { .hero-grid { grid-template-columns: 1fr; gap: 44px; } }
+  .hero h1 { font-size: clamp(44px, 5.6vw, 66px); margin: 22px 0 0; letter-spacing: calc(var(--tk-display) - 0.01em); }
+  .hero h1 .soft { color: var(--accent); }
+  .hero-sub { font-size: 18px; color: var(--ink-secondary); max-width: 30em; margin-top: 22px; }
+  .hero-cta { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+  .hero-note { margin-top: 22px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); display: flex; align-items: center; gap: 8px; }
+  .hero-note .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(var(--accent-rgb),0.2); }
+
+  /* Hero visual — dark glass window in an ember glow */
+  .visual-wrap { position: relative; }
+  .visual-wrap::before { content: ""; position: absolute; inset: -12% -8% -12% -4%; z-index: 0; background: radial-gradient(60% 60% at 70% 30%, rgba(var(--anchor-rgb),0.35), transparent 62%); filter: blur(20px); }
+  .capture { position: relative; z-index: 1; background: rgba(var(--surface-rgb),0.72); border: 1px solid var(--border-strong); border-radius: var(--r-xl); padding: 18px; backdrop-filter: blur(14px); box-shadow: var(--sh-float), inset 0 1px 0 rgba(255,255,255,0.06); }
+  .capture-head { display: flex; align-items: center; justify-content: space-between; padding: 0 2px 14px; border-bottom: 1px solid var(--border); }
+  .capture-head .ttl { font-family: var(--font-body); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+  .capture-head .dots { display: flex; gap: 6px; }
+  .capture-head .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+  .capture-body { display: grid; grid-template-columns: 0.9fr auto 1.1fr; gap: 12px; padding-top: 16px; align-items: stretch; }
+  @media (max-width: 480px) { .capture-body { grid-template-columns: 1fr; } .capture-arrow { transform: rotate(90deg); justify-self: center; } }
+  .doc { position: relative; background: var(--glass-2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 13px; overflow: hidden; }
+  .doc-brand { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--ink-muted); text-transform: uppercase; }
+  .doc-title { font-family: var(--font-display); font-weight: 600; font-size: 15px; margin: 5px 0 12px; letter-spacing: -0.02em; }
+  .doc-line { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.09); margin-bottom: 8px; }
+  .doc-line.s2 { width: 82%; } .doc-line.s3 { width: 64%; }
+  .doc-rows { margin-top: 11px; border-top: 1px solid var(--border); padding-top: 10px; }
+  .doc-row { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--ink-secondary); padding: 3px 0; }
+  .doc-row b { color: var(--ink); font-weight: 500; }
+  .doc-scan { position: absolute; left: 0; right: 0; height: 24%; top: -30%; background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb),0.4), transparent); border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent); animation: scan 3.6s var(--ease) infinite; }
+  @keyframes scan { 0% { top: -30%; } 55% { top: 108%; } 100% { top: 108%; } }
+  .capture-arrow { display: grid; place-items: center; color: var(--ink-muted); }
+  .capture-arrow svg { width: 22px; height: 22px; }
+  .extract { display: flex; flex-direction: column; gap: 8px; }
+  .ex-cap { font-family: var(--font-body); font-size: 9.5px; font-weight: 600; letter-spacing: 0.13em; color: var(--ink-muted); text-transform: uppercase; }
+  .ex-row { border: 1px solid var(--border); border-radius: var(--r-md); padding: 9px 11px; background: var(--glass-2); display: flex; flex-direction: column; gap: 5px; }
+  .ex-row .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .ex-row .desc { font-size: 12px; font-weight: 600; color: var(--ink); }
+  .ex-row .meta { font-family: var(--font-mono); font-size: 9.5px; color: var(--ink-muted); display: flex; gap: 10px; }
+  .ex-row .meta .sku { color: var(--accent); }
+  .ex-row.is-review { border-color: rgba(var(--accent-rgb),0.35); background: rgba(var(--accent-rgb),0.08); }
+  .visual-cap { position: relative; z-index: 1; text-align: center; margin-top: 16px; font-family: var(--font-body); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+
+  /* Section shell */
+  .sec { padding: var(--section) 0; }
+  .sec-head { max-width: 40em; }
+  .sec-head h2 { font-size: clamp(30px, 3.8vw, 46px); margin-top: 14px; }
+  .sec-head p { color: var(--ink-secondary); font-size: 17px; margin-top: 16px; }
+  .band { background: rgba(var(--bg-deep-rgb),0.5); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  /* Problem */
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  @media (max-width: 860px) { .pain-grid { grid-template-columns: 1fr; } }
+  .pain { background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px 26px; backdrop-filter: blur(8px); }
+  .pain .idx { font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); letter-spacing: 0.1em; }
+  .pain h3 { font-size: 21px; margin: 15px 0 10px; }
+  .pain p { font-size: 14.5px; color: var(--ink-secondary); }
+  .pain .quote { margin-top: 18px; font-size: 13.5px; color: var(--ink-muted); border-left: 2px solid var(--accent); padding-left: 12px; font-style: italic; }
+
+  /* How it works */
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
+  @media (max-width: 980px) { .flow { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .flow { grid-template-columns: 1fr; } }
+  .step { border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px 22px; background: var(--glass-2); backdrop-filter: blur(6px); transition: transform 300ms var(--ease), border-color 300ms var(--ease), background-color 300ms var(--ease); }
+  .step:hover { transform: translateY(-4px); border-color: var(--border-strong); background: var(--glass); }
+  .step.is-auto { border-color: rgba(var(--accent-rgb),0.28); background: rgba(var(--accent-rgb),0.06); }
+  .step-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .step .num { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.08em; }
+  .step h3 { font-size: 20px; margin-bottom: 8px; }
+  .step p { font-size: 14px; color: var(--ink-secondary); }
+  .step .flag { margin-top: 16px; font-family: var(--font-body); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 7px; }
+  .step .flag.auto { color: var(--accent); }
+  .step .flag.auto .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(var(--accent-rgb),0.2); }
+  .step .flag.manual { color: var(--ink-muted); }
+  .flow-legend { margin-top: 28px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); display: flex; align-items: center; gap: 10px; }
+  .flow-legend .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+  /* Smart capture bento */
+  .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; align-items: start; }
+  @media (max-width: 980px) { .bento { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .bento { grid-template-columns: 1fr; } }
+  .bcard { background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px 22px; backdrop-filter: blur(8px); transition: transform 300ms var(--ease), border-color 300ms var(--ease); }
+  .bcard:hover { transform: translateY(-4px); border-color: var(--border-strong); }
+  .bcard.wide { grid-column: span 2; }
+  @media (max-width: 620px) { .bcard.wide { grid-column: span 1; } }
+  .bcard .b-label { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+  .bcard h3 { font-size: 20px; margin: 8px 0 0; }
+  .bcard .b-desc { font-size: 14px; color: var(--ink-secondary); margin-top: 10px; }
+  .bcard .ui { margin-top: 18px; }
+  .merge { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .merge .to { color: var(--ink-muted); font-family: var(--font-mono); font-size: 12px; }
+  .kv { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-family: var(--font-mono); font-size: 11px; }
+  .kv + .kv { margin-top: 7px; }
+  .kv .k { color: var(--ink-secondary); }
+  .kv .v { color: var(--accent); }
+  .conv-big { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); }
+  .conv-big .from { font-size: 15px; color: var(--ink-muted); }
+  .conv-big .eq { color: var(--ink-muted); }
+  .conv-big .to { font-size: 23px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+
+  /* Grows */
+  .mod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  @media (max-width: 860px) { .mod-grid { grid-template-columns: 1fr; } }
+  .mod { background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 28px 26px; backdrop-filter: blur(8px); }
+  .mod .badge { margin-bottom: 18px; }
+  .mod .k { font-family: var(--font-body); font-size: 10px; font-weight: 600; color: var(--ink-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+  .mod h3 { font-size: 21px; margin: 11px 0 8px; }
+  .mod p { font-size: 14.5px; color: var(--ink-secondary); }
+
+  /* Who */
+  .who-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 46px; }
+  @media (max-width: 860px) { .who-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .who-grid { grid-template-columns: 1fr; } }
+  .who { border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px 22px; background: var(--glass-2); transition: transform 260ms var(--ease), border-color 260ms var(--ease); }
+  .who:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .who .n { font-family: var(--font-mono); font-size: 10px; color: var(--ink-muted); }
+  .who h3 { font-size: 19px; margin: 13px 0 6px; }
+  .who p { font-size: 13.5px; color: var(--ink-secondary); }
+
+  /* CTA */
+  .cta-band { padding: 40px 0 var(--section); }
+  .cta-card { position: relative; border-radius: var(--r-xl); padding: 58px 50px; overflow: hidden; border: 1px solid var(--border-strong); background: rgba(var(--surface-rgb),0.66); backdrop-filter: blur(14px); display: grid; grid-template-columns: 1.2fr 1fr; gap: 44px; align-items: center; box-shadow: var(--sh-float); }
+  @media (max-width: 860px) { .cta-card { grid-template-columns: 1fr; padding: 40px 28px; gap: 32px; } }
+  .cta-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 120% at 88% 6%, rgba(var(--anchor-rgb),0.28), transparent 58%); }
+  .cta-card > * { position: relative; z-index: 1; }
+  .cta-card h2 { font-size: clamp(30px, 3.6vw, 44px); margin: 14px 0 12px; }
+  .cta-card p { color: var(--ink-secondary); font-size: 16px; max-width: 26em; }
+  .accent-card { background: var(--anchor); color: var(--on-accent); border-radius: var(--r-lg); padding: 26px 24px; }
+  .accent-card .ac-ttl { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+  .accent-card p { color: rgba(var(--on-accent-rgb),0.82) !important; font-size: 13.5px; margin-top: 8px; max-width: none; }
+  .accent-card .ac-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  .accent-card .btn { width: 100%; }
+  .accent-card .btn-dark { background: var(--bg-deep); color: var(--accent); }
+  .accent-card .btn-dark:hover { background: var(--bg-deep); transform: translateY(-2px); }
+  .accent-card .btn-line { background: transparent; border-color: rgba(var(--on-accent-rgb),0.3); color: var(--on-accent); }
+  .accent-card .btn-line:hover { border-color: var(--on-accent); background: rgba(var(--on-accent-rgb),0.06); }
+  .accent-card .ac-foot { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(var(--on-accent-rgb),0.2); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: rgba(var(--on-accent-rgb),0.72); text-transform: uppercase; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 72px 0 40px; position: relative; }
+  .foot-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .foot-statement { font-family: var(--font-display); font-size: clamp(34px, 5vw, 58px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.0; }
+  .foot-statement .dim { color: var(--ink-muted); }
+  .foot-tags { display: flex; gap: 22px; margin-top: 22px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-muted); }
+  .foot-links { display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--ink-secondary); text-align: right; }
+  .foot-links a:hover { color: var(--ink); }
+  .foot-meta { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(22px); filter: blur(8px); transition: opacity 760ms var(--ease), transform 760ms var(--ease), filter 760ms var(--ease); }
+  .reveal.in { opacity: 1; transform: none; filter: none; }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+    .doc-scan { display: none; }
+    .atmos .ember, .atmos .cool { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="atmos" aria-hidden="true"><span class="ember"></span><span class="cool"></span></div>
+  <div class="dither" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Light Industrial home">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span class="brand-name">Light <b>Industrial</b></span>
+      </a>
+      <div class="nav-links">
+        <a class="link" href="#problem">The problem</a>
+        <a class="link" href="#how">How it works</a>
+        <a class="link" href="#capture">Smart capture</a>
+        <a class="link" href="#who">Who it's for</a>
+        <a class="btn btn-primary nav-cta" href="#cta">Send an invoice <span class="arw">→</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow reveal">OCR supplier document capture</span>
+        <h1 class="reveal">Stop retyping<br>supplier <span class="soft">invoices.</span></h1>
+        <p class="hero-sub reveal">Light Industrial reads the quotes, delivery notes and invoices your suppliers send you — and pushes clean, matched data straight into your stock and accounts.</p>
+        <div class="hero-cta reveal">
+          <a class="btn btn-primary" href="#cta">Send us a supplier invoice <span class="arw">→</span></a>
+          <a class="btn btn-outline" href="#how">See how it works</a>
+        </div>
+        <p class="hero-note reveal"><span class="dot"></span> Paperwork in, structured data out — no retyping, no reconciliation by hand.</p>
+      </div>
+
+      <div class="visual-wrap reveal">
+        <div class="capture" aria-label="Supplier document captured and matched to stock">
+          <div class="capture-head">
+            <span class="ttl">Capture &amp; match</span>
+            <span class="dots"><i></i><i></i><i></i></span>
+          </div>
+          <div class="capture-body">
+            <div class="doc">
+              <div class="doc-scan"></div>
+              <div class="doc-brand">Delivery note · Eurosteel</div>
+              <div class="doc-title">DN-4471</div>
+              <div class="doc-line"></div><div class="doc-line s2"></div><div class="doc-line s3"></div>
+              <div class="doc-rows">
+                <div class="doc-row"><span>S/STEEL SHEET 304</span><b>×2</b></div>
+                <div class="doc-row"><span>M10 BOLT (BOX)</span><b>×3</b></div>
+                <div class="doc-row"><span>WELD WIRE 0.8</span><b>×1</b></div>
+              </div>
+            </div>
+            <div class="capture-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            <div class="extract">
+              <span class="ex-cap">Matched to your stock</span>
+              <div class="ex-row">
+                <div class="top"><span class="desc">S/Steel Sheet 304 2B</span><span class="sys-tag matched"><span class="dot"></span>Matched</span></div>
+                <div class="meta"><span class="sku">ITM-0007</span><span>2 sheets</span><span>99%</span></div>
+              </div>
+              <div class="ex-row">
+                <div class="top"><span class="desc">M10 Bolt, Zinc</span><span class="sys-tag matched"><span class="dot"></span>Matched</span></div>
+                <div class="meta"><span class="sku">ITM-1182</span><span>3 box → 300 ea</span><span>96%</span></div>
+              </div>
+              <div class="ex-row is-review">
+                <div class="top"><span class="desc">Weld Wire 0.8mm</span><span class="sys-tag review"><span class="dot"></span>Review</span></div>
+                <div class="meta"><span class="sku">2 suggestions</span><span>1 reel</span><span>71%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="visual-cap">Diagram 01 — capture &amp; match</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Problem -->
+  <section class="sec band" id="problem">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow">The daily tax</span>
+        <h2>The paperwork already arrived. Now someone has to type it.</h2>
+        <p>Three things quietly cost you hours every week — and they all start with a document a supplier sent back.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain reveal">
+          <span class="idx">01 / RE-ENTRY</span>
+          <h3>Typed in by hand</h3>
+          <p>Every quote and invoice gets keyed into your system line by line. Again, and again, and again.</p>
+          <p class="quote">"That's two afternoons a week, just capturing."</p>
+        </div>
+        <div class="pain reveal">
+          <span class="idx">02 / DRIFT</span>
+          <h3>Counts that don't match</h3>
+          <p>Goods arrive, the note gets filed, stock never gets updated. Your system says 40; the shelf says 12.</p>
+          <p class="quote">"We stopped trusting the numbers months ago."</p>
+        </div>
+        <div class="pain reveal">
+          <span class="idx">03 / MONTH-END</span>
+          <h3>Reconciled by hand</h3>
+          <p>Delivery notes against POs against invoices, matched line by line when the month closes.</p>
+          <p class="quote">"Every month-end is a paper hunt."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="sec" id="how">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow">The loop</span>
+        <h2>Raise it, capture it, receive it. Stock keeps itself honest.</h2>
+        <p>One flow from purchase order to updated stock. The capture steps run automatically — you only confirm what the system isn't sure about.</p>
+      </div>
+      <div class="flow">
+        <div class="step reveal">
+          <div class="step-top"><span class="badge"><svg viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg></span><span class="num">01</span></div>
+          <h3>Raise a purchase order</h3>
+          <p>Create a PO in the system or import one, and send it to your supplier.</p>
+          <span class="flag manual">Your move</span>
+        </div>
+        <div class="step is-auto reveal">
+          <div class="step-top"><span class="badge"><svg viewBox="0 0 24 24"><path d="M4 4h16v14H4z"/><path d="M4 9h16M8 13h6"/></svg></span><span class="num">02</span></div>
+          <h3>Supplier replies</h3>
+          <p>A quote comes back as a PDF, an email, or a photo. OCR reads the document.</p>
+          <span class="flag auto"><span class="dot"></span>Automated capture</span>
+        </div>
+        <div class="step is-auto reveal">
+          <div class="step-top"><span class="badge"><svg viewBox="0 0 24 24"><path d="M4 7h10M4 12h6M4 17h8"/><path d="M16 14l3 3 4-5"/></svg></span><span class="num">03</span></div>
+          <h3>Normalise &amp; match</h3>
+          <p>Captured lines are matched to your stock items and suppliers. Anything unknown is flagged for a one-click confirm.</p>
+          <span class="flag auto"><span class="dot"></span>Automated capture</span>
+        </div>
+        <div class="step reveal">
+          <div class="step-top"><span class="badge"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span><span class="num">04</span></div>
+          <h3>Accept the quote</h3>
+          <p>Approve it and the quote becomes an approved order, ready to receive against.</p>
+          <span class="flag manual">Your move</span>
+        </div>
+        <div class="step is-auto reveal">
+          <div class="step-top"><span class="badge"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></span><span class="num">05</span></div>
+          <h3>Capture the receipt</h3>
+          <p>Snap the delivery note when goods arrive. OCR reconciles it against the order — full or partial.</p>
+          <span class="flag auto"><span class="dot"></span>Automated capture</span>
+        </div>
+        <div class="step is-auto reveal">
+          <div class="step-top"><span class="badge"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span><span class="num">06</span></div>
+          <h3>Stock updates itself</h3>
+          <p>Levels rise automatically on receipt, in the units you actually count, with a full audit trail.</p>
+          <span class="flag auto"><span class="dot"></span>Automated capture</span>
+        </div>
+      </div>
+      <p class="flow-legend reveal"><span class="dot"></span> Ember = runs automatically. Paperwork in, structured data out.</p>
+    </div>
+  </section>
+
+  <!-- Smart capture -->
+  <section class="sec band" id="capture">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Under the hood</span>
+        <h2>The smart bits that make capture trustworthy.</h2>
+        <p>Reading the text is the easy part. The value is in what happens next — matched, converted, and flagged when it isn't sure.</p>
+      </div>
+      <div class="bento">
+        <div class="bcard wide reveal">
+          <span class="b-label">Supplier normalisation</span>
+          <h3>One supplier, not four spellings</h3>
+          <p class="b-desc">Captured supplier details are matched to records you already have. Duplicates collapse; genuinely new suppliers are proposed for you to confirm — never silently created.</p>
+          <div class="ui">
+            <span class="ui-label">Resolving supplier</span>
+            <div class="ui-divide"></div>
+            <div class="merge">
+              <span class="chip">Eurosteel (Pty) Ltd</span>
+              <span class="chip">EUROSTEEL</span>
+              <span class="chip">euro steel jhb</span>
+              <span class="to">→</span>
+              <span class="sys-tag matched"><span class="dot"></span>1 supplier</span>
+            </div>
+            <div class="ui-divide"></div>
+            <div class="ui-row"><span class="avatar">E</span><div><div style="font-size:13px;font-weight:600">Eurosteel</div><div class="ui-label" style="margin-top:2px">ITM linked · 92 items</div></div></div>
+          </div>
+        </div>
+
+        <div class="bcard reveal">
+          <span class="b-label">Human-in-the-loop</span>
+          <h3>Trust, not magic</h3>
+          <p class="b-desc">Low-confidence fields are flagged for a quick confirm rather than trusted blindly.</p>
+          <div class="ui">
+            <div class="ui-row" style="justify-content:space-between"><span style="font-size:13px;font-weight:600">Weld Wire 0.8mm</span><span class="sys-tag review"><span class="dot"></span>71%</span></div>
+            <div class="ui-divide"></div>
+            <span class="ui-label">Suggested match</span>
+            <div class="kv" style="margin-top:8px"><span class="k">MIG Wire 0.8mm ER70S</span><span class="v">ITM-0431</span></div>
+            <div style="display:flex;gap:8px;margin-top:12px"><span class="sys-tag matched" style="padding:5px 11px">Confirm</span><span class="sys-tag" style="padding:5px 11px">Pick another</span></div>
+          </div>
+        </div>
+
+        <div class="bcard reveal">
+          <span class="b-label">Line-item matching</span>
+          <h3>Fuzzy text, exact item</h3>
+          <p class="b-desc">OCR'd descriptions are fuzzy-matched to your catalogue, with a suggested match — not a blank field.</p>
+          <div class="ui">
+            <span class="ui-label">Captured → matched</span>
+            <div class="ui-divide"></div>
+            <div class="kv"><span class="k">"S/STEEL SHT 304"</span><span class="sys-tag matched"><span class="dot"></span>99%</span></div>
+            <div class="kv"><span class="k">S/Steel Sheet 304 2B</span><span class="v">ITM-0007</span></div>
+            <div class="ui-divide"></div>
+            <div class="kv"><span class="k">"M10 BOLT BOX"</span><span class="sys-tag matched"><span class="dot"></span>96%</span></div>
+            <div class="kv"><span class="k">M10 Bolt, Zinc</span><span class="v">ITM-1182</span></div>
+          </div>
+        </div>
+
+        <div class="bcard reveal">
+          <span class="b-label">Unit &amp; packaging conversion</span>
+          <h3>Boxes in, units on hand</h3>
+          <p class="b-desc">Suppliers sell in boxes; you count in units. Conversion is applied at receipt.</p>
+          <div class="ui">
+            <span class="ui-label">Applied at receipt</span>
+            <div class="ui-divide"></div>
+            <div class="conv-big"><span class="from">3 boxes</span><span class="eq">=</span><span class="to">300 units</span></div>
+            <div class="kv" style="margin-top:10px"><span class="k">1 box</span><span class="v">100 ea</span></div>
+          </div>
+        </div>
+
+        <div class="bcard reveal">
+          <span class="b-label">Partial receipts</span>
+          <h3>Receive what arrived</h3>
+          <p class="b-desc">Take in what turned up and keep the rest open. Stock reflects reality, not the PO.</p>
+          <div class="ui">
+            <div class="ui-row" style="justify-content:space-between"><span class="ui-label">PO-0180 · receiving</span><span class="sys-tag matched">7 of 10</span></div>
+            <div class="ui-divide"></div>
+            <div class="check done"><span class="box"></span>S/Steel Sheet 304 — 2 of 2</div>
+            <div class="check done"><span class="box"></span>M10 Bolt — 5 of 5</div>
+            <div class="check"><span class="box"></span>Weld Wire 0.8 — 0 of 3 <span class="sys-tag" style="margin-left:auto">still open</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grows -->
+  <section class="sec" id="grows">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow">And it grows with you</span>
+        <h2>Capture is the wedge. There's a platform behind it.</h2>
+        <p>Once your paperwork is structured data, the rest of your operation gets easier too.</p>
+      </div>
+      <div class="mod-grid">
+        <div class="mod reveal">
+          <span class="badge"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></span>
+          <span class="k">Inventory</span>
+          <h3>Stock, in your units</h3>
+          <p>Track what's on hand in the units you actually consume, with thresholds that flag items before they run critical.</p>
+        </div>
+        <div class="mod reveal">
+          <span class="badge"><svg viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg></span>
+          <span class="k">Quoting</span>
+          <h3>Quote from stock</h3>
+          <p>Turn your stock and pricing into client quotes without rebuilding the catalogue somewhere else.</p>
+        </div>
+        <div class="mod reveal">
+          <span class="badge"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          <span class="k">Accounting</span>
+          <h3>Sync to your books</h3>
+          <p>Push customers and invoices to your accounting package — QuickBooks first, more to follow.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who -->
+  <section class="sec band" id="who">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Built for</span>
+        <h2>Light-industrial businesses run on email, spreadsheets, and a disconnected accounting package.</h2>
+      </div>
+      <div class="who-grid">
+        <div class="who reveal"><span class="n">01</span><h3>Manufacturers</h3><p>Small-to-mid shops buying materials in, tracking what's consumed.</p></div>
+        <div class="who reveal"><span class="n">02</span><h3>Fabricators</h3><p>Steel, timber, plastics — priced by supplier, counted by you.</p></div>
+        <div class="who reveal"><span class="n">03</span><h3>Wholesalers</h3><p>High supplier volume, constant receiving, thin margins for error.</p></div>
+        <div class="who reveal"><span class="n">04</span><h3>Trade suppliers</h3><p>Owner-operators and ops managers drowning in supplier paperwork.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" id="cta">
+    <div class="container">
+      <div class="cta-card reveal">
+        <div>
+          <span class="eyebrow">See it on your own documents</span>
+          <h2>Send us a supplier invoice. Watch it get captured.</h2>
+          <p>Nothing sells this like watching it eat your own messy paperwork. Send one document — we'll run it through and show you the structured result.</p>
+        </div>
+        <div class="accent-card">
+          <div class="ac-ttl">Send an invoice</div>
+          <p>One document, one honest look at the capture-and-match result. No account needed.</p>
+          <div class="ac-actions">
+            <a class="btn btn-dark" href="mailto:danika@lightindustrial.co.za?subject=Capture%20my%20invoice">Send a supplier invoice →</a>
+            <a class="btn btn-line" href="mailto:danika@lightindustrial.co.za?subject=15-min%20demo">Book a 15-min demo</a>
+          </div>
+          <div class="ac-foot">Reply within one business day</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="foot-top">
+        <div>
+          <div class="foot-statement">Capture. <span class="dim">Match.</span><br>Reconcile.</div>
+          <div class="foot-tags"><span>CAPTURE</span><span>MATCH</span><span>RECEIVE</span><span>SYNC</span></div>
+        </div>
+        <div class="foot-links">
+          <a href="#problem">The problem</a>
+          <a href="#how">How it works</a>
+          <a href="#capture">Smart capture</a>
+          <a href="#cta">Send an invoice</a>
+        </div>
+      </div>
+      <div class="foot-meta">
+        <span>© 2026 Light Industrial</span>
+        <span>lightindustrial.co.za</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var els = document.querySelectorAll('.reveal');
+      if (prefersReduced || !('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el, i) { el.style.transitionDelay = Math.min(i % 6, 5) * 55 + 'ms'; io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
