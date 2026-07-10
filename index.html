@@ -115,7 +115,7 @@
 
   /* Nav */
   .nav { position: sticky; top: 0; z-index: 100; background: rgba(var(--bg-deep-rgb),0.6); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; padding-bottom: 18px; }
   .brand { display: flex; align-items: center; gap: 11px; }
   .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--accent-soft); border: 1px solid rgba(var(--accent-rgb),0.3); display: grid; place-items: center; flex-shrink: 0; position: relative; }
   .brand-mark span { width: 12px; height: 12px; border: 2px solid var(--accent); border-radius: 2px; }
@@ -277,6 +277,7 @@
   .foot-tags { display: flex; gap: 22px; margin-top: 22px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-muted); }
   .foot-links { display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--ink-secondary); text-align: right; }
   .foot-links a:hover { color: var(--ink); }
+  @media (max-width: 620px) { .foot-links { text-align: left; } }
   .foot-meta { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); }
 
   /* Reveal */
@@ -308,7 +309,7 @@
         <a class="link" href="#how">How it works</a>
         <a class="link" href="#capture">Smart capture</a>
         <a class="link" href="#who">Who it's for</a>
-        <a class="btn btn-primary nav-cta" href="#cta">Send an invoice <span class="arw">→</span></a>
+        <a class="btn btn-primary nav-cta" href="mailto:danika@lightindustrial.co.za?subject=Capture%20my%20invoice">Send an invoice <span class="arw">→</span></a>
       </div>
     </div>
   </nav>
@@ -321,7 +322,7 @@
         <h1 class="reveal">Stop retyping<br>supplier <span class="soft">invoices.</span></h1>
         <p class="hero-sub reveal">Light Industrial reads the quotes, delivery notes and invoices your suppliers send you — and pushes clean, matched data straight into your stock and accounts.</p>
         <div class="hero-cta reveal">
-          <a class="btn btn-primary" href="#cta">Send us a supplier invoice <span class="arw">→</span></a>
+          <a class="btn btn-primary" href="mailto:danika@lightindustrial.co.za?subject=Capture%20my%20invoice">Send us a supplier invoice <span class="arw">→</span></a>
           <a class="btn btn-outline" href="#how">See how it works</a>
         </div>
         <p class="hero-note reveal"><span class="dot"></span> Paperwork in, structured data out — no retyping, no reconciliation by hand.</p>
@@ -614,7 +615,7 @@
           <a href="#problem">The problem</a>
           <a href="#how">How it works</a>
           <a href="#capture">Smart capture</a>
-          <a href="#cta">Send an invoice</a>
+          <a href="mailto:danika@lightindustrial.co.za?subject=Capture%20my%20invoice">Send an invoice</a>
         </div>
       </div>
       <div class="foot-meta">
