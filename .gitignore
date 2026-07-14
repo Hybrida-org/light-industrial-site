@@ -1,0 +1,6 @@
+# Cloudflare Wrangler local state/cache
+.wrangler/
+
+# Local-only Worker secrets for `wrangler dev` (never commit real keys)
+worker/.dev.vars
+.dev.vars

@@ -1,0 +1,10 @@
+name = "light-industrial-supplier-invoice"
+main = "send-invoice.js"
+compatibility_date = "2024-11-01"
+
+# Non-secret variables. Edit these to your real values, then `wrangler deploy`.
+# The Resend API key is NOT set here — it's a secret (see README.md).
+[vars]
+TO_EMAIL = "danika@lightindustrial.co.za"
+FROM_EMAIL = "Light Industrial <invoices@mail.lightindustrial.co.za>"
+ALLOWED_ORIGIN = "https://lightindustrial.co.za"
