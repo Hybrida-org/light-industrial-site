@@ -61,7 +61,7 @@
             <span class="block">
               <span class="reveal-word" style="transition-delay: 0.1s;">Snap</span>
               <span class="reveal-word" style="transition-delay: 0.2s;">the</span>
-              <span class="reveal-word" style="transition-delay: 0.3s;">invoice.</span>
+              <span class="reveal-word" style="transition-delay: 0.3s;">paperwork.</span>
             </span>
             <span class="block">
               <span class="reveal-word" style="transition-delay: 0.4s;">Skip</span>
@@ -74,8 +74,8 @@
           <div class="hero-divider reveal-fade" style="transition-delay: 0.7s;"></div>
 
           <p class="hero-text reveal-para" style="transition-delay: 0.8s;">
-            For the manufacturers, wholesalers and trade suppliers who are done keying the same
-            paperwork into two systems. Snap it, check it, and your stock and books stay current.
+            For the manufacturers, wholesalers and trade suppliers who are done keying every
+            supplier document into two systems. Snap it, check it, and your stock and books stay current.
           </p>
         </div>
       </div>
@@ -369,23 +369,23 @@
                 <button type="button" class="flow-c" data-flow="0" aria-label="Step 1: Raise PO">
                   <span class="flow-ci flow-ci--blue"><iconify-icon icon="solar:document-add-linear"></iconify-icon></span>
                   <span class="flow-cl">Raise PO</span>
-                  <span class="flow-cs">Create and send to supplier</span>
+                  <span class="flow-cs">Create and send to suppliers</span>
                   <span class="flow-sn">01</span>
                 </button>
                 <div class="flow-cn flow-r1c1"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
-                <button type="button" class="flow-c flow-c--ai" data-flow="1" aria-label="Step 2: Supplier replies">
+                <button type="button" class="flow-c flow-c--ai" data-flow="1" aria-label="Step 2: Suppliers reply">
                   <span class="flow-badge">OCR</span>
                   <span class="flow-pulse"></span>
                   <span class="flow-ci flow-ci--purple"><iconify-icon icon="solar:scanner-linear"></iconify-icon></span>
-                  <span class="flow-cl">Supplier replies</span>
-                  <span class="flow-cs">Quote arrives, AI reads it</span>
+                  <span class="flow-cl">Suppliers reply</span>
+                  <span class="flow-cs">Quotes arrive, AI reads them</span>
                   <span class="flow-sn">02</span>
                 </button>
                 <div class="flow-cn flow-r1c2"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
-                <button type="button" class="flow-c" data-flow="2" aria-label="Step 3: Match to stock">
-                  <span class="flow-ci flow-ci--teal"><iconify-icon icon="solar:checklist-minimalistic-linear"></iconify-icon></span>
-                  <span class="flow-cl">Match to stock</span>
-                  <span class="flow-cs">Lines matched to stock items</span>
+                <button type="button" class="flow-c" data-flow="2" aria-label="Step 3: Accept quote">
+                  <span class="flow-ci flow-ci--green"><iconify-icon icon="solar:check-circle-linear"></iconify-icon></span>
+                  <span class="flow-cl">Accept quote</span>
+                  <span class="flow-cs">Compare quotes, accept one</span>
                   <span class="flow-sn">03</span>
                 </button>
               </div>
@@ -395,21 +395,21 @@
                 <div class="flow-turn-line"><div class="flow-turn-dot"></div></div>
               </div>
 
-              <!-- Row 2: Steps 4–6 -->
-              <div class="flow-row">
-                <button type="button" class="flow-c" data-flow="3" aria-label="Step 4: Accept quote">
-                  <span class="flow-ci flow-ci--green"><iconify-icon icon="solar:check-circle-linear"></iconify-icon></span>
-                  <span class="flow-cl">Accept quote</span>
-                  <span class="flow-cs">Approved, ready to receive</span>
-                  <span class="flow-sn">04</span>
-                </button>
-                <div class="flow-cn flow-r2c1"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
-                <button type="button" class="flow-c flow-c--ai" data-flow="4" aria-label="Step 5: Capture receipt">
+              <!-- Row 2: Steps 4–6 (flows right-to-left so the turn line reads 3 -> 4) -->
+              <div class="flow-row flow-row-rev">
+                <button type="button" class="flow-c flow-c--ai" data-flow="3" aria-label="Step 4: Capture receipt">
                   <span class="flow-badge">OCR</span>
                   <span class="flow-pulse"></span>
                   <span class="flow-ci flow-ci--purple"><iconify-icon icon="solar:camera-linear"></iconify-icon></span>
                   <span class="flow-cl">Capture receipt</span>
                   <span class="flow-cs">Snap delivery note on arrival</span>
+                  <span class="flow-sn">04</span>
+                </button>
+                <div class="flow-cn flow-r2c1"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
+                <button type="button" class="flow-c" data-flow="4" aria-label="Step 5: Match to stock">
+                  <span class="flow-ci flow-ci--teal"><iconify-icon icon="solar:checklist-minimalistic-linear"></iconify-icon></span>
+                  <span class="flow-cl">Match to stock</span>
+                  <span class="flow-cs">Received lines matched to stock</span>
                   <span class="flow-sn">05</span>
                 </button>
                 <div class="flow-cn flow-r2c2"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
@@ -426,7 +426,7 @@
             <!-- Detail panel -->
             <div class="flow-det" id="flowDet" aria-live="polite">
               <p class="flow-det-t" id="flowDt">The full order-to-stock loop</p>
-              <p id="flowDd" style="margin:0">From purchase order to updated stock counts, running on the paperwork your suppliers already send. AI reads the documents at steps 02 and 05.</p>
+              <p id="flowDd" style="margin:0">From purchase order to updated stock counts, running on the paperwork your suppliers already send. AI reads the documents at steps 02 and 04.</p>
             </div>
           </div>
         </div>
@@ -437,12 +437,12 @@
   <script>
     (function () {
       var flowData = [
-        { t: 'Raise a purchase order', d: 'Create a PO and send it to your supplier. That’s the starting point. You say what you need, and a clean order goes out.' },
-        { t: 'Supplier replies', d: 'The quote comes back as a PDF, an email, or a photo of a handwritten sheet. OCR reads it and pulls out every line, price and quantity. No typing.' },
-        { t: 'Match to your stock', d: 'Captured lines are matched to your existing stock items and suppliers. Anything unfamiliar is flagged for a one-tap confirm. No duplicates, no guessing.' },
-        { t: 'Accept the quote', d: 'Review and approve. The quote becomes an approved order, ready to receive goods against, so your team knows exactly what’s coming.' },
-        { t: 'Capture the receipt', d: 'When goods arrive, snap the delivery note. OCR reconciles it against the order, flags any differences and handles partial deliveries automatically.' },
-        { t: 'Stock updates itself', d: 'Levels rise automatically on receipt, in the units you actually count, and every change is logged with a full audit trail.' }
+        { t: 'Raise a purchase order', d: 'Create a PO and send it to your suppliers. You say exactly what you need, and it goes out for them to quote against.' },
+        { t: 'Suppliers reply', d: 'The quotes come back as PDFs, emails, or photos of handwritten sheets. OCR reads each one and pulls out every line, price and quantity. No typing.' },
+        { t: 'Accept the quote', d: 'Compare the quotes on price and what you are getting, then approve the one that works best. The quote you accept becomes your firm order, ready to receive goods against.' },
+        { t: 'Capture the receipt', d: 'When goods arrive, snap the delivery note. OCR reads it, checks it against the order and flags any differences, handling partial deliveries automatically.' },
+        { t: 'Match to your stock', d: 'Received lines are matched to your existing stock items and suppliers. Anything unfamiliar is flagged for a one-tap confirm. No duplicates, no guessing.' },
+        { t: 'Stock updates itself', d: 'Levels rise automatically once the receipt is matched, in the units you actually count, and every change is logged with a full audit trail.' }
       ];
       var titleEl = document.getElementById('flowDt');
       var descEl = document.getElementById('flowDd');
