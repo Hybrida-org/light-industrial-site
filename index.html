@@ -1014,6 +1014,19 @@
 
 
   <script>
+  // Measure the scrollbar once, so the modals can fill the gap they leave behind.
+  // Re-measured on resize because the width can change between monitors.
+  (function () {
+    function measure() {
+      var width = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.setProperty('--scrollbar-width', Math.max(0, width) + 'px');
+    }
+    measure();
+    window.addEventListener('resize', measure);
+  })();
+  </script>
+
+  <script>
   // Booking (Calendly) modal
   (function () {
     var overlay = document.getElementById('demoModal');

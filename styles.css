@@ -538,7 +538,11 @@ box-shadow: inset 0 1px 0 rgba(231,227,218,0.03);
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
 
 /* ===== MODALS (booking + send-an-invoice) — ported ===== */
-body.modal-open { overflow: hidden; }
+/* Locking the page behind a modal removes the scrollbar, and the page would jump
+   sideways into the freed space. Pad the body by exactly the scrollbar's width to
+   fill it. --scrollbar-width is measured once on load; it is 0 where scrollbars
+   float over the page (macOS default), so this costs nothing there. */
+body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); }
 .modal-overlay { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(8,9,10,0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity 260ms ease, visibility 260ms ease; }
 .modal-overlay.open { opacity: 1; visibility: visible; }
 .modal-overlay[hidden] { display: none; }
