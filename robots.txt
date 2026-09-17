@@ -1,0 +1,5 @@
+# Everything on this site is public marketing — crawl all of it.
+User-agent: *
+Allow: /
+
+Sitemap: https://lightindustrial.co.za/sitemap.xml
