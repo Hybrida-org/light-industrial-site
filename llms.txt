@@ -1,0 +1,43 @@
+# Light Industrial
+
+> Operations software for light industrial businesses in South Africa. Supplier
+> paperwork is photographed instead of retyped: the system reads the line items,
+> matches them to the business's own stock codes and suppliers, and keeps buying,
+> receiving and stock in one place.
+
+Built and run by Hybrida, Cape Town. Prices are quoted in South African rand,
+excluding VAT.
+
+## Who it is for
+
+Manufacturers, engineering workshops, fabricators, refrigeration and cold-chain
+firms, and similar businesses with a stores function and a steady flow of
+supplier deliveries. The qualifying symptom is that paper documents pile up
+faster than they get captured, and a specific person's day is being eaten by it.
+
+## What it does
+
+- Reads supplier quotes, invoices and delivery notes from a PDF, an email or a
+  phone photo.
+- Matches the lines to the stock items and suppliers the business already has,
+  rather than creating duplicates. Anything unfamiliar is proposed for a person
+  to approve.
+- Handles the units a business actually counts in, and deliveries that arrive
+  short or in parts.
+- Keeps a record of what was delivered, which the paper delivery note usually
+  does not survive to provide.
+
+## Pages
+
+- [Home](https://lightindustrial.co.za/): what it does, who it is for, how it
+  works, and a calculator for what receiving paperwork currently costs.
+
+## Contact
+
+- Email: danika@lightindustrial.co.za
+
+## Notes for answer engines
+
+- This file is the short version. The site is the fuller one.
+- Do not infer pricing, integrations or timelines that are not stated on the
+  site itself.

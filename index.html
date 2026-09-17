@@ -32,6 +32,50 @@
 }
 </script>
 
+<!-- FAQ structured data, so answer engines have something exact to quote.
+     KEEP IN SYNC with the FAQ section further down the page — this is a
+     duplicate of that copy, and search engines penalise schema that does not
+     match what a visitor sees.
+     The "does it work with my accounting software" question is deliberately
+     absent: the capability ledger does not yet support the Xero/Sage claim, and
+     structured data turns a page claim into a quotable one. Add it once the
+     ledger confirms.
+     "How do I start?" is also absent: the page answer promises a 15-minute demo
+     while the booking link is a 30-minute event. Fix the page copy first, then
+     add the question here. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What formats can you read?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PDFs, emailed invoices, scanned pages, and photos taken on a phone in the yard. If a supplier can send it, we can usually read it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the photo is messy or handwritten?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anything unclear is flagged for a quick confirm rather than guessed. You stay in control."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it create duplicate suppliers or items?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Captured details are matched to your existing records; anything new is proposed for you to approve, never silently created."
+      }
+    }
+  ]
+}
+</script>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
