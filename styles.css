@@ -579,6 +579,56 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .modal-btn:hover { transform: translateY(-1px); }
 .modal-btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
 .cal-fallback .modal-btn { width: auto; padding: 0 22px; min-height: 46px; }
+/* ===== ROI CALCULATOR — see docs/roi-calculator-spec.md ===== */
+.calc-section { position: relative; }
+.calc-shell { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
+.calc-frame { position: relative; overflow: hidden; border: 1px solid rgba(45,42,38,0.08); border-radius: 30px; background: radial-gradient(circle at top center, rgba(168,138,109,0.06), transparent 22%), linear-gradient(180deg, #f2eee8 0%, #e8e2d9 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 24px 60px rgba(0,0,0,0.06); }
+.calc-inner { position: relative; z-index: 1; padding: 84px 44px 76px; }
+.calc-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
+.calc-kicker { margin: 0 0 16px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
+.calc-title { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); line-height: 0.98; letter-spacing: -0.05em; color: var(--ink); }
+.calc-title .reveal-line { display: block; }
+.calc-intro { margin: 22px auto 0; max-width: 540px; font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
+
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 1080px; margin: 0 auto; border: 1px solid rgba(45,42,38,0.10); border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.40); }
+.calc-controls { padding: 38px 36px; display: flex; flex-direction: column; gap: 30px; border-right: 1px solid rgba(45,42,38,0.10); }
+.calc-ctrl { display: flex; flex-direction: column; gap: 10px; }
+.calc-ctrl-top { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
+.calc-ctrl label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+.calc-ctrl output { font-size: 17px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.calc-hint { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); opacity: 0.75; }
+
+/* Slider: 24px tall so the thumb is easy to grab on a phone. */
+.calc-ctrl input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; }
+.calc-ctrl input[type="range"]::-webkit-slider-runnable-track { height: 3px; border-radius: 3px; background: rgba(45,42,38,0.16); }
+.calc-ctrl input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -9.5px; border-radius: 50%; background: var(--bronze); border: 3px solid var(--paper); box-shadow: 0 2px 8px rgba(45,42,38,0.28); }
+.calc-ctrl input[type="range"]::-moz-range-track { height: 3px; border-radius: 3px; background: rgba(45,42,38,0.16); }
+.calc-ctrl input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--bronze); border: 3px solid var(--paper); box-shadow: 0 2px 8px rgba(45,42,38,0.28); }
+.calc-ctrl input[type="range"]:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; border-radius: 4px; }
+
+.calc-result { padding: 38px 36px; display: flex; flex-direction: column; justify-content: center; gap: 14px; min-height: 320px; }
+.calc-verdict { margin: 0; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #4f6b59; }
+.calc-result[data-state="no"] .calc-verdict { color: #a6503c; }
+.calc-headline { margin: 0; font-size: clamp(1.7rem, 2.6vw, 2.5rem); line-height: 1.06; letter-spacing: -0.04em; color: var(--ink); }
+.calc-amount { color: #4f6b59; font-variant-numeric: tabular-nums; }
+.calc-result[data-state="no"] .calc-amount { color: #a6503c; }
+.calc-sub { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+.calc-sub b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.calc-flag { margin: 0; font-size: 13px; line-height: 1.55; color: var(--ink); background: rgba(168,138,109,0.14); border-radius: 10px; padding: 11px 14px; }
+.calc-flag[hidden] { display: none; }
+.calc-against { margin: 0; padding-top: 14px; border-top: 1px solid rgba(45,42,38,0.10); font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); opacity: 0.8; }
+.calc-cta { align-self: flex-start; margin-top: 4px; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 1px solid rgba(45,42,38,0.14); background: rgba(255,255,255,0.5); color: var(--ink); font-size: 14px; font-weight: 500; text-decoration: none; transition: transform 180ms ease, background 180ms ease, border-color 180ms ease; }
+.calc-result[data-state="yes"] .calc-cta { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.calc-cta:hover { transform: translateY(-1px); border-color: rgba(168,138,109,0.45); }
+
+@media (max-width: 900px) {
+  .calc-inner { padding: 64px 20px 56px; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .calc-controls { border-right: none; border-bottom: 1px solid rgba(45,42,38,0.10); padding: 30px 22px; }
+  .calc-result { padding: 30px 22px; min-height: 0; }
+}
+@media (max-width: 720px) { .calc-shell { padding: 0 14px 14px; } }
+
 /* Lead form — select, consent tick, per-field errors. See docs/lead-form-spec.md */
 .modal-form select { font-family: 'Mona Sans', sans-serif; font-size: 15px; color: var(--text); background-color: rgba(231,227,218,0.04); border: 1px solid rgba(231,227,218,0.12); border-radius: 12px; padding: 12px 40px 12px 14px; width: 100%; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%237f8782' stroke-width='1.5' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 12px; transition: border-color 200ms ease, background-color 200ms ease; }
 .modal-form select:focus { outline: none; border-color: rgba(168,138,109,0.55); background-color: rgba(231,227,218,0.06); }

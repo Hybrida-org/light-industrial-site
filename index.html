@@ -734,6 +734,73 @@
     </div>
   </section>
 
+  <!-- SECTION: ROI CALCULATOR — see docs/roi-calculator-spec.md -->
+  <section id="calculator" class="calc-section">
+    <div class="calc-shell">
+      <div class="calc-frame">
+        <div class="calc-inner">
+
+          <div class="calc-head">
+            <p class="calc-kicker reveal-fade">What it&rsquo;s worth</p>
+            <h2 class="calc-title font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">What the paperwork</span>
+              <span class="reveal-line" style="transition-delay: 0.24s;">already costs you.</span>
+            </h2>
+            <p class="calc-intro reveal-para" style="transition-delay: 0.18s;">
+              Move the three sliders to match your business. The numbers are yours; we just
+              do the sum.
+            </p>
+          </div>
+
+          <!-- Slider ranges and starting values come from SETTINGS in the calculator
+               script below — deliberately not written into the markup, so there is one
+               place to change them. -->
+          <div class="calc-grid reveal-fade" style="transition-delay: 0.26s;">
+
+            <div class="calc-controls">
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <label for="calcDocs">Documents a month</label>
+                  <output id="calcDocsOut" for="calcDocs"></output>
+                </div>
+                <input type="range" id="calcDocs" aria-describedby="calcDocsHint">
+                <p class="calc-hint" id="calcDocsHint">Delivery notes, supplier invoices and quotes coming in.</p>
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <label for="calcCost">What that person costs</label>
+                  <output id="calcCostOut" for="calcCost"></output>
+                </div>
+                <input type="range" id="calcCost" aria-describedby="calcCostHint">
+                <p class="calc-hint" id="calcCostHint">A month, to the business &mdash; not their take-home pay.</p>
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <label for="calcMins">Minutes per document</label>
+                  <output id="calcMinsOut" for="calcMins"></output>
+                </div>
+                <input type="range" id="calcMins" aria-describedby="calcMinsHint">
+                <p class="calc-hint" id="calcMinsHint">Checking, chasing and capturing &mdash; not just typing.</p>
+              </div>
+            </div>
+
+            <div class="calc-result" id="calcResult" data-state="yes" aria-live="polite">
+              <p class="calc-verdict" id="calcVerdict">Worth it</p>
+              <p class="calc-headline font-head" id="calcHeadline"></p>
+              <p class="calc-sub" id="calcSub"></p>
+              <p class="calc-flag" id="calcFlag" hidden></p>
+              <p class="calc-against" id="calcAgainst"></p>
+              <a href="#" class="calc-cta" id="calcCta" data-open-contact>Talk to us about your numbers</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 7: FAQ + FINAL CTA -->
   <section id="cta" class="final-section-v1">
     <div class="final-shell-v1">
@@ -930,6 +997,153 @@
       </div>
     </div>
   </div>
+
+  <script>
+  // ROI calculator — see docs/roi-calculator-spec.md
+  (function () {
+    // ─── Every number the team may want to argue about lives here ───────────
+    var SETTINGS = {
+      // The three sliders. "start" is what a visitor sees before touching anything,
+      // so it should describe a real in-market buyer.
+      sliders: {
+        docs: { min: 20,   max: 600,   step: 10,  start: 300 },
+        cost: { min: 5000, max: 40000, step: 500, start: 12000 },
+        mins: { min: 5,    max: 60,    step: 1,   start: 25 }
+      },
+      workingHoursPerMonth: 160,   // one person's month
+      shareWeRemove: 0.8,          // a human still checks what we flag
+      tiers: [                     // published document-intake prices, ex VAT
+        { upToDocs: 150, price: 3500 },
+        { upToDocs: Infinity, price: 6500 }
+      ],
+      // The worksheet PDF does not exist yet. Flip this on once it does, and the
+      // button starts offering it instead of a conversation.
+      worksheetReady: false
+    };
+    // ────────────────────────────────────────────────────────────────────────
+
+    var result = document.getElementById('calcResult');
+    if (!result) return;
+
+    var docs = document.getElementById('calcDocs');
+    var cost = document.getElementById('calcCost');
+    var mins = document.getElementById('calcMins');
+    var outs = {
+      docs: document.getElementById('calcDocsOut'),
+      cost: document.getElementById('calcCostOut'),
+      mins: document.getElementById('calcMinsOut')
+    };
+    var verdict = document.getElementById('calcVerdict');
+    var headline = document.getElementById('calcHeadline');
+    var sub = document.getElementById('calcSub');
+    var flag = document.getElementById('calcFlag');
+    var against = document.getElementById('calcAgainst');
+    var cta = document.getElementById('calcCta');
+
+    function rands(amount) {
+      return 'R' + Math.round(amount).toLocaleString('en-US');
+    }
+
+    function priceFor(documentsPerMonth) {
+      for (var i = 0; i < SETTINGS.tiers.length; i++) {
+        if (documentsPerMonth <= SETTINGS.tiers[i].upToDocs) return SETTINGS.tiers[i].price;
+      }
+      return SETTINGS.tiers[SETTINGS.tiers.length - 1].price;
+    }
+
+    function sums() {
+      var documentsPerMonth = +docs.value;
+      var hours = documentsPerMonth * (+mins.value) / 60;
+      var costPerHour = (+cost.value) / SETTINGS.workingHoursPerMonth;
+      var freed = hours * costPerHour * SETTINGS.shareWeRemove;
+      var price = priceFor(documentsPerMonth);
+      return {
+        hours: hours,
+        price: price,
+        // Rounded to the nearest R100 — false precision reads as a made-up number.
+        net: Math.round((freed - price) / 100) * 100
+      };
+    }
+
+    function render() {
+      outs.docs.textContent = docs.value;
+      outs.cost.textContent = rands(+cost.value);
+      outs.mins.textContent = mins.value;
+
+      var s = sums();
+      var hours = Math.round(s.hours);
+
+      against.textContent = 'Measured against document intake at ' + rands(s.price) +
+        ' a month, ex VAT.';
+
+      // More than one person's month means the sliders have left reality behind.
+      if (s.hours > SETTINGS.workingHoursPerMonth) {
+        flag.hidden = false;
+        flag.textContent = "That's more than one person's whole month on paperwork — " +
+          'worth a conversation rather than a calculator.';
+      } else {
+        flag.hidden = true;
+      }
+
+      if (s.net > 0) {
+        result.setAttribute('data-state', 'yes');
+        verdict.textContent = 'Worth it';
+        headline.innerHTML = "You'd save about <span class=\"calc-amount\">" +
+          rands(s.net) + '</span> a month';
+        sub.innerHTML = "That's <b>" + rands(s.net * 12) + '</b> a year, and about <b>' +
+          hours + ' hours</b> of somebody&rsquo;s time.';
+        cta.textContent = SETTINGS.worksheetReady
+          ? 'Email me the worksheet'
+          : 'Talk to us about your numbers';
+        cta.setAttribute('data-form-variant', SETTINGS.worksheetReady ? 'worksheet' : 'contact');
+      } else {
+        result.setAttribute('data-state', 'no');
+        verdict.textContent = 'Not yet';
+        headline.innerHTML = 'Honestly? <span class="calc-amount">Not yet.</span>';
+        sub.innerHTML = 'At this volume, a cheap capture tool and a spreadsheet will do ' +
+          'the job for less than we charge. You&rsquo;d still get about <b>' + hours +
+          ' hours</b> back &mdash; just not enough to pay for us.';
+        cta.textContent = 'Talk to us anyway';
+        cta.setAttribute('data-form-variant', 'contact');
+      }
+    }
+
+    // One of only two key events, so it has to mean something: it fires once, and
+    // only after the visitor has actually moved a slider. A default nobody touched
+    // is not a signal.
+    var reported = false;
+    function reportCompleted() {
+      if (reported) return;
+      reported = true;
+      var s = sums();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'calculator_completed',
+        documents_per_month: +docs.value,
+        capture_cost_per_month: +cost.value,
+        minutes_per_document: +mins.value,
+        monthly_saving: s.net,
+        outcome: s.net > 0 ? 'saving' : 'too_small'
+      });
+    }
+
+    // Build each slider from SETTINGS rather than the markup, so the numbers have
+    // exactly one home.
+    function setUp(slider, config) {
+      slider.min = config.min;
+      slider.max = config.max;
+      slider.step = config.step;
+      slider.value = config.start;
+      slider.addEventListener('input', render);
+      slider.addEventListener('change', reportCompleted);
+    }
+    setUp(docs, SETTINGS.sliders.docs);
+    setUp(cost, SETTINGS.sliders.cost);
+    setUp(mins, SETTINGS.sliders.mins);
+
+    render();
+  })();
+  </script>
 
   <!-- Lead form modal — see docs/lead-form-spec.md -->
   <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" hidden>
