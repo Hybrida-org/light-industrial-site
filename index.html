@@ -931,44 +931,87 @@
     </div>
   </div>
 
-  <!-- Get-in-touch contact modal -->
+  <!-- Lead form modal — see docs/lead-form-spec.md -->
   <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" hidden>
     <div class="modal modal--form">
       <div class="modal-body">
         <div class="modal-head">
           <div>
-            <span class="eyebrow">Get in touch</span>
+            <span class="eyebrow" id="lf-eyebrow">Get in touch</span>
             <h2 id="contactModalTitle">Let's talk</h2>
-            <p>Tell us a bit about your setup and we'll get back to you within one business day.</p>
+            <p id="lf-intro">Tell us a bit about your setup and we'll get back to you within one working day.</p>
           </div>
           <button type="button" class="modal-close" data-close-contact aria-label="Close">&times;</button>
         </div>
-        <form class="modal-form" id="contactForm" novalidate>
+
+        <form class="modal-form" id="leadForm" novalidate>
           <div class="field">
-            <label for="cf-name">Name <span class="req">*</span></label>
-            <input type="text" id="cf-name" name="name" placeholder="Your full name" required autocomplete="name">
+            <label for="lf-name">Your name <span class="req">*</span></label>
+            <input type="text" id="lf-name" name="name" placeholder="Your full name" autocomplete="name" aria-describedby="lf-name-err">
+            <p class="field-error" id="lf-name-err" hidden></p>
           </div>
+
           <div class="field">
-            <label for="cf-email">Email <span class="req">*</span></label>
-            <input type="email" id="cf-email" name="email" placeholder="you@company.co.za" required autocomplete="email">
+            <label for="lf-company">Company <span class="req">*</span></label>
+            <input type="text" id="lf-company" name="company" placeholder="Where you work" autocomplete="organization" aria-describedby="lf-company-err">
+            <p class="field-error" id="lf-company-err" hidden></p>
           </div>
+
           <div class="field">
-            <label for="cf-message">Message</label>
-            <textarea id="cf-message" name="message" placeholder="What you're running today, and what you'd like to sort out"></textarea>
+            <label for="lf-phone">Phone <span class="req">*</span></label>
+            <input type="tel" id="lf-phone" name="phone" placeholder="021 555 0123" autocomplete="tel" inputmode="tel" aria-describedby="lf-phone-err">
+            <p class="field-error" id="lf-phone-err" hidden></p>
           </div>
-          <p class="modal-error" id="cf-error" role="alert" hidden></p>
-          <button type="submit" class="modal-btn" id="cf-submit">Send message →</button>
-          <div class="modal-foot" id="cf-foot">Opens your email so you can hit send</div>
+
+          <div class="field">
+            <label for="lf-email">Email <span class="req">*</span></label>
+            <input type="email" id="lf-email" name="email" placeholder="you@company.co.za" autocomplete="email" inputmode="email" aria-describedby="lf-email-err">
+            <p class="field-error" id="lf-email-err" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="lf-volume">Delivery notes a week <span class="req">*</span></label>
+            <select id="lf-volume" name="volume" aria-describedby="lf-volume-err">
+              <option value="">Pick the closest</option>
+              <option value="under-10">Fewer than 10 a week</option>
+              <option value="10-30">10 to 30 a week</option>
+              <option value="30-100">30 to 100 a week</option>
+              <option value="over-100">More than 100 a week</option>
+              <option value="unsure">I'm not sure</option>
+            </select>
+            <p class="field-error" id="lf-volume-err" hidden></p>
+          </div>
+
+          <div class="field field--check">
+            <label class="check-line" for="lf-consent">
+              <input type="checkbox" id="lf-consent" name="consent" aria-describedby="lf-consent-err">
+              <span>I'm happy for Light Industrial to contact me about this enquiry.</span>
+            </label>
+            <p class="field-note">We'll only use your details to reply to you.</p>
+            <!-- Restore the privacy link here once the privacy page exists. -->
+            <p class="field-error" id="lf-consent-err" hidden></p>
+          </div>
+
+          <!-- Spam trap: hidden from people, filled in by bots. Never remove the label. -->
+          <div class="hp-wrap" aria-hidden="true">
+            <label for="lf-website">Website</label>
+            <input type="text" id="lf-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <p class="modal-error" id="lf-error" role="alert" hidden></p>
+          <button type="submit" class="modal-btn" id="lf-submit">Send my details</button>
         </form>
       </div>
+
       <div class="modal-success" hidden>
-        <div class="tick" aria-hidden="true">✓</div>
-        <h2 id="cf-success-title">Almost there</h2>
-        <p id="cf-success-msg">Your email app should have opened with your message ready. Hit send and we'll get back to you.</p>
+        <div class="tick" aria-hidden="true">&#10003;</div>
+        <h2 id="lf-success-title" tabindex="-1">Thanks &mdash; we've got it.</h2>
+        <p id="lf-success-msg"></p>
         <button type="button" class="modal-btn" data-close-contact style="margin-top:20px;">Done</button>
       </div>
     </div>
   </div>
+
 
   <script>
   // Booking (Calendly) modal
@@ -1032,54 +1075,216 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
   })();
 
-  // Get-in-touch contact modal (opens the visitor's email to Danika)
+  // Lead form modal — see docs/lead-form-spec.md
   (function () {
+    // Paste the deployed Worker URL here to send real leads to HubSpot.
+    // While it is empty the form falls back to opening the visitor's email app,
+    // which is what the site did before. It never silently swallows a lead.
+    var LEAD_ENDPOINT = '';
     var CONTACT_EMAIL = 'danika@lightindustrial.co.za';
+
+    // The same form, framed two ways. The worksheet variant is wired up but has no
+    // trigger yet — it belongs to the ROI calculator, which is not built.
+    var VARIANTS = {
+      contact: {
+        eyebrow: 'Get in touch',
+        title: "Let's talk",
+        intro: "Tell us a bit about your setup and we'll get back to you within one working day.",
+        button: 'Send my details',
+        sent: function () { return 'Danika will be in touch within one working day.'; }
+      },
+      worksheet: {
+        eyebrow: 'ROI worksheet',
+        title: 'Email me the worksheet',
+        intro: "We'll send the worksheet through and give you a call to talk it over.",
+        button: 'Email me the worksheet',
+        sent: function (email) { return 'Your ROI worksheet is on its way to ' + email + '. Danika will be in touch within one working day.'; }
+      }
+    };
 
     var overlay = document.getElementById('contactModal');
     if (!overlay) return;
-    var form = document.getElementById('contactForm');
+
+    var form = document.getElementById('leadForm');
     var body = overlay.querySelector('.modal-body');
     var success = overlay.querySelector('.modal-success');
-    var errorEl = document.getElementById('cf-error');
-    var submitBtn = document.getElementById('cf-submit');
-    var successTitle = document.getElementById('cf-success-title');
-    var successMsg = document.getElementById('cf-success-msg');
+    var formError = document.getElementById('lf-error');
+    var submitBtn = document.getElementById('lf-submit');
+    var successMsg = document.getElementById('lf-success-msg');
     var lastFocus = null;
+    var variant = VARIANTS.contact;
 
-    function v(n) { return (form.elements[n].value || '').trim(); }
-    function clearError() { errorEl.hidden = true; }
-    function open() {
+    // One rule per field. `check` runs only once the field has something in it,
+    // so nobody is told their email is malformed before they have typed it.
+    var RULES = [
+      { name: 'name', empty: 'We need your name to get back to you.' },
+      { name: 'company', empty: 'Let us know which company you are with.' },
+      {
+        name: 'phone', empty: 'We need a number to call you on.',
+        check: function (v) { return v.replace(/[^0-9]/g, '').length >= 9; },
+        invalid: 'That number looks too short. Include the area code.'
+      },
+      {
+        name: 'email', empty: 'We need an email address to reply to.',
+        check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
+        invalid: "That email doesn't look right — check for a typo?"
+      },
+      { name: 'volume', empty: 'Pick the closest option so we know how to help.' },
+      { name: 'consent', empty: "Please tick the box so we're allowed to contact you." }
+    ];
+
+    function fieldOf(rule) { return form.elements[rule.name]; }
+    function errorOf(rule) { return document.getElementById('lf-' + rule.name + '-err'); }
+    function valueOf(rule) {
+      var el = fieldOf(rule);
+      return el.type === 'checkbox' ? (el.checked ? 'yes' : '') : (el.value || '').trim();
+    }
+
+    // Returns the message to show, or '' when the field is fine.
+    function problemWith(rule) {
+      var value = valueOf(rule);
+      if (!value) return rule.empty;
+      if (rule.check && !rule.check(value)) return rule.invalid;
+      return '';
+    }
+
+    function showProblem(rule, message) {
+      var el = fieldOf(rule);
+      var errorEl = errorOf(rule);
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+      if (message) { el.setAttribute('aria-invalid', 'true'); }
+      else { el.removeAttribute('aria-invalid'); }
+    }
+
+    function clearAllProblems() {
+      RULES.forEach(function (rule) { showProblem(rule, ''); });
+      formError.hidden = true;
+    }
+
+    // Check a field when the person leaves it, but only clear-as-you-type after
+    // they have already been told about it — correcting mid-word is annoying.
+    RULES.forEach(function (rule) {
+      var el = fieldOf(rule);
+      var event = (el.type === 'checkbox' || el.tagName === 'SELECT') ? 'change' : 'blur';
+      el.addEventListener(event, function () { showProblem(rule, problemWith(rule)); });
+      el.addEventListener('input', function () {
+        if (el.getAttribute('aria-invalid')) showProblem(rule, problemWith(rule));
+      });
+    });
+
+    function firstProblem() {
+      var first = null;
+      RULES.forEach(function (rule) {
+        var message = problemWith(rule);
+        showProblem(rule, message);
+        if (message && !first) first = rule;
+      });
+      return first;
+    }
+
+    function applyVariant(name) {
+      variant = VARIANTS[name] || VARIANTS.contact;
+      document.getElementById('lf-eyebrow').textContent = variant.eyebrow;
+      document.getElementById('contactModalTitle').textContent = variant.title;
+      document.getElementById('lf-intro').textContent = variant.intro;
+      submitBtn.textContent = variant.button;
+    }
+
+    function open(name) {
       lastFocus = document.activeElement;
+      applyVariant(name);
       overlay.hidden = false; void overlay.offsetWidth;
       overlay.classList.add('open'); document.body.classList.add('modal-open');
-      var first = overlay.querySelector('input, textarea, button'); if (first) first.focus();
+      var first = overlay.querySelector('input, select, button'); if (first) first.focus();
     }
+
     function close() {
       overlay.classList.remove('open'); document.body.classList.remove('modal-open');
       setTimeout(function () {
         overlay.hidden = true; body.hidden = false; success.hidden = true;
-        clearError(); submitBtn.disabled = false; submitBtn.innerHTML = 'Send message →'; form.reset();
+        clearAllProblems();
+        submitBtn.disabled = false; submitBtn.textContent = variant.button;
+        form.reset();
       }, 280);
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
-    function showSuccess(title, msg) {
-      successTitle.textContent = title; successMsg.textContent = msg;
+
+    function showSuccess(message) {
+      successMsg.textContent = message;
       body.hidden = true; success.hidden = false;
+      success.querySelector('h2').focus();
     }
+
+    function answers() {
+      return {
+        name: form.elements.name.value.trim(),
+        company: form.elements.company.value.trim(),
+        phone: form.elements.phone.value.trim(),
+        email: form.elements.email.value.trim(),
+        delivery_notes_per_week: form.elements.volume.value,
+        consent: form.elements.consent.checked,
+        source: 'website',
+        variant: variant === VARIANTS.worksheet ? 'worksheet' : 'contact'
+      };
+    }
+
+    // Fallback while LEAD_ENDPOINT is empty: hand the details to the visitor's own
+    // email app. Weaker than posting to HubSpot, but it does not lose the lead.
+    function sendByEmail(lead) {
+      var lines = [
+        'Name: ' + lead.name,
+        'Company: ' + lead.company,
+        'Phone: ' + lead.phone,
+        'Email: ' + lead.email,
+        'Delivery notes a week: ' + lead.delivery_notes_per_week
+      ];
+      window.location.href = 'mailto:' + CONTACT_EMAIL +
+        '?subject=' + encodeURIComponent('Light Industrial enquiry — ' + lead.company) +
+        '&body=' + encodeURIComponent(lines.join('\n'));
+      showSuccess("Your email app should have opened with your details ready. Hit send and we'll get back to you.");
+    }
+
+    function sendToWorker(lead) {
+      submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+      fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lead)
+      }).then(function (response) {
+        if (!response.ok) throw new Error('Worker returned ' + response.status);
+        showSuccess(variant.sent(lead.email));
+      }).catch(function () {
+        submitBtn.disabled = false; submitBtn.textContent = variant.button;
+        formError.innerHTML = 'Something went wrong on our side. Email ' +
+          '<a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a> and we\'ll pick it up.';
+        formError.hidden = false;
+      });
+    }
+
     document.querySelectorAll('[data-open-contact]').forEach(function (btn) {
-      btn.addEventListener('click', function (e) { e.preventDefault(); open(); });
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        open(btn.getAttribute('data-form-variant') || 'contact');
+      });
     });
     overlay.querySelectorAll('[data-close-contact]').forEach(function (btn) { btn.addEventListener('click', close); });
     overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      var lines = ['Name: ' + v('name'), 'Email: ' + v('email'), '', 'Message:', v('message') || '—'];
-      var mailto = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Light Industrial enquiry — ' + v('name')) + '&body=' + encodeURIComponent(lines.join('\n'));
-      window.location.href = mailto;
-      showSuccess('Almost there', "Your email app should have opened with your message ready. Hit send and we'll get back to you.");
+      formError.hidden = true;
+
+      var bad = firstProblem();
+      if (bad) { fieldOf(bad).focus(); return; }
+
+      // A person never sees this field, so anything in it came from a bot.
+      // Show the normal thank-you and drop it, rather than telling the bot it failed.
+      if (form.elements.website.value) { showSuccess(variant.sent(answers().email)); return; }
+
+      var lead = answers();
+      if (LEAD_ENDPOINT) sendToWorker(lead); else sendByEmail(lead);
     });
   })();
   </script>

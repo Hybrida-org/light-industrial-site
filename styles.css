@@ -542,7 +542,7 @@ body.modal-open { overflow: hidden; }
 .modal-overlay { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(8,9,10,0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity 260ms ease, visibility 260ms ease; }
 .modal-overlay.open { opacity: 1; visibility: visible; }
 .modal-overlay[hidden] { display: none; }
-.modal { width: 100%; max-width: 620px; max-height: calc(100vh - 48px); overflow-y: auto; background: linear-gradient(180deg, rgba(28,33,34,0.98), rgba(14,16,17,0.99)); border: 1px solid rgba(231,227,218,0.12); border-radius: 24px; box-shadow: 0 30px 90px rgba(0,0,0,0.45); padding: 28px 28px 24px; transform: translateY(18px) scale(0.98); transition: transform 300ms cubic-bezier(0.16,1,0.3,1); color: var(--text-soft); }
+.modal { width: 100%; max-width: 620px; max-height: calc(100vh - 32px); overflow-y: auto; background: linear-gradient(180deg, rgba(28,33,34,0.98), rgba(14,16,17,0.99)); border: 1px solid rgba(231,227,218,0.12); border-radius: 24px; box-shadow: 0 30px 90px rgba(0,0,0,0.45); padding: 24px 28px 20px; transform: translateY(18px) scale(0.98); transition: transform 300ms cubic-bezier(0.16,1,0.3,1); color: var(--text-soft); }
 .modal-overlay.open .modal { transform: none; }
 .modal--form { max-width: 480px; }
 .modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
@@ -558,8 +558,8 @@ body.modal-open { overflow: hidden; }
 .cal-fallback { padding: 44px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .cal-loading[hidden], .cal-fallback[hidden] { display: none; }
 .cal-fallback p { color: #4a5262; font-size: 14px; }
-.modal-form { margin-top: 22px; display: flex; flex-direction: column; gap: 15px; }
-.modal-form .field { display: flex; flex-direction: column; gap: 7px; }
+.modal-form { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
+.modal-form .field { display: flex; flex-direction: column; gap: 6px; }
 .modal-form label { font-family: 'Miranda Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .modal-form label .req { color: var(--bronze); }
 .modal-form label .hint { text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--muted); margin-left: 4px; }
@@ -571,10 +571,33 @@ body.modal-open { overflow: hidden; }
 .modal-form input[type=file] { padding: 9px 12px; cursor: pointer; color: var(--text-soft); font-size: 13.5px; }
 .modal-form input[type=file]::file-selector-button { font-family: 'Mona Sans', sans-serif; font-size: 13px; font-weight: 600; margin-right: 12px; padding: 8px 14px; border-radius: 10px; border: 1px solid rgba(231,227,218,0.16); background: rgba(231,227,218,0.06); color: var(--text); cursor: pointer; transition: border-color 200ms ease, color 200ms ease; }
 .modal-form input[type=file]::file-selector-button:hover { border-color: var(--bronze); color: var(--bronze); }
-.modal-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 50px; margin-top: 4px; border: none; border-radius: 999px; background: linear-gradient(180deg, rgba(168,138,109,0.96), rgba(139,113,88,0.96)); color: #fff; font-family: 'Mona Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 20px rgba(0,0,0,0.2); transition: transform 180ms ease; text-decoration: none; }
+.modal-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 49px; margin-top: 2px; border: none; border-radius: 999px; background: linear-gradient(180deg, rgba(168,138,109,0.96), rgba(139,113,88,0.96)); color: #fff; font-family: 'Mona Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 20px rgba(0,0,0,0.2); transition: transform 180ms ease; text-decoration: none; }
 .modal-btn:hover { transform: translateY(-1px); }
 .modal-btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
 .cal-fallback .modal-btn { width: auto; padding: 0 22px; min-height: 46px; }
+/* Lead form — select, consent tick, per-field errors. See docs/lead-form-spec.md */
+.modal-form select { font-family: 'Mona Sans', sans-serif; font-size: 15px; color: var(--text); background-color: rgba(231,227,218,0.04); border: 1px solid rgba(231,227,218,0.12); border-radius: 12px; padding: 12px 40px 12px 14px; width: 100%; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%237f8782' stroke-width='1.5' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 12px; transition: border-color 200ms ease, background-color 200ms ease; }
+.modal-form select:focus { outline: none; border-color: rgba(168,138,109,0.55); background-color: rgba(231,227,218,0.06); }
+.modal-form select:invalid, .modal-form select option[value=""] { color: var(--muted); }
+.modal-form select option { color: #1a1d1f; background: var(--paper); }
+
+.modal-form .field--check { gap: 9px; }
+.modal-form .check-line { display: flex; align-items: flex-start; gap: 11px; padding: 4px 0; /* keeps the tap target near 48px on a phone */ font-family: 'Mona Sans', sans-serif; font-size: 14px; font-weight: 400; line-height: 1.5; letter-spacing: 0; text-transform: none; color: var(--text-soft); cursor: pointer; }
+.modal-form .check-line input { flex: 0 0 auto; width: 20px; height: 20px; margin: 1px 0 0; padding: 0; accent-color: var(--bronze); cursor: pointer; }
+.modal-form .check-line input:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+.modal-form .field-note { margin: 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+
+/* Errors carry a word as well as a colour, so they still read without colour vision. */
+.modal-form .field-error { margin: 0; font-size: 13px; line-height: 1.45; color: #e0857a; }
+.modal-form .field-error[hidden] { display: none; }
+.modal-form [aria-invalid="true"] { border-color: rgba(224,133,122,0.65); }
+
+/* The spam trap. Off-screen rather than display:none — some bots skip hidden fields. */
+.hp-wrap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.modal-error a { color: inherit; text-decoration: underline; }
+.modal-success h2:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; border-radius: 6px; }
+
 .modal-error { color: #e0857a; font-size: 13px; margin: -2px 0 0; }
 .modal-error[hidden] { display: none; }
 .modal-foot { margin-top: 14px; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: center; }
