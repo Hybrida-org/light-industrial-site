@@ -1227,7 +1227,7 @@
           <div>
             <span class="eyebrow" id="lf-eyebrow">Get in touch</span>
             <h2 id="contactModalTitle">Let's talk</h2>
-            <p id="lf-intro">Tell us a bit about your setup and we'll get back to you within one working day.</p>
+            <p id="lf-intro">Tell us a bit about your setup and we'll get back to you within 48 hours.</p>
           </div>
           <button type="button" class="modal-close" data-close-contact aria-label="Close">&times;</button>
         </div>
@@ -1384,22 +1384,27 @@
     var LEAD_ENDPOINT = '';
     var CONTACT_EMAIL = 'danika@lightindustrial.co.za';
 
+    // A real submission lands on its own page. A page load is a far more reliable
+    // conversion signal for Google Ads than a JavaScript event, which ad blockers
+    // and flaky networks can swallow.
+    var THANK_YOU_URL = '/thank-you/';
+
     // The same form, framed two ways. The worksheet variant is wired up but has no
     // trigger yet — it belongs to the ROI calculator, which is not built.
     var VARIANTS = {
       contact: {
         eyebrow: 'Get in touch',
         title: "Let's talk",
-        intro: "Tell us a bit about your setup and we'll get back to you within one working day.",
+        intro: "Tell us a bit about your setup and we'll get back to you within 48 hours.",
         button: 'Send my details',
-        sent: function () { return 'Danika will be in touch within one working day.'; }
+        sent: function () { return 'Danika will be in touch within 48 hours.'; }
       },
       worksheet: {
         eyebrow: 'ROI worksheet',
         title: 'Email me the worksheet',
         intro: "We'll send the worksheet through and give you a call to talk it over.",
         button: 'Email me the worksheet',
-        sent: function (email) { return 'Your ROI worksheet is on its way to ' + email + '. Danika will be in touch within one working day.'; }
+        sent: function (email) { return 'Your ROI worksheet is on its way to ' + email + '. Danika will be in touch within 48 hours.'; }
       }
     };
 
@@ -1543,6 +1548,8 @@
       window.location.href = 'mailto:' + CONTACT_EMAIL +
         '?subject=' + encodeURIComponent('Light Industrial enquiry — ' + lead.company) +
         '&body=' + encodeURIComponent(lines.join('\n'));
+      // Deliberately not the thank-you page: nothing has actually reached us until
+      // they press send, and only this message tells them to.
       showSuccess("Your email app should have opened with your details ready. Hit send and we'll get back to you.");
     }
 
@@ -1554,7 +1561,7 @@
         body: JSON.stringify(lead)
       }).then(function (response) {
         if (!response.ok) throw new Error('Worker returned ' + response.status);
-        showSuccess(variant.sent(lead.email));
+        window.location.href = THANK_YOU_URL;
       }).catch(function () {
         submitBtn.disabled = false; submitBtn.textContent = variant.button;
         formError.innerHTML = 'Something went wrong on our side. Email ' +

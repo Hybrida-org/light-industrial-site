@@ -579,6 +579,29 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .modal-btn:hover { transform: translateY(-1px); }
 .modal-btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
 .cal-fallback .modal-btn { width: auto; padding: 0 22px; min-height: 46px; }
+/* ===== THANK-YOU PAGE (/thank-you/) ===== */
+.ty-body { display: flex; min-height: 100vh; }
+.ty-shell { width: 100%; max-width: 680px; margin: auto; padding: 48px 24px; }
+.ty-card { border: 1px solid var(--border-dark); border-radius: 26px; padding: 44px 40px 36px; background: linear-gradient(180deg, rgba(23,26,28,0.94), rgba(14,16,17,0.98)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 30px 90px rgba(0,0,0,0.30); }
+.ty-mark { width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgba(231,227,218,0.14); background: rgba(231,227,218,0.04); display: inline-flex; align-items: center; justify-content: center; color: var(--text); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+.ty-kicker { margin: 26px 0 10px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bronze); }
+.ty-title { margin: 0; font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: 1.04; letter-spacing: -0.04em; color: var(--text); }
+.ty-lede { margin: 16px 0 0; font-size: 17px; line-height: 1.6; color: var(--text); }
+.ty-block { margin-top: 32px; padding-top: 26px; border-top: 1px solid var(--border-dark); }
+.ty-heading { margin: 0 0 12px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.ty-text { margin: 0; font-size: 15px; line-height: 1.75; color: var(--text-soft); }
+.ty-steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.65; color: var(--text-soft); }
+.ty-steps::marker, .ty-steps li::marker { color: var(--bronze); }
+.ty-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.ty-link { display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border-radius: 999px; border: 1px solid rgba(231,227,218,0.14); background: rgba(231,227,218,0.04); color: var(--text); font-size: 14px; text-decoration: none; transition: border-color 180ms ease, transform 180ms ease; }
+.ty-link:hover { border-color: rgba(168,138,109,0.5); transform: translateY(-1px); }
+.ty-link:focus-visible, .ty-back:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
+.ty-foot { margin: 32px 0 0; padding-top: 26px; border-top: 1px solid var(--border-dark); font-size: 14px; line-height: 1.7; color: var(--text-soft); }
+.ty-foot a { color: var(--bronze); }
+.ty-back { display: inline-block; margin-top: 26px; font-size: 13px; color: var(--muted); text-decoration: none; }
+.ty-back:hover { color: var(--text); }
+@media (max-width: 520px) { .ty-card { padding: 32px 22px 28px; border-radius: 20px; } }
+
 /* ===== ROI CALCULATOR — see docs/roi-calculator-spec.md ===== */
 .calc-section { position: relative; }
 .calc-shell { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
