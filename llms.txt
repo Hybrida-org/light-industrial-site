@@ -1,9 +1,9 @@
 # Light Industrial
 
-> Operations software for light industrial businesses in South Africa. Supplier
-> paperwork is photographed instead of retyped: the system reads the line items,
-> matches them to the business's own stock codes and suppliers, and keeps buying,
-> receiving and stock in one place.
+> Manufacturing and stock control software for South African workshops, fabricators
+> and small manufacturers. Supplier paperwork is photographed instead of retyped:
+> the system reads the line items, matches them to the business's own stock codes
+> and suppliers, and keeps buying, receiving and stock in one place.
 
 Built and run by Hybrida, Cape Town. Prices are quoted in South African rand,
 excluding VAT.
