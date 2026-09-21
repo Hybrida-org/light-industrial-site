@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Intake ROI Calculator | Light Industrial</title>
+<meta name="description" content="Work out what receiving paperwork costs your workshop each month, what document intake would save, and how long it takes to pay for itself.">
+<link rel="canonical" href="https://lightindustrial.co.za/intake/">
+<link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="What receiving paperwork costs you — work it out">
+<meta property="og:description" content="Move five sliders and see the hours, the rands and the payback on document intake.">
+<meta property="og:url" content="https://lightindustrial.co.za/intake/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/01-capture.jpg">
+<meta property="og:image:alt" content="A delivery note being photographed on a workshop floor">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="intake.css">
+</head>
+
+<body class="">
+  <!-- HEADER — the nav on its own. It used to sit inside a full hero; the hero
+       went because the calculator section below already opens the page, and the
+       hero's button only scrolled to it. -->
+  <header class="intake-header">
+    <div class="nav-wrap">
+      <div class="nav-pill">
+        <a href="../" class="flex items-center gap-3 nav-brand-link">
+          <span class="brand-mark font-head">LI</span>
+          <div>
+            <div class="font-head text-[13px] uppercase tracking-[0.24em] brand-name">Light Industrial</div>
+            <div class="mt-[2px] text-[10px] uppercase tracking-[0.18em] brand-sub">Operations platform</div>
+          </div>
+        </a>
+
+        <nav class="flex items-center gap-8 text-sm">
+          <a href="../#problem" class="nav-link">The problem</a>
+          <a href="../#how" class="nav-link">How it works</a>
+          <a href="../#features" class="nav-link">Features</a>
+          <a href="#calculator" class="nav-link">Calculator</a>
+        </nav>
+
+        <!-- Plain mailto, not the homepage modal: the lead form lives in
+             index.html and is not worth duplicating for one button. -->
+        <a href="mailto:danika@lightindustrial.co.za?subject=Document%20intake%20enquiry" class="nav-book-btn">Get in touch</a>
+
+        <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+          <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
+        </button>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu" hidden>
+        <a href="../#problem" class="mobile-menu-link">The problem</a>
+        <a href="../#how" class="mobile-menu-link">How it works</a>
+        <a href="../#features" class="mobile-menu-link">Features</a>
+        <a href="#calculator" class="mobile-menu-link">Calculator</a>
+        <a href="mailto:danika@lightindustrial.co.za?subject=Document%20intake%20enquiry" class="mobile-menu-cta">Get in touch</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ROI CALCULATOR — every number lives in SETTINGS at the bottom of this file -->
+  <section id="calculator" class="roi-section">
+    <div class="roi-shell">
+      <div class="roi-frame">
+        <div class="roi-inner">
+
+          <div class="roi-head">
+            <p class="roi-kicker reveal-fade">What it costs you now</p>
+            <h2 class="roi-title font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">You give the numbers.</span>
+              <span class="reveal-line" style="transition-delay: 0.24s;">We do the maths.</span>
+            </h2>
+            <p class="roi-intro reveal-para" style="transition-delay: 0.18s;">
+              Every delivery note gets checked, chased and typed in by someone. See what that
+              costs you a month.
+            </p>
+          </div>
+
+          <div class="roi-grid reveal-fade" style="transition-delay: 0.26s;">
+
+            <!-- Slider ranges and starting values come from SETTINGS, deliberately not
+                 written into the markup, so there is one place to change them. -->
+            <div class="roi-controls">
+              <div class="roi-ctrl">
+                <div class="roi-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="roiDocs">Delivery notes a week</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiDocsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="roi-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="roiDocsHint">Delivery notes, supplier invoices and quotes coming through the door.</span>
+                    </span>
+                  </span>
+                  <output id="roiDocsOut" for="roiDocs"></output>
+                </div>
+                <input type="range" id="roiDocs" aria-describedby="roiDocsHint">
+              </div>
+
+              <div class="roi-ctrl">
+                <div class="roi-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="roiMins">Minutes per document today</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiMinsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="roi-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="roiMinsHint">Checking it against the order, chasing what&rsquo;s short, filing it, typing it in.</span>
+                    </span>
+                  </span>
+                  <output id="roiMinsOut" for="roiMins"></output>
+                </div>
+                <input type="range" id="roiMins" aria-describedby="roiMinsHint">
+              </div>
+
+              <div class="roi-ctrl">
+                <div class="roi-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="roiSalary">What that person costs a month</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiSalaryHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="roi-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="roiSalaryHint">Cost to the business &mdash; not their take-home pay.</span>
+                    </span>
+                  </span>
+                  <output id="roiSalaryOut" for="roiSalary"></output>
+                </div>
+                <input type="range" id="roiSalary" aria-describedby="roiSalaryHint">
+              </div>
+
+              <div class="roi-ctrl">
+                <div class="roi-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="roiErrors">Captured lines that need fixing</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiErrorsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="roi-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="roiErrorsHint">Wrong part code, wrong quantity, wrong price. Where you start, not where you stay.</span>
+                    </span>
+                  </span>
+                  <output id="roiErrorsOut" for="roiErrors"></output>
+                </div>
+                <input type="range" id="roiErrors" aria-describedby="roiErrorsHint">
+              </div>
+
+              <div class="roi-ctrl">
+                <div class="roi-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="roiShort">Deliveries that arrive short or wrong</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiShortHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="roi-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="roiShortHint">Missing items, swapped items, quantities that don&rsquo;t match the order.</span>
+                    </span>
+                  </span>
+                  <output id="roiShortOut" for="roiShort"></output>
+                </div>
+                <input type="range" id="roiShort" aria-describedby="roiShortHint">
+              </div>
+
+              <fieldset class="roi-toggles">
+                <legend>Setting you up</legend>
+
+                <label class="roi-toggle">
+                  <input type="checkbox" id="roiIntegration">
+                  <span class="roi-toggle-box" aria-hidden="true"></span>
+                  <span class="roi-toggle-text">
+                    <b>We&rsquo;re staying on our current system</b>
+                    We build the link to it instead of you moving onto ours.
+                  </span>
+                </label>
+
+                <label class="roi-toggle">
+                  <input type="checkbox" id="roiMigration">
+                  <span class="roi-toggle-box" aria-hidden="true"></span>
+                  <span class="roi-toggle-text">
+                    <b>Bring our old data across</b>
+                    Suppliers, stock items and history loaded before you go live.
+                  </span>
+                </label>
+
+                <p class="roi-setup-line">Once-off setup: <b id="roiSetupOut"></b></p>
+              </fieldset>
+            </div>
+
+            <!-- The answer, and the four things behind it -->
+            <div class="roi-output">
+
+              <div class="roi-result" id="roiResult" data-state="pays" aria-live="polite">
+                <p class="roi-verdict" id="roiVerdict"></p>
+                <p class="roi-headline font-head" id="roiHeadline"></p>
+                <p class="roi-sub" id="roiSub"></p>
+                <p class="roi-flag" id="roiFlag" hidden></p>
+              </div>
+
+              <div class="roi-tiles">
+
+                <!-- Tile 1: two bars, same measure before and after. Grey is today,
+                     green is with us — the only two colours on the page. -->
+                <div class="roi-tile">
+                  <p class="roi-tile-label">Time reclaimed</p>
+                  <div class="roi-bars">
+                    <div class="roi-bar-row">
+                      <span class="roi-bar-name">Today</span>
+                      <span class="roi-bar-track"><span class="roi-bar-fill is-today" id="roiBarToday"></span></span>
+                      <span class="roi-bar-value" id="roiBarTodayVal"></span>
+                    </div>
+                    <div class="roi-bar-row">
+                      <span class="roi-bar-name">With intake</span>
+                      <span class="roi-bar-track"><span class="roi-bar-fill is-after" id="roiBarAfter"></span></span>
+                      <span class="roi-bar-value" id="roiBarAfterVal"></span>
+                    </div>
+                  </div>
+                  <p class="roi-tile-note" id="roiTimeNote"></p>
+                </div>
+
+                <!-- Tile 2: one line, six months. Drawn in JS from the error slider. -->
+                <div class="roi-tile">
+                  <p class="roi-tile-label">Mistakes, month by month</p>
+                  <svg class="roi-line-chart" id="roiLineChart" viewBox="0 0 320 132" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="roiLineTitle"></svg>
+                  <table class="roi-visually-hidden" id="roiLineTable">
+                    <caption id="roiLineTitle">Share of captured lines needing a fix, month one to month six</caption>
+                    <thead><tr><th scope="col">Month</th><th scope="col">Needs a fix</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                  <p class="roi-tile-note" id="roiErrorNote"></p>
+                </div>
+
+                <!-- Tile 3: one number is the chart. -->
+                <div class="roi-tile roi-tile--badge">
+                  <p class="roi-tile-label">Caught at the dock</p>
+                  <p class="roi-badge-figure font-head" id="roiShortFigure"></p>
+                  <p class="roi-tile-note" id="roiShortNote"></p>
+                </div>
+
+                <!-- Tile 4: an example, clearly labelled as one. We are not
+                     pretending to know their suppliers on day one. -->
+                <div class="roi-tile roi-tile--locked">
+                  <p class="roi-tile-label">Supplier scorecard <span class="roi-example-chip">Example</span></p>
+                  <table class="roi-scorecard">
+                    <thead><tr><th scope="col">Supplier</th><th scope="col">Short or wrong</th></tr></thead>
+                    <tbody>
+                      <tr><td>Supplier A</td><td>4%</td></tr>
+                      <tr><td>Supplier B</td><td>19%</td></tr>
+                      <tr><td>Supplier C</td><td>2%</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="roi-tile-note">
+                    <iconify-icon icon="solar:lock-keyhole-minimalistic-linear" width="13" height="13"></iconify-icon>
+                    Yours fills in once we have three months of your own deliveries.
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- The sum, in the open. A prospect who checks our maths should find it. -->
+              <details class="roi-working">
+                <summary>How we worked that out</summary>
+                <ul class="roi-working-list" id="roiWorking"></ul>
+                <p class="roi-terms" id="roiTerms"></p>
+              </details>
+
+              <!-- Results are never gated. Only the written-up version needs an email. -->
+              <form class="roi-capture" id="roiCapture" novalidate>
+                <label for="roiEmail" class="roi-capture-label">Want this written up and sent to you?</label>
+                <p class="roi-capture-sub">Your numbers, the savings month by month, and what setting you up actually involves.</p>
+                <div class="roi-capture-row">
+                  <input type="email" id="roiEmail" name="email" placeholder="you@yourcompany.co.za" autocomplete="email" required>
+                  <button type="submit" class="roi-capture-btn" id="roiCaptureBtn">Send it to me</button>
+                </div>
+                <p class="roi-capture-note" id="roiCaptureNote">We&rsquo;ll email it within 48 hours. No newsletter, no list.</p>
+                <!-- A person never sees this. Anything in it came from a bot. -->
+                <div class="roi-honeypot" aria-hidden="true"><label for="roiWebsite">Website</label><input type="text" id="roiWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PART THAT ISN'T ON THE CALCULATOR -->
+  <section id="beyond" class="roi-extras-section">
+    <div class="roi-extras-shell">
+      <div class="roi-extras-head">
+        <p class="roi-kicker reveal-fade">Not in the sum above</p>
+        <h2 class="roi-extras-title font-head reveal-trigger">
+          <span class="reveal-line" style="transition-delay: 0.10s;">Three things we couldn&rsquo;t</span>
+          <span class="reveal-line" style="transition-delay: 0.24s;">put a number on.</span>
+        </h2>
+        <p class="roi-intro reveal-para" style="transition-delay: 0.18s;">
+          The calculator only counts hours, because hours are the only thing we can work out
+          honestly from five sliders. These three are worth more and we won&rsquo;t pretend to price them.
+        </p>
+      </div>
+
+      <div class="roi-extras-grid">
+        <article class="roi-extra reveal-fade" style="transition-delay: 0.10s;">
+          <iconify-icon icon="solar:document-text-linear" width="22" height="22"></iconify-icon>
+          <h3 class="font-head">Every line traces back to the paper</h3>
+          <p>
+            Each line item stays linked to the photo it came from, who checked it, and the minute
+            it was captured. When a supplier says they delivered it, you open the picture.
+          </p>
+        </article>
+
+        <article class="roi-extra reveal-fade" style="transition-delay: 0.16s;">
+          <iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon>
+          <h3 class="font-head">It only learns a part code once</h3>
+          <p>
+            Match a supplier&rsquo;s odd code to your stock item one time and it stays matched.
+            Accuracy climbs on its own &mdash; nobody has to go and configure anything.
+          </p>
+        </article>
+
+        <article class="roi-extra reveal-fade" style="transition-delay: 0.22s;">
+          <iconify-icon icon="solar:chart-square-linear" width="22" height="22"></iconify-icon>
+          <h3 class="font-head">You find out who keeps short-shipping you</h3>
+          <p>
+            Every short delivery is counted against the supplier who sent it. At renewal you
+            arrive with a number instead of a feeling.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE + NEXT STEP -->
+  <section class="roi-cta-section">
+    <div class="roi-cta-shell">
+      <div class="roi-cta-frame">
+        <p class="roi-kicker reveal-fade">Document intake</p>
+        <h2 class="roi-cta-title font-head reveal-trigger">
+          <span class="reveal-line" style="transition-delay: 0.10s;">Ready when you are.</span>
+        </h2>
+        <p class="roi-cta-price" id="roiCtaPrice"></p>
+        <div class="roi-cta-btns reveal-fade" style="transition-delay: 0.18s;">
+          <a href="mailto:danika@lightindustrial.co.za?subject=Document%20intake%20enquiry" class="roi-cta-btn primary">Get in touch</a>
+          <a href="#calculator" class="roi-cta-btn">Back to the calculator</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-v1">
+    <div class="site-footer-shell-v1">
+      <div class="site-footer-frame-v1">
+        <div class="site-footer-inner-v1">
+          <div class="site-footer-top-v1">
+            <div class="site-footer-brand-v1 reveal-fade" style="transition-delay: 0.08s;">
+              <div class="site-footer-mark-v1 font-head">LI</div>
+              <h2 class="site-footer-name-v1 font-head">Light Industrial</h2>
+              <p class="site-footer-text-v1">
+                The operations platform for light industrial businesses. Clean data, accurate stock and
+                books that stay in sync, from the order you place to the stock on your shelf.
+              </p>
+            </div>
+
+            <div class="reveal-fade" style="transition-delay: 0.14s;">
+              <p class="site-footer-heading-v1">Navigate</p>
+              <div class="site-footer-links-v1">
+                <a href="../" class="site-footer-link-v1">Home</a>
+                <a href="../#features" class="site-footer-link-v1">Features</a>
+                <a href="../#how" class="site-footer-link-v1">How it works</a>
+                <a href="../#who" class="site-footer-link-v1">Who it's for</a>
+              </div>
+            </div>
+
+            <div class="reveal-fade" style="transition-delay: 0.20s;">
+              <p class="site-footer-heading-v1">Connect</p>
+              <div class="site-footer-contact-v1">
+                <a href="mailto:danika@lightindustrial.co.za?subject=Document%20intake%20enquiry" class="site-footer-contact-item-v1">Get in touch</a>
+                <a href="mailto:danika@lightindustrial.co.za" class="site-footer-contact-item-v1">danika@lightindustrial.co.za</a>
+                <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="site-footer-contact-item-v1">Book a demo</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="site-footer-bottom-v1 reveal-fade" style="transition-delay: 0.24s;">
+            <div class="site-footer-meta-v1">© 2026 Light Industrial. Operations software for light industry.</div>
+            <div class="site-footer-legal-v1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="calculator.js"></script>
+  <script src="tooltips.js"></script>
+
+  <script>
+  // Reveal-on-scroll — same behaviour as the homepage, kept short here.
+  (function () {
+    var els = document.querySelectorAll('.reveal-trigger, .reveal-para, .reveal-fade, .reveal-img');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('is-revealed'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+
+  // Mobile nav menu toggle
+  (function () {
+    var btn = document.querySelector('.mobile-menu-btn');
+    var menu = document.getElementById('mobileMenu');
+    if (!btn || !menu) return;
+    function setOpen(open) { menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); }
+    btn.addEventListener('click', function () { setOpen(menu.hidden); });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  })();
+  </script>
+</body>
+</html>
