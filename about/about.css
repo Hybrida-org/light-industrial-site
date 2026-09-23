@@ -1,0 +1,85 @@
+/* About Us page — everything that is not already in styles.css.
+   The nav, footer and reveal animations are shared. This file lays out the
+   three sections: the story, the list of what we have built, and the team.
+
+   The page is three light "paper" panels on the site's dark background, the
+   same frame treatment the savings page uses, so the two pages feel related. */
+
+/* ── Header ────────────────────────────────────────────────────────────────── */
+/* No hero on this page, so the nav sits in normal flow rather than floating
+   over a photo. The 24px padding matches the gap the savings header leaves. */
+.about-header { padding: 24px; }
+.about-header .nav-wrap { position: static; transform: none; margin: 0 auto; }
+
+/* ── Section shell ─────────────────────────────────────────────────────────── */
+.about-section { position: relative; }
+.about-shell { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
+.about-frame {
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(45,42,38,0.08); border-radius: 30px;
+  background:
+    radial-gradient(circle at top center, rgba(168,138,109,0.06), transparent 22%),
+    linear-gradient(180deg, #f2eee8 0%, #e8e2d9 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 24px 60px rgba(0,0,0,0.06);
+}
+.about-inner { position: relative; z-index: 1; padding: 84px 44px 76px; }
+
+.about-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
+.about-kicker { margin: 0 0 16px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
+.about-title { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.05em; color: var(--ink); }
+
+/* ── Our story ─────────────────────────────────────────────────────────────── */
+/* A single readable column. 68ch is about 12 words a line, which is where long
+   prose stops being tiring to read. */
+.about-prose { max-width: 68ch; margin: 0 auto; }
+.about-prose p { margin: 0 0 22px; font-size: 16px; line-height: 1.8; color: var(--ink-soft); }
+.about-prose p:last-child { margin-bottom: 0; }
+/* The closing three sentences are the point of the section, so they carry the
+   weight of the page's ink colour instead of the softer body grey. */
+.about-prose-close { font-size: 17px !important; color: var(--ink) !important; font-weight: 500; }
+
+/* ── What we have built ────────────────────────────────────────────────────── */
+.built-list { max-width: 900px; margin: 0 auto; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 22px; }
+.built-item {
+  display: flex; gap: 18px; padding: 26px 28px;
+  border: 1px solid rgba(45,42,38,0.10); border-radius: 22px;
+  background: rgba(255,255,255,0.46);
+}
+.built-bullet {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 999px;
+  border: 1px solid rgba(168,138,109,0.26); background: rgba(168,138,109,0.10);
+  color: var(--bronze);
+}
+.built-lead { margin: 0 0 8px; font-size: 16px; font-weight: 600; line-height: 1.45; color: var(--ink); }
+.built-text { margin: 0; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+.built-close { max-width: 68ch; margin: 40px auto 0; text-align: center; font-size: 16px; line-height: 1.8; color: var(--ink); }
+
+/* ── Meet the team ─────────────────────────────────────────────────────────── */
+.team-grid { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.team-card {
+  padding: 30px 30px 32px;
+  border: 1px solid rgba(45,42,38,0.10); border-radius: 24px;
+  background: rgba(255,255,255,0.46);
+}
+/* Empty frame until the real photos arrive. Swapping in an <img> with the same
+   class needs no CSS change: object-fit crops the photo to the same circle. */
+.team-photo {
+  width: 84px; height: 84px; margin: 0 0 20px;
+  border-radius: 999px; object-fit: cover;
+  border: 1px dashed rgba(45,42,38,0.22);
+  background: linear-gradient(180deg, rgba(45,42,38,0.05), rgba(45,42,38,0.09));
+}
+.team-name { margin: 0; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
+.team-role { margin: 6px 0 14px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
+.team-text { margin: 0; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+
+/* ── Small screens ─────────────────────────────────────────────────────────── */
+@media (max-width: 880px) {
+  .about-shell { padding: 0 16px 16px; }
+  .about-inner { padding: 56px 22px 52px; }
+  .about-head { margin-bottom: 36px; }
+  .team-grid { grid-template-columns: 1fr; }
+  /* The icon above the text reads better than beside it once the card narrows. */
+  .built-item { flex-direction: column; gap: 14px; padding: 22px 20px; }
+}
