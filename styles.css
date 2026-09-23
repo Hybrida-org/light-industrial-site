@@ -829,3 +829,85 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 }
 @media (max-width: 900px) { .price-inner { padding: 64px 20px 56px; } }
 @media (max-width: 720px) { .price-shell { padding: 0 14px 14px; } }
+
+/* ===== LEAD FORM (built by /lead-form.js — see HYBRIDA-905) =====
+   One set of styles for the form wherever it appears: the bottom of Home and
+   the Contact Us page. It borrows the look of the old pop-up form on purpose,
+   so nothing changed visually when the pop-up went away. */
+.lf-block { max-width: 720px; margin: 0 auto; }
+.lf-head { text-align: center; margin-bottom: 26px; }
+.lf-head[hidden] { display: none; }
+.lf-eyebrow { margin: 0 0 12px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bronze); }
+.lf-title { margin: 0; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--text); }
+.lf-intro { margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-soft); }
+
+/* Two columns once there is room. The selects and the consent tick stay full
+   width — a long option list squeezed into half a row is hard to read. */
+.lf-form { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 620px) {
+  .lf-form { grid-template-columns: 1fr 1fr; }
+  .lf-form > .lf-field:nth-child(n+5), .lf-form > .lf-form-error, .lf-form > .lf-submit { grid-column: 1 / -1; }
+}
+.lf-field { display: flex; flex-direction: column; gap: 6px; }
+.lf-field label { font-family: 'Miranda Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.lf-req { color: var(--bronze); }
+
+.lf-field input, .lf-field select {
+  font-family: 'Mona Sans', sans-serif; font-size: 15px; color: var(--text);
+  background-color: rgba(231,227,218,0.04); border: 1px solid rgba(231,227,218,0.12);
+  border-radius: 12px; padding: 12px 14px; width: 100%;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+.lf-field input::placeholder { color: var(--muted); }
+.lf-field input:focus, .lf-field select:focus { outline: none; border-color: rgba(168,138,109,0.55); background-color: rgba(231,227,218,0.06); }
+.lf-field select {
+  padding-right: 40px; cursor: pointer; appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%237f8782' stroke-width='1.5' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 12px;
+}
+.lf-field select option { color: #1a1d1f; background: var(--paper); }
+
+.lf-field--check { gap: 9px; }
+.lf-check { display: flex; align-items: flex-start; gap: 11px; padding: 4px 0; /* keeps the tap target near 48px on a phone */ font-family: 'Mona Sans', sans-serif; font-size: 14px; font-weight: 400; line-height: 1.5; letter-spacing: 0; text-transform: none; color: var(--text-soft); cursor: pointer; }
+.lf-check input { flex: 0 0 auto; width: 20px; height: 20px; margin: 1px 0 0; padding: 0; accent-color: var(--bronze); cursor: pointer; }
+.lf-check input:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+.lf-note { margin: 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.lf-note a { color: var(--text-soft); }
+
+/* Errors carry a word as well as a colour, so they still read without colour vision. */
+.lf-error, .lf-form-error { margin: 0; font-size: 13px; line-height: 1.45; color: #e0857a; }
+.lf-error[hidden], .lf-form-error[hidden] { display: none; }
+.lf-form-error a { color: inherit; text-decoration: underline; }
+.lf-field [aria-invalid="true"] { border-color: rgba(224,133,122,0.65); }
+
+.lf-submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; min-height: 49px; margin-top: 2px; border: none; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(168,138,109,0.96), rgba(139,113,88,0.96));
+  color: #fff; font-family: 'Mona Sans', sans-serif; font-size: 14px; font-weight: 500;
+  cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 20px rgba(0,0,0,0.2);
+  transition: transform 180ms ease;
+}
+.lf-submit:hover { transform: translateY(-1px); }
+.lf-submit[disabled] { opacity: 0.6; cursor: default; transform: none; }
+
+/* The spam trap. Off-screen rather than display:none — some bots skip hidden fields. */
+.lf-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.lf-done { text-align: center; padding: 20px 0 6px; }
+.lf-done[hidden] { display: none; }
+.lf-tick { width: 52px; height: 52px; margin: 0 auto 18px; border-radius: 999px; border: 1px solid rgba(142,165,150,0.4); background: rgba(142,165,150,0.12); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--sage); }
+.lf-done-title { margin: 0; font-size: clamp(1.5rem, 3.4vw, 2rem); line-height: 1.1; letter-spacing: -0.03em; color: var(--text); }
+.lf-done-title:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; border-radius: 6px; }
+.lf-done-text { margin: 12px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-soft); }
+
+/* The lead form's own section at the bottom of the home page. The frame matches
+   the sections above it so the page still reads as one piece. */
+.home-form-section { padding-bottom: 8px; }
+.home-form-shell { max-width: 1500px; margin: 0 auto; padding: 24px; }
+.home-form-frame {
+  border: 1px solid var(--border-dark); border-radius: 30px; overflow: hidden;
+  background: linear-gradient(180deg, rgba(23, 26, 28, 0.92), rgba(14, 16, 17, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02), 0 30px 90px rgba(0, 0, 0, 0.24);
+}
+.home-form-inner { padding: clamp(36px, 6vw, 80px) clamp(20px, 5vw, 64px); }

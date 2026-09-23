@@ -1,6 +1,6 @@
 # Lead form — what it asks, what it does, what it looks like when things go wrong
 
-**Status:** Draft for review, 2026-09-17. Nothing is built yet.
+**Status:** Built. The form is a section on the page, not a pop-up (`HYBRIDA-905`).
 **Written by:** Tankiso · **Decisions needed from:** Donovan (§ 6)
 **From:** `website-launch-brief.md` § 5.9
 
@@ -11,35 +11,40 @@ Danika, without anyone retyping anything.
 
 ## 1. Where it appears
 
-One form, used in two places, with different words around it:
+One form, built once in `lead-form.js`, shown in two places:
 
-| Where | Heading | Button |
-|---|---|---|
-| "Get in touch" — the main call to action | Let's talk | Send my details |
-| After the ROI calculator | Email me the worksheet | Email me the worksheet |
+| Where | What it is |
+|---|---|
+| The last section of the home page | The page's final ask, after the price and the questions |
+| The Contact Us page | Under the ways of reaching us directly |
 
-Same fields, same machinery underneath. Only the heading and button change, so there is
-one form to fix when something is wrong with it.
+A page marks the spot with `<div data-lead-form></div>` and the script fills it in. Same
+fields, same checks, same place it sends — one form to fix when something is wrong.
 
-**The worksheet variant has had no trigger since 2026-09-23.** The savings calculator
-(`HYBRIDA-797`) took its own single-field email gate, on the home page and on
-`/savings/`, rather than opening this modal. The variant is left wired but unused while
-the lead form itself is being reworked in `HYBRIDA-905`.
+**It used to be a pop-up.** A form you can already see gets filled in far more often than
+one you have to click to open, and every "Get in touch" button on the site now has
+somewhere on the page to land.
+
+**A second set of words is wired but unused.** The `worksheet` variant reworded the heading
+and the button for the ROI worksheet. Nothing triggers it since 2026-09-23: the savings
+calculator (`HYBRIDA-797`) took its own single-field email gate instead.
 
 ---
 
 ## 2. The fields
 
-Six. Every one has to earn its place, because each extra field costs us conversions.
+Six, plus the consent tick. Every one has to earn its place, because each extra field
+costs us conversions.
 
 | # | Label on screen | Required | Type | Why it's here |
 |---|---|---|---|---|
 | 1 | Your name | Yes | Text | So Danika opens with a name |
 | 2 | Company | Yes | Text | So she can look them up before phoning |
-| 3 | Phone | Yes | Phone number | This buyer answers a phone faster than an email |
-| 4 | Email | Yes | Email | Where the worksheet goes |
-| 5 | Delivery notes a week | Yes | Pick one | The qualifying question — see below |
-| 6 | Consent tick | Yes | Checkbox | Required by law before we may contact them |
+| 3 | Work email | Yes | Email | Where we reply |
+| 4 | Phone | Yes | Phone number | This buyer answers a phone faster than an email |
+| 5 | Supplier delivery notes a week | Yes | Pick one | The qualifying question — see below |
+| 6 | What runs your stock today | Yes | Pick one | Tells us what we'd be syncing with, and how big a change this is |
+| 7 | Consent tick | Yes | Checkbox | Required by law before we may contact them |
 
 ### Field 5 is the important one
 

@@ -128,8 +128,9 @@
             </p>
           </div>
 
-          <!-- Mini lead form. Two fields only; it posts to the same place as the full
-               form in the modal, tagged 'hero' so the source is visible in HubSpot. -->
+          <!-- Mini lead form. Two fields only; it posts to the same place as the
+               full form at the bottom of the page, tagged 'hero' so the source is
+               visible in HubSpot. -->
           <div class="hero-form-panel reveal-fade" style="transition-delay: 0.9s;">
             <h2 class="hero-form-title font-head">Get a call back</h2>
 
@@ -186,7 +187,7 @@
               </p>
 
               <div class="cta-row mt-8 reveal-fade" style="transition-delay: 0.6s;">
-                <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="btn-primary" data-open-contact>
+                <a href="#contact-form" class="btn-primary">
                   Get in touch
                   <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
                 </a>
@@ -621,7 +622,7 @@
                 </div>
 
                 <div class="membership-card-actions-v2">
-                  <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="membership-plan-btn-v2 primary" data-open-contact>Send us an invoice</a>
+                  <a href="#contact-form" class="membership-plan-btn-v2 primary">Send us an invoice</a>
                   <a href="#how" class="membership-plan-btn-v2 secondary">See how it works</a>
                 </div>
 
@@ -1094,12 +1095,27 @@
                 </div>
 
                 <div class="final-cta-actions-v1">
-                  <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="final-btn-v1 primary" data-open-contact>Get in touch</a>
+                  <a href="#contact-form" class="final-btn-v1 primary">Get in touch</a>
                   <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="final-btn-v1 secondary" data-open-demo>Book a 30-min demo</a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD FORM — the last thing on the page, and the same component as the
+       Contact Us page (built by /lead-form.js). It replaced a pop-up: a form
+       you can already see gets filled in far more often than one you have to
+       click to open, and it gives every "Get in touch" button somewhere on the
+       page to land. See HYBRIDA-905. -->
+  <section id="contact-form" class="home-form-section">
+    <div class="home-form-shell">
+      <div class="home-form-frame">
+        <div class="home-form-inner">
+          <div data-lead-form data-variant="contact"></div>
         </div>
       </div>
     </div>
@@ -1174,6 +1190,9 @@
   <!-- The maths lives in one file, shared with the results page. This script only
        reads the sliders, paints the teaser, and hands the numbers over. -->
   <script src="savings/sums.js"></script>
+  <!-- After sums.js: the form reads the lead endpoint and the fallback email
+       address from there, so one paste turns on every form on the site. -->
+  <script src="lead-form.js"></script>
   <script>
   // Savings calculator, step 1 — the home-page teaser.
   //
@@ -1441,88 +1460,6 @@
   })();
   </script>
 
-  <!-- Lead form modal — see docs/lead-form-spec.md -->
-  <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" hidden>
-    <div class="modal modal--form">
-      <div class="modal-body">
-        <div class="modal-head">
-          <div>
-            <span class="eyebrow" id="lf-eyebrow">Get in touch</span>
-            <h2 id="contactModalTitle">Let's talk</h2>
-            <p id="lf-intro">Tell us a bit about your setup and we'll get back to you within 48 hours.</p>
-          </div>
-          <button type="button" class="modal-close" data-close-contact aria-label="Close">&times;</button>
-        </div>
-
-        <form class="modal-form" id="leadForm" novalidate>
-          <div class="field">
-            <label for="lf-name">Your name <span class="req">*</span></label>
-            <input type="text" id="lf-name" name="name" placeholder="Your full name" autocomplete="name" aria-describedby="lf-name-err">
-            <p class="field-error" id="lf-name-err" hidden></p>
-          </div>
-
-          <div class="field">
-            <label for="lf-company">Company <span class="req">*</span></label>
-            <input type="text" id="lf-company" name="company" placeholder="Where you work" autocomplete="organization" aria-describedby="lf-company-err">
-            <p class="field-error" id="lf-company-err" hidden></p>
-          </div>
-
-          <div class="field">
-            <label for="lf-phone">Phone <span class="req">*</span></label>
-            <input type="tel" id="lf-phone" name="phone" placeholder="021 555 0123" autocomplete="tel" inputmode="tel" aria-describedby="lf-phone-err">
-            <p class="field-error" id="lf-phone-err" hidden></p>
-          </div>
-
-          <div class="field">
-            <label for="lf-email">Email <span class="req">*</span></label>
-            <input type="email" id="lf-email" name="email" placeholder="you@company.co.za" autocomplete="email" inputmode="email" aria-describedby="lf-email-err">
-            <p class="field-error" id="lf-email-err" hidden></p>
-          </div>
-
-          <div class="field">
-            <label for="lf-volume">Delivery notes a week <span class="req">*</span></label>
-            <select id="lf-volume" name="volume" aria-describedby="lf-volume-err">
-              <option value="">Pick the closest</option>
-              <option value="under-10">Fewer than 10 a week</option>
-              <option value="10-30">10 to 30 a week</option>
-              <option value="30-100">30 to 100 a week</option>
-              <option value="over-100">More than 100 a week</option>
-              <option value="unsure">I'm not sure</option>
-            </select>
-            <p class="field-error" id="lf-volume-err" hidden></p>
-          </div>
-
-          <div class="field field--check">
-            <label class="check-line" for="lf-consent">
-              <input type="checkbox" id="lf-consent" name="consent" aria-describedby="lf-consent-err">
-              <span>I'm happy for Light Industrial to contact me about this enquiry.</span>
-            </label>
-            <p class="field-note">We'll only use your details to reply to you.</p>
-            <!-- Restore the privacy link here once the privacy page exists. -->
-            <p class="field-error" id="lf-consent-err" hidden></p>
-          </div>
-
-          <!-- Spam trap: hidden from people, filled in by bots. Never remove the label. -->
-          <div class="hp-wrap" aria-hidden="true">
-            <label for="lf-website">Website</label>
-            <input type="text" id="lf-website" name="website" tabindex="-1" autocomplete="off">
-          </div>
-
-          <p class="modal-error" id="lf-error" role="alert" hidden></p>
-          <button type="submit" class="modal-btn" id="lf-submit">Send my details</button>
-        </form>
-      </div>
-
-      <div class="modal-success" hidden>
-        <div class="tick" aria-hidden="true">&#10003;</div>
-        <h2 id="lf-success-title" tabindex="-1">Thanks &mdash; we've got it.</h2>
-        <p id="lf-success-msg"></p>
-        <button type="button" class="modal-btn" data-close-contact style="margin-top:20px;">Done</button>
-      </div>
-    </div>
-  </div>
-
-
   <script>
   // Measure the scrollbar once, so the modals can fill the gap they leave behind.
   // Re-measured on resize because the width can change between monitors.
@@ -1598,235 +1535,15 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
   })();
 
-  // Lead form modal — see docs/lead-form-spec.md
-  (function () {
-    // Paste the deployed Worker URL here to send real leads to HubSpot.
-    // While it is empty the form falls back to opening the visitor's email app,
-    // which is what the site did before. It never silently swallows a lead.
-    var LEAD_ENDPOINT = '';
-    var CONTACT_EMAIL = 'danika@lightindustrial.co.za';
-
-    // A real submission lands on its own page. A page load is a far more reliable
-    // conversion signal for Google Ads than a JavaScript event, which ad blockers
-    // and flaky networks can swallow.
-    var THANK_YOU_URL = '/thank-you/';
-
-    // The same form, framed two ways. Nothing triggers the worksheet variant any
-    // more: the savings calculator took its own email gate (see the teaser script
-    // above), so this is left wired but unused rather than deleted while the lead
-    // form itself is still being reworked in HYBRIDA-905.
-    var VARIANTS = {
-      contact: {
-        eyebrow: 'Get in touch',
-        title: "Let's talk",
-        intro: "Tell us a bit about your setup and we'll get back to you within 48 hours.",
-        button: 'Send my details',
-        sent: function () { return 'Danika will be in touch within 48 hours.'; }
-      },
-      worksheet: {
-        eyebrow: 'ROI worksheet',
-        title: 'Email me the worksheet',
-        intro: "We'll send the worksheet through and give you a call to talk it over.",
-        button: 'Email me the worksheet',
-        sent: function (email) { return 'Your ROI worksheet is on its way to ' + email + '. Danika will be in touch within 48 hours.'; }
-      }
-    };
-
-    var overlay = document.getElementById('contactModal');
-    if (!overlay) return;
-
-    var form = document.getElementById('leadForm');
-    var body = overlay.querySelector('.modal-body');
-    var success = overlay.querySelector('.modal-success');
-    var formError = document.getElementById('lf-error');
-    var submitBtn = document.getElementById('lf-submit');
-    var successMsg = document.getElementById('lf-success-msg');
-    var lastFocus = null;
-    var variant = VARIANTS.contact;
-
-    // One rule per field. `check` runs only once the field has something in it,
-    // so nobody is told their email is malformed before they have typed it.
-    var RULES = [
-      { name: 'name', empty: 'We need your name to get back to you.' },
-      { name: 'company', empty: 'Let us know which company you are with.' },
-      {
-        name: 'phone', empty: 'We need a number to call you on.',
-        check: function (v) { return v.replace(/[^0-9]/g, '').length >= 9; },
-        invalid: 'That number looks too short. Include the area code.'
-      },
-      {
-        name: 'email', empty: 'We need an email address to reply to.',
-        check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
-        invalid: "That email doesn't look right — check for a typo?"
-      },
-      { name: 'volume', empty: 'Pick the closest option so we know how to help.' },
-      { name: 'consent', empty: "Please tick the box so we're allowed to contact you." }
-    ];
-
-    function fieldOf(rule) { return form.elements[rule.name]; }
-    function errorOf(rule) { return document.getElementById('lf-' + rule.name + '-err'); }
-    function valueOf(rule) {
-      var el = fieldOf(rule);
-      return el.type === 'checkbox' ? (el.checked ? 'yes' : '') : (el.value || '').trim();
-    }
-
-    // Returns the message to show, or '' when the field is fine.
-    function problemWith(rule) {
-      var value = valueOf(rule);
-      if (!value) return rule.empty;
-      if (rule.check && !rule.check(value)) return rule.invalid;
-      return '';
-    }
-
-    function showProblem(rule, message) {
-      var el = fieldOf(rule);
-      var errorEl = errorOf(rule);
-      errorEl.textContent = message;
-      errorEl.hidden = !message;
-      if (message) { el.setAttribute('aria-invalid', 'true'); }
-      else { el.removeAttribute('aria-invalid'); }
-    }
-
-    function clearAllProblems() {
-      RULES.forEach(function (rule) { showProblem(rule, ''); });
-      formError.hidden = true;
-    }
-
-    // Check a field when the person leaves it, but only clear-as-you-type after
-    // they have already been told about it — correcting mid-word is annoying.
-    RULES.forEach(function (rule) {
-      var el = fieldOf(rule);
-      var event = (el.type === 'checkbox' || el.tagName === 'SELECT') ? 'change' : 'blur';
-      el.addEventListener(event, function () { showProblem(rule, problemWith(rule)); });
-      el.addEventListener('input', function () {
-        if (el.getAttribute('aria-invalid')) showProblem(rule, problemWith(rule));
-      });
-    });
-
-    function firstProblem() {
-      var first = null;
-      RULES.forEach(function (rule) {
-        var message = problemWith(rule);
-        showProblem(rule, message);
-        if (message && !first) first = rule;
-      });
-      return first;
-    }
-
-    function applyVariant(name) {
-      variant = VARIANTS[name] || VARIANTS.contact;
-      document.getElementById('lf-eyebrow').textContent = variant.eyebrow;
-      document.getElementById('contactModalTitle').textContent = variant.title;
-      document.getElementById('lf-intro').textContent = variant.intro;
-      submitBtn.textContent = variant.button;
-    }
-
-    function open(name) {
-      lastFocus = document.activeElement;
-      applyVariant(name);
-      overlay.hidden = false; void overlay.offsetWidth;
-      overlay.classList.add('open'); document.body.classList.add('modal-open');
-      var first = overlay.querySelector('input, select, button'); if (first) first.focus();
-    }
-
-    function close() {
-      overlay.classList.remove('open'); document.body.classList.remove('modal-open');
-      setTimeout(function () {
-        overlay.hidden = true; body.hidden = false; success.hidden = true;
-        clearAllProblems();
-        submitBtn.disabled = false; submitBtn.textContent = variant.button;
-        form.reset();
-      }, 280);
-      if (lastFocus && lastFocus.focus) lastFocus.focus();
-    }
-
-    function showSuccess(message) {
-      successMsg.textContent = message;
-      body.hidden = true; success.hidden = false;
-      success.querySelector('h2').focus();
-    }
-
-    function answers() {
-      return {
-        name: form.elements.name.value.trim(),
-        company: form.elements.company.value.trim(),
-        phone: form.elements.phone.value.trim(),
-        email: form.elements.email.value.trim(),
-        delivery_notes_per_week: form.elements.volume.value,
-        consent: form.elements.consent.checked,
-        source: 'website',
-        variant: variant === VARIANTS.worksheet ? 'worksheet' : 'contact'
-      };
-    }
-
-    // Fallback while LEAD_ENDPOINT is empty: hand the details to the visitor's own
-    // email app. Weaker than posting to HubSpot, but it does not lose the lead.
-    function sendByEmail(lead) {
-      var lines = [
-        'Name: ' + lead.name,
-        'Company: ' + lead.company,
-        'Phone: ' + lead.phone,
-        'Email: ' + lead.email,
-        'Delivery notes a week: ' + lead.delivery_notes_per_week
-      ];
-      window.location.href = 'mailto:' + CONTACT_EMAIL +
-        '?subject=' + encodeURIComponent('Light Industrial enquiry — ' + lead.company) +
-        '&body=' + encodeURIComponent(lines.join('\n'));
-      // Deliberately not the thank-you page: nothing has actually reached us until
-      // they press send, and only this message tells them to.
-      showSuccess("Your email app should have opened with your details ready. Hit send and we'll get back to you.");
-    }
-
-    function sendToWorker(lead) {
-      submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
-      fetch(LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(lead)
-      }).then(function (response) {
-        if (!response.ok) throw new Error('Worker returned ' + response.status);
-        window.location.href = THANK_YOU_URL;
-      }).catch(function () {
-        submitBtn.disabled = false; submitBtn.textContent = variant.button;
-        formError.innerHTML = 'Something went wrong on our side. Email ' +
-          '<a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a> and we\'ll pick it up.';
-        formError.hidden = false;
-      });
-    }
-
-    document.querySelectorAll('[data-open-contact]').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        open(btn.getAttribute('data-form-variant') || 'contact');
-      });
-    });
-    overlay.querySelectorAll('[data-close-contact]').forEach(function (btn) { btn.addEventListener('click', close); });
-    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      formError.hidden = true;
-
-      var bad = firstProblem();
-      if (bad) { fieldOf(bad).focus(); return; }
-
-      // A person never sees this field, so anything in it came from a bot.
-      // Show the normal thank-you and drop it, rather than telling the bot it failed.
-      if (form.elements.website.value) { showSuccess(variant.sent(answers().email)); return; }
-
-      var lead = answers();
-      if (LEAD_ENDPOINT) sendToWorker(lead); else sendByEmail(lead);
-    });
-  })();
   </script>
 
   <script>
   // Hero mini lead form — see HYBRIDA-904.
   //
   // Two fields and nothing else: the job of this form is to be cheap to fill in,
-  // not to qualify anyone. It posts the same JSON to the same endpoint as the full
-  // form in the modal, tagged variant 'hero' so HubSpot can tell them apart.
+  // not to qualify anyone. It posts the same JSON to the same endpoint as the
+  // full form at the bottom of the page, tagged variant 'hero' so HubSpot can
+  // tell them apart.
   (function () {
     var form = document.getElementById('heroForm');
     if (!form || !window.SavingsSums) return;
