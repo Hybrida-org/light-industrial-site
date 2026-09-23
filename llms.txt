@@ -31,6 +31,10 @@ faster than they get captured, and a specific person's day is being eaten by it.
 
 - [Home](https://lightindustrial.co.za/): what it does, who it is for, how it
   works, and a calculator for what receiving paperwork currently costs.
+- [Your savings, worked out](https://lightindustrial.co.za/savings/): the full
+  result of the savings calculator — the hours and rands a business spends on
+  receiving paperwork today, what it would cost to replace, and how long that
+  takes to pay back.
 
 ## Contact
 

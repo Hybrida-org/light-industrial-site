@@ -43,9 +43,9 @@
      absent: the capability ledger does not yet support the Xero/Sage claim, and
      structured data turns a page claim into a quotable one. Add it once the
      ledger confirms.
-     "How do I start?" is also absent: the page answer promises a 15-minute demo
-     while the booking link is a 30-minute event. Fix the page copy first, then
-     add the question here. -->
+     "How do I start?" is also absent. The page copy used to promise a 15-minute
+     demo while the booking link was a 30-minute event; the copy now says 30
+     everywhere, so this question is safe to add whenever we want it. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -95,65 +95,74 @@
       <div class="top-image-zone">
         <img src="public/00-Hero-bg.jpg" alt="Steel fabricator cutting metal, sparks flying in a dark workshop" class="reveal-img">
 
-        <div class="nav-wrap">
-          <div class="nav-pill">
-            <div class="flex items-center gap-3">
-              <span class="brand-mark font-head">LI</span>
-              <div>
-                <div class="font-head text-[13px] uppercase tracking-[0.24em] brand-name">Light Industrial</div>
-                <div class="mt-[2px] text-[10px] uppercase tracking-[0.18em] brand-sub">Operations platform</div>
-              </div>
-            </div>
-
-            <nav class="flex items-center gap-8 text-sm">
-              <a href="#problem" class="nav-link">The problem</a>
-              <a href="#how" class="nav-link">How it works</a>
-              <a href="#features" class="nav-link">Features</a>
-              <a href="#who" class="nav-link">Who it's for</a>
-            </nav>
-
-            <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="nav-book-btn" data-open-contact>Get in touch</a>
-
-            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
-              <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
-            </button>
-          </div>
-
-          <div class="mobile-menu" id="mobileMenu" hidden>
-            <a href="#problem" class="mobile-menu-link">The problem</a>
-            <a href="#how" class="mobile-menu-link">How it works</a>
-            <a href="#features" class="mobile-menu-link">Features</a>
-            <a href="#who" class="mobile-menu-link">Who it's for</a>
-            <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="mobile-menu-cta" data-open-contact>Get in touch</a>
-          </div>
-        </div>
+        <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+        <div class="nav-wrap" data-site-nav></div>
 
         <div class="hero-copy">
-          <div class="eyebrow reveal-fade">
-            <span class="eyebrow-dot"></span>
-            Operations software for light industry
+          <div class="hero-copy-left">
+            <div class="eyebrow reveal-fade">
+              <span class="eyebrow-dot"></span>
+              Operations software for light industry
+            </div>
+
+            <h1 class="hero-title font-head reveal-trigger">
+              <span class="block">
+                <span class="reveal-word" style="transition-delay: 0.1s;">Snap</span>
+                <span class="reveal-word" style="transition-delay: 0.2s;">the</span>
+                <span class="reveal-word" style="transition-delay: 0.3s;">paperwork.</span>
+              </span>
+              <span class="block">
+                <span class="reveal-word" style="transition-delay: 0.4s;">Skip</span>
+                <span class="reveal-word" style="transition-delay: 0.5s;">the</span>
+                <span class="reveal-word" style="transition-delay: 0.6s;">data</span>
+                <span class="reveal-word" style="transition-delay: 0.7s;">entry.</span>
+              </span>
+            </h1>
+
+            <div class="hero-divider reveal-fade" style="transition-delay: 0.7s;"></div>
+
+            <!-- Names the trades and nothing else. Deliberately shares no word with
+                 the headline above it, so the two lines never say the same thing twice. -->
+            <p class="hero-text reveal-para" style="transition-delay: 0.8s;">
+              For manufacturers, wholesalers and trade suppliers.
+            </p>
           </div>
 
-          <h1 class="hero-title font-head reveal-trigger">
-            <span class="block">
-              <span class="reveal-word" style="transition-delay: 0.1s;">Snap</span>
-              <span class="reveal-word" style="transition-delay: 0.2s;">the</span>
-              <span class="reveal-word" style="transition-delay: 0.3s;">paperwork.</span>
-            </span>
-            <span class="block">
-              <span class="reveal-word" style="transition-delay: 0.4s;">Skip</span>
-              <span class="reveal-word" style="transition-delay: 0.5s;">the</span>
-              <span class="reveal-word" style="transition-delay: 0.6s;">data</span>
-              <span class="reveal-word" style="transition-delay: 0.7s;">entry.</span>
-            </span>
-          </h1>
+          <!-- Mini lead form. Two fields only; it posts to the same place as the full
+               form in the modal, tagged 'hero' so the source is visible in HubSpot. -->
+          <div class="hero-form-panel reveal-fade" style="transition-delay: 0.9s;">
+            <h2 class="hero-form-title font-head">Get a call back</h2>
 
-          <div class="hero-divider reveal-fade" style="transition-delay: 0.7s;"></div>
+            <form class="hero-form" id="heroForm" novalidate>
+              <div class="hero-field">
+                <label for="hf-email">Work email</label>
+                <input type="email" id="hf-email" name="email" placeholder="you@company.co.za" autocomplete="email" inputmode="email" aria-describedby="hf-email-err">
+                <p class="hero-field-error" id="hf-email-err" hidden></p>
+              </div>
 
-          <p class="hero-text reveal-para" style="transition-delay: 0.8s;">
-            For the manufacturers, wholesalers and trade suppliers who are done keying every
-            supplier document into two systems. Snap it, check it, and your stock and books stay current.
-          </p>
+              <div class="hero-field">
+                <label for="hf-phone">Phone</label>
+                <input type="tel" id="hf-phone" name="phone" placeholder="021 555 0123" autocomplete="tel" inputmode="tel" aria-describedby="hf-phone-err">
+                <p class="hero-field-error" id="hf-phone-err" hidden></p>
+              </div>
+
+              <!-- Spam trap: hidden from people, filled in by bots. Never remove the label. -->
+              <div class="hp-wrap" aria-hidden="true">
+                <label for="hf-website">Website</label>
+                <input type="text" id="hf-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <p class="hero-form-error" id="hf-error" role="alert" hidden></p>
+              <button type="submit" class="hero-form-btn" id="hf-submit">Send</button>
+              <p class="hero-form-fine">By sending, you're happy for us to contact you about this.</p>
+            </form>
+
+            <div class="hero-form-done" id="hf-done" hidden>
+              <div class="hero-form-tick" aria-hidden="true">&#10003;</div>
+              <h3 id="hf-done-title" tabindex="-1">Got it.</h3>
+              <p id="hf-done-msg">We'll be in touch within 24 hours.</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -181,7 +190,7 @@
                   Get in touch
                   <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
                 </a>
-                <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="btn-secondary" data-open-demo>Book a 15-min demo</a>
+                <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="btn-secondary" data-open-demo>Book a 30-min demo</a>
               </div>
 
               <div class="icon-pulse mt-6">
@@ -643,7 +652,7 @@
                 </div>
 
                 <div class="membership-card-actions-v2">
-                  <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="membership-plan-btn-v2 secondary" data-open-demo>Book a 15-min demo</a>
+                  <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="membership-plan-btn-v2 secondary" data-open-demo>Book a 30-min demo</a>
                   <a href="#who" class="membership-plan-btn-v2 secondary">See who it's for</a>
                 </div>
 
@@ -811,68 +820,201 @@
     </div>
   </section>
 
-  <!-- SECTION: ROI CALCULATOR — see docs/roi-calculator-spec.md -->
+  <!-- SECTION: SAVINGS CALCULATOR, STEP 1 — the teaser.
+       Five sliders and one part-hidden headline. The full answer, the charts and
+       the working live at /savings/, behind an email. Every number here comes
+       from savings/sums.js — nothing numeric is written into this markup. -->
   <section id="calculator" class="calc-section">
     <div class="calc-shell">
       <div class="calc-frame">
         <div class="calc-inner">
 
           <div class="calc-head">
-            <p class="calc-kicker reveal-fade">What it&rsquo;s worth</p>
+            <p class="calc-kicker reveal-fade">ROI calculator</p>
             <h2 class="calc-title font-head reveal-trigger">
               <span class="reveal-line" style="transition-delay: 0.10s;">What the paperwork</span>
               <span class="reveal-line" style="transition-delay: 0.24s;">already costs you.</span>
             </h2>
             <p class="calc-intro reveal-para" style="transition-delay: 0.18s;">
-              Move the three sliders to match your business. The numbers are yours; we just
+              Move the sliders to match your business. The numbers are yours; we just
               do the sum.
             </p>
           </div>
 
-          <!-- Slider ranges and starting values come from SETTINGS in the calculator
-               script below — deliberately not written into the markup, so there is one
-               place to change them. -->
           <div class="calc-grid reveal-fade" style="transition-delay: 0.26s;">
 
             <div class="calc-controls">
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
-                  <label for="calcDocs">Documents a month</label>
+                  <label for="calcDocs">Delivery notes a week</label>
                   <output id="calcDocsOut" for="calcDocs"></output>
                 </div>
                 <input type="range" id="calcDocs" aria-describedby="calcDocsHint">
-                <p class="calc-hint" id="calcDocsHint">Delivery notes, supplier invoices and quotes coming in.</p>
+                <p class="calc-hint" id="calcDocsHint">Delivery notes, supplier invoices and quotes coming through the door.</p>
               </div>
 
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
-                  <label for="calcCost">What that person costs</label>
-                  <output id="calcCostOut" for="calcCost"></output>
-                </div>
-                <input type="range" id="calcCost" aria-describedby="calcCostHint">
-                <p class="calc-hint" id="calcCostHint">A month, to the business &mdash; not their take-home pay.</p>
-              </div>
-
-              <div class="calc-ctrl">
-                <div class="calc-ctrl-top">
-                  <label for="calcMins">Minutes per document</label>
+                  <label for="calcMins">Minutes a document, today</label>
                   <output id="calcMinsOut" for="calcMins"></output>
                 </div>
                 <input type="range" id="calcMins" aria-describedby="calcMinsHint">
-                <p class="calc-hint" id="calcMinsHint">Checking, chasing and capturing &mdash; not just typing.</p>
+                <p class="calc-hint" id="calcMinsHint">Checking it against the order, chasing what&rsquo;s short, filing it, typing it in.</p>
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <label for="calcSalary">What that person costs</label>
+                  <output id="calcSalaryOut" for="calcSalary"></output>
+                </div>
+                <input type="range" id="calcSalary" aria-describedby="calcSalaryHint">
+                <p class="calc-hint" id="calcSalaryHint">A month, to the business &mdash; not their take-home pay.</p>
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <label for="calcErrors">Captured lines needing a fix</label>
+                  <output id="calcErrorsOut" for="calcErrors"></output>
+                </div>
+                <input type="range" id="calcErrors" aria-describedby="calcErrorsHint">
+                <p class="calc-hint" id="calcErrorsHint">Wrong part code, wrong quantity, wrong price. Where you start, not where you stay.</p>
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <label for="calcShort">Deliveries arriving short or wrong</label>
+                  <output id="calcShortOut" for="calcShort"></output>
+                </div>
+                <input type="range" id="calcShort" aria-describedby="calcShortHint">
+                <p class="calc-hint" id="calcShortHint">Missing items, swapped items, quantities that don&rsquo;t match the order.</p>
               </div>
             </div>
 
-            <div class="calc-result" id="calcResult" data-state="yes" aria-live="polite">
-              <p class="calc-verdict" id="calcVerdict">Worth it</p>
+            <!-- The teaser. One number, half of it covered. The blurred part is a
+                 placeholder, never the real figure rendered small — a visitor who
+                 opens the inspector should find nothing we haven't shown them. -->
+            <div class="calc-result" id="calcResult" data-state="pays" aria-live="polite">
+              <p class="calc-verdict" id="calcVerdict"></p>
               <p class="calc-headline font-head" id="calcHeadline"></p>
               <p class="calc-sub" id="calcSub"></p>
-              <p class="calc-flag" id="calcFlag" hidden></p>
+
+              <ul class="calc-teaser-list">
+                <li>The month it pays for itself, and what you keep after that</li>
+                <li>Hours won back, and where your mistakes go over six months</li>
+                <li>Short deliveries caught, and which suppliers keep doing it</li>
+              </ul>
+
+              <!-- Step 2 starts here: one field, then the results page. -->
+              <form class="calc-gate" id="calcGate" novalidate>
+                <label class="calc-gate-label" for="calcEmail">Work email</label>
+                <div class="calc-gate-row">
+                  <input type="email" id="calcEmail" name="email" placeholder="you@yourcompany.co.za" autocomplete="email" required>
+                  <button type="submit" class="calc-cta" id="calcGateBtn">See my full results</button>
+                </div>
+                <p class="calc-gate-note" id="calcGateNote">Your numbers go with you to the next page. No newsletter, no list.</p>
+                <!-- A person never sees this. Anything in it came from a bot. -->
+                <div class="calc-honeypot" aria-hidden="true"><label for="calcWebsite">Website</label><input type="text" id="calcWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+              </form>
+
               <p class="calc-against" id="calcAgainst"></p>
-              <a href="#" class="calc-cta" id="calcCta" data-open-contact>Talk to us about your numbers</a>
             </div>
 
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: PRICING.
+       Sits after the calculator on purpose: by the time a visitor reaches it they
+       have just put a number on what the paperwork costs them, so the price lands
+       against their own figure instead of against nothing.
+
+       The once-off setup fee is the headline number because it is the one nobody
+       else on this market publishes. Every amount comes from savings/sums.js —
+       nothing numeric is written into this markup. -->
+  <section id="pricing" class="price-section">
+    <div class="price-shell">
+      <div class="price-frame">
+        <div class="price-inner">
+
+          <div class="price-head">
+            <p class="price-kicker reveal-fade">What it costs</p>
+            <h2 class="price-title font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">Pick your volume.</span>
+              <span class="reveal-line" style="transition-delay: 0.24s;">Everything else is included.</span>
+            </h2>
+            <p class="price-intro reveal-para" style="transition-delay: 0.18s;">
+              The setup fee depends on two things and the monthly fee depends on one. Set them
+              here and watch the price change &mdash; no form, no call.
+            </p>
+          </div>
+
+          <div class="price-grid reveal-fade" style="transition-delay: 0.26s;">
+
+            <div class="price-choices">
+
+              <div class="price-choice">
+                <span class="price-legend">How much paperwork</span>
+                <div class="price-slider-top">
+                  <label for="priceDocs">Supplier documents a month</label>
+                  <output id="priceDocsOut" for="priceDocs"></output>
+                </div>
+                <input type="range" id="priceDocs" class="price-range">
+              </div>
+
+              <div class="price-choice">
+                <span class="price-legend">Setting you up</span>
+
+                <label class="price-toggle">
+                  <input type="checkbox" id="priceIntegration">
+                  <span class="price-toggle-text">
+                    <b>We're staying on our current system</b>
+                    <span>We build the link to it instead of you moving onto ours.</span>
+                  </span>
+                  <span class="price-toggle-price" id="priceIntegrationAmount"></span>
+                </label>
+
+                <label class="price-toggle">
+                  <input type="checkbox" id="priceMigration">
+                  <span class="price-toggle-text">
+                    <b>Bring our old data across</b>
+                    <span>Suppliers, stock items and history loaded before you go live.</span>
+                  </span>
+                  <span class="price-toggle-price" id="priceMigrationAmount"></span>
+                </label>
+              </div>
+
+            </div>
+
+            <aside class="price-answer" aria-live="polite">
+              <p class="price-answer-label">Once-off, to set you up</p>
+              <p class="price-figure font-head" id="priceSetupOut"></p>
+              <p class="price-figure-note">Invoiced once, before you go live.</p>
+
+              <div class="price-stack">
+                <div class="price-block" data-part="base"><span>Onboarding</span> <b id="priceBaseAmount"></b></div>
+                <div class="price-block" data-part="integration" hidden><span>Link to your system</span> <b id="priceIntegrationBlock"></b></div>
+                <div class="price-block" data-part="migration" hidden><span>Old data brought across</span> <b id="priceMigrationBlock"></b></div>
+              </div>
+
+              <div class="price-divider"></div>
+
+              <div class="price-monthly">
+                <span>Then, every month<br><small id="priceTierNote"></small></span>
+                <b id="priceMonthlyOut"></b>
+              </div>
+
+              <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="price-cta" data-open-demo>Book a 30-min demo</a>
+            </aside>
+
+          </div>
+
+          <p class="price-exvat">
+            Prices exclude VAT. The monthly fee is priced on documents, never on users &mdash;
+            put the whole team on it at no extra cost.
+          </p>
+
         </div>
       </div>
     </div>
@@ -898,7 +1040,7 @@
           </div>
 
           <div class="faq-list-v1">
-            <div class="faq-item-v1 reveal-fade active" style="transition-delay: 0.14s;">
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.14s;">
               <button class="faq-question-v1" type="button"><span>What formats can you read?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
                 PDFs, emailed invoices, scanned pages, and photos taken on a phone in the yard. If a supplier can send it, we can usually read it.
@@ -929,7 +1071,7 @@
             <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.38s;">
               <button class="faq-question-v1" type="button"><span>How do I start?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                Get in touch, or book a 15-minute demo. We'll walk you through it and see if it's a fit. No signup, no pressure.
+                Get in touch, or book a 30-minute demo. We'll walk you through it and see if it's a fit. No signup, no pressure.
               </div></div>
             </div>
           </div>
@@ -953,7 +1095,7 @@
 
                 <div class="final-cta-actions-v1">
                   <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="final-btn-v1 primary" data-open-contact>Get in touch</a>
-                  <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="final-btn-v1 secondary" data-open-demo>Book a 15-min demo</a>
+                  <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="final-btn-v1 secondary" data-open-demo>Book a 30-min demo</a>
                 </div>
               </div>
             </div>
@@ -964,55 +1106,9 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="site-footer-v1">
-    <div class="site-footer-shell-v1">
-      <div class="site-footer-frame-v1">
-        <div class="site-footer-inner-v1">
-          <div class="site-footer-top-v1">
-            <div class="site-footer-brand-v1 reveal-fade" style="transition-delay: 0.08s;">
-              <div class="site-footer-mark-v1 font-head">LI</div>
-              <h2 class="site-footer-name-v1 font-head">Light Industrial</h2>
-              <p class="site-footer-text-v1">
-                The operations platform for light industrial businesses. Clean data, accurate stock and
-                books that stay in sync, from the order you place to the stock on your shelf.
-              </p>
-            </div>
+  <footer class="site-footer-v1" data-site-footer></footer>
 
-            <div class="reveal-fade" style="transition-delay: 0.14s;">
-              <p class="site-footer-heading-v1">Navigate</p>
-              <div class="site-footer-links-v1">
-                <a href="#hero" class="site-footer-link-v1">Home</a>
-                <a href="#features" class="site-footer-link-v1">Features</a>
-                <a href="#how" class="site-footer-link-v1">How it works</a>
-                <!-- <a href="#platform" class="site-footer-link-v1">The platform</a> -->
-                <a href="#who" class="site-footer-link-v1">Who it's for</a>
-              </div>
-            </div>
-
-            <div class="reveal-fade" style="transition-delay: 0.20s;">
-              <p class="site-footer-heading-v1">Connect</p>
-              <div class="site-footer-contact-v1">
-                <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="site-footer-contact-item-v1" data-open-contact>Get in touch</a>
-                <a href="mailto:danika@lightindustrial.co.za" class="site-footer-contact-item-v1">danika@lightindustrial.co.za</a>
-                <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="site-footer-contact-item-v1" data-open-demo>Book a 15-min demo</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="site-footer-bottom-v1 reveal-fade" style="transition-delay: 0.24s;">
-            <div class="site-footer-meta-v1">© 2026 Light Industrial. Operations software for light industry.</div>
-            <div class="site-footer-legal-v1">
-              <!-- Legal pages not built yet — hidden for now.
-              <a href="#">Privacy</a>
-              <a href="#">Terms</a>
-              <a href="#">Accessibility</a>
-              -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <script src="site-chrome.js"></script>
 
   <script>
     (function () {
@@ -1058,7 +1154,7 @@
     <div class="modal">
       <div class="modal-head">
         <div>
-          <span class="eyebrow">15-minute demo</span>
+          <span class="eyebrow">30-minute demo</span>
           <h2 id="demoModalTitle">Pick a time that works for you</h2>
           <p>Grab a slot with Danika and we'll walk you through the capture-and-match flow on your own documents.</p>
         </div>
@@ -1075,150 +1171,273 @@
     </div>
   </div>
 
+  <!-- The maths lives in one file, shared with the results page. This script only
+       reads the sliders, paints the teaser, and hands the numbers over. -->
+  <script src="savings/sums.js"></script>
   <script>
-  // ROI calculator — see docs/roi-calculator-spec.md
+  // Savings calculator, step 1 — the home-page teaser.
+  //
+  // Shows one headline with its key figure covered, then trades the full results
+  // for a work email. Every number comes from savings/sums.js; there are none here.
   (function () {
-    // ─── Every number the team may want to argue about lives here ───────────
-    var SETTINGS = {
-      // The three sliders. "start" is what a visitor sees before touching anything,
-      // so it should describe a real in-market buyer.
-      sliders: {
-        docs: { min: 20,   max: 600,   step: 10,  start: 300 },
-        cost: { min: 5000, max: 40000, step: 500, start: 12000 },
-        mins: { min: 5,    max: 60,    step: 1,   start: 25 }
-      },
-      workingHoursPerMonth: 160,   // one person's month
-      shareWeRemove: 0.8,          // a human still checks what we flag
-      tiers: [                     // published document-intake prices, ex VAT
-        { upToDocs: 150, price: 3500 },
-        { upToDocs: Infinity, price: 6500 }
-      ],
-      // The worksheet PDF does not exist yet. Flip this on once it does, and the
-      // button starts offering it instead of a conversation.
-      worksheetReady: false
-    };
-    // ────────────────────────────────────────────────────────────────────────
+    'use strict';
 
-    var result = document.getElementById('calcResult');
+    var sums = window.SavingsSums;
+    if (!sums) return;
+
+    var SETTINGS = sums.SETTINGS;
+    var rands = sums.rands;
+    var hoursWord = sums.hoursWord;
+
+    var el = function (id) { return document.getElementById(id); };
+
+    var result = el('calcResult');
     if (!result) return;
 
-    var docs = document.getElementById('calcDocs');
-    var cost = document.getElementById('calcCost');
-    var mins = document.getElementById('calcMins');
-    var outs = {
-      docs: document.getElementById('calcDocsOut'),
-      cost: document.getElementById('calcCostOut'),
-      mins: document.getElementById('calcMinsOut')
+    var sliders = {
+      docsPerWeek: el('calcDocs'),
+      minsPerDoc: el('calcMins'),
+      salary: el('calcSalary'),
+      errorRate: el('calcErrors'),
+      shortRate: el('calcShort')
     };
-    var verdict = document.getElementById('calcVerdict');
-    var headline = document.getElementById('calcHeadline');
-    var sub = document.getElementById('calcSub');
-    var flag = document.getElementById('calcFlag');
-    var against = document.getElementById('calcAgainst');
-    var cta = document.getElementById('calcCta');
+    var outs = {
+      docsPerWeek: el('calcDocsOut'),
+      minsPerDoc: el('calcMinsOut'),
+      salary: el('calcSalaryOut'),
+      errorRate: el('calcErrorsOut'),
+      shortRate: el('calcShortOut')
+    };
+    var verdict = el('calcVerdict');
+    var headline = el('calcHeadline');
+    var sub = el('calcSub');
+    var against = el('calcAgainst');
 
-    function rands(amount) {
-      return 'R' + Math.round(amount).toLocaleString('en-US');
-    }
+    // The covered figure. It is a placeholder, not the real number blurred, so
+    // there is nothing to read in the inspector that we haven't shown on screen.
+    var HIDDEN = '<span class="calc-blur" aria-hidden="true">00</span><span class="calc-visually-hidden">hidden until you see the full results</span>';
 
-    function priceFor(documentsPerMonth) {
-      for (var i = 0; i < SETTINGS.tiers.length; i++) {
-        if (documentsPerMonth <= SETTINGS.tiers[i].upToDocs) return SETTINGS.tiers[i].price;
-      }
-      return SETTINGS.tiers[SETTINGS.tiers.length - 1].price;
-    }
-
-    function sums() {
-      var documentsPerMonth = +docs.value;
-      var hours = documentsPerMonth * (+mins.value) / 60;
-      var costPerHour = (+cost.value) / SETTINGS.workingHoursPerMonth;
-      var freed = hours * costPerHour * SETTINGS.shareWeRemove;
-      var price = priceFor(documentsPerMonth);
+    // The two setup toggles only exist on the results page. The teaser assumes
+    // the common case — keeping their own system, no data migration — and the
+    // results page lets them change it.
+    function readInputs() {
       return {
-        hours: hours,
-        price: price,
-        // Rounded to the nearest R100 — false precision reads as a made-up number.
-        net: Math.round((freed - price) / 100) * 100
+        docsPerWeek: +sliders.docsPerWeek.value,
+        minsPerDoc: +sliders.minsPerDoc.value,
+        salary: +sliders.salary.value,
+        errorRate: +sliders.errorRate.value,
+        shortRate: +sliders.shortRate.value,
+        keepingOwnSystem: SETTINGS.setup.integrationStartsOn,
+        dataMigration: SETTINGS.setup.migrationStartsOn
       };
     }
 
     function render() {
-      outs.docs.textContent = docs.value;
-      outs.cost.textContent = rands(+cost.value);
-      outs.mins.textContent = mins.value;
+      outs.docsPerWeek.textContent = sliders.docsPerWeek.value;
+      outs.minsPerDoc.textContent = sliders.minsPerDoc.value + ' min';
+      outs.salary.textContent = rands(+sliders.salary.value);
+      outs.errorRate.textContent = sliders.errorRate.value + '%';
+      outs.shortRate.textContent = sliders.shortRate.value + '%';
 
-      var s = sums();
-      var hours = Math.round(s.hours);
+      var s = sums.calculate(readInputs());
+      var hours = Math.round(s.hoursSaved);
 
       against.textContent = 'Measured against document intake at ' + rands(s.price) +
-        ' a month, ex VAT.';
-
-      // More than one person's month means the sliders have left reality behind.
-      if (s.hours > SETTINGS.workingHoursPerMonth) {
-        flag.hidden = false;
-        flag.textContent = "That's more than one person's whole month on paperwork — " +
-          'worth a conversation rather than a calculator.';
-      } else {
-        flag.hidden = true;
-      }
+        ' a month at ' + s.docs + ' documents, ex VAT.';
 
       if (s.net > 0) {
-        result.setAttribute('data-state', 'yes');
-        verdict.textContent = 'Worth it';
-        headline.innerHTML = "You'd save about <span class=\"calc-amount\">" +
-          rands(s.net) + '</span> a month';
-        sub.innerHTML = "That's <b>" + rands(s.net * 12) + '</b> a year, and about <b>' +
-          hours + ' hours</b> of somebody&rsquo;s time.';
-        cta.textContent = SETTINGS.worksheetReady
-          ? 'Email me the worksheet'
-          : 'Talk to us about your numbers';
-        cta.setAttribute('data-form-variant', SETTINGS.worksheetReady ? 'worksheet' : 'contact');
-      } else {
-        result.setAttribute('data-state', 'no');
-        verdict.textContent = 'Not yet';
-        headline.innerHTML = 'Honestly? <span class="calc-amount">Not yet.</span>';
-        sub.innerHTML = 'At this volume, a cheap capture tool and a spreadsheet will do ' +
-          'the job for less than we charge. You&rsquo;d still get about <b>' + hours +
-          ' hours</b> back &mdash; just not enough to pay for us.';
-        cta.textContent = 'Talk to us anyway';
-        cta.setAttribute('data-form-variant', 'contact');
+        result.setAttribute('data-state', 'pays');
+        verdict.textContent = 'It pays for itself';
+        headline.innerHTML = 'Setup paid back by <span class="calc-amount">month ' + HIDDEN + '</span>.';
+        sub.innerHTML = 'After that you keep money every month, and get <b>' +
+          hoursWord(hours) + '</b> of somebody&rsquo;s time back.';
+        return;
       }
+
+      // The rands do not carry it at these numbers, so the hours lead instead —
+      // shown in full, because a covered number nobody can uncover is not a tease.
+      // Never a negative on the page, and never "never".
+      result.setAttribute('data-state', 'time');
+      verdict.textContent = 'What you get back';
+      headline.innerHTML = 'Win back <span class="calc-amount">' + hoursWord(hours) +
+        '</span> every month.';
+      sub.innerHTML = 'At these numbers the hours come back before the money does. ' +
+        'The full results show you exactly where the line is.';
     }
 
     // One of only two key events, so it has to mean something: it fires once, and
     // only after the visitor has actually moved a slider. A default nobody touched
-    // is not a signal.
+    // is not a signal. Harmless while no tag manager is listening.
     var reported = false;
     function reportCompleted() {
       if (reported) return;
       reported = true;
-      var s = sums();
+      var s = sums.calculate(readInputs());
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'calculator_completed',
-        documents_per_month: +docs.value,
-        capture_cost_per_month: +cost.value,
-        minutes_per_document: +mins.value,
-        monthly_saving: s.net,
-        outcome: s.net > 0 ? 'saving' : 'too_small'
+        step: 'teaser',
+        documents_per_month: s.docs,
+        minutes_per_document: +sliders.minsPerDoc.value,
+        monthly_staff_cost: +sliders.salary.value,
+        hours_saved: Math.round(s.hoursSaved),
+        monthly_net: s.net,
+        break_even_month: s.breakEvenMonth,
+        outcome: s.net > 0 ? 'pays_back' : 'time_only'
       });
     }
 
-    // Build each slider from SETTINGS rather than the markup, so the numbers have
-    // exactly one home.
-    function setUp(slider, config) {
+    Object.keys(sliders).forEach(function (name) {
+      var slider = sliders[name];
+      var config = SETTINGS.sliders[name];
       slider.min = config.min;
       slider.max = config.max;
       slider.step = config.step;
       slider.value = config.start;
       slider.addEventListener('input', render);
       slider.addEventListener('change', reportCompleted);
-    }
-    setUp(docs, SETTINGS.sliders.docs);
-    setUp(cost, SETTINGS.sliders.cost);
-    setUp(mins, SETTINGS.sliders.mins);
+    });
 
     render();
+
+    // ── Step 2: the email, then the results page ──────────────────────────────
+
+    var gate = el('calcGate');
+    var field = el('calcEmail');
+    var button = el('calcGateBtn');
+    var note = el('calcGateNote');
+
+    function looksLikeEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function goToResults(input) {
+      window.location.href = sums.resultsLinkFor(input);
+    }
+
+    // The lead matters more than the page turn, so a failed send never blocks the
+    // results — they gave us the email, they get what they were promised.
+    function sendLead(email, input, s) {
+      if (!SETTINGS.leadEndpoint) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'calculator_lead', endpoint: 'none' });
+        return Promise.resolve();
+      }
+      return fetch(SETTINGS.leadEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          source: 'home-savings-calculator',
+          variant: 'calculator_lead',
+          delivery_notes_per_week: input.docsPerWeek,
+          minutes_per_document: input.minsPerDoc,
+          monthly_staff_cost: input.salary,
+          error_rate_percent: input.errorRate,
+          short_delivery_percent: input.shortRate,
+          documents_per_month: s.docs,
+          hours_saved: Math.round(s.hoursSaved),
+          monthly_net: s.net,
+          break_even_month: s.breakEvenMonth
+        })
+      });
+    }
+
+    gate.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var email = field.value.trim();
+
+      if (!looksLikeEmail(email)) {
+        note.textContent = 'That email address does not look right — check it and try again.';
+        field.focus();
+        return;
+      }
+
+      var input = readInputs();
+
+      // Show the bot the normal path and drop it, rather than telling it it failed.
+      if (el('calcWebsite').value) { goToResults(input); return; }
+
+      button.disabled = true;
+      button.textContent = 'One moment…';
+      reportCompleted();
+
+      // Remembered so the results page knows this visitor already paid the toll
+      // and does not ask a second time. Session only — it dies with the tab.
+      try { window.sessionStorage.setItem('savingsEmail', email); } catch (error) { /* private mode */ }
+
+      sendLead(email, input, sums.calculate(input))
+        .catch(function () { /* the results are still owed either way */ })
+        .then(function () { goToResults(input); });
+    });
+  })();
+  </script>
+
+  <script>
+  // Pricing section — the once-off setup fee, built in front of the visitor.
+  //
+  // Three inputs: how many documents a month, whether they are keeping their own
+  // system, and whether old data comes across. Every amount, including the two
+  // toggle prices and the slider range, comes from savings/sums.js. This script
+  // owns no number and does no arithmetic of its own.
+  (function () {
+    'use strict';
+
+    var sums = window.SavingsSums;
+    if (!sums) return;
+
+    var SETTINGS = sums.SETTINGS;
+    var rands = sums.rands;
+
+    var el = function (id) { return document.getElementById(id); };
+
+    var docs = el('priceDocs');
+    if (!docs) return;
+
+    var integration = el('priceIntegration');
+    var migration = el('priceMigration');
+
+    // The calculator above asks for documents a week; this asks for a month, so
+    // the range is that one scaled up. Same business, same limits, one place.
+    var perWeek = SETTINGS.sliders.docsPerWeek;
+    var perMonth = function (weekly) { return Math.round(weekly * SETTINGS.weeksPerMonth / 5) * 5; };
+
+    docs.min = perMonth(perWeek.min);
+    docs.max = perMonth(perWeek.max);
+    docs.step = 5;
+    docs.value = perMonth(perWeek.start);
+
+    integration.checked = SETTINGS.setup.integrationStartsOn;
+    migration.checked = SETTINGS.setup.migrationStartsOn;
+
+    // The two toggle prices and the base block are written once — they never change.
+    el('priceIntegrationAmount').textContent = '+ ' + rands(SETTINGS.setup.integration);
+    el('priceMigrationAmount').textContent = '+ ' + rands(SETTINGS.setup.migration);
+    el('priceBaseAmount').textContent = rands(SETTINGS.setup.base);
+    el('priceIntegrationBlock').textContent = rands(SETTINGS.setup.integration);
+    el('priceMigrationBlock').textContent = rands(SETTINGS.setup.migration);
+
+    function draw() {
+      var documentsPerMonth = +docs.value;
+      var choices = { keepingOwnSystem: integration.checked, dataMigration: migration.checked };
+
+      el('priceDocsOut').textContent = documentsPerMonth;
+      el('priceSetupOut').textContent = rands(
+        SETTINGS.setup.base +
+        (choices.keepingOwnSystem ? SETTINGS.setup.integration : 0) +
+        (choices.dataMigration ? SETTINGS.setup.migration : 0)
+      );
+      el('priceMonthlyOut').textContent = rands(sums.priceFor(documentsPerMonth));
+      el('priceTierNote').textContent = documentsPerMonth + ' documents a month';
+
+      document.querySelector('.price-block[data-part="integration"]').hidden = !choices.keepingOwnSystem;
+      document.querySelector('.price-block[data-part="migration"]').hidden = !choices.dataMigration;
+    }
+
+    [docs, integration, migration].forEach(function (control) {
+      control.addEventListener('input', draw);
+    });
+    draw();
   })();
   </script>
 
@@ -1392,8 +1611,10 @@
     // and flaky networks can swallow.
     var THANK_YOU_URL = '/thank-you/';
 
-    // The same form, framed two ways. The worksheet variant is wired up but has no
-    // trigger yet — it belongs to the ROI calculator, which is not built.
+    // The same form, framed two ways. Nothing triggers the worksheet variant any
+    // more: the savings calculator took its own email gate (see the teaser script
+    // above), so this is left wired but unused rather than deleted while the lead
+    // form itself is still being reworked in HYBRIDA-905.
     var VARIANTS = {
       contact: {
         eyebrow: 'Get in touch',
@@ -1601,15 +1822,144 @@
   </script>
 
   <script>
-  // Mobile nav menu toggle
+  // Hero mini lead form — see HYBRIDA-904.
+  //
+  // Two fields and nothing else: the job of this form is to be cheap to fill in,
+  // not to qualify anyone. It posts the same JSON to the same endpoint as the full
+  // form in the modal, tagged variant 'hero' so HubSpot can tell them apart.
   (function () {
-    var btn = document.querySelector('.mobile-menu-btn');
-    var menu = document.getElementById('mobileMenu');
-    if (!btn || !menu) return;
-    function setOpen(open) { menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); }
-    btn.addEventListener('click', function () { setOpen(menu.hidden); });
-    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    var form = document.getElementById('heroForm');
+    if (!form || !window.SavingsSums) return;
+
+    // The endpoint, the fallback address and the thank-you page all live in
+    // savings/sums.js, so pasting the deployed Worker URL in one place turns on
+    // every form on the site at once.
+    var SETTINGS = window.SavingsSums.SETTINGS;
+
+    var panel = document.querySelector('.hero-form-panel');
+    var done = document.getElementById('hf-done');
+    var formError = document.getElementById('hf-error');
+    var submitBtn = document.getElementById('hf-submit');
+
+    // One rule per field. `check` only runs once the field has something in it, so
+    // nobody is told their email is wrong before they have finished typing it.
+    var RULES = [
+      {
+        name: 'email', empty: 'We need an email address to reply to.',
+        check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
+        invalid: "That email doesn't look right — check for a typo?"
+      },
+      {
+        name: 'phone', empty: 'We need a number to call you on.',
+        check: function (v) { return v.replace(/[^0-9]/g, '').length >= 9; },
+        invalid: 'That number looks too short. Include the area code.'
+      }
+    ];
+
+    function fieldOf(rule) { return form.elements[rule.name]; }
+    function errorOf(rule) { return document.getElementById('hf-' + rule.name + '-err'); }
+
+    // Returns the message to show, or '' when the field is fine.
+    function problemWith(rule) {
+      var value = (fieldOf(rule).value || '').trim();
+      if (!value) return rule.empty;
+      if (rule.check && !rule.check(value)) return rule.invalid;
+      return '';
+    }
+
+    function showProblem(rule, message) {
+      var el = fieldOf(rule);
+      var errorEl = errorOf(rule);
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+      if (message) { el.setAttribute('aria-invalid', 'true'); }
+      else { el.removeAttribute('aria-invalid'); }
+    }
+
+    // Check on the way out of a field, but only correct as they type once they have
+    // already been told — fixing someone mid-word is annoying.
+    RULES.forEach(function (rule) {
+      var el = fieldOf(rule);
+      el.addEventListener('blur', function () { showProblem(rule, problemWith(rule)); });
+      el.addEventListener('input', function () {
+        if (el.getAttribute('aria-invalid')) showProblem(rule, problemWith(rule));
+      });
+    });
+
+    function firstProblem() {
+      var first = null;
+      RULES.forEach(function (rule) {
+        var message = problemWith(rule);
+        showProblem(rule, message);
+        if (message && !first) first = rule;
+      });
+      return first;
+    }
+
+    function showDone() {
+      form.hidden = true;
+      done.hidden = false;
+      document.getElementById('hf-done-title').focus();
+    }
+
+    function lead() {
+      return {
+        email: form.elements.email.value.trim(),
+        phone: form.elements.phone.value.trim(),
+        source: 'website',
+        variant: 'hero'
+      };
+    }
+
+    // Fallback while the endpoint is empty: hand the details to the visitor's own
+    // email app. Weaker than posting to HubSpot, but it does not lose the lead.
+    function sendByEmail(details) {
+      window.location.href = 'mailto:' + SETTINGS.contactEmail +
+        '?subject=' + encodeURIComponent('Light Industrial — call back request') +
+        '&body=' + encodeURIComponent('Email: ' + details.email + '\nPhone: ' + details.phone);
+      // Deliberately not the thank-you page: nothing has reached us until they press
+      // send, and only this message tells them to.
+      panel.querySelector('#hf-done-msg').textContent =
+        "Your email app should have opened with your details ready. Hit send and we'll call you back.";
+      showDone();
+    }
+
+    function sendToWorker(details) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      fetch(SETTINGS.leadEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(details)
+      }).then(function (response) {
+        if (!response.ok) throw new Error('Worker returned ' + response.status);
+        // A page load is a far more reliable conversion signal for Google Ads than a
+        // JavaScript event, which ad blockers and flaky networks can swallow.
+        window.location.href = SETTINGS.thankYouUrl;
+      }).catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send';
+        formError.innerHTML = 'Something went wrong on our side. Email ' +
+          '<a href="mailto:' + SETTINGS.contactEmail + '">' + SETTINGS.contactEmail + '</a> and we\'ll pick it up.';
+        formError.hidden = false;
+      });
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      formError.hidden = true;
+
+      var bad = firstProblem();
+      if (bad) { fieldOf(bad).focus(); return; }
+
+      // A person never sees this field, so anything in it came from a bot. Show the
+      // normal thank-you and drop it, rather than telling the bot it failed.
+      if (form.elements.website.value) { showDone(); return; }
+
+      var details = lead();
+      if (SETTINGS.leadEndpoint) sendToWorker(details); else sendByEmail(details);
+    });
   })();
   </script>
+
 </body></html>

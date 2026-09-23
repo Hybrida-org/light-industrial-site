@@ -1,61 +1,18 @@
-// Document intake ROI calculator — the sums behind /intake/.
+// Savings results page — drawing only.
 //
-// Everything anybody may want to argue about lives in SETTINGS below. Nothing
-// numeric is written into the markup, so there is exactly one place to change a
-// price, a range or a default.
+// Every number and every formula lives in sums.js, which this file must load
+// after. Nothing here does arithmetic; it reads the sliders, asks for the sums,
+// and paints them.
 
 (function () {
   'use strict';
 
-  var SETTINGS = {
-    // What a visitor sees before touching anything. "start" should describe a
-    // real in-market buyer, not the smallest one.
-    sliders: {
-      docsPerWeek: { min: 5,    max: 150,   step: 5,   start: 30 },
-      minsPerDoc:  { min: 3,    max: 30,    step: 1,   start: 12 },
-      salary:      { min: 6000, max: 25000, step: 500, start: 11000 },
-      errorRate:   { min: 0,    max: 40,    step: 1,   start: 15 },
-      shortRate:   { min: 0,    max: 40,    step: 1,   start: 20 }
-    },
-
-    weeksPerMonth: 4.33,
-    reviewMinutesPerDoc: 2,      // we do not remove all of it — somebody still approves
-    workingHoursPerMonth: 173,   // one person's month
-
-    // Published document-intake prices, ex VAT, by documents a month.
-    tiers: [
-      { upToDocs: 50,       price: 3500 },
-      { upToDocs: 150,      price: 6500 },
-      { upToDocs: Infinity, price: 12000 }
-    ],
-
-    // Once-off setup. Base is a straight onboarding onto our own system; the two
-    // toggles add to it. Integration starts ticked because most buyers are keeping
-    // an accounting or ERP system they already pay for.
-    setup: {
-      base: 15000,
-      integration: 15000,
-      migration: 5000,
-      integrationStartsOn: true,
-      migrationStartsOn: false
-    },
-
-    settledErrorRate: 2,    // where matching memory lands it
-    decayMonths: 6,         // how long that takes
-    longPaybackMonths: 24,  // past this we say so rather than let the number stand
-
-    // Paste the deployed Worker URL here to send real leads. While it is empty the
-    // form falls back to the visitor's own email app, exactly like the homepage
-    // form does. It never silently swallows a lead.
-    leadEndpoint: '',
-    contactEmail: 'danika@lightindustrial.co.za',
-    thankYouUrl: '/thank-you/'
-  };
-
-  // Grey is today, green is with us. Those are the only two colours on the page,
-  // and they mean the same thing in every tile. Kept here because the line chart
-  // is drawn in JavaScript and needs them too.
-  var COLOURS = { today: '#9a9188', after: '#3f5d4b', grid: 'rgba(45,42,38,0.12)', ink: '#5f5850' };
+  var SETTINGS = window.SavingsSums.SETTINGS;
+  var COLOURS = window.SavingsSums.COLOURS;
+  var rands = window.SavingsSums.rands;
+  var hoursWord = window.SavingsSums.hoursWord;
+  var errorCurve = window.SavingsSums.errorCurve;
+  var QUERY_KEYS = window.SavingsSums.QUERY_KEYS;
 
   var el = function (id) { return document.getElementById(id); };
 
@@ -72,71 +29,21 @@
   var integration = el('roiIntegration');
   var migration = el('roiMigration');
 
-  // ── Formatting ──────────────────────────────────────────────────────────────
-
-  // "-R5,100", never "R-5,100" — the minus belongs to the amount, not the currency.
-  function rands(amount) {
-    var rounded = Math.round(amount);
-    return (rounded < 0 ? '-R' : 'R') + Math.abs(rounded).toLocaleString('en-ZA').replace(/[\s\u00a0\u202f]/g, ',');
-  }
-
-  function hoursWord(hours) {
-    return hours === 1 ? '1 hour' : hours + ' hours';
-  }
-
-  // ── The sums ────────────────────────────────────────────────────────────────
-
-  function priceFor(documentsPerMonth) {
-    for (var i = 0; i < SETTINGS.tiers.length; i++) {
-      if (documentsPerMonth <= SETTINGS.tiers[i].upToDocs) return SETTINGS.tiers[i].price;
-    }
-    return SETTINGS.tiers[SETTINGS.tiers.length - 1].price;
-  }
-
-  function setupFee() {
-    return SETTINGS.setup.base +
-      (integration.checked ? SETTINGS.setup.integration : 0) +
-      (migration.checked ? SETTINGS.setup.migration : 0);
-  }
-
-  function sums() {
-    var docs = Math.round((+inputs.docsPerWeek.value) * SETTINGS.weeksPerMonth);
-    var currentHours = docs * (+inputs.minsPerDoc.value) / 60;
-    var newHours = docs * SETTINGS.reviewMinutesPerDoc / 60;
-    var hoursSaved = Math.max(currentHours - newHours, 0);
-    var hourlyCost = (+inputs.salary.value) / SETTINGS.workingHoursPerMonth;
-    var labourSaved = hoursSaved * hourlyCost;
-    var price = priceFor(docs);
-    var setup = setupFee();
-    // Rounded to the nearest R100 — false precision reads as a made-up number.
-    var net = Math.round((labourSaved - price) / 100) * 100;
-
+  // The one place the page turns controls into the plain object sums.js wants.
+  function readInputs() {
     return {
-      docs: docs,
-      currentHours: currentHours,
-      newHours: newHours,
-      hoursSaved: hoursSaved,
-      hourlyCost: hourlyCost,
-      labourSaved: labourSaved,
-      price: price,
-      setup: setup,
-      net: net,
-      breakEvenMonth: net > 0 ? Math.ceil(setup / net) : null,
-      shortCaught: Math.round(docs * (+inputs.shortRate.value) / 100)
+      docsPerWeek: +inputs.docsPerWeek.value,
+      minsPerDoc: +inputs.minsPerDoc.value,
+      salary: +inputs.salary.value,
+      errorRate: +inputs.errorRate.value,
+      shortRate: +inputs.shortRate.value,
+      keepingOwnSystem: integration.checked,
+      dataMigration: migration.checked
     };
   }
 
-  // Month one is where they are today; month six is where matching memory lands
-  // them. The curve between is a smooth decay, not a straight line, because most
-  // of the learning happens in the first few weeks.
-  function errorCurve(startRate) {
-    var settled = Math.min(SETTINGS.settledErrorRate, startRate);
-    var months = [];
-    for (var m = 1; m <= SETTINGS.decayMonths; m++) {
-      var progress = (m - 1) / (SETTINGS.decayMonths - 1);
-      months.push(settled + (startRate - settled) * Math.pow(1 - progress, 1.5));
-    }
-    return months;
+  function sums() {
+    return window.SavingsSums.calculate(readInputs());
   }
 
   // ── Tile 1: two bars, one measure, before and after ─────────────────────────
@@ -357,33 +264,71 @@
 
   // ── Wiring ──────────────────────────────────────────────────────────────────
 
+  // The home-page teaser hands its slider values over in the address bar, so the
+  // results a visitor arrives on are the ones they just set. A missing or silly
+  // value falls back to the default rather than breaking the page, which also
+  // means a hand-edited or truncated link still shows something sensible.
+  var handedOver = new URLSearchParams(window.location.search);
+
+  function startingValue(name, config) {
+    var given = parseFloat(handedOver.get(QUERY_KEYS[name]));
+    if (isNaN(given)) return config.start;
+    return Math.min(Math.max(given, config.min), config.max);
+  }
+
+  function startingTick(key, fallback) {
+    var given = handedOver.get(key);
+    return given === null ? fallback : given === '1';
+  }
+
   Object.keys(inputs).forEach(function (name) {
     var slider = inputs[name];
     var config = SETTINGS.sliders[name];
     slider.min = config.min;
     slider.max = config.max;
     slider.step = config.step;
-    slider.value = config.start;
+    slider.value = startingValue(name, config);
     slider.addEventListener('input', render);
     slider.addEventListener('change', reportCompleted);
   });
 
-  integration.checked = SETTINGS.setup.integrationStartsOn;
-  migration.checked = SETTINGS.setup.migrationStartsOn;
+  integration.checked = startingTick(QUERY_KEYS.keepingOwnSystem, SETTINGS.setup.integrationStartsOn);
+  migration.checked = startingTick(QUERY_KEYS.dataMigration, SETTINGS.setup.migrationStartsOn);
   [integration, migration].forEach(function (box) {
     box.addEventListener('change', function () { render(); reportCompleted(); });
   });
 
   render();
 
-  // ── The email box ───────────────────────────────────────────────────────────
-  // The results above are never gated. This only buys the written-up version.
+  // ── Step 2's toll, and the copy to take away ────────────────────────────────
+  //
+  // Most people arrive from the home page, which already took their email and
+  // remembered it for the tab. This handles the other way in — a shared link, a
+  // bookmark, a direct visit — and unlocks the results once we have one.
 
   (function () {
+    var REMEMBERED = 'savingsEmail';
+
+    var output = el('roiOutput');
     var form = el('roiCapture');
     var field = el('roiEmail');
     var button = el('roiCaptureBtn');
     var note = el('roiCaptureNote');
+
+    function unlock() {
+      output.classList.remove('is-locked');
+    }
+
+    // Private browsing throws on sessionStorage rather than returning null, so
+    // both of these swallow it: a visitor who blocks storage sees the gate again,
+    // which is annoying but correct. Nothing else breaks.
+    function rememberedEmail() {
+      try { return window.sessionStorage.getItem(REMEMBERED); } catch (error) { return null; }
+    }
+
+    function remember(email) {
+      try { window.sessionStorage.setItem(REMEMBERED, email); } catch (error) { /* private mode */ }
+    }
 
     function looksLikeEmail(value) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -409,30 +354,23 @@
       ];
     }
 
-    function showSent(email) {
-      form.innerHTML = '<p class="roi-capture-done"><b>On its way.</b> We&rsquo;ll email your ' +
-        'breakdown to ' + email.replace(/[<>&]/g, '') + ' within 48 hours.</p>';
-    }
-
+    // No Worker deployed yet, so the lead goes through the visitor's own email app
+    // rather than being silently dropped. Weaker than posting to HubSpot, but it
+    // never loses a lead.
     function sendByEmail(email, s) {
       window.location.href = 'mailto:' + SETTINGS.contactEmail +
         '?subject=' + encodeURIComponent('ROI breakdown request') +
         '&body=' + encodeURIComponent(summaryLines(s).concat(['', 'Email: ' + email]).join('\n'));
-      // Deliberately not the thank-you page: nothing has reached us until they
-      // press send, and only this message tells them to.
-      note.textContent = 'Your email app should have opened with your numbers ready. Hit send and we\'ll pick it up.';
     }
 
     function sendToWorker(email, s) {
-      button.disabled = true;
-      button.textContent = 'Sending…';
-      fetch(SETTINGS.leadEndpoint, {
+      return fetch(SETTINGS.leadEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: email,
-          source: 'intake-roi-calculator',
-          variant: 'roi_breakdown',
+          source: 'savings-results-page',
+          variant: 'calculator_lead',
           delivery_notes_per_week: +inputs.docsPerWeek.value,
           minutes_per_document: +inputs.minsPerDoc.value,
           monthly_staff_cost: +inputs.salary.value,
@@ -446,19 +384,11 @@
           setup_fee: s.setup,
           break_even_month: s.breakEvenMonth
         })
-      }).then(function (response) {
-        if (!response.ok) throw new Error('Worker returned ' + response.status);
-        window.location.href = SETTINGS.thankYouUrl;
-      }).catch(function () {
-        button.disabled = false;
-        button.textContent = 'Send it to me';
-        note.innerHTML = 'Something went wrong on our side. Email <a href="mailto:' +
-          SETTINGS.contactEmail + '">' + SETTINGS.contactEmail + '</a> and we&rsquo;ll pick it up.';
       });
     }
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
       var email = field.value.trim();
 
       if (!looksLikeEmail(email)) {
@@ -467,11 +397,43 @@
         return;
       }
 
-      // Show the normal thank-you and drop it, rather than telling the bot it failed.
-      if (el('roiWebsite').value) { showSent(email); return; }
+      // Show the bot what a person sees and drop it, rather than telling it it failed.
+      if (el('roiWebsite').value) { unlock(); return; }
+
+      button.disabled = true;
+      button.textContent = 'One moment…';
+      remember(email);
 
       var s = sums();
-      if (SETTINGS.leadEndpoint) sendToWorker(email, s); else sendByEmail(email, s);
+      // They gave us the email, so they get the results either way. A Worker that
+      // is down is our problem, not theirs.
+      if (SETTINGS.leadEndpoint) {
+        sendToWorker(email, s).catch(function () { /* nothing to tell them */ }).then(unlock);
+      } else {
+        unlock();
+        sendByEmail(email, s);
+      }
+    });
+
+    if (rememberedEmail()) unlock();
+  })();
+
+  // ── The copy to take away ───────────────────────────────────────────────────
+  // The designed one-page PDF does not exist yet (HYBRIDA-992). Until it does,
+  // this hands the page to the browser's own "Save as PDF" and the print rules in
+  // savings.css keep the nav, the sliders and the footer out of it.
+
+  (function () {
+    var button = el('roiPdfBtn');
+    if (!button) return;
+    button.addEventListener('click', function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'savings_pdf_downloaded' });
+      // A closed <details> does not print, and the working is the part a sceptic
+      // takes away. Open it first; leaving it open afterwards is the honest state.
+      var working = document.querySelector('.roi-working');
+      if (working) working.open = true;
+      window.print();
     });
   })();
 })();

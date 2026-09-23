@@ -21,6 +21,11 @@ One form, used in two places, with different words around it:
 Same fields, same machinery underneath. Only the heading and button change, so there is
 one form to fix when something is wrong with it.
 
+**The worksheet variant has had no trigger since 2026-09-23.** The savings calculator
+(`HYBRIDA-797`) took its own single-field email gate, on the home page and on
+`/savings/`, rather than opening this modal. The variant is left wired but unused while
+the lead form itself is being reworked in `HYBRIDA-905`.
+
 ---
 
 ## 2. The fields
