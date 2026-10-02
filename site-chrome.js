@@ -38,8 +38,8 @@
   // ignored — no link has to be found and changed.
   var PAGES = [
     { label: 'Home',            folder: '',                built: true  },
-    { label: 'Document Intake', folder: 'document-intake',  built: false },
-    { label: 'ERP',             folder: 'erp',              built: false },
+    { label: 'Document Intake', folder: 'document-intake',  built: false, homeAnchor: 'how' },
+    { label: 'ERP',             folder: 'erp',              built: true  },
     { label: 'Pricing',         folder: 'pricing',          built: false, homeAnchor: 'pricing' },
     { label: 'About Us',        folder: 'about',            built: true  },
     { label: 'Contact Us',      folder: 'contact',          built: true  }
@@ -215,9 +215,25 @@
     return slot;
   }
 
+  /* In-page links to another page on the site: mark the <a> with
+     data-site-link="<folder>" and its href is written here from PAGES above.
+     That way a link in the body of a page follows the same single source of
+     truth as the nav — including the homeAnchor fallback, so a link to a page
+     that is not built yet lands on the matching home-page section instead of
+     nowhere, and starts pointing at the real page the day it ships. */
+  function applySiteLinks() {
+    document.querySelectorAll('[data-site-link]').forEach(function (link) {
+      var folder = link.getAttribute('data-site-link');
+      for (var i = 0; i < PAGES.length; i++) {
+        if (PAGES[i].folder === folder) { link.setAttribute('href', hrefFor(PAGES[i])); return; }
+      }
+    });
+  }
+
   fill('[data-site-nav]', navMarkup());
   fill('[data-site-footer]', footerMarkup());
   fill('[data-site-phone]', phoneMarkup());
+  applySiteLinks();
 
   // Mobile menu toggle. It lives here because the button it drives is created
   // here — a page script could run before this file on a page that loads it late.

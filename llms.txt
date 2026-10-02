@@ -35,6 +35,10 @@ faster than they get captured, and a specific person's day is being eaten by it.
   result of the savings calculator — the hours and rands a business spends on
   receiving paperwork today, what it would cost to replace, and how long that
   takes to pay back.
+- [ERP module](https://lightindustrial.co.za/erp/): the wider system — stock,
+  suppliers and purchase orders, quotes, job cards, delivery notes, customers,
+  bills of material, accounting sync and reports, with an assistant layer that
+  answers questions and drafts work for each role.
 - [Contact us](https://lightindustrial.co.za/contact/): how to reach a person —
   email, a 30-minute walkthrough booking, and a form that asks how much supplier
   paperwork arrives each week.

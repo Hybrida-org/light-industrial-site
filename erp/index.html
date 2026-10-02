@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP module — stock, quotes, job cards and deliveries | Light Industrial</title>
+<meta name="description" content="One system for the whole job: quote it, order the parts, receive them, build it, deliver it, invoice it. Stock control and inventory management for South African workshops and trade suppliers.">
+<link rel="canonical" href="https://lightindustrial.co.za/erp/">
+<link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="Quotes, job cards, stock and delivery notes in one place">
+<meta property="og:description" content="One system for the whole job, built for South African workshops and trade suppliers.">
+<meta property="og:url" content="https://lightindustrial.co.za/erp/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/02-match-stock.jpg">
+<meta property="og:image:alt" content="Stock shelves in a workshop stores room">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="erp.css">
+</head>
+
+<body>
+  <header class="erp-header">
+    <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+    <div class="nav-wrap" data-site-nav></div>
+  </header>
+
+  <main>
+
+  <!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+  <!-- Both buttons carry data-site-link / a plain Calendly href rather than a
+       hand-written path: see site-chrome.js. While the Pricing page is unbuilt
+       the link lands on the home page's pricing section, and switches to the
+       real page by itself the day that page ships. -->
+  <section id="hero" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">ERP module</p>
+            <h1 class="erp-title font-head reveal-fade" style="transition-delay: 0.06s;">
+              Quotes, job cards, stock and delivery notes in one place.
+            </h1>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              One system for the whole job: quote it, order the parts, receive them, build it, deliver it,
+              invoice it. Built for South African workshops and trade suppliers. Up to five users included.
+            </p>
+            <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+              <a href="#" data-site-link="pricing" class="btn-primary">
+                See pricing
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+              <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener"
+                 class="btn-secondary" data-open-demo>
+                Book a call
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE PROBLEM IT FIXES ──────────────────────────────────────────────── -->
+  <section id="problem" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">The problem it fixes</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              The number you see is the number on the shelf.
+            </h2>
+          </div>
+
+          <div class="erp-prose">
+            <p class="reveal-fade" style="transition-delay: 0.10s;">
+              Most workshops run on three things that do not talk to each other: a spreadsheet for stock,
+              a quoting template, and whatever the accountant uses. Nobody knows what is on the shelf until
+              someone walks to the shelf. Quotes get built from last year&rsquo;s prices. Jobs go out late
+              because a part was &ldquo;in stock&rdquo; and was not.
+            </p>
+            <p class="erp-prose-close reveal-fade" style="transition-delay: 0.14s;">
+              The ERP module puts stock, purchasing, quoting, jobs and deliveries on one screen, so the
+              number you see is the number on the shelf.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT IT DOES ──────────────────────────────────────────────────────── -->
+  <!-- Eight groups, each one a part of the system. Two columns on a wide screen,
+       one on a phone; the groups are independent, so order across columns does
+       not matter to the reader. -->
+  <section id="what-it-does" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">What it does</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              The whole job, end to end.
+            </h2>
+          </div>
+
+          <div class="erp-grid">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.10s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:box-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Stock</h3>
+              <ul class="erp-list">
+                <li>One record per item, with your own codes and descriptions.</li>
+                <li>Buy in one unit, use in another. Sheets to metres, boxes to pieces, drums to litres. Conversions are set once per item.</li>
+                <li>Every movement is logged: received, issued to a job, adjusted, returned. You can always see why a count changed.</li>
+                <li>Minimum levels and reorder suggestions, so you order before you run out, not after.</li>
+                <li>Categories, locations and bins for shops with more than one store.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:cart-large-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Suppliers and purchase orders</h3>
+              <ul class="erp-list">
+                <li>A price list per supplier per item, with the history of every price you have paid.</li>
+                <li>Raise a purchase order in a minute, PDF it, email it to the supplier from inside the system.</li>
+                <li>Receive against the order. Partial deliveries are normal, so the system tracks what is still outstanding.</li>
+                <li>Price-jump alerts when a supplier&rsquo;s price moves more than you would expect.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:document-add-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Quotes</h3>
+              <ul class="erp-list">
+                <li>Build a quote from your stock items and your products, with your margins.</li>
+                <li>Group lines into products so the customer sees one line and you see the full parts list.</li>
+                <li>Approve, PDF, email. Convert an approved quote into a job or a delivery note with one click.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:clipboard-list-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Job cards</h3>
+              <ul class="erp-list">
+                <li>Open a job from a quote. Issue parts to it. Track labour and hours.</li>
+                <li>See what each job actually cost against what you quoted it at.</li>
+                <li>Know which jobs are waiting on parts before the customer phones.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.26s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:delivery-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Delivery notes and customers</h3>
+              <ul class="erp-list">
+                <li>Delivery notes come off the quote, so nothing is retyped. Several deliveries per job if that is how it ships.</li>
+                <li>Signature on delivery, PDF filed against the customer.</li>
+                <li>Customer records with their quotes, jobs, deliveries and outstanding items in one view.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.30s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:widget-4-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Products and bills of material</h3>
+              <ul class="erp-list">
+                <li>Define the things you sell as a list of the things you buy. Change a component price and every quote that uses it updates.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.34s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:calculator-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Accounting</h3>
+              <ul class="erp-list">
+                <li>Customers, suppliers and invoices sync to Xero, QuickBooks or Sage. Your accountant keeps their system. You stop capturing twice.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.38s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:chart-2-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Reports</h3>
+              <ul class="erp-list">
+                <li>Stock value, slow movers, supplier spend, quote win rate, job margin. Export anything to Excel.</li>
+              </ul>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHO USES IT ───────────────────────────────────────────────────────── -->
+  <section id="who" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">Who uses it</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Each person sees what their job needs and nothing else.
+            </h2>
+          </div>
+
+          <div class="erp-role-grid">
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.10s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:settings-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">Admin</h3>
+              <p class="erp-role-text">Sets up items, prices and users.</p>
+            </article>
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.14s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:phone-calling-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">Sales</h3>
+              <p class="erp-role-text">Quotes and follows up.</p>
+            </article>
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.18s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:box-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">Storeman</h3>
+              <p class="erp-role-text">Receives, issues and counts.</p>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AN ASSISTANT FOR EVERY ROLE ───────────────────────────────────────── -->
+  <section id="assistant" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">An assistant for every role</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              It suggests; you approve.
+            </h2>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              An AI layer sits on top of the whole system. It reads your data, it knows your suppliers and
+              customers, and it answers in plain language. Each person gets the help their job needs.
+            </p>
+          </div>
+
+          <ul class="erp-assistant-list">
+
+            <li class="erp-assistant-item reveal-fade" style="transition-delay: 0.14s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:chat-square-like-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <div>
+                <p class="erp-assistant-lead">Owner or manager</p>
+                <p class="erp-assistant-text">
+                  Ask a question, get an answer. &ldquo;What did we spend with our top three suppliers last
+                  quarter?&rdquo; &ldquo;Which jobs are running over quote?&rdquo; &ldquo;What is sitting on
+                  the shelf that has not moved in six months?&rdquo; No report builder, no export.
+                </p>
+              </div>
+            </li>
+
+            <li class="erp-assistant-item reveal-fade" style="transition-delay: 0.18s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:document-text-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <div>
+                <p class="erp-assistant-lead">Sales</p>
+                <p class="erp-assistant-text">
+                  Paste a customer&rsquo;s email or WhatsApp and get a draft quote with the right items and
+                  your margins. It flags parts that are out of stock before you send it, and reminds you
+                  which quotes have gone quiet.
+                </p>
+              </div>
+            </li>
+
+            <li class="erp-assistant-item reveal-fade" style="transition-delay: 0.22s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:camera-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <div>
+                <p class="erp-assistant-lead">Storeman</p>
+                <p class="erp-assistant-text">
+                  Photograph the delivery note and the goods are booked. It warns when a delivery is short,
+                  when a supplier&rsquo;s part code does not match yours, or when a count looks wrong against
+                  the last one.
+                </p>
+              </div>
+            </li>
+
+            <li class="erp-assistant-item reveal-fade" style="transition-delay: 0.26s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:broom-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <div>
+                <p class="erp-assistant-lead">Admin</p>
+                <p class="erp-assistant-text">
+                  It spots duplicate items, missing prices and suppliers with two names, and offers to clean
+                  them up. Every correction you make, it remembers.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+
+          <p class="erp-close reveal-fade" style="transition-delay: 0.30s;">
+            It never changes a record without a person saying yes. It suggests; you approve.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ADD DOCUMENT INTAKE ───────────────────────────────────────────────── -->
+  <!-- The link is resolved by site-chrome.js: it lands on the home page's "how
+       it works" section until the Document Intake page ships (HYBRIDA-898), then
+       points at that page with no edit here. -->
+  <section id="intake" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame erp-frame-accent">
+        <div class="erp-inner erp-inner-tight">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">Add Document Intake</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Receiving is where the stock record goes wrong.
+            </h2>
+          </div>
+
+          <div class="erp-prose">
+            <p class="reveal-fade" style="transition-delay: 0.10s;">
+              Add the Document Intake module and your storeman photographs the supplier&rsquo;s delivery note
+              instead of typing it. The system reads it, matches it to the purchase order and books the stock.
+            </p>
+          </div>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="#" data-site-link="document-intake" class="btn-secondary">
+              Learn about Document Intake
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GETTING STARTED + PRICING ─────────────────────────────────────────── -->
+  <!-- Two short sections share one panel: both answer "what does this cost me to
+       begin", and splitting them across two panels made each look thinner than
+       the answer deserves. -->
+  <section id="start" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">Getting started</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Working in the system within a few weeks.
+            </h2>
+          </div>
+
+          <div class="erp-prose">
+            <p class="reveal-fade" style="transition-delay: 0.10s;">
+              We import your item list, suppliers and customers from wherever they live today. Most
+              businesses are working in the system within a few weeks. Onboarding is a once-off fee we
+              quote after a short call.
+            </p>
+          </div>
+
+          <div class="erp-price reveal-fade" style="transition-delay: 0.14s;">
+            <p class="erp-kicker">Pricing</p>
+            <p class="erp-price-figure font-head">R6,000 <span class="erp-price-unit">per month, ex VAT</span></p>
+            <p class="erp-price-text">Up to five users. More users: talk to us.</p>
+            <div class="cta-row erp-cta-row">
+              <a href="#" data-site-link="pricing" class="btn-primary">
+                Full pricing
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── READY? ────────────────────────────────────────────────────────────── -->
+  <!-- The one CTA at the bottom of the page. Same form component as Home and
+       Contact Us — see /lead-form.js. -->
+  <section id="contact-form" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+          <div data-lead-form data-variant="contact"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer-v1" data-site-footer></footer>
+
+  <script src="../site-chrome.js"></script>
+  <!-- sums.js is loaded for its settings only: the lead endpoint, the fallback
+       email address and the thank-you page live there, shared with every form. -->
+  <script src="../savings/sums.js"></script>
+  <script src="../lead-form.js"></script>
+
+  <script>
+  // Fade sections in as they come up. Same behaviour as the other pages.
+  (function () {
+    var els = document.querySelectorAll('.reveal-fade');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+  </script>
+</body>
+</html>
