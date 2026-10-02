@@ -416,6 +416,37 @@ box-shadow: inset 0 1px 0 rgba(231,227,218,0.03);
 @media (max-width: 1080px) { .outcomes-text-v1 { max-width: 700px; } .outcomes-grid-v1 { grid-template-columns: 1fr; gap: 22px; } .outcome-card-media-v1 { min-height: 360px; } }
 @media (max-width: 720px) { .outcomes-shell-v1 { padding: 0 14px 14px; } .outcomes-inner-v1 { padding: 56px 18px; } .outcomes-text-v1 { max-width: 100%; } .outcome-card-v1 { padding: 14px 14px 18px; border-radius: 24px; } .outcome-card-media-v1 { min-height: 320px; border-radius: 20px; } .outcome-card-media-v1::after { border-radius: 20px; } .outcome-card-frame-v1 { inset: 14px; border-radius: 15px; } .outcome-title-v1 { font-size: 26px; } }
 
+/* TWO MODULES (dark) — same card language as the outcomes cards, two-up. */
+.modules-section-v1 { position: relative; }
+.modules-shell-v1 { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
+.modules-frame-v1 { position: relative; overflow: hidden; border: 1px solid rgba(231,227,218,0.08); border-radius: 30px; background: radial-gradient(circle at top center, rgba(168,138,109,0.08), transparent 18%), linear-gradient(180deg, rgba(23,26,28,0.94), rgba(14,16,17,0.98)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 30px 90px rgba(0,0,0,0.20); }
+.modules-frame-v1::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 16%, transparent 84%, rgba(255,255,255,0.015)), radial-gradient(circle at 82% 16%, rgba(142,165,150,0.04), transparent 20%); }
+.modules-inner-v1 { position: relative; z-index: 1; padding: 84px 34px; }
+.modules-top-v1 { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 48px; }
+.modules-eyebrow-v1 { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(168,138,109,0.18); background: rgba(231,227,218,0.04); color: rgba(231,227,218,0.72); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; width: fit-content; }
+.modules-eyebrow-v1::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--bronze); box-shadow: 0 0 0 7px rgba(168,138,109,0.10); }
+.modules-title-v1 { margin: 0; max-width: none; font-size: clamp(2.5rem, 4.5vw, 4.9rem); line-height: 0.92; letter-spacing: -0.065em; color: var(--text); }
+.modules-title-v1 .reveal-line { display: block; }
+.modules-text-v1 { margin: 2px 0 0; max-width: 700px; font-size: 16px; line-height: 1.9; color: rgba(231,227,218,0.72); }
+.modules-grid-v1 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.module-card-v1 { min-width: 0; display: flex; flex-direction: column; border-radius: 30px; border: 1px solid rgba(231,227,218,0.07); background: linear-gradient(180deg, rgba(231,227,218,0.05), rgba(231,227,218,0.02)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 18px 42px rgba(0,0,0,0.22); padding: 20px 20px 24px; }
+.module-card-media-v1 { position: relative; overflow: hidden; min-height: 430px; border-radius: 22px; background: #1a1d1f; border: 1px solid rgba(231,227,218,0.06); }
+.module-card-image-v1 { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms ease, filter 700ms ease; filter: saturate(0.84) brightness(0.88); }
+.module-card-v1:hover .module-card-image-v1 { transform: scale(1.035); filter: saturate(0.90) brightness(0.95); }
+.module-card-media-v1::after { content: ""; position: absolute; inset: 0; border-radius: 22px; background: linear-gradient(180deg, rgba(13,15,16,0.00) 0%, rgba(13,15,16,0.10) 58%, rgba(13,15,16,0.42) 100%); pointer-events: none; }
+.module-card-frame-v1 { position: absolute; inset: 16px; z-index: 2; border-radius: 16px; border: 1px solid rgba(168,138,109,0.20); opacity: 0.82; transition: border-color 220ms ease, opacity 220ms ease; }
+.module-card-v1:hover .module-card-frame-v1 { border-color: rgba(168,138,109,0.34); opacity: 1; }
+.module-card-body-v1 { display: flex; flex-direction: column; flex: 1; padding: 16px 8px 0; }
+.module-index-v1 { display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; margin: 0 0 14px; border-radius: 999px; border: 1px solid rgba(168,138,109,0.16); background: rgba(168,138,109,0.08); font-size: 10px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(214,190,166,0.88); width: fit-content; }
+.module-title-v1 { margin: 0; font-size: 29px; line-height: 1; letter-spacing: -0.05em; color: var(--text); }
+.module-text-v1 { margin: 18px 0 26px; font-size: 14px; line-height: 1.95; color: rgba(231,227,218,0.70); }
+/* margin-top:auto keeps the two buttons on one line even when the two blocks
+   of copy end up different lengths. */
+.module-btn-v1 { display: inline-flex; align-items: center; justify-content: center; gap: 10px; align-self: flex-start; margin-top: auto; min-height: 48px; padding: 0 22px; border-radius: 999px; background: linear-gradient(180deg, rgba(168,138,109,0.96), rgba(139,113,88,0.96)); color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 18px rgba(0,0,0,0.22); transition: transform 180ms ease, background 180ms ease; }
+.module-btn-v1:hover { transform: translateY(-1px); background: linear-gradient(180deg, rgba(180,150,120,0.98), rgba(150,123,96,0.98)); }
+@media (max-width: 1080px) { .modules-grid-v1 { grid-template-columns: 1fr; gap: 22px; } .module-card-media-v1 { min-height: 360px; } }
+@media (max-width: 720px) { .modules-shell-v1 { padding: 0 14px 14px; } .modules-inner-v1 { padding: 56px 18px; } .modules-text-v1 { max-width: 100%; } .module-card-v1 { padding: 14px 14px 18px; border-radius: 24px; } .module-card-media-v1 { min-height: 320px; border-radius: 20px; } .module-card-media-v1::after { border-radius: 20px; } .module-card-frame-v1 { inset: 14px; border-radius: 15px; } .module-title-v1 { font-size: 26px; } }
+
 /* TESTIMONIALS (dark) */
 .testimonials-section-v1 { position: relative; }
 .testimonials-shell-v1 { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
