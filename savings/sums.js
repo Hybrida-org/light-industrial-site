@@ -26,27 +26,15 @@
     reviewMinutesPerDoc: 2,      // we do not remove all of it — somebody still approves
     workingHoursPerMonth: 173,   // one person's month
 
-    // Published document-intake prices, ex VAT, by documents a month.
+    // Published document-intake prices, ex VAT, by documents a month. Three bands,
+    // as before; the base came down to R2,500 with HYBRIDA-896, which also moved
+    // what the base means — it buys the module and the first 50 documents, not a
+    // document allowance on its own.
     tiers: [
-      { upToDocs: 50,       price: 3500 },
+      { upToDocs: 50,       price: 2500 },
       { upToDocs: 150,      price: 6500 },
       { upToDocs: Infinity, price: 12000 }
     ],
-
-    // Once-off setup. Base is a straight onboarding onto our own system; the two
-    // toggles add to it. Integration starts ticked because most buyers are keeping
-    // an accounting or ERP system they already pay for.
-    //
-    // These three numbers are a best reading of a brief that contradicts itself —
-    // see open question 23. The payback month is the setup fee divided by the
-    // monthly saving, so nothing on the results page matters more than these.
-    setup: {
-      base: 15000,
-      integration: 15000,
-      migration: 5000,
-      integrationStartsOn: true,
-      migrationStartsOn: false
-    },
 
     settledErrorRate: 2,    // where matching memory lands it
     decayMonths: 6,         // how long that takes

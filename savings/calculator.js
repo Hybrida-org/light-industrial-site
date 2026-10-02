@@ -203,11 +203,17 @@
     el('roiWorking').innerHTML = lines.map(function (line) { return '<li>' + line + '</li>'; }).join('');
   }
 
+  // Built from the bands rather than three fixed numbers, so a reprice in sums.js
+  // changes this sentence with it. The last band is open-ended and has no number
+  // to name, so it reads "above that".
   function tierSentence() {
-    return 'Document intake is ' + rands(SETTINGS.tiers[0].price) + ' a month up to ' +
-      SETTINGS.tiers[0].upToDocs + ' documents, ' + rands(SETTINGS.tiers[1].price) + ' up to ' +
-      SETTINGS.tiers[1].upToDocs + ', and ' + rands(SETTINGS.tiers[2].price) +
-      ' above that. Unlimited users. All prices ex VAT.';
+    var bands = SETTINGS.tiers.map(function (tier, index) {
+      var amount = rands(tier.price);
+      if (!isFinite(tier.upToDocs)) return amount + ' above that';
+      return amount + (index === 0 ? ' a month' : '') + ' up to ' + tier.upToDocs +
+        (index === 0 ? ' documents' : '');
+    }).join(', ');
+    return 'Document intake is ' + bands + '. Unlimited users. All prices ex VAT.';
   }
 
   // ── Draw everything ─────────────────────────────────────────────────────────

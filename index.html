@@ -999,6 +999,7 @@
     </div>
   </section>
 
+
   <!-- SECTION: PRICING.
        Sits after the calculator on purpose: by the time a visitor reaches it they
        have just put a number on what the paperwork costs them, so the price lands
@@ -1019,8 +1020,8 @@
               <span class="reveal-line" style="transition-delay: 0.24s;">Everything else is included.</span>
             </h2>
             <p class="price-intro reveal-para" style="transition-delay: 0.18s;">
-              The setup fee depends on two things and the monthly fee depends on one. Set them
-              here and watch the price change &mdash; no form, no call.
+              One thing sets the price: how many supplier documents you put through in a month.
+              Move the slider to your volume and the price follows.
             </p>
           </div>
 
@@ -1035,49 +1036,36 @@
                   <output id="priceDocsOut" for="priceDocs"></output>
                 </div>
                 <input type="range" id="priceDocs" class="price-range">
+                <p class="price-slider-note">Quotes, invoices and delivery notes &mdash; everything your suppliers send you. Moves in steps of 50.</p>
               </div>
 
               <div class="price-choice">
-                <span class="price-legend">Setting you up</span>
-
-                <label class="price-toggle">
-                  <input type="checkbox" id="priceIntegration">
-                  <span class="price-toggle-text">
-                    <b>We're staying on our current system</b>
-                    <span>We build the link to it instead of you moving onto ours.</span>
-                  </span>
-                  <span class="price-toggle-price" id="priceIntegrationAmount"></span>
-                </label>
-
-                <label class="price-toggle">
-                  <input type="checkbox" id="priceMigration">
-                  <span class="price-toggle-text">
-                    <b>Bring our old data across</b>
-                    <span>Suppliers, stock items and history loaded before you go live.</span>
-                  </span>
-                  <span class="price-toggle-price" id="priceMigrationAmount"></span>
-                </label>
+                <span class="price-legend">What that price covers</span>
+                <ul class="price-includes">
+                  <li>Every person on your team. Users are never charged for.</li>
+                  <li>Capture from a PDF, an email or a phone photo.</li>
+                  <li>Lines matched to your own stock codes and suppliers.</li>
+                  <li>Partial and short deliveries handled, with the record kept.</li>
+                </ul>
               </div>
 
             </div>
 
             <aside class="price-answer" aria-live="polite">
-              <p class="price-answer-label">Once-off, to set you up</p>
-              <p class="price-figure font-head" id="priceSetupOut"></p>
-              <p class="price-figure-note">Invoiced once, before you go live.</p>
+              <p class="price-answer-label">Every month</p>
+              <p class="price-figure font-head" id="priceMonthlyOut"></p>
+              <p class="price-figure-note" id="pricePerDoc"></p>
 
-              <div class="price-stack">
-                <div class="price-block" data-part="base"><span>Onboarding</span> <b id="priceBaseAmount"></b></div>
-                <div class="price-block" data-part="integration" hidden><span>Link to your system</span> <b id="priceIntegrationBlock"></b></div>
-                <div class="price-block" data-part="migration" hidden><span>Old data brought across</span> <b id="priceMigrationBlock"></b></div>
-              </div>
+              <!-- The three volume bands, drawn from savings/sums.js. The one the
+                   slider is sitting in is the lit row, so the visitor can see the
+                   step they are on and the step above them at the same time. -->
+              <div class="price-stack" id="priceLadder"></div>
 
               <div class="price-divider"></div>
 
-              <div class="price-monthly">
-                <span>Then, every month<br><small id="priceTierNote"></small></span>
-                <b id="priceMonthlyOut"></b>
-              </div>
+              <p class="price-setup-line">
+                A once-off onboarding fee applies. We quote it after a short call.
+              </p>
 
               <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="price-cta" data-open-demo>Book a 30-min demo</a>
             </aside>
@@ -1093,7 +1081,6 @@
       </div>
     </div>
   </section>
-
   <!-- SECTION 7: FAQ + FINAL CTA -->
   <section id="cta" class="final-section-v1">
     <div class="final-shell-v1">
@@ -1466,12 +1453,15 @@
   </script>
 
   <script>
-  // Pricing section — the once-off setup fee, built in front of the visitor.
+  // Pricing section — what the volume costs.
   //
-  // Three inputs: how many documents a month, whether they are keeping their own
-  // system, and whether old data comes across. Every amount, including the two
-  // toggle prices and the slider range, comes from savings/sums.js. This script
-  // owns no number and does no arithmetic of its own.
+  // One input: how many supplier documents a month, moved in steps of 50 so the
+  // number always reads as an estimate rather than a promise. Three price bands,
+  // the prices, the band labels and the rand per document all come from
+  // savings/sums.js. This script owns no number of its own.
+  //
+  // The once-off onboarding fee is deliberately not priced here; the page says a
+  // fee applies and that we quote it on a call. See HYBRIDA-896.
   (function () {
     'use strict';
 
@@ -1483,55 +1473,51 @@
 
     var el = function (id) { return document.getElementById(id); };
 
-    var docs = el('priceDocs');
-    if (!docs) return;
+    var slider = el('priceDocs');
+    if (!slider) return;
 
-    var integration = el('priceIntegration');
-    var migration = el('priceMigration');
+    var bands = SETTINGS.tiers;
+    var lastNamedBand = bands[bands.length - 2];   // the last one with a number on it
 
-    // The calculator above asks for documents a week; this asks for a month, so
-    // the range is that one scaled up. Same business, same limits, one place.
-    var perWeek = SETTINGS.sliders.docsPerWeek;
-    var perMonth = function (weekly) { return Math.round(weekly * SETTINGS.weeksPerMonth / 5) * 5; };
+    // Steps of 50 documents. The slider runs a good way past the top band so the
+    // open-ended band is somewhere a visitor can actually land.
+    slider.min = 50;
+    slider.max = lastNamedBand.upToDocs * 4;
+    slider.step = 50;
+    slider.value = 150;
 
-    docs.min = perMonth(perWeek.min);
-    docs.max = perMonth(perWeek.max);
-    docs.step = 5;
-    docs.value = perMonth(perWeek.start);
+    var ladder = el('priceLadder');
+    var rows = bands.map(function (band, index) {
+      var label = isFinite(band.upToDocs)
+        ? 'Up to ' + band.upToDocs + ' a month'
+        : 'More than ' + bands[index - 1].upToDocs + ' a month';
 
-    integration.checked = SETTINGS.setup.integrationStartsOn;
-    migration.checked = SETTINGS.setup.migrationStartsOn;
-
-    // The two toggle prices and the base block are written once — they never change.
-    el('priceIntegrationAmount').textContent = '+ ' + rands(SETTINGS.setup.integration);
-    el('priceMigrationAmount').textContent = '+ ' + rands(SETTINGS.setup.migration);
-    el('priceBaseAmount').textContent = rands(SETTINGS.setup.base);
-    el('priceIntegrationBlock').textContent = rands(SETTINGS.setup.integration);
-    el('priceMigrationBlock').textContent = rands(SETTINGS.setup.migration);
+      var row = document.createElement('div');
+      row.className = 'price-block';
+      row.innerHTML = '<span>' + label + '</span> <b>' + rands(band.price) + '</b>';
+      ladder.appendChild(row);
+      return row;
+    });
 
     function draw() {
-      var documentsPerMonth = +docs.value;
-      var choices = { keepingOwnSystem: integration.checked, dataMigration: migration.checked };
+      var documentsPerMonth = +slider.value;
+      var price = sums.priceFor(documentsPerMonth);
 
       el('priceDocsOut').textContent = documentsPerMonth;
-      el('priceSetupOut').textContent = rands(
-        SETTINGS.setup.base +
-        (choices.keepingOwnSystem ? SETTINGS.setup.integration : 0) +
-        (choices.dataMigration ? SETTINGS.setup.migration : 0)
-      );
-      el('priceMonthlyOut').textContent = rands(sums.priceFor(documentsPerMonth));
-      el('priceTierNote').textContent = documentsPerMonth + ' documents a month';
+      el('priceMonthlyOut').textContent = rands(price);
+      el('pricePerDoc').textContent =
+        'That works out at ' + rands(price / documentsPerMonth) + ' a document.';
 
-      document.querySelector('.price-block[data-part="integration"]').hidden = !choices.keepingOwnSystem;
-      document.querySelector('.price-block[data-part="migration"]').hidden = !choices.dataMigration;
+      rows.forEach(function (row, index) {
+        row.classList.toggle('is-current', bands[index].price === price);
+      });
     }
 
-    [docs, integration, migration].forEach(function (control) {
-      control.addEventListener('input', draw);
-    });
+    slider.addEventListener('input', draw);
     draw();
   })();
   </script>
+
 
   <script>
   // Measure the scrollbar once, so the modals can fill the gap they leave behind.

@@ -797,69 +797,6 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .mobile-menu-cta { margin-top: 6px; padding: 13px 14px; border-radius: 999px; text-align: center; background: linear-gradient(180deg, rgba(168,138,109,0.96), rgba(139,113,88,0.96)); color: #fff; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
 @media (min-width: 1081px) { .mobile-menu { display: none !important; } }
 
-/* ── PRICING ───────────────────────────────────────────────────────────────── */
-/* Same paper frame as the calculator above it, so the two read as one stretch of
-   the page rather than two competing panels. The one thing that stands out is the
-   once-off figure, which sits on ink while everything around it stays on paper. */
-.price-section { position: relative; }
-.price-shell { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
-.price-frame { position: relative; overflow: hidden; border: 1px solid rgba(45,42,38,0.08); border-radius: 30px; background: radial-gradient(circle at top center, rgba(168,138,109,0.06), transparent 22%), linear-gradient(180deg, #f2eee8 0%, #e8e2d9 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 24px 60px rgba(0,0,0,0.06); }
-.price-inner { position: relative; z-index: 1; padding: 84px 44px 76px; }
-.price-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
-.price-kicker { margin: 0 0 16px; font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
-.price-title { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); line-height: 0.98; letter-spacing: -0.05em; color: var(--ink); }
-.price-title .reveal-line { display: block; }
-.price-intro { margin: 22px auto 0; max-width: 540px; font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
-
-.price-grid { display: grid; grid-template-columns: 1fr 420px; gap: 44px; max-width: 1080px; margin: 0 auto; align-items: start; }
-.price-choices { display: flex; flex-direction: column; gap: 22px; }
-.price-choice { padding: 24px 26px; background: rgba(255,255,255,0.45); border: 1px solid rgba(45,42,38,0.10); border-radius: 20px; }
-.price-legend { display: block; margin: 0 0 16px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
-.price-slider-top { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 8px; }
-.price-slider-top label { font-size: 14px; font-weight: 600; color: var(--ink); }
-.price-slider-top output { font-size: 17px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
-
-/* Same slider as the calculator's, so the two sections feel like one control set. */
-.price-range { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; }
-.price-range::-webkit-slider-runnable-track { height: 3px; border-radius: 3px; background: rgba(45,42,38,0.16); }
-.price-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -9.5px; border-radius: 50%; background: var(--bronze); border: 3px solid var(--paper); box-shadow: 0 2px 8px rgba(45,42,38,0.28); }
-.price-range::-moz-range-track { height: 3px; border-radius: 3px; background: rgba(45,42,38,0.16); }
-.price-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--bronze); border: 3px solid var(--paper); box-shadow: 0 2px 8px rgba(45,42,38,0.28); }
-.price-range:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; border-radius: 4px; }
-
-.price-toggle { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-top: 1px solid rgba(45,42,38,0.08); cursor: pointer; }
-.price-toggle:first-of-type { border-top: 0; padding-top: 0; }
-.price-toggle input { margin-top: 3px; accent-color: var(--bronze); width: 17px; height: 17px; flex: 0 0 auto; }
-.price-toggle-text b { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
-.price-toggle-text span { display: block; margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
-.price-toggle-price { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
-
-.price-answer { position: sticky; top: 24px; padding: 32px; border-radius: 24px; background: linear-gradient(180deg, #24211d, #1b1917); color: var(--paper); box-shadow: 0 24px 60px rgba(0,0,0,0.18); }
-.price-answer-label { margin: 0; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(239,236,230,0.55); }
-.price-figure { margin: 10px 0 0; font-size: clamp(2.6rem, 4vw, 3.4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
-.price-figure-note { margin: 8px 0 0; font-size: 13px; color: rgba(239,236,230,0.66); }
-/* Each part of the once-off is its own labelled block, so the total reads as
-   something assembled rather than something handed down. */
-.price-stack { display: flex; flex-direction: column; gap: 4px; margin: 22px 0 0; }
-.price-block { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 11px 14px; border-radius: 10px; font-size: 13px; background: rgba(168,138,109,0.22); }
-.price-block[data-part="base"] { background: rgba(168,138,109,0.40); }
-.price-block[hidden] { display: none; }
-.price-block b { font-variant-numeric: tabular-nums; }
-.price-divider { margin: 22px 0; height: 1px; background: rgba(239,236,230,0.14); }
-.price-monthly { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
-.price-monthly span { font-size: 13px; color: rgba(239,236,230,0.66); }
-.price-monthly small { font-size: 12px; }
-.price-monthly b { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.price-cta { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; margin-top: 24px; padding: 0 24px; border-radius: 999px; background: var(--paper); color: var(--ink); font-size: 14px; font-weight: 500; text-decoration: none; transition: transform 180ms ease, background 180ms ease; }
-.price-cta:hover { transform: translateY(-1px); background: #fff; }
-.price-exvat { margin: 40px auto 0; max-width: 620px; text-align: center; font-size: 12.5px; line-height: 1.7; color: var(--ink-soft); opacity: 0.85; }
-
-@media (max-width: 1080px) {
-  .price-grid { grid-template-columns: 1fr; gap: 28px; }
-  .price-answer { position: static; }
-}
-@media (max-width: 900px) { .price-inner { padding: 64px 20px 56px; } }
-@media (max-width: 720px) { .price-shell { padding: 0 14px 14px; } }
 
 /* ===== LEAD FORM (built by /lead-form.js — see HYBRIDA-905) =====
    One set of styles for the form wherever it appears: the bottom of Home and
@@ -931,6 +868,65 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .lf-done-title { margin: 0; font-size: clamp(1.5rem, 3.4vw, 2rem); line-height: 1.1; letter-spacing: -0.03em; color: var(--text); }
 .lf-done-title:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; border-radius: 6px; }
 .lf-done-text { margin: 12px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-soft); }
+
+/* ── PRICING ───────────────────────────────────────────────────────────────── */
+/* Same paper frame as the calculator above it, so the two read as one stretch of
+   the page rather than two competing panels. The one thing that stands out is the
+   once-off figure, which sits on ink while everything around it stays on paper. */
+.price-section { position: relative; }
+.price-shell { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
+.price-frame { position: relative; overflow: hidden; border: 1px solid rgba(45,42,38,0.08); border-radius: 30px; background: radial-gradient(circle at top center, rgba(168,138,109,0.06), transparent 22%), linear-gradient(180deg, #f2eee8 0%, #e8e2d9 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 24px 60px rgba(0,0,0,0.06); }
+.price-inner { position: relative; z-index: 1; padding: 84px 44px 76px; }
+.price-head { max-width: 760px; margin: 0 auto 52px; text-align: center; }
+.price-kicker { margin: 0 0 16px; font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
+.price-title { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); line-height: 0.98; letter-spacing: -0.05em; color: var(--ink); }
+.price-title .reveal-line { display: block; }
+.price-intro { margin: 22px auto 0; max-width: 540px; font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
+
+.price-grid { display: grid; grid-template-columns: 1fr 420px; gap: 44px; max-width: 1080px; margin: 0 auto; align-items: start; }
+.price-choices { display: flex; flex-direction: column; gap: 22px; }
+.price-choice { padding: 24px 26px; background: rgba(255,255,255,0.45); border: 1px solid rgba(45,42,38,0.10); border-radius: 20px; }
+.price-legend { display: block; margin: 0 0 16px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+.price-slider-top { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; margin-bottom: 8px; }
+.price-slider-top label { font-size: 14px; font-weight: 600; color: var(--ink); }
+.price-slider-top output { font-size: 17px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* Same slider as the calculator's, so the two sections feel like one control set. */
+.price-range { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; }
+.price-range::-webkit-slider-runnable-track { height: 3px; border-radius: 3px; background: rgba(45,42,38,0.16); }
+.price-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -9.5px; border-radius: 50%; background: var(--bronze); border: 3px solid var(--paper); box-shadow: 0 2px 8px rgba(45,42,38,0.28); }
+.price-range::-moz-range-track { height: 3px; border-radius: 3px; background: rgba(45,42,38,0.16); }
+.price-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--bronze); border: 3px solid var(--paper); box-shadow: 0 2px 8px rgba(45,42,38,0.28); }
+.price-range:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; border-radius: 4px; }
+
+.price-slider-note { margin: 10px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-soft); opacity: 0.85; }
+.price-includes { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.price-includes li { position: relative; padding-left: 22px; font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+.price-includes li::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--bronze); opacity: 0.55; }
+
+.price-answer { position: sticky; top: 24px; padding: 32px; border-radius: 24px; background: linear-gradient(180deg, #24211d, #1b1917); color: var(--paper); box-shadow: 0 24px 60px rgba(0,0,0,0.18); }
+.price-answer-label { margin: 0; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(239,236,230,0.55); }
+.price-figure { margin: 10px 0 0; font-size: clamp(2.6rem, 4vw, 3.4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.price-figure-note { margin: 8px 0 0; font-size: 13px; color: rgba(239,236,230,0.66); }
+/* Each part of the once-off is its own labelled block, so the total reads as
+   something assembled rather than something handed down. */
+.price-stack { display: flex; flex-direction: column; gap: 4px; margin: 22px 0 0; }
+/* Every band is legible; the one the slider is in is the lit one. */
+.price-block { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 11px 14px; border-radius: 10px; font-size: 13px; background: rgba(239,236,230,0.06); color: rgba(239,236,230,0.62); transition: background 200ms ease, color 200ms ease; }
+.price-block.is-current { background: rgba(168,138,109,0.38); color: var(--paper); }
+.price-block b { font-variant-numeric: tabular-nums; }
+.price-divider { margin: 22px 0; height: 1px; background: rgba(239,236,230,0.14); }
+.price-setup-line { margin: 0; font-size: 13px; line-height: 1.7; color: rgba(239,236,230,0.72); }
+.price-cta { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; margin-top: 24px; padding: 0 24px; border-radius: 999px; background: var(--paper); color: var(--ink); font-size: 14px; font-weight: 500; text-decoration: none; transition: transform 180ms ease, background 180ms ease; }
+.price-cta:hover { transform: translateY(-1px); background: #fff; }
+.price-exvat { margin: 40px auto 0; max-width: 620px; text-align: center; font-size: 12.5px; line-height: 1.7; color: var(--ink-soft); opacity: 0.85; }
+
+@media (max-width: 1080px) {
+  .price-grid { grid-template-columns: 1fr; gap: 28px; }
+  .price-answer { position: static; }
+}
+@media (max-width: 900px) { .price-inner { padding: 64px 20px 56px; } }
+@media (max-width: 720px) { .price-shell { padding: 0 14px 14px; } }
 
 /* The lead form's own section at the bottom of the home page. The frame matches
    the sections above it so the page still reads as one piece. */
