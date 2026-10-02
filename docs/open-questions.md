@@ -21,6 +21,7 @@ work in flight — they're the things I can't decide on my own.
 | 24 | ~~**Two calculators now disagree**~~ | **Closed 2026-09-23** by `HYBRIDA-797`. The homepage one is gone; the stricter sum (173 hours, 2 minutes a document) survived and is now the only one, in `savings/sums.js` | `roi-calculator-spec.md` |
 | 25 | **The calculator opens on hours, not money** | On the default sliders net is −R5,100, so there is no payback month and the headline falls back to "win back 22 hours every month". That is the fallback rule working correctly, but it means the home page opens on time rather than rands. Either the defaults are wrong or the ICP is narrower than the slider ranges suggest | `roi-calculator-spec.md` § 5 |
 | 26 | **No nav link to `/savings/`** | It is in the sitemap, `llms.txt` and the homepage footer only. Reached in practice through the home-page teaser. Same reason as item 22 — didn't want to crowd the nav before the story is reordered | Q6 |
+| 29 | **Three price bands or a step ladder?** | HYBRIDA-896 describes a ladder rising in steps of 100 documents to R12,000. The site keeps the three bands it already had — R2,500 up to 50, R6,500 up to 150, R12,000 above that — with only the base changed to the ticket's R2,500. Tankiso's call on 2026-09-23; the ticket still reads the other way | HYBRIDA-896 |
 
 ## 2. Needs a fact from someone
 
