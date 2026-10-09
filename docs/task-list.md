@@ -10,13 +10,6 @@ thing described is live on the branch and reviewable on a link.
 
 These are mine. Nobody is blocking them.
 
-- [ ] **Document Intake page.** Its own full page, same shape as the ERP page
-      that is now done. Carries the lead form.
-- [ ] **Readability pass.** Brighten the body text, and fix the small text on the
-      dark sections. Hero email and phone are too faint to read.
-- [ ] **Hero.** Merge the dotted line and the sub-line into one line under the
-      heading: "Operations software for manufacturers, wholesalers and trade
-      suppliers." Drop the duplicate.
 - [ ] **Modules section cleanup.** Donovan's bullets instead of paragraphs,
       smaller images, and the dot element above the headings removed.
 - [ ] **"What it saves you" rewritten as four wins** — keeps your data clean,
@@ -98,3 +91,11 @@ I will build these the day there is an answer. Each one is a single question.
 - ERP module page.
 - Setup fee taken off the pricing section; base band moved to R2,500.
 - Crawlability and AI-answer-engine groundwork: sitemap, `llms.txt`, FAQ data.
+- Document Intake module page, carrying the lead form.
+- Hero: the eyebrow pill and the sub-line merged into one line naming the trades.
+- Readability pass, all six pages. Every text style now clears WCAG AA (4.5:1
+  for small text). The recurring fault was the bronze accent used as a label
+  colour on the light panels, where it sat at 2.4:1; those uses moved to a new
+  `--bronze-ink`. Also fixed the hero form's see-through fields, a focus ring
+  that was invisible on light panels, and list bullets at 2:1. Still open, as
+  size rather than colour: 9.5px chips on the savings page and 10px form labels.
