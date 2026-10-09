@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Intake module — supplier delivery notes booked in your own units | Light Industrial</title>
+<meta name="description" content="Photograph a supplier delivery note and every line comes off it, matched to your own stock codes and your own units. Document Intake for South African stores rooms, workshops and trade suppliers.">
+<link rel="canonical" href="https://lightindustrial.co.za/document-intake/">
+<link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="We read the delivery note and book the stock in your own units">
+<meta property="og:description" content="Your supplier sends gloves in boxes of a hundred. You count them in pairs. Tell us once and every delivery books itself in your units.">
+<meta property="og:url" content="https://lightindustrial.co.za/document-intake/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/01-capture.jpg">
+<meta property="og:image:alt" content="Photographing a supplier delivery note in a stores room">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<!-- The two module pages are one layout, so they share one stylesheet rather
+     than keeping two copies of the same panel, card and role rules in step.
+     intake.css holds only what this page adds: the numbered steps. -->
+<link rel="stylesheet" href="../erp/erp.css">
+<link rel="stylesheet" href="intake.css">
+</head>
+
+<body>
+  <header class="erp-header">
+    <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+    <div class="nav-wrap" data-site-nav></div>
+  </header>
+
+  <main>
+
+  <!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+  <!-- Leads on the matching, not the photograph. product/how-it-works.md is
+       explicit that the reading is a commodity and the per-supplier mapping is
+       the differentiator, so the headline sells the mapping.
+
+       data-site-link resolves the path at run time: while the Pricing page is
+       unbuilt the link lands on the home page's pricing section and switches to
+       the real page by itself the day that page ships. See site-chrome.js. -->
+  <section id="hero" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">Document Intake module</p>
+            <h1 class="erp-title font-head reveal-fade" style="transition-delay: 0.06s;">
+              We read your supplier paperwork and book the stock, so nobody types it in.
+            </h1>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              Delivery notes, supplier invoices and quotes, however they reach you &mdash; a photo, a PDF or
+              an email. Every line comes off the document and is booked against the right order, under your own
+              stock names and in your own units, with the original kept against it.
+            </p>
+            <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+              <a href="#" data-site-link="pricing" class="btn-primary">
+                See pricing
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+              <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener"
+                 class="btn-secondary" data-open-demo>
+                Book a call
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──────────────────────────────────────────────────────── -->
+  <!-- Three steps, not the home page's six. Raising the purchase order and
+       comparing quotes are the ERP's story; this page starts where the truck
+       arrives. Step 02 carries the accent because it is the differentiator. -->
+  <section id="how-it-works" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">How it works</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              From the delivery note to stock on hand, in three steps.
+            </h2>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              It runs on the documents your suppliers already send you, so there is nothing to set up on their
+              side. No portal to sign them up for, and no asking them to send their paperwork a particular way.
+            </p>
+          </div>
+
+          <ol class="intake-steps">
+
+            <li class="intake-step reveal-fade" style="transition-delay: 0.14s;">
+              <span class="intake-step-no font-head">01</span>
+              <div>
+                <h3 class="intake-step-title font-head">Photograph it</h3>
+                <p class="intake-step-text">
+                  A delivery note, a supplier invoice or a quote, photographed on a phone. Every line on it
+                  gets read: code, description, quantity, unit and price.
+                </p>
+              </div>
+            </li>
+
+            <li class="intake-step intake-step-lead reveal-fade" style="transition-delay: 0.18s;">
+              <span class="intake-step-no font-head">02</span>
+              <div>
+                <h3 class="intake-step-title font-head">We match it to your stock</h3>
+                <p class="intake-step-text">
+                  Every supplier names and counts things their own way. Tell the system once how theirs
+                  lines up with yours and it holds from then on &mdash; so gloves that come in boxes of a
+                  hundred book as two hundred pairs, because that is how you count them.
+                </p>
+              </div>
+            </li>
+
+            <li class="intake-step reveal-fade" style="transition-delay: 0.22s;">
+              <span class="intake-step-no font-head">03</span>
+              <div>
+                <h3 class="intake-step-title font-head">We check it, then book it</h3>
+                <p class="intake-step-text">
+                  Anything that does not match what you ordered &mdash; a price that moved, a quantity that
+                  came up short &mdash; is flagged for you before it is paid. You decide what happens: book it
+                  in full, book it short, or turn it away. Every decision you make is kept, so the next delivery
+                  from that supplier asks less of you than the last one. Stock on hand and your costs update,
+                  with the photo filed against the movement.
+                </p>
+              </div>
+            </li>
+
+          </ol>
+
+          <!-- product/how-it-works.md asks for this expectation to be set
+               explicitly: it turns a month-one disappointment into a month-one
+               milestone. It is also simply what happens. -->
+          <p class="erp-close reveal-fade" style="transition-delay: 0.26s;">
+            For the first month or two you will be confirming matches as new supplier lines come through.
+            After that most documents book themselves.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT IT READS ─────────────────────────────────────────────────────── -->
+  <!-- Four cards. Units and codes used to be a fifth; it now lives in step 02,
+       where it belongs, rather than being said twice. -->
+  <section id="what-it-reads" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">What it reads</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              The paperwork you already get, in whatever shape it arrives.
+            </h2>
+          </div>
+
+          <div class="erp-grid">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.10s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:document-text-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Supplier quotes</h3>
+              <ul class="erp-list">
+                <li>PDF, photo, scan, or the text sitting in the body of an email.</li>
+                <li>Lines, quantities and prices come out as a list you can compare against the other quotes you asked for.</li>
+                <li>Every price is kept, so you can see what this supplier charged you last time.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:delivery-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Delivery notes</h3>
+              <ul class="erp-list">
+                <li>Photographed on a phone when the delivery arrives.</li>
+                <li>Matched line by line to the order it belongs to.</li>
+                <li>Booked in full, short, or turned away on the spot, with the photo kept on the movement as your proof.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:bill-list-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">Invoices</h3>
+              <ul class="erp-list">
+                <li>Checked against both what you ordered and what actually came off the truck.</li>
+                <li>A price that moved, a quantity that does not match, or a line nobody ordered is flagged before the invoice is paid.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:archive-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">An audit trail nobody has to keep</h3>
+              <ul class="erp-list">
+                <li>Every document is filed against the supplier, the order and the stock movement it created.</li>
+                <li>When a count is queried months later, the photo of the note that moved it is one click away.</li>
+              </ul>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GETTING STARTED + PRICING ─────────────────────────────────────────── -->
+  <section id="start" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">Getting started</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              What it takes, and what it costs.
+            </h2>
+          </div>
+
+          <div class="erp-prose">
+            <p class="reveal-fade" style="transition-delay: 0.10s;">
+              Someone is doing this work by hand right now. Starting is mostly on us: we import your stock
+              items and suppliers from wherever they live today. Your storeman has nothing new to learn.
+              Onboarding is a once-off fee we quote on a call.
+            </p>
+          </div>
+
+          <!-- One number and one link. The bands live on the Pricing page and in
+               the calculator; here they only made the reader do arithmetic before
+               deciding whether to enquire. The link is the calculator rather than
+               the price list, because the price only reads as small next to what
+               the paperwork already costs them. -->
+          <div class="erp-price reveal-fade" style="transition-delay: 0.14s;">
+            <p class="erp-kicker">Pricing</p>
+            <p class="erp-price-figure font-head">From R2,500 <span class="erp-price-unit">a month, ex VAT</span></p>
+            <p class="erp-price-text">
+              Priced on how many supplier documents you put through in a month. Up to five users.
+            </p>
+            <div class="cta-row erp-cta-row">
+              <a href="../savings/" class="btn-primary">
+                See what the paperwork costs you now
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ADD THE ERP ───────────────────────────────────────────────────────── -->
+  <!-- The mirror of the ERP page's "Add Document Intake" panel. Same accent wash,
+       so on either page the cross-sell reads as a step sideways rather than the
+       next point in the argument. -->
+  <section id="erp" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame erp-frame-accent">
+        <div class="erp-inner erp-inner-tight">
+
+          <div class="erp-head">
+            <p class="erp-kicker reveal-fade">Add the ERP</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              This handles what comes in. The ERP runs what goes out.
+            </h2>
+          </div>
+
+          <div class="erp-prose">
+            <p class="reveal-fade" style="transition-delay: 0.10s;">
+              Start with Document Intake and your receiving is sorted. Add the ERP module and the same stock
+              record carries through the rest of the job: quotes, job cards, delivery notes and invoicing, all
+              running off the stock this module booked in. One set of numbers, nothing typed twice.
+            </p>
+          </div>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="#" data-site-link="erp" class="btn-secondary">
+              Learn about the ERP module
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── READY? ────────────────────────────────────────────────────────────── -->
+  <!-- The one CTA at the bottom of the page. Same form component as Home, ERP
+       and Contact Us — see /lead-form.js. -->
+  <section id="contact-form" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+          <div data-lead-form data-variant="contact"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer-v1" data-site-footer></footer>
+
+  <script src="../site-chrome.js"></script>
+  <!-- sums.js is loaded for its settings only: the lead endpoint, the fallback
+       email address and the thank-you page live there, shared with every form. -->
+  <script src="../savings/sums.js"></script>
+  <script src="../lead-form.js"></script>
+
+  <script>
+  // Fade sections in as they come up. Same behaviour as the other pages.
+  (function () {
+    var els = document.querySelectorAll('.reveal-fade');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+  </script>
+</body>
+</html>

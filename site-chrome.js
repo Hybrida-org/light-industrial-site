@@ -38,7 +38,7 @@
   // ignored — no link has to be found and changed.
   var PAGES = [
     { label: 'Home',            folder: '',                built: true  },
-    { label: 'Document Intake', folder: 'document-intake',  built: false, homeAnchor: 'how' },
+    { label: 'Document Intake', folder: 'document-intake',  built: true  },
     { label: 'ERP',             folder: 'erp',              built: true  },
     { label: 'Pricing',         folder: 'pricing',          built: false, homeAnchor: 'pricing' },
     { label: 'About Us',        folder: 'about',            built: true  },

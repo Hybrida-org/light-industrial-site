@@ -1,4 +1,8 @@
-/* ERP module page — everything that is not already in styles.css.
+/* Module pages (ERP and Document Intake) — everything not already in styles.css.
+   Both module pages load this file: they are one layout, and keeping two copies
+   of these rules in step by hand would be the surer way to let them drift.
+   Document Intake adds only its numbered steps, in document-intake/intake.css.
+
    The nav, footer, buttons and reveal animations are shared.
 
    The page is a stack of light "paper" panels on the site's dark background,
