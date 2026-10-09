@@ -38,7 +38,7 @@
 .erp-inner-tight { padding: 60px 44px 56px; }
 
 .erp-head { max-width: 800px; margin: 0 auto 48px; text-align: center; }
-.erp-kicker { margin: 0 0 16px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
+.erp-kicker { margin: 0 0 16px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
 .erp-title { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.05em; color: var(--ink); }
 /* The h1 carries the page; every h2 below it steps down a size so the hero
    stays the loudest thing on the page. */
@@ -64,7 +64,7 @@
   flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
   width: 42px; height: 42px; border-radius: 999px;
   border: 1px solid rgba(168,138,109,0.26); background: rgba(168,138,109,0.10);
-  color: var(--bronze);
+  color: var(--bronze-ink);
 }
 
 /* ── What it does ──────────────────────────────────────────────────────────── */
@@ -89,7 +89,7 @@
 }
 .erp-list li::before {
   content: ""; position: absolute; left: 0; top: 12px;
-  width: 8px; height: 1px; background: var(--bronze); opacity: 0.7;
+  width: 8px; height: 1px; background: var(--bronze-ink);
 }
 
 /* ── Who uses it ───────────────────────────────────────────────────────────── */
@@ -135,7 +135,7 @@
 .erp-inner .lf-intro,
 .erp-inner .lf-check { color: var(--ink-soft); }
 .erp-inner .lf-field label { color: var(--ink-soft); }
-.erp-inner .lf-note { color: #6b645b; }
+.erp-inner .lf-note { color: var(--ink-soft); }
 .erp-inner .lf-note a { color: var(--ink); }
 
 .erp-inner .lf-field input,
@@ -144,10 +144,10 @@
   background-color: rgba(255,255,255,0.62);
   border-color: rgba(45,42,38,0.28);
 }
-.erp-inner .lf-field input::placeholder { color: rgba(45,42,38,0.46); }
+.erp-inner .lf-field input::placeholder { color: rgba(45,42,38,0.74); }
 .erp-inner .lf-field input:focus,
 .erp-inner .lf-field select:focus {
-  border-color: var(--bronze);
+  border-color: var(--bronze-ink);
   background-color: rgba(255,255,255,0.86);
 }
 /* The chevron is drawn in the stylesheet, so its colour has to be swapped with

@@ -24,7 +24,7 @@
   flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
   width: 42px; height: 42px; border-radius: 999px;
   border: 1px solid rgba(168,138,109,0.26); background: rgba(168,138,109,0.10);
-  color: var(--bronze); font-size: 14px; letter-spacing: -0.01em;
+  color: var(--bronze-ink); font-size: 14px; letter-spacing: -0.01em;
 }
 .intake-step-title { margin: 0 0 8px; font-size: 18px; letter-spacing: -0.02em; color: var(--ink); }
 .intake-step-text { margin: 0; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
@@ -43,5 +43,5 @@
   background: rgba(255,255,255,0.66);
 }
 .intake-step-lead .intake-step-no {
-  background: var(--bronze); border-color: var(--bronze); color: #fff;
+  background: var(--bronze-ink); border-color: var(--bronze-ink); color: #fff;
 }
