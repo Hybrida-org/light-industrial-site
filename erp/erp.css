@@ -125,6 +125,37 @@
 .erp-price-unit { font-family: 'Onest', sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0; color: var(--ink-soft); }
 .erp-price-text { margin: 14px 0 0; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
 
+/* ── Lead form on a light panel ────────────────────────────────────────────── */
+/* The form's own colours in styles.css are built for the dark background it has
+   on Home and Contact Us. The module pages are light "paper" panels, so the
+   same markup needs the ink palette instead: dark text, and borders dark enough
+   to draw a box. Only colour is overridden here — layout, spacing and the
+   button stay shared, so the form is still one component. */
+.erp-inner .lf-title { color: var(--ink); }
+.erp-inner .lf-intro,
+.erp-inner .lf-check { color: var(--ink-soft); }
+.erp-inner .lf-field label { color: var(--ink-soft); }
+.erp-inner .lf-note { color: #6b645b; }
+.erp-inner .lf-note a { color: var(--ink); }
+
+.erp-inner .lf-field input,
+.erp-inner .lf-field select {
+  color: var(--ink);
+  background-color: rgba(255,255,255,0.62);
+  border-color: rgba(45,42,38,0.28);
+}
+.erp-inner .lf-field input::placeholder { color: rgba(45,42,38,0.46); }
+.erp-inner .lf-field input:focus,
+.erp-inner .lf-field select:focus {
+  border-color: var(--bronze);
+  background-color: rgba(255,255,255,0.86);
+}
+/* The chevron is drawn in the stylesheet, so its colour has to be swapped with
+   the rest of the palette or it disappears against the lighter field. */
+.erp-inner .lf-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%235f5850' stroke-width='1.5' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+}
+
 /* ── Small screens ─────────────────────────────────────────────────────────── */
 @media (max-width: 880px) {
   .erp-shell { padding: 0 16px 16px; }

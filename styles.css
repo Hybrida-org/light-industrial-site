@@ -822,12 +822,12 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 
 .lf-field input, .lf-field select {
   font-family: 'Mona Sans', sans-serif; font-size: 15px; color: var(--text);
-  background-color: rgba(231,227,218,0.04); border: 1px solid rgba(231,227,218,0.12);
+  background-color: rgba(231,227,218,0.07); border: 1px solid rgba(231,227,218,0.24);
   border-radius: 12px; padding: 12px 14px; width: 100%;
   transition: border-color 200ms ease, background-color 200ms ease;
 }
 .lf-field input::placeholder { color: var(--muted); }
-.lf-field input:focus, .lf-field select:focus { outline: none; border-color: rgba(168,138,109,0.55); background-color: rgba(231,227,218,0.06); }
+.lf-field input:focus, .lf-field select:focus { outline: none; border-color: rgba(168,138,109,0.75); background-color: rgba(231,227,218,0.10); }
 .lf-field select {
   padding-right: 40px; cursor: pointer; appearance: none; -webkit-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%237f8782' stroke-width='1.5' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
