@@ -68,7 +68,7 @@
 
   var CONTACT_EMAIL = 'danika@lightindustrial.co.za';
   var CONTACT_MAILTO = 'mailto:' + CONTACT_EMAIL + '?subject=Light%20Industrial%20enquiry';
-  var DEMO_URL = 'https://calendly.com/danika-lightindustrial/30min';
+  var DEMO_URL = 'https://calendly.com/donovan-lightindustrial/30min';
 
   /* The phone number for the site, waiting on HYBRIDA-918. Paste it here in the
      shape a person should read it; PHONE_DIAL is the same number in the shape a
