@@ -563,6 +563,8 @@ box-shadow: inset 0 1px 0 rgba(231,227,218,0.03);
 .site-footer-contact-v1 { display: grid; gap: 10px; }
 .site-footer-contact-item-v1 { color: rgba(169,177,172,0.82); text-decoration: none; font-size: 15px; line-height: 1.7; transition: color 180ms ease; }
 .site-footer-contact-item-v1:hover { color: var(--text); }
+/* <address> is italic by default in every browser; the footer wants it plain. */
+.site-footer-address-v1 { margin: 4px 0 0; font-style: normal; font-size: 15px; line-height: 1.7; color: rgba(169,177,172,0.82); }
 .site-footer-bottom-v1 { margin-top: 34px; padding-top: 18px; border-top: 1px solid rgba(231,227,218,0.08); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 .site-footer-meta-v1 { font-size: 13px; color: rgba(169,177,172,0.82); }
 .site-footer-legal-v1 { display: flex; flex-wrap: wrap; gap: 16px; }

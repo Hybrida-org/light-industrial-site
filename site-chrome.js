@@ -77,6 +77,15 @@
   var PHONE = '';
   var PHONE_DIAL = '';
 
+  /* The office address, shown in the footer on every page. One line per line of
+     the address; change it here and it changes site-wide. */
+  var ADDRESS_LINES = [
+    '22 on Sloane',
+    '39 Somerset Rd',
+    'Green Point',
+    'Cape Town, 8005'
+  ];
+
   function hrefFor(page) {
     if (!page.built) return page.homeAnchor ? homeAnchorHref(page.homeAnchor) : '#';
     if (USE_CLEAN_URLS) return '/' + (page.folder ? page.folder + '/' : '');
@@ -182,6 +191,9 @@
       '            <a href="' + contactHref() + '" class="site-footer-contact-item-v1">Get in touch</a>' +
       '            <a href="mailto:' + CONTACT_EMAIL + '" class="site-footer-contact-item-v1">' + CONTACT_EMAIL + '</a>' +
       '            <a href="' + DEMO_URL + '" target="_blank" rel="noopener" class="site-footer-contact-item-v1" data-open-demo>Book a 30-min demo</a>' +
+      // Street address. <address> is the tag browsers and search engines read as
+      // "this is where the business is"; the italics it adds are turned off in CSS.
+      '            <address class="site-footer-address-v1">' + ADDRESS_LINES.join('<br>') + '</address>' +
       '          </div>' +
       '        </div>' +
       '      </div>' +
