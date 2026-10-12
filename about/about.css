@@ -1,9 +1,18 @@
 /* About Us page — everything that is not already in styles.css.
-   The nav, footer and reveal animations are shared. This file lays out the
-   three sections: the story, the list of what we have built, and the team.
+   The nav, footer and reveal animations are shared. This file lays out the two
+   sections: who we are with the proof beside it, and the people.
 
-   The page is three light "paper" panels on the site's dark background, the
-   same frame treatment the savings page uses, so the two pages feel related. */
+   The page is light "paper" panels on the site's dark background, the same frame
+   treatment the savings page uses, so the two pages feel related.
+
+   Two things this file does differently from the module pages, on purpose:
+
+   1. Everything shares ONE left edge (.about-body). The page used to centre four
+      different widths — 760px, 68ch, 900px and 1060px — so the left edge of the
+      text jumped in and out as you scrolled and there was no edge for the eye to
+      follow. One edge reads faster and makes the page feel shorter.
+   2. There is one page headline, not one per section. The whole page is a single
+      argument, so the second section carries only a small label. */
 
 /* ── Header ────────────────────────────────────────────────────────────────── */
 /* No hero on this page, so the nav sits in normal flow rather than floating
@@ -22,64 +31,80 @@
     linear-gradient(180deg, #f2eee8 0%, #e8e2d9 100%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 24px 60px rgba(0,0,0,0.06);
 }
-.about-inner { position: relative; z-index: 1; padding: 84px 44px 76px; }
+/* Was 84px/76px. Three panels of that spent roughly a screen and a half of the
+   page on padding alone; two panels of this spend a third of it. */
+.about-inner { position: relative; z-index: 1; padding: 64px 44px 60px; }
 
-.about-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
-.about-kicker { margin: 0 0 16px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
-.about-title { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.05em; color: var(--ink); }
+/* The single left edge every block on the page lines up against. */
+.about-body { max-width: 1120px; margin: 0 auto; }
 
-/* ── Our story ─────────────────────────────────────────────────────────────── */
-/* A single readable column. 68ch is about 12 words a line, which is where long
-   prose stops being tiring to read. */
-.about-prose { max-width: 68ch; margin: 0 auto; }
-.about-prose p { margin: 0 0 22px; font-size: 16px; line-height: 1.8; color: var(--ink-soft); }
-.about-prose p:last-child { margin-bottom: 0; }
-/* The closing three sentences are the point of the section, so they carry the
-   weight of the page's ink colour instead of the softer body grey. */
-.about-prose-close { font-size: 17px !important; color: var(--ink) !important; font-weight: 500; }
+.about-head { margin: 0 0 40px; }
+.about-kicker { margin: 0 0 14px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
+.about-title { margin: 0; max-width: 24ch; font-size: clamp(2.1rem, 3.8vw, 3.4rem); line-height: 1.02; letter-spacing: -0.05em; color: var(--ink); }
+/* The people section has no headline of its own — just its label and this line. */
+.about-sub { margin: 0; max-width: 40ch; font-size: 19px; line-height: 1.5; letter-spacing: -0.02em; color: var(--ink); }
 
-/* ── What we have built ────────────────────────────────────────────────────── */
-.built-list { max-width: 900px; margin: 0 auto; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 22px; }
-.built-item {
-  display: flex; gap: 18px; padding: 26px 28px;
-  border: 1px solid rgba(45,42,38,0.10); border-radius: 22px;
-  background: rgba(255,255,255,0.46);
+/* ── Who we are ────────────────────────────────────────────────────────────── */
+/* The words on the left, the evidence on the right, so a nervous reader meets
+   the proof without scrolling to find it. */
+.intro-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: start; }
+.intro-col { min-width: 0; }
+.intro-text { margin: 0 0 20px; max-width: 48ch; font-size: 16px; line-height: 1.8; color: var(--ink-soft); }
+.intro-text:last-child { margin-bottom: 0; }
+/* The sentence the section is actually for gets the page's ink. */
+.intro-text-close { color: var(--ink); font-weight: 500; }
+
+.proof-label { margin: 0 0 16px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
+.proof-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; }
+/* A bronze dash instead of a bullet, drawn with padding rather than list-style
+   so a wrapped second line lines up under the first. Matches erp.css. */
+.proof-list li {
+  position: relative; padding-left: 18px;
+  font-size: 15px; line-height: 1.7; color: var(--ink-soft);
 }
-.built-bullet {
-  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
-  width: 42px; height: 42px; border-radius: 999px;
-  border: 1px solid rgba(168,138,109,0.26); background: rgba(168,138,109,0.10);
-  color: var(--bronze-ink);
+.proof-list li::before {
+  content: ""; position: absolute; left: 0; top: 12px;
+  width: 8px; height: 1px; background: var(--bronze-ink);
 }
-.built-lead { margin: 0 0 8px; font-size: 16px; font-weight: 600; line-height: 1.45; color: var(--ink); }
-.built-text { margin: 0; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
-.built-close { max-width: 68ch; margin: 40px auto 0; text-align: center; font-size: 16px; line-height: 1.8; color: var(--ink); }
 
-/* ── Meet the team ─────────────────────────────────────────────────────────── */
-.team-grid { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.about-close { margin: 44px 0 0; max-width: 60ch; font-size: 16px; line-height: 1.8; color: var(--ink); }
+
+/* ── The people ────────────────────────────────────────────────────────────── */
+/* Four across. With one sentence each the cards are short, so the section is
+   one screen instead of two scrolls of two-up cards. */
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .team-card {
-  padding: 30px 30px 32px;
-  border: 1px solid rgba(45,42,38,0.10); border-radius: 24px;
+  padding: 24px 22px 26px;
+  border: 1px solid rgba(45,42,38,0.10); border-radius: 20px;
   background: rgba(255,255,255,0.46);
 }
 /* Empty frame until the real photos arrive. Swapping in an <img> with the same
    class needs no CSS change: object-fit crops the photo to the same circle. */
 .team-photo {
-  width: 84px; height: 84px; margin: 0 0 20px;
+  width: 64px; height: 64px; margin: 0 0 16px;
   border-radius: 999px; object-fit: cover;
   border: 1px dashed rgba(45,42,38,0.22);
   background: linear-gradient(180deg, rgba(45,42,38,0.05), rgba(45,42,38,0.09));
 }
-.team-name { margin: 0; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
-.team-role { margin: 6px 0 14px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
-.team-text { margin: 0; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+.team-name { margin: 0; font-size: 18px; letter-spacing: -0.02em; color: var(--ink); }
+.team-role { margin: 5px 0 12px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
+.team-text { margin: 0; font-size: 14.5px; line-height: 1.7; color: var(--ink-soft); }
 
-/* ── Small screens ─────────────────────────────────────────────────────────── */
+/* ── Smaller screens ───────────────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  /* Two-up before one-up: four narrow cards stop reading well before this. */
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .intro-grid { gap: 40px; }
+}
 @media (max-width: 880px) {
   .about-shell { padding: 0 16px 16px; }
-  .about-inner { padding: 56px 22px 52px; }
-  .about-head { margin-bottom: 36px; }
+  .about-inner { padding: 48px 22px 44px; }
+  .about-head { margin-bottom: 30px; }
+  /* The proof stacks under the words rather than squeezing beside them. */
+  .intro-grid { grid-template-columns: 1fr; gap: 36px; }
+  .intro-text { max-width: none; }
+  .about-close { margin-top: 32px; }
+}
+@media (max-width: 560px) {
   .team-grid { grid-template-columns: 1fr; }
-  /* The icon above the text reads better than beside it once the card narrows. */
-  .built-item { flex-direction: column; gap: 14px; padding: 22px 20px; }
 }
