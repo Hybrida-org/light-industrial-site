@@ -917,47 +917,87 @@
             <div class="calc-controls">
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
-                  <label for="calcDocs">Delivery notes a week</label>
+                  <span class="roi-label-row">
+                    <label for="calcDocs">Delivery notes a week</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcDocsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcDocsHint">Delivery notes, supplier invoices and quotes coming through the door.</span>
+                    </span>
+                  </span>
                   <output id="calcDocsOut" for="calcDocs"></output>
                 </div>
                 <input type="range" id="calcDocs" aria-describedby="calcDocsHint">
-                <p class="calc-hint" id="calcDocsHint">Delivery notes, supplier invoices and quotes coming through the door.</p>
               </div>
 
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
-                  <label for="calcMins">Minutes a document, today</label>
+                  <span class="roi-label-row">
+                    <label for="calcMins">Minutes a document, today</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcMinsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcMinsHint">Checking it against the order, chasing what&rsquo;s short, filing it, typing it in.</span>
+                    </span>
+                  </span>
                   <output id="calcMinsOut" for="calcMins"></output>
                 </div>
                 <input type="range" id="calcMins" aria-describedby="calcMinsHint">
-                <p class="calc-hint" id="calcMinsHint">Checking it against the order, chasing what&rsquo;s short, filing it, typing it in.</p>
               </div>
 
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
-                  <label for="calcSalary">What that person costs</label>
+                  <span class="roi-label-row">
+                    <label for="calcSalary">What that person costs</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcSalaryHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcSalaryHint">A month, to the business &mdash; not their take-home pay.</span>
+                    </span>
+                  </span>
                   <output id="calcSalaryOut" for="calcSalary"></output>
                 </div>
                 <input type="range" id="calcSalary" aria-describedby="calcSalaryHint">
-                <p class="calc-hint" id="calcSalaryHint">A month, to the business &mdash; not their take-home pay.</p>
               </div>
 
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
-                  <label for="calcErrors">Captured lines needing a fix</label>
+                  <span class="roi-label-row">
+                    <label for="calcErrors">Captured lines needing a fix</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcErrorsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcErrorsHint">Wrong part code, wrong quantity, wrong price. Where you start, not where you stay.</span>
+                    </span>
+                  </span>
                   <output id="calcErrorsOut" for="calcErrors"></output>
                 </div>
                 <input type="range" id="calcErrors" aria-describedby="calcErrorsHint">
-                <p class="calc-hint" id="calcErrorsHint">Wrong part code, wrong quantity, wrong price. Where you start, not where you stay.</p>
               </div>
 
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
-                  <label for="calcShort">Deliveries arriving short or wrong</label>
+                  <span class="roi-label-row">
+                    <label for="calcShort">Deliveries arriving short or wrong</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcShortHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcShortHint">Missing items, swapped items, quantities that don&rsquo;t match the order.</span>
+                    </span>
+                  </span>
                   <output id="calcShortOut" for="calcShort"></output>
                 </div>
                 <input type="range" id="calcShort" aria-describedby="calcShortHint">
-                <p class="calc-hint" id="calcShortHint">Missing items, swapped items, quantities that don&rsquo;t match the order.</p>
               </div>
             </div>
 
@@ -1247,6 +1287,7 @@
   <!-- The maths lives in one file, shared with the results page. This script only
        reads the sliders, paints the teaser, and hands the numbers over. -->
   <script src="savings/sums.js"></script>
+  <script src="savings/tooltips.js"></script>
   <!-- After sums.js: the form reads the lead endpoint and the fallback email
        address from there, so one paste turns on every form on the site. -->
   <script src="lead-form.js"></script>
