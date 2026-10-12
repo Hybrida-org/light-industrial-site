@@ -22,7 +22,7 @@ These are mine. Nobody is blocking them.
       Target: half that. "What we have built" drops from four long blocks to four
       short lines, and the team bios go to one sentence each.
 - [ ] **Finish Contact Us.** Opposite problem — it is too thin. Add the address
-      (22 on Sloane) and a phone number.
+      (22 on Sloane).
 - [ ] **Swap in the words the trade actually uses.** "GRV it" instead of "capture
       the receipt", "stock on hand", "short delivery". Full list in
       `docs/word-list.md`.
