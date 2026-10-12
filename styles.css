@@ -496,14 +496,19 @@ box-shadow: inset 0 1px 0 rgba(231,227,218,0.03);
 
 
 /* WHO IT'S FOR — business types */
-.audience-grid-v1 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+/* Seven cards over a four-wide row leaves a last row of three. Flex-wrap with
+   centred rows puts that short row in the middle so it reads as deliberate.
+   The cards keep a fixed quarter-width basis and do not grow, so the three in
+   the last row stay the same size as the four above them. */
+.audience-grid-v1 { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.audience-grid-v1 > * { flex: 0 1 calc(25% - 13.5px); }
 .audience-card-v1 { position: relative; padding: 26px 22px 24px; border-radius: 22px; border: 1px solid rgba(231,227,218,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); transition: transform 220ms ease, border-color 220ms ease, background 220ms ease; }
 .audience-card-v1:hover { transform: translateY(-4px); border-color: rgba(168,138,109,0.22); background: linear-gradient(180deg, rgba(168,138,109,0.06), rgba(255,255,255,0.015)); }
 .audience-icon-v1 { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border-radius: 14px; border: 1px solid rgba(168,138,109,0.20); background: rgba(168,138,109,0.10); color: var(--bronze); font-size: 24px; margin-bottom: 18px; }
 .audience-name-v1 { margin: 0 0 8px; font-size: 20px; line-height: 1.05; letter-spacing: -0.03em; color: var(--text); }
 .audience-text-v1 { margin: 0; font-size: 14px; line-height: 1.7; color: rgba(169,177,172,0.82); }
-@media (max-width: 1080px) { .audience-grid-v1 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .audience-grid-v1 { grid-template-columns: 1fr; } }
+@media (max-width: 1080px) { .audience-grid-v1 > * { flex-basis: calc(50% - 9px); } }
+@media (max-width: 560px) { .audience-grid-v1 > * { flex-basis: 100%; } }
 
 /* FAQ + FINAL CTA (paper) */
 .final-section-v1 { position: relative; }
