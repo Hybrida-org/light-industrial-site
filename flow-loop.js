@@ -43,7 +43,7 @@
       '<svg class="loop-ring" aria-hidden="true"><rect pathLength="1"/></svg>' +
       '<span class="loop-ci"><iconify-icon icon="' + st.icon + '"></iconify-icon></span>' +
       '<span class="loop-cl">' + st.t + '</span><span class="loop-cs">' + st.s + '</span>' +
-      '<span class="loop-who">' + (st.ai ? 'AI does this' : 'You') + '</span></button>';
+      '<span class="loop-who">' + (st.ai ? 'AI' : 'You') + '</span></button>';
   }
   function connHtml(c, i) {
     var v = c[2] === 'v';
@@ -57,7 +57,7 @@
         '<div class="loop-copy"><div class="loop-shot"></div><p class="loop-copy-k">Step <span class="loop-copy-i">1</span> of ' + STEPS.length + ' <span class="loop-copy-who"></span></p>' +
         '<h3 class="loop-copy-t"></h3><p class="loop-copy-d"></p></div>' +
         '<div class="loop-right"><div class="loop-grid">' + STEPS.map(cardHtml).join('') + CONN_POS.map(connHtml).join('') + '</div>' +
-        '<p class="loop-legend"><span class="is-ai">AI does this</span><span class="is-you">Your part</span> Four of the eight steps are yours. Each one takes a minute.</p></div>' +
+        '<p class="loop-legend"><span class="is-ai">AI</span><span class="is-you">You</span> Four of the eight steps are yours. Each one takes a minute.</p></div>' +
       '</div>';
     var loop = host.querySelector('.loop');
     var cards = host.querySelectorAll('.loop-card');
@@ -78,7 +78,7 @@
     function clearTimers() { timers.forEach(clearTimeout); timers = []; }
     function words(i) {
       tEl.textContent = STEPS[i].t; dEl.textContent = STEPS[i].d; iEl.textContent = i + 1;
-      kEl.textContent = STEPS[i].ai ? 'AI does this' : 'Your part';
+      kEl.textContent = STEPS[i].ai ? 'AI' : 'You'; host.querySelector('.loop-copy').classList.toggle('is-ai', !!STEPS[i].ai);
       shotEl.innerHTML = STEPS[i].shot; shotEl.classList.remove('is-in'); void shotEl.offsetWidth; shotEl.classList.add('is-in');
     }
     function reset() {

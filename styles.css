@@ -997,7 +997,7 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .flow-section-head { max-width: 760px; }
 .loop { display: grid; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); gap: 36px; align-items: start; margin-top: 36px; }
 .loop-copy { min-height: 480px; padding: 22px 24px; border-radius: 20px; background: rgba(255,255,255,0.5); border: 1px solid rgba(45,42,38,0.10); }
-.loop-copy-k { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--brick); }
+.loop-copy-k { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--bronze-ink); }
 .loop-copy-t { margin: 0; font-family: 'Poppins', sans-serif; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
 .loop-copy-d { margin: 10px 0 0; min-height: 5.2em; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
 .loop-copy-n { margin: 18px 0 0; font-size: 13px; color: var(--ink-soft); }
@@ -1006,31 +1006,32 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .loop-card:hover { transform: translateY(-2px); }
 .loop-card:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
 .loop-card.is-active { border-color: rgba(45,42,38,0.28); }
-.loop-card.is-ai { border-color: rgba(155,59,45,0.55); background: rgba(155,59,45,0.06); }
+.loop-card.is-ai { border-color: rgba(142,165,150,0.7); background: rgba(142,165,150,0.12); }
 .loop-card.is-you { border-style: dashed; background: transparent; }
 .loop-ci { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: rgba(45,42,38,0.06); color: var(--ink); transition: background 180ms ease, color 180ms ease; }
-.loop-card.is-ai .loop-ci { background: rgba(155,59,45,0.10); color: var(--brick); }
+.loop-card.is-ai .loop-ci { background: rgba(142,165,150,0.28); color: #3f5d4b; }
 .loop-card.is-active .loop-ci { background: var(--ink); color: var(--paper); }
-.loop-card.is-ai.is-active .loop-ci { background: var(--brick); color: var(--paper); }
+.loop-card.is-ai.is-active .loop-ci { background: #3f5d4b; color: var(--paper); }
 .loop-cl { font-family: 'Poppins', sans-serif; font-size: 12.5px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); }
 .loop-cs { font-size: 11.5px; line-height: 1.35; color: var(--ink-soft); }
 .loop-who { margin-top: 4px; font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; background: rgba(45,42,38,0.07); color: var(--ink-soft); }
-.loop-card.is-ai .loop-who { background: var(--brick); color: var(--paper); }
+.loop-card.is-ai .loop-who { background: #3f5d4b; color: var(--paper); }
+.loop-copy.is-ai .loop-copy-who { background: #3f5d4b; color: var(--paper); }
 .loop-copy-who { margin-left: 8px; padding: 2px 7px; border-radius: 3px; background: rgba(45,42,38,0.07); color: var(--ink-soft); font-size: 10px; }
 .loop-legend { margin: 14px 0 0; font-size: 13px; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .loop-legend span { font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
-.loop-legend .is-ai { background: var(--brick); color: var(--paper); }
+.loop-legend .is-ai { background: #3f5d4b; color: var(--paper); }
 .loop-legend .is-you { border: 1px dashed rgba(45,42,38,0.35); color: var(--ink-soft); }
 /* The ring: a rect the size of the card, stroke drawn with pathLength=1. */
 .loop-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.loop-ring rect { fill: none; stroke: var(--brick); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loop-ring rect { fill: none; stroke: var(--bronze); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
 .loop-card.is-drawing .loop-ring rect { animation: loop-draw var(--ring-ms, 2600ms) linear forwards; }
 .loop-card.is-done .loop-ring rect { stroke-dashoffset: 0; }
 /* Connectors: a faint dashed line, with the brick line drawn over it. */
 .loop-conn { width: 100%; height: 100%; overflow: visible; position: relative; }
 .loop-conn::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed rgba(45,42,38,0.25); }
 .loop-conn.is-v::before { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 1px dashed rgba(45,42,38,0.25); }
-.loop-conn line { stroke: var(--brick); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loop-conn line { stroke: var(--bronze); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
 .loop-conn.is-drawing line { animation: loop-draw var(--conn-ms, 700ms) linear forwards; }
 .loop-conn.is-done line { stroke-dashoffset: 0; }
 @keyframes loop-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
