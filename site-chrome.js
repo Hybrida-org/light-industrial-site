@@ -40,7 +40,7 @@
     { label: 'Home',            folder: '',                built: true  },
     { label: 'Document Intake', folder: 'document-intake',  built: true  },
     { label: 'ERP',             folder: 'erp',              built: true  },
-    { label: 'Pricing',         folder: 'pricing',          built: false, homeAnchor: 'pricing' },
+    { label: 'Pricing',         folder: 'pricing',          built: true  },
     { label: 'About Us',        folder: 'about',            built: true  },
     { label: 'Contact Us',      folder: 'contact',          built: true  }
   ];
@@ -143,7 +143,7 @@
       '    <span class="brand-mark font-head">LI</span>' +
       '    <div>' +
       '      <div class="font-head text-[13px] uppercase tracking-[0.24em] brand-name">Light Industrial</div>' +
-      '      <div class="mt-[2px] text-[10px] uppercase tracking-[0.18em] brand-sub">Operations platform</div>' +
+      '      <div class="mt-[2px] text-[10px] uppercase tracking-[0.18em] brand-sub">Stock control software</div>' +
       '    </div>' +
       '  </a>' +
       '  <nav class="flex items-center gap-6 text-sm" aria-label="Main">' + deskLinks + '</nav>' +
@@ -177,7 +177,8 @@
       '          <div class="site-footer-mark-v1 font-head">LI</div>' +
       '          <h2 class="site-footer-name-v1 font-head">Light Industrial</h2>' +
       '          <p class="site-footer-text-v1">' +
-      '            The operations platform for light industrial businesses. Clean data, accurate stock and' +
+      '            Document intelligence and operations software for South African manufacturers, workshops and merchants.' +
+      '            Clean data, accurate stock and' +
       '            books that stay in sync, from the order you place to the stock on your shelf.' +
       '          </p>' +
       '        </div>' +
@@ -198,7 +199,7 @@
       '        </div>' +
       '      </div>' +
       '      <div class="site-footer-bottom-v1 reveal-fade" style="transition-delay: 0.24s;">' +
-      '        <div class="site-footer-meta-v1">© 2026 Light Industrial. Operations software for light industry.</div>' +
+      '        <div class="site-footer-meta-v1">© 2026 Light Industrial. Document intelligence and operations software.</div>' +
       '        <div class="site-footer-legal-v1">' + legalLinks + '</div>' +
       '      </div>' +
       '    </div>' +

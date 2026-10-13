@@ -1,7 +1,7 @@
 # Light Industrial
 
-> Manufacturing and stock control software for South African workshops, fabricators
-> and small manufacturers. Supplier paperwork is photographed instead of retyped:
+> Document intelligence and operations software for South African manufacturers,
+> workshops and merchants. Supplier paperwork is photographed instead of retyped:
 > the system reads the line items, matches them to the business's own stock codes
 > and suppliers, and keeps buying, receiving and stock in one place.
 
@@ -35,6 +35,11 @@ faster than they get captured, and a specific person's day is being eaten by it.
   result of the savings calculator — the hours and rands a business spends on
   receiving paperwork today, what it would cost to replace, and how long that
   takes to pay back.
+- [Document Intake](https://lightindustrial.co.za/document-intake/): the module
+  that reads supplier paperwork and books the stock. Sold on its own, it works
+  alongside the system the customer already runs.
+- [Pricing](https://lightindustrial.co.za/pricing/): the two module prices, what
+  each includes, and five pricing questions answered.
 - [ERP module](https://lightindustrial.co.za/erp/): the wider system — stock,
   suppliers and purchase orders, quotes, job cards, delivery notes, customers,
   bills of material, accounting sync and reports, with an assistant layer that
@@ -42,6 +47,18 @@ faster than they get captured, and a specific person's day is being eaten by it.
 - [Contact us](https://lightindustrial.co.za/contact/): how to reach a person —
   email, a 30-minute walkthrough booking, and a form that asks how much supplier
   paperwork arrives each week.
+
+## Pricing
+
+All prices in South African rand, per month, excluding VAT. Month to month, no
+contract. Set-up is included. Moving data from a current system is quoted after
+a short call.
+
+- Document Intake: R2,500 a month. 50 documents a month included; more volume on
+  request. Works alongside the system the customer already runs (an ERP, an
+  accounting package or spreadsheets).
+- Core ERP: R6,500 a month. 3 users included, R750 per extra user per month.
+- Both modules: R9,000 a month.
 
 ## Contact
 
