@@ -72,12 +72,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css?v=20261013l">
+<link rel="stylesheet" href="../styles.css?v=20261013n">
 <!-- The two module pages are one layout, so they share one stylesheet rather
      than keeping two copies of the same panel, card and role rules in step.
-     intake.css holds only what this page adds: the three-screen process flow. -->
-<link rel="stylesheet" href="../erp/erp.css?v=20261013l">
-<link rel="stylesheet" href="intake.css?v=20261013l">
+     intake.css holds only what this page adds. -->
+<link rel="stylesheet" href="../erp/erp.css?v=20261013n">
+<link rel="stylesheet" href="intake.css?v=20261013n">
 </head>
 
 <body>
@@ -149,77 +149,7 @@
 
           <div class="flow-host reveal-fade" data-flow-loop style="transition-delay: 0.12s;"></div>
 
-          <h3 class="erp-card-title font-head" style="margin: 48px 0 18px;">What it looks like on screen</h3>
-          <div class="flow3 flow3-4 reveal-fade" style="transition-delay: 0.14s;">
 
-            <article class="flow3-stage">
-              <div class="flow3-screen">
-                <div class="flow3-bar"><span>Inbox</span><span>Today</span></div>
-                <div class="flow3-photo"><img src="../public/01-capture.jpg" alt="" loading="lazy"></div>
-                <ul class="flow3-files">
-                  <li><span>DN 48213.jpg</span><span>Phone photo</span></li>
-                  <li><span>INV 1187.pdf</span><span>Email</span></li>
-                  <li><span>Q-2290.pdf</span><span>Email</span></li>
-                </ul>
-              </div>
-              <h3 class="flow3-title font-head">Photograph it or forward the email</h3>
-              <p class="flow3-text">A phone photo at the gate, a PDF or a scan. Your suppliers change nothing.</p>
-            </article>
-
-            <div class="flow3-link" aria-hidden="true"></div>
-
-            <article class="flow3-stage">
-              <div class="flow3-screen">
-                <div class="flow3-bar"><span>DN 48213, Steelmart</span><span>4 lines</span></div>
-                <table class="flow3-table">
-                  <thead><tr><th>Document</th><th>Your code</th><th>Qty</th></tr></thead>
-                  <tbody>
-                    <tr><td>Galv bolt M12x40, bx 100</td><td>BLT-M12-40</td><td>200</td></tr>
-                    <tr><td>Angle 50x50x5, 6 m</td><td>ANG-50-5</td><td>12</td></tr>
-                    <tr class="is-short"><td>Cutting disc 115</td><td>DSC-115</td><td>10 of 12</td></tr>
-                    <tr class="is-price"><td>Weld wire 0.9, 15 kg</td><td>WIR-09</td><td>4</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <h3 class="flow3-title font-head">We read every line and match it to your codes</h3>
-              <p class="flow3-text">Supplier wording and pack sizes become your codes and your counts.</p>
-            </article>
-
-            <div class="flow3-link" aria-hidden="true"></div>
-
-            <article class="flow3-stage flow3-stage-lead">
-              <div class="flow3-screen">
-                <div class="flow3-bar"><span>PO-0612, Steelmart</span><span>R18,420</span></div>
-                <ol class="flow3-chain">
-                  <li class="is-done"><span>Quote Q-2290</span><span>Accepted 29 Sep</span></li>
-                  <li class="is-done"><span>PO-0612 sent</span><span>2 Oct</span></li>
-                  <li class="is-short"><span>DN 48213</span><span>Received, 2 short</span></li>
-                  <li class="is-price"><span>INV 1187</span><span>1 price moved</span></li>
-                  <li class="is-open"><span>Balance</span><span>2 x DSC-115 open</span></li>
-                </ol>
-              </div>
-              <h3 class="flow3-title font-head">We link every document to its order</h3>
-              <p class="flow3-text">The quote, order, delivery note and invoice sit on one record. We check them against each other and put what is short, what moved and what is still owed on the order.</p>
-            </article>
-
-            <div class="flow3-link" aria-hidden="true"></div>
-
-            <article class="flow3-stage">
-              <div class="flow3-screen">
-                <div class="flow3-bar"><span>Booked, GRN 2211</span><span>09:14</span></div>
-                <ul class="flow3-stock">
-                  <li><span>BLT-M12-40</span><span>340 <i>to</i> 540</span></li>
-                  <li><span>ANG-50-5</span><span>18 <i>to</i> 30</span></li>
-                  <li class="is-short"><span>DSC-115</span><span>Short by 2</span></li>
-                  <li class="is-price"><span>WIR-09</span><span>R412 <i>to</i> R450</span></li>
-                </ul>
-                <div class="flow3-actions"><span class="is-primary">Approve</span><span>Hold</span></div>
-              </div>
-              <h3 class="flow3-title font-head">Your stock updates. Odd lines wait for your tap</h3>
-              <p class="flow3-text">We update counts and costs and file the photo against the movement. You look only at what we flag.</p>
-            </article>
-
-          </div>
 
           <p class="erp-close reveal-fade" style="transition-delay: 0.26s;">
             For the first month or two you will be confirming matches as new supplier lines come through.
@@ -641,7 +571,7 @@
 
   <footer class="site-footer-v1" data-site-footer></footer>
 
-  <script src="../flow-loop.js?v=20261013k"></script>
+  <script src="../flow-loop.js?v=20261013m"></script>
   <script src="../site-chrome.js"></script>
   <!-- sums.js is loaded for its settings only: the lead endpoint, the fallback
        email address and the thank-you page live there, shared with every form. -->
