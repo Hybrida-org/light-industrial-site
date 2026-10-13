@@ -1001,11 +1001,11 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .loop-copy-t { margin: 0; min-height: 1.3em; font-family: 'Poppins', sans-serif; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
 .loop-copy-d { margin: 10px 0 0; min-height: 7.2em; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
 .loop-copy-n { margin: 18px 0 0; font-size: 13px; color: var(--ink-soft); }
-.loop-grid { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr; grid-template-rows: auto 30px auto; align-items: stretch; }
-.loop-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 16px 10px 14px; border: 1px solid rgba(45,42,38,0.14); border-radius: 16px; background: #fbfaf7; cursor: pointer; font: inherit; color: inherit; transition: background 180ms ease, border-color 180ms ease, transform 180ms ease; }
-.loop-card:hover { transform: translateY(-2px); }
+.loop-grid { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr; grid-template-rows: auto 30px auto; align-items: stretch; padding: 14px 10px; }
+.loop-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 16px 10px 14px; border: 1px solid rgba(45,42,38,0.14); border-radius: 16px; background: #fbfaf7; cursor: pointer; font: inherit; color: inherit; transition: background 180ms ease, border-color 180ms ease, transform 320ms cubic-bezier(.2,.8,.2,1), box-shadow 320ms ease; }
 .loop-card:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
-.loop-card.is-active { border-color: rgba(45,42,38,0.28); }
+.loop-card.is-active { border-color: rgba(45,42,38,0.28); transform: scale(1.18); z-index: 3; box-shadow: 0 16px 36px rgba(0,0,0,0.14); }
+.loop-card:hover:not(.is-active) { transform: translateY(-2px); }
 .loop-card.is-ai { border-color: rgba(142,165,150,0.7); background: rgba(142,165,150,0.12); }
 .loop-card.is-you { border-style: dashed; background: transparent; }
 .loop-ci { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: rgba(45,42,38,0.06); color: var(--ink); transition: background 180ms ease, color 180ms ease; }
