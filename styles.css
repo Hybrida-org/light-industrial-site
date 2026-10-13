@@ -1119,3 +1119,4 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .loop-grid { grid-template-columns: 1fr 44px 1fr 44px 1fr 44px 1fr; grid-template-rows: auto 48px auto; max-width: 1080px; margin: 0 auto; }
 .loop-card { padding: 26px 16px 22px; }
 .loop-cl { font-size: 15px; }
+.loop-card.is-ai { background: #eef2ee; }
