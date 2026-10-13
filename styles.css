@@ -1022,3 +1022,10 @@ h1.font-head { font-weight: 500; }
 
 /* Product name inside headings: Industrial carries the weight, as in the wordmark. */
 .wm { font-weight: 800; }
+
+/* Home section headings: top-left, one size, two lines at most. Overrides the
+   older centred, oversized titles above. */
+.ritual-panels-header-grid, .ritual-panels-header>.ritual-panels-header-grid>div, .testimonials-head-v1, .final-head-v1, .price-head, .calc-head { align-items: flex-start; text-align: left; margin-left: 0; margin-right: 0; max-width: none; }
+.ritual-panels-title, .testimonials-title-v1, .final-title-v1, .price-title, .calc-title { margin-top: 0; font-size: clamp(1.9rem, 2.8vw, 2.8rem); line-height: 1.05; letter-spacing: -0.04em; max-width: 32ch; }
+.ritual-panels-title .reveal-line, .testimonials-title-v1 .reveal-line, .final-title-v1 .reveal-line, .price-title .reveal-line, .calc-title .reveal-line { display: inline; }
+.ritual-panels-text, .testimonials-text-v1, .final-text-v1 { margin-left: 0; margin-right: 0; font-size: 17px; line-height: 1.7; }
