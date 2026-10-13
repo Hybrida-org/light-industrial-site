@@ -1019,3 +1019,6 @@ h1.font-head { font-weight: 500; }
 .works-with { display: inline-flex; align-items: center; gap: 16px; }
 .works-with > span { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; color: var(--ink); }
 .works-with img { height: 26px; width: auto; }
+
+/* Product name inside headings: Industrial carries the weight, as in the wordmark. */
+.wm { font-weight: 800; }
