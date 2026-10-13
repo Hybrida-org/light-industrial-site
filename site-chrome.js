@@ -141,9 +141,9 @@
     return '' +
       '<div class="nav-pill">' +
       '  <a href="' + hrefFor(PAGES[0]) + '" class="flex items-center gap-3 nav-brand-link">' +
-      '    <span class="brand-mark font-head">LI</span>' +
+      '    <svg class="brand-svg" viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="12" y="44" width="40" height="9" rx="1.5" fill="var(--mark-base)"/><rect x="12" y="32" width="40" height="9" rx="1.5" fill="var(--bronze)"/><rect x="18" y="12" width="28" height="11" rx="1.5" fill="var(--brick)" transform="rotate(-6 32 17)"/></svg>' +
       '    <div>' +
-      '      <div class="font-head text-[13px] uppercase tracking-[0.24em] brand-name">Light Industrial</div>' +
+      '      <div class="brand-name wordmark"><small>Light</small><span>Industrial</span></div>' +
       '      <div class="mt-[2px] text-[10px] uppercase tracking-[0.18em] brand-sub">Stock control software</div>' +
       '    </div>' +
       '  </a>' +
@@ -178,8 +178,8 @@
       '    <div class="site-footer-inner-v1">' +
       '      <div class="site-footer-top-v1">' +
       '        <div class="site-footer-brand-v1 reveal-fade" style="transition-delay: 0.08s;">' +
-      '          <div class="site-footer-mark-v1 font-head">LI</div>' +
-      '          <h2 class="site-footer-name-v1 font-head">Light Industrial</h2>' +
+      '          <div class="site-footer-mark-v1"><svg class="brand-svg" viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="12" y="44" width="40" height="9" rx="1.5" fill="var(--mark-base)"/><rect x="12" y="32" width="40" height="9" rx="1.5" fill="var(--bronze)"/><rect x="18" y="12" width="28" height="11" rx="1.5" fill="var(--brick)" transform="rotate(-6 32 17)"/></svg></div>' +
+      '          <h2 class="site-footer-name-v1 wordmark"><small>Light</small><span>Industrial</span></h2>' +
       '          <p class="site-footer-text-v1">' +
       '            Document intelligence and operations software for South African manufacturers, workshops and merchants.' +
       '            Clean data, accurate stock and' +

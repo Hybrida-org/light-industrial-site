@@ -18,6 +18,8 @@ src: url('https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wg
 --bronze-soft: rgba(168, 138, 109, 0.18);
 --border-dark: rgba(231, 227, 218, 0.08);
 --ink: #2d2a26;
+--brick: #9b3b2d;
+--mark-base: #d9d4ca;   /* bottom slab of the brand mark on dark chrome; use #1e2124 on paper */
 --ink-soft: #5f5850;
 --paper: #efece6;
 --paper-2: #e8e3db;
@@ -1002,3 +1004,13 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .plan .btn-primary, .plan .btn-secondary { margin-top: 26px; align-self: flex-start; }
 .plan .btn-secondary + .btn-secondary { margin-top: 10px; }
 .plan-note { max-width: 68ch; margin: 36px auto 0; text-align: center; font-size: 15px; line-height: 1.8; color: var(--ink); }
+
+/* Wordmark: "Light" light, "Industrial" heavy (logo D1) */
+.wordmark { display: flex; flex-direction: column; font-family: 'Poppins', sans-serif; font-weight: 800; line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase; color: var(--text); }
+.wordmark small { font-size: 0.62em; font-weight: 600; letter-spacing: 0.06em; }
+.brand-name.wordmark { font-size: 15px; }
+.site-footer-name-v1.wordmark { font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.01em; }
+.brand-svg { width: 36px; height: 36px; flex: 0 0 auto; }
+.site-footer-mark-v1 .brand-svg { width: 42px; height: 42px; }
+.site-footer-mark-v1 { border: none; background: none; }
+h1.font-head { font-weight: 800; }
