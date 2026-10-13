@@ -59,7 +59,7 @@
     ink: '#5f5850'
   };
 
-  // The teaser on the home page hands its five slider values and two toggles to
+  // The teaser on the home page hands its five slider values to
   // the results page in the address bar, so the results somebody lands on are the
   // ones they just set. Both ends read these key names from here, so a link can
   // never be built with a name the other side does not recognise.
@@ -68,18 +68,14 @@
     minsPerDoc: 'mins',
     salary: 'salary',
     errorRate: 'errors',
-    shortRate: 'short',
-    keepingOwnSystem: 'own',
-    dataMigration: 'migrate'
+    shortRate: 'short'
   };
 
-  // Builds the results-page link for a set of inputs. Booleans go over as 1 and 0
-  // because a query string has no other honest way to say true and false.
+  // Builds the results-page link for a set of inputs.
   function resultsLinkFor(input) {
     var query = new URLSearchParams();
     Object.keys(QUERY_KEYS).forEach(function (name) {
-      var value = input[name];
-      query.set(QUERY_KEYS[name], typeof value === 'boolean' ? (value ? '1' : '0') : value);
+      query.set(QUERY_KEYS[name], input[name]);
     });
     return SETTINGS.resultsUrl + '?' + query.toString();
   }
@@ -106,13 +102,8 @@
     return SETTINGS.tiers[SETTINGS.tiers.length - 1].price;
   }
 
-  function setupFeeFor(choices) {
-    return SETTINGS.setup.base +
-      (choices.keepingOwnSystem ? SETTINGS.setup.integration : 0) +
-      (choices.dataMigration ? SETTINGS.setup.migration : 0);
-  }
-
-  // `input` carries the five slider values and the two setup toggles. Every
+  // `input` carries the five slider values. Set-up is included, so there is no
+  // once-off figure: the sum pays back from month 1 or not at all. Every
   // number the two pages show comes out of here, so neither of them does
   // arithmetic of its own.
   function calculate(input) {
@@ -123,7 +114,6 @@
     var hourlyCost = input.salary / SETTINGS.workingHoursPerMonth;
     var labourSaved = hoursSaved * hourlyCost;
     var price = priceFor(docs);
-    var setup = setupFeeFor(input);
     // Rounded to the nearest R100 — false precision reads as a made-up number.
     var net = Math.round((labourSaved - price) / 100) * 100;
 
@@ -135,11 +125,10 @@
       hourlyCost: hourlyCost,
       labourSaved: labourSaved,
       price: price,
-      setup: setup,
       net: net,
       // Null, never a negative and never Infinity: when the sum does not pay yet
       // there is no payback month to show, and both pages fall back to hours.
-      breakEvenMonth: net > 0 ? Math.ceil(setup / net) : null,
+      breakEvenMonth: net > 0 ? 1 : null,
       shortCaught: Math.round(docs * input.shortRate / 100)
     };
   }

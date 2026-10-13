@@ -26,8 +26,6 @@
     errorRate: el('roiErrors'),
     shortRate: el('roiShort')
   };
-  var integration = el('roiIntegration');
-  var migration = el('roiMigration');
 
   // The one place the page turns controls into the plain object sums.js wants.
   function readInputs() {
@@ -36,9 +34,7 @@
       minsPerDoc: +inputs.minsPerDoc.value,
       salary: +inputs.salary.value,
       errorRate: +inputs.errorRate.value,
-      shortRate: +inputs.shortRate.value,
-      keepingOwnSystem: integration.checked,
-      dataMigration: migration.checked
+      shortRate: +inputs.shortRate.value
     };
   }
 
@@ -143,17 +139,11 @@
     if (s.net > 0) {
       result.setAttribute('data-state', 'pays');
       verdict.textContent = 'It pays for itself';
-      // "Setup paid back", not "break even": net already has the subscription
-      // taken off, so the thing these months are clearing is the once-off fee.
-      headline.innerHTML = 'Setup paid back by <span class="roi-amount">month ' + s.breakEvenMonth + '</span>.';
-      sub.innerHTML = 'From month ' + (s.breakEvenMonth + 1) + ' you keep <b>' + rands(s.net) +
-        '</b> a month, and get <b>' + hoursWord(hours) + '</b> back.';
-
-      if (flag.hidden && s.breakEvenMonth > SETTINGS.longPaybackMonths) {
-        flag.hidden = false;
-        flag.textContent = "That's a long wait to pay the setup back. Worth a conversation before you " +
-          'commit to anything — there may be a smaller way in.';
-      }
+      // Set-up is included, so there is nothing to clear first: net already has
+      // the subscription taken off, and it is positive from the first month.
+      headline.innerHTML = 'Pays for itself from <span class="roi-amount">month ' + s.breakEvenMonth + '</span>.';
+      sub.innerHTML = 'You keep <b>' + rands(s.net) + '</b> a month, and get <b>' +
+        hoursWord(hours) + '</b> back.';
       return;
     }
 
@@ -165,7 +155,7 @@
     // plainly — it costs us a lead and buys the one thing worth more.
     if (hours < 1) {
       verdict.textContent = 'Too small to bother';
-      headline.innerHTML = 'Honestly? <span class="roi-amount">Not yet.</span>';
+      headline.innerHTML = 'It does not pay <span class="roi-amount">yet</span>.';
       sub.innerHTML = 'At this volume the paperwork is not costing you enough to be worth ' +
         'automating. A cheap capture tool and a spreadsheet will do the job for less than we ' +
         'charge. Come back when the deliveries start piling up.';
@@ -175,45 +165,39 @@
     verdict.hidden = true;
     headline.innerHTML = 'Win back <span class="roi-amount">' + hoursWord(hours) + '</span> every month.';
     sub.innerHTML = 'The time you&rsquo;d save is worth about <b>' + rands(s.labourSaved) +
-      '</b> a month. That does not cover the <b>' + rands(s.price) +
-      '</b> subscription. You&rsquo;d get the hours back, but not the money.';
+      '</b> a month. That does not cover the monthly price. You&rsquo;d get the hours back, but not the money.';
   }
 
   // ── The sum, written out ────────────────────────────────────────────────────
 
   function renderWorking(s) {
     var lines = [
-      s.docs + ' documents a month &mdash; ' + inputs.docsPerWeek.value + ' a week &times; ' +
+      s.docs + ' documents a month. ' + inputs.docsPerWeek.value + ' a week &times; ' +
         SETTINGS.weeksPerMonth + ' weeks.',
-      hoursWord(Math.round(s.currentHours)) + ' a month today &mdash; ' + s.docs +
+      hoursWord(Math.round(s.currentHours)) + ' a month today. ' + s.docs +
         ' documents &times; ' + inputs.minsPerDoc.value + ' minutes.',
-      hoursWord(Math.round(s.newHours)) + ' with intake &mdash; we still allow ' +
+      hoursWord(Math.round(s.newHours)) + ' with intake. We still allow ' +
         SETTINGS.reviewMinutesPerDoc + ' minutes a document for somebody to check and approve it.',
-      rands(s.hourlyCost) + ' an hour &mdash; ' + rands(+inputs.salary.value) + ' a month &divide; ' +
+      rands(s.hourlyCost) + ' an hour. ' + rands(+inputs.salary.value) + ' a month &divide; ' +
         SETTINGS.workingHoursPerMonth + ' working hours.',
-      rands(s.labourSaved) + ' of labour freed a month &mdash; ' + hoursWord(Math.round(s.hoursSaved)) +
+      rands(s.labourSaved) + ' of labour freed a month. ' + hoursWord(Math.round(s.hoursSaved)) +
         ' &times; ' + rands(s.hourlyCost) + '.',
-      'Less ' + rands(s.price) + ' a month for document intake at ' + s.docs + ' documents.',
-      '<b>' + (s.net > 0 ? rands(s.net) + ' net a month' : rands(s.net) + ' a month &mdash; it does not pay yet') + '.</b>'
+      s.docs <= SETTINGS.tiers[0].upToDocs
+        ? 'Less ' + rands(s.price) + ' a month for document intake, ' + SETTINGS.tiers[0].upToDocs + ' documents included.'
+        : 'Less an estimated ' + rands(s.price) + ' a month at ' + s.docs + ' documents. Over ' +
+          SETTINGS.tiers[0].upToDocs + ' documents, talk to us for a price.',
+      '<b>' + (s.net > 0 ? rands(s.net) + ' net a month' : rands(s.net) + ' a month, it does not pay yet') + '.</b>'
     ];
-    if (s.net > 0) {
-      lines.push('Setup of ' + rands(s.setup) + ' &divide; ' + rands(s.net) +
-        ' a month = setup paid back in month ' + s.breakEvenMonth + '.');
-    }
+    if (s.net > 0) lines.push('Set-up is included, so it pays for itself from month 1.');
     el('roiWorking').innerHTML = lines.map(function (line) { return '<li>' + line + '</li>'; }).join('');
   }
 
-  // Built from the bands rather than three fixed numbers, so a reprice in sums.js
-  // changes this sentence with it. The last band is open-ended and has no number
-  // to name, so it reads "above that".
+  // Only the first band is published. The upper bands stay in sums.js because
+  // the sum needs a price above 50 documents, but the page says "talk to us".
   function tierSentence() {
-    var bands = SETTINGS.tiers.map(function (tier, index) {
-      var amount = rands(tier.price);
-      if (!isFinite(tier.upToDocs)) return amount + ' above that';
-      return amount + (index === 0 ? ' a month' : '') + ' up to ' + tier.upToDocs +
-        (index === 0 ? ' documents' : '');
-    }).join(', ');
-    return 'Document intake is ' + bands + '. Unlimited users. All prices ex VAT.';
+    return 'Document intake is ' + rands(SETTINGS.tiers[0].price) + ' a month, ' +
+      SETTINGS.tiers[0].upToDocs + ' documents included. More volume, talk to us. ' +
+      'Set-up included. All prices ex VAT.';
   }
 
   // ── Draw everything ─────────────────────────────────────────────────────────
@@ -227,7 +211,6 @@
 
     var s = sums();
 
-    el('roiSetupOut').textContent = rands(s.setup);
     renderHeadline(s);
     renderBars(s);
     renderErrorChart(+inputs.errorRate.value);
@@ -237,12 +220,12 @@
       ? 'Nothing arrives short, on your numbers. If that changes, it gets caught.'
       : (s.shortCaught === 1 ? 'A short or mismatched delivery a month, caught'
                               : 'Short or mismatched deliveries a month, caught') +
-        ' at the dock — before you approve the supplier invoice.';
+        ' at the dock, before you approve the supplier invoice.';
 
     renderWorking(s);
     el('roiTerms').textContent = tierSentence();
-    el('roiCtaPrice').textContent = 'From ' + rands(SETTINGS.tiers[0].price) +
-      ' a month · unlimited users · once-off setup from ' + rands(SETTINGS.setup.base);
+    el('roiCtaPrice').textContent = rands(SETTINGS.tiers[0].price) + ' a month, ' +
+      SETTINGS.tiers[0].upToDocs + ' documents included. Set-up included.';
   }
 
   // ── The tracked event ───────────────────────────────────────────────────────
@@ -282,11 +265,6 @@
     return Math.min(Math.max(given, config.min), config.max);
   }
 
-  function startingTick(key, fallback) {
-    var given = handedOver.get(key);
-    return given === null ? fallback : given === '1';
-  }
-
   Object.keys(inputs).forEach(function (name) {
     var slider = inputs[name];
     var config = SETTINGS.sliders[name];
@@ -296,12 +274,6 @@
     slider.value = startingValue(name, config);
     slider.addEventListener('input', render);
     slider.addEventListener('change', reportCompleted);
-  });
-
-  integration.checked = startingTick(QUERY_KEYS.keepingOwnSystem, SETTINGS.setup.integrationStartsOn);
-  migration.checked = startingTick(QUERY_KEYS.dataMigration, SETTINGS.setup.migrationStartsOn);
-  [integration, migration].forEach(function (box) {
-    box.addEventListener('change', function () { render(); reportCompleted(); });
   });
 
   render();
@@ -349,14 +321,11 @@
         'Monthly cost of the person handling them: ' + rands(+inputs.salary.value),
         'Captured lines needing fixes: ' + inputs.errorRate.value + '%',
         'Deliveries arriving short or wrong: ' + inputs.shortRate.value + '%',
-        'Staying on our current system: ' + (integration.checked ? 'yes' : 'no'),
-        'Data migration: ' + (migration.checked ? 'yes' : 'no'),
         '',
         'Documents a month: ' + s.docs,
         'Hours saved a month: ' + Math.round(s.hoursSaved),
         'Net a month: ' + rands(s.net),
-        'Setup: ' + rands(s.setup),
-        'Setup paid back: ' + (s.breakEvenMonth ? 'month ' + s.breakEvenMonth : 'not at this volume')
+        'Pays for itself: ' + (s.breakEvenMonth ? 'from month ' + s.breakEvenMonth : 'not at this volume')
       ];
     }
 
@@ -382,12 +351,9 @@
           monthly_staff_cost: +inputs.salary.value,
           error_rate_percent: +inputs.errorRate.value,
           short_delivery_percent: +inputs.shortRate.value,
-          keeping_current_system: integration.checked,
-          data_migration: migration.checked,
           documents_per_month: s.docs,
           hours_saved: Math.round(s.hoursSaved),
           monthly_net: s.net,
-          setup_fee: s.setup,
           break_even_month: s.breakEvenMonth
         })
       });
@@ -398,7 +364,7 @@
       var email = field.value.trim();
 
       if (!looksLikeEmail(email)) {
-        note.textContent = 'That email address does not look right — check it and try again.';
+        note.textContent = 'That email address does not look right. Check it and try again.';
         field.focus();
         return;
       }

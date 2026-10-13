@@ -2,14 +2,14 @@
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your savings, worked out | Light Industrial</title>
-<meta name="description" content="Work out what receiving paperwork costs your workshop each month, what document intake would save, and how long it takes to pay for itself.">
+<meta name="description" content="Work out what receiving paperwork costs your workshop each month, what Document Intake saves at R2,500 a month, and the month it pays for itself.">
 <link rel="canonical" href="https://lightindustrial.co.za/savings/">
 <link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Light Industrial">
-<meta property="og:title" content="What receiving paperwork costs you — work it out">
-<meta property="og:description" content="Move five sliders and see the hours, the rands and the payback on document intake.">
+<meta property="og:title" content="What receiving paperwork costs you">
+<meta property="og:description" content="Move five sliders. See the hours, the rands and the payback on Document Intake at R2,500 a month.">
 <meta property="og:url" content="https://lightindustrial.co.za/savings/">
 <meta property="og:image" content="https://lightindustrial.co.za/public/01-capture.jpg">
 <meta property="og:image:alt" content="A delivery note being photographed on a workshop floor">
@@ -43,13 +43,13 @@
 
           <div class="roi-head">
             <p class="roi-kicker reveal-fade">What it costs you now</p>
-            <h2 class="roi-title font-head reveal-trigger">
-              <span class="reveal-line" style="transition-delay: 0.10s;">You give the numbers.</span>
-              <span class="reveal-line" style="transition-delay: 0.24s;">We do the maths.</span>
-            </h2>
+            <h1 class="roi-title font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">What supplier paperwork costs</span>
+              <span class="reveal-line" style="transition-delay: 0.24s;">your workshop each month</span>
+            </h1>
             <p class="roi-intro reveal-para" style="transition-delay: 0.18s;">
-              Every delivery note gets checked, chased and typed in by someone. See what that
-              costs you a month.
+              Someone checks, chases and types in every delivery note. See what that costs you a
+              month, and what Document Intake at R2,500 a month saves.
             </p>
           </div>
 
@@ -101,7 +101,7 @@
                         <span aria-hidden="true">i</span>
                         <span class="roi-visually-hidden">What this means</span>
                       </button>
-                      <span class="roi-tip" role="tooltip" id="roiSalaryHint">Cost to the business &mdash; not their take-home pay.</span>
+                      <span class="roi-tip" role="tooltip" id="roiSalaryHint">Cost to the business, including what sits on top of take-home pay.</span>
                     </span>
                   </span>
                   <output id="roiSalaryOut" for="roiSalary"></output>
@@ -118,7 +118,7 @@
                         <span aria-hidden="true">i</span>
                         <span class="roi-visually-hidden">What this means</span>
                       </button>
-                      <span class="roi-tip" role="tooltip" id="roiErrorsHint">Wrong part code, wrong quantity, wrong price. Where you start, not where you stay.</span>
+                      <span class="roi-tip" role="tooltip" id="roiErrorsHint">Wrong part code, wrong quantity, wrong price. Your starting point. It drops as the system learns your suppliers.</span>
                     </span>
                   </span>
                   <output id="roiErrorsOut" for="roiErrors"></output>
@@ -143,29 +143,6 @@
                 <input type="range" id="roiShort" aria-describedby="roiShortHint">
               </div>
 
-              <fieldset class="roi-toggles">
-                <legend>Setting you up</legend>
-
-                <label class="roi-toggle">
-                  <input type="checkbox" id="roiIntegration">
-                  <span class="roi-toggle-box" aria-hidden="true"></span>
-                  <span class="roi-toggle-text">
-                    <b>We&rsquo;re staying on our current system</b>
-                    We build the link to it instead of you moving onto ours.
-                  </span>
-                </label>
-
-                <label class="roi-toggle">
-                  <input type="checkbox" id="roiMigration">
-                  <span class="roi-toggle-box" aria-hidden="true"></span>
-                  <span class="roi-toggle-text">
-                    <b>Bring our old data across</b>
-                    Suppliers, stock items and history loaded before you go live.
-                  </span>
-                </label>
-
-                <p class="roi-setup-line">Once-off setup: <b id="roiSetupOut"></b></p>
-              </fieldset>
             </div>
 
             <!-- The answer, and the four things behind it.
@@ -177,14 +154,14 @@
                    home page — their email is remembered for the tab. -->
               <div class="roi-gate" id="roiGate">
                 <p class="roi-gate-title font-head">Your results are ready.</p>
-                <p class="roi-gate-sub">The month it pays for itself, the hours you win back, where your mistakes go, and which deliveries get caught &mdash; worked out on the numbers you just set.</p>
+                <p class="roi-gate-sub">The month it pays for itself, the hours you win back, how your mistakes fall, and what we catch at the door. All from the numbers you set.</p>
                 <form class="roi-capture" id="roiCapture" novalidate>
                   <label for="roiEmail" class="roi-capture-label">Work email</label>
                   <div class="roi-capture-row">
                     <input type="email" id="roiEmail" name="email" placeholder="you@yourcompany.co.za" autocomplete="email" required>
                     <button type="submit" class="roi-capture-btn" id="roiCaptureBtn">See my results</button>
                   </div>
-                  <p class="roi-capture-note" id="roiCaptureNote">We&rsquo;ll only email you about this. No newsletter, no list.</p>
+                  <p class="roi-capture-note" id="roiCaptureNote">We only email you about this. No newsletter, no list.</p>
                   <!-- A person never sees this. Anything in it came from a bot. -->
                   <div class="roi-honeypot" aria-hidden="true"><label for="roiWebsite">Website</label><input type="text" id="roiWebsite" name="website" tabindex="-1" autocomplete="off"></div>
                 </form>
@@ -269,13 +246,19 @@
                    "Save as PDF", and the print rules below keep the nav, the
                    sliders and the footer out of it. -->
               <div class="roi-download">
-                <p class="roi-download-label">Want a copy of this?</p>
+                <p class="roi-download-label">Take a copy with you.</p>
                 <button type="button" class="roi-capture-btn" id="roiPdfBtn">Download as PDF</button>
-                <p class="roi-download-note">Opens your browser&rsquo;s print box &mdash; choose &ldquo;Save as PDF&rdquo;.</p>
+                <p class="roi-download-note">Opens your browser&rsquo;s print box. Choose Save as PDF.</p>
               </div>
 
             </div>
           </div>
+
+          <div class="roi-cta-btns reveal-fade">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="roi-cta-btn primary" data-open-demo>Book a 30-min demo</a>
+            <a href="/pricing/" class="roi-cta-btn">See pricing</a>
+          </div>
+
         </div>
       </div>
     </div>
@@ -287,42 +270,47 @@
       <div class="roi-extras-head">
         <p class="roi-kicker reveal-fade">Not in the sum above</p>
         <h2 class="roi-extras-title font-head reveal-trigger">
-          <span class="reveal-line" style="transition-delay: 0.10s;">Three things we couldn&rsquo;t</span>
-          <span class="reveal-line" style="transition-delay: 0.24s;">put a number on.</span>
+          <span class="reveal-line" style="transition-delay: 0.10s;">Three costs this</span>
+          <span class="reveal-line" style="transition-delay: 0.24s;">calculator does not count</span>
         </h2>
         <p class="roi-intro reveal-para" style="transition-delay: 0.18s;">
-          The calculator only counts hours, because hours are the only thing we can work out
-          honestly from five sliders. These three are worth more and we won&rsquo;t pretend to price them.
+          The calculator counts hours, because five sliders can only tell us hours. These three
+          are worth more. We do not put a price on them.
         </p>
       </div>
 
       <div class="roi-extras-grid">
         <article class="roi-extra reveal-fade" style="transition-delay: 0.10s;">
           <iconify-icon icon="solar:document-text-linear" width="22" height="22"></iconify-icon>
-          <h3 class="font-head">Every line traces back to the paper</h3>
+          <h3 class="font-head">Every line links back to the photo of the document</h3>
           <p>
-            Each line item stays linked to the photo it came from, who checked it, and the minute
-            it was captured. When a supplier says they delivered it, you open the picture.
+            Every line stays linked to the photo it came from, who checked it and when. When a
+            supplier says they delivered it, you open the picture.
           </p>
         </article>
 
         <article class="roi-extra reveal-fade" style="transition-delay: 0.16s;">
           <iconify-icon icon="solar:magic-stick-3-linear" width="22" height="22"></iconify-icon>
-          <h3 class="font-head">It only learns a part code once</h3>
+          <h3 class="font-head">Matches a supplier&rsquo;s part code once, then remembers it</h3>
           <p>
-            Match a supplier&rsquo;s odd code to your stock item one time and it stays matched.
-            Accuracy climbs on its own &mdash; nobody has to go and configure anything.
+            Match a supplier&rsquo;s code to your stock item once and it stays matched. The next
+            document from that supplier needs less fixing. Nothing to configure.
           </p>
         </article>
 
         <article class="roi-extra reveal-fade" style="transition-delay: 0.22s;">
           <iconify-icon icon="solar:chart-square-linear" width="22" height="22"></iconify-icon>
-          <h3 class="font-head">You find out who keeps short-shipping you</h3>
+          <h3 class="font-head">Shows which suppliers keep delivering short</h3>
           <p>
-            Every short delivery is counted against the supplier who sent it. At renewal you
+            We count every short delivery against the supplier who sent it. At renewal you
             arrive with a number instead of a feeling.
           </p>
         </article>
+      </div>
+
+      <div class="roi-cta-btns reveal-fade">
+        <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="roi-cta-btn primary" data-open-demo>Book a 30-min demo</a>
+        <a href="/pricing/" class="roi-cta-btn">See pricing</a>
       </div>
     </div>
   </section>
@@ -331,14 +319,14 @@
   <section class="roi-cta-section">
     <div class="roi-cta-shell">
       <div class="roi-cta-frame">
-        <p class="roi-kicker reveal-fade">Document intake</p>
+        <p class="roi-kicker reveal-fade">Document Intake</p>
         <h2 class="roi-cta-title font-head reveal-trigger">
-          <span class="reveal-line" style="transition-delay: 0.10s;">Ready when you are.</span>
+          <span class="reveal-line" style="transition-delay: 0.10s;">Book a demo or see Document Intake pricing</span>
         </h2>
         <p class="roi-cta-price" id="roiCtaPrice"></p>
         <div class="roi-cta-btns reveal-fade" style="transition-delay: 0.18s;">
-          <a href="mailto:danika@lightindustrial.co.za?subject=Document%20intake%20enquiry" class="roi-cta-btn primary">Get in touch</a>
-          <a href="#calculator" class="roi-cta-btn">Back to the calculator</a>
+          <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="roi-cta-btn primary" data-open-demo>Book a 30-min demo</a>
+          <a href="/pricing/" class="roi-cta-btn">See pricing</a>
         </div>
       </div>
     </div>
@@ -349,8 +337,8 @@
 
   <script src="../site-chrome.js"></script>
 
-  <script src="sums.js"></script>
-  <script src="calculator.js"></script>
+  <script src="sums.js?v=20261013"></script>
+  <script src="calculator.js?v=20261013"></script>
   <script src="tooltips.js"></script>
 
   <script>
