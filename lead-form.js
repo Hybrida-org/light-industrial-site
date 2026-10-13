@@ -62,7 +62,7 @@
     contact: {
       eyebrow: 'Get in touch',
       title: 'Tell us about your paperwork',
-      intro: 'Six questions, about a minute. We’ll get back to you within 48 hours.',
+      intro: 'Six questions, about a minute. We’ll get back to you within 24 hours.',
       button: 'Send my details'
     },
     worksheet: {
@@ -94,7 +94,7 @@
       placeholder: 'you@yourcompany.co.za', autocomplete: 'email', inputmode: 'email',
       empty: 'We need an email address to reply to.',
       check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
-      invalid: 'That email doesn’t look right — check for a typo?'
+      invalid: 'That email does not look right. Check for a typo.'
     },
     {
       key: 'phone', label: 'Phone', type: 'tel',
@@ -227,8 +227,8 @@
       '</form>' +
       '<div class="lf-done" id="' + prefix + '-done" hidden>' +
       '  <div class="lf-tick" aria-hidden="true">✓</div>' +
-      '  <h2 class="lf-done-title font-head" tabindex="-1">Thanks — we’ve got it.</h2>' +
-      '  <p class="lf-done-text">We’ll be in touch within 48 hours.</p>' +
+      '  <h2 class="lf-done-title font-head" tabindex="-1">We have your details.</h2>' +
+      '  <p class="lf-done-text">We’ll be in touch within 24 hours.</p>' +
       '</div>';
   }
 
@@ -289,7 +289,7 @@
     }
 
     function answers() {
-      var lead = { source: 'website', variant: variantName, page: window.location.pathname };
+      var lead = { source: slot.getAttribute('data-source') || 'website', variant: variantName, page: window.location.pathname };
       FIELDS.forEach(function (field) {
         var el = controlOf(field);
         lead[field.key] = el.type === 'checkbox' ? el.checked : (el.value || '').trim();
@@ -313,7 +313,7 @@
         .map(function (field) { return field.label + ': ' + lead[field.key]; });
 
       window.location.href = 'mailto:' + CONTACT_EMAIL +
-        '?subject=' + encodeURIComponent('Light Industrial enquiry — ' + lead.company) +
+        '?subject=' + encodeURIComponent('Light Industrial enquiry from ' + lead.company) +
         '&body=' + encodeURIComponent(lines.join('\n'));
 
       /* Deliberately not the thank-you page: nothing has actually reached us
