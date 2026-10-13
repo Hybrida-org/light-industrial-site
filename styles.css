@@ -836,7 +836,7 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .price-kicker { margin: 0 0 16px; font-size: 11px; font-weight: 600; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
 .price-title { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.6rem); line-height: 0.98; letter-spacing: -0.05em; color: var(--ink); }
 .price-title .reveal-line { display: block; }
-.price-intro { margin: 22px auto 0; max-width: 540px; font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
+.price-intro { margin: 14px 0 0; max-width: 60ch; font-size: 17px; line-height: 1.7; color: var(--ink); }
 
 .price-grid { display: grid; grid-template-columns: 1fr 420px; gap: 44px; max-width: 1080px; margin: 0 auto; align-items: start; }
 .price-choices { display: flex; flex-direction: column; gap: 22px; }
@@ -990,31 +990,43 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .calc-figures .calc-figure:first-child .calc-amount { color: #4f6b59; }
 
 /* ===== HOW IT WORKS — the order-to-stock loop (flow-loop.js) =====
-   Words on the left for the step you are on, the six steps down the right. */
+   Words for the step you are on down the left, six cards in a snake on the
+   right. A brick line traces the active card's border, then runs along the
+   connector to the next card. */
 .flow-inner { position: relative; z-index: 1; padding: 72px 34px 76px; }
 .flow-section-head { max-width: 760px; }
-.loop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; margin-top: 36px; }
-.loop-copy { position: sticky; top: 110px; padding: 28px 30px; border-radius: 20px; background: rgba(255,255,255,0.5); border: 1px solid rgba(45,42,38,0.10); }
+.loop { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 40px; align-items: center; margin-top: 36px; }
+.loop-copy { padding: 28px 30px; border-radius: 20px; background: rgba(255,255,255,0.5); border: 1px solid rgba(45,42,38,0.10); }
 .loop-copy-k { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--brick); }
-.loop-copy-t { margin: 0; font-family: 'Poppins', sans-serif; font-size: 24px; letter-spacing: -0.02em; color: var(--ink); }
-.loop-copy-d { margin: 12px 0 0; font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+.loop-copy-t { margin: 0; font-family: 'Poppins', sans-serif; font-size: 22px; letter-spacing: -0.02em; color: var(--ink); }
+.loop-copy-d { margin: 12px 0 0; font-size: 15.5px; line-height: 1.7; color: var(--ink-soft); }
 .loop-copy-n { margin: 18px 0 0; font-size: 13px; color: var(--ink-soft); }
-.loop-steps { list-style: none; margin: 0; padding: 0; position: relative; }
-.loop-steps::before { content: ""; position: absolute; left: 23px; top: 24px; bottom: 24px; width: 1px; background: rgba(45,42,38,0.18); }
-.loop-step { position: relative; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; width: 100%; padding: 10px 12px 10px 0; border: 0; border-radius: 14px; background: transparent; text-align: left; cursor: pointer; font: inherit; color: inherit; transition: background 180ms ease; }
-.loop-step:hover { background: rgba(255,255,255,0.4); }
-.loop-step:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
-.loop-ci { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; background: #fbfaf7; border: 1px solid rgba(45,42,38,0.14); color: var(--ink); position: relative; z-index: 1; transition: background 180ms ease, border-color 180ms ease, color 180ms ease; }
-.loop-step.is-active .loop-ci { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.loop-step.is-ai .loop-ci { border-color: var(--brick); color: var(--brick); }
-.loop-step.is-ai.is-active .loop-ci { background: var(--brick); border-color: var(--brick); color: var(--paper); }
-.loop-cl { display: block; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
-.loop-cs { display: block; font-size: 14px; color: var(--ink-soft); margin-top: 2px; }
-.loop-ai { display: inline-block; margin-left: 8px; font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; background: rgba(155,59,45,0.10); color: var(--brick); vertical-align: 2px; }
-.loop-step.is-active .loop-cl { color: var(--ink); }
-.loop-bar { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--brick); border-radius: 2px; }
-.loop-step.is-active .loop-bar { animation: loop-fill var(--loop-ms, 4000ms) linear forwards; }
-@keyframes loop-fill { from { width: 0; } to { width: 100%; } }
-.loop.is-paused .loop-bar { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) { .loop-bar { display: none; } }
-@media (max-width: 860px) { .loop { grid-template-columns: 1fr; gap: 24px; } .loop-copy { position: static; } }
+.loop-grid { display: grid; grid-template-columns: 1fr 26px 1fr 26px 1fr; grid-template-rows: auto 30px auto; align-items: stretch; }
+.loop-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 18px 12px 16px; border: 1px solid rgba(45,42,38,0.14); border-radius: 16px; background: #fbfaf7; cursor: pointer; font: inherit; color: inherit; transition: background 180ms ease, border-color 180ms ease, transform 180ms ease; }
+.loop-card:hover { transform: translateY(-2px); }
+.loop-card:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
+.loop-card.is-active { border-color: rgba(45,42,38,0.28); }
+.loop-card.is-ai { border-color: rgba(155,59,45,0.45); }
+.loop-ci { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: rgba(45,42,38,0.06); color: var(--ink); transition: background 180ms ease, color 180ms ease; }
+.loop-card.is-ai .loop-ci { background: rgba(155,59,45,0.10); color: var(--brick); }
+.loop-card.is-active .loop-ci { background: var(--ink); color: var(--paper); }
+.loop-card.is-ai.is-active .loop-ci { background: var(--brick); color: var(--paper); }
+.loop-cl { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); }
+.loop-cs { font-size: 11.5px; line-height: 1.35; color: var(--ink-soft); }
+.loop-ai { position: absolute; top: 8px; right: 8px; font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.08em; padding: 1px 5px; border-radius: 3px; background: rgba(155,59,45,0.10); color: var(--brick); }
+/* The ring: a rect the size of the card, stroke drawn with pathLength=1. */
+.loop-ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.loop-ring rect { fill: none; stroke: var(--brick); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loop-card.is-drawing .loop-ring rect { animation: loop-draw var(--ring-ms, 2600ms) linear forwards; }
+.loop-card.is-done .loop-ring rect { stroke-dashoffset: 0; }
+/* Connectors: a faint dashed line, with the brick line drawn over it. */
+.loop-conn { width: 100%; height: 100%; overflow: visible; position: relative; }
+.loop-conn::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed rgba(45,42,38,0.25); }
+.loop-conn.is-v::before { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 1px dashed rgba(45,42,38,0.25); }
+.loop-conn line { stroke: var(--brick); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loop-conn.is-drawing line { animation: loop-draw var(--conn-ms, 700ms) linear forwards; }
+.loop-conn.is-done line { stroke-dashoffset: 0; }
+@keyframes loop-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .loop-ring rect, .loop-conn line { animation: none !important; } }
+@media (max-width: 900px) { .loop { grid-template-columns: 1fr; gap: 24px; } }
+@media (max-width: 480px) { .loop-grid { grid-template-columns: 1fr; grid-template-rows: none; gap: 10px; } .loop-card, .loop-conn { grid-row: auto !important; grid-column: auto !important; } .loop-conn { display: none; } }
