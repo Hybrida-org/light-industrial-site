@@ -994,7 +994,7 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
    right. A brick line traces the active card's border, then runs along the
    connector to the next card. */
 .flow-inner { position: relative; z-index: 1; padding: 72px 34px 76px; }
-.flow-section-head { max-width: 760px; }
+.flow-section-head { max-width: 1040px; }
 .loop { display: grid; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); gap: 36px; align-items: start; margin-top: 36px; }
 .loop-copy { min-height: 420px; padding: 22px 24px; border-radius: 20px; background: rgba(255,255,255,0.5); border: 1px solid rgba(45,42,38,0.10); }
 .loop-copy-k { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--bronze-ink); }
