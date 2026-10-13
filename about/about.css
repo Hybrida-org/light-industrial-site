@@ -81,9 +81,9 @@
 /* Empty frame until the real photos arrive. Swapping in an <img> with the same
    class needs no CSS change: object-fit crops the photo to the same circle. */
 .team-photo {
-  width: 64px; height: 64px; margin: 0 0 16px;
+  width: 88px; height: 88px; margin: 0 0 16px;
   border-radius: 999px; object-fit: cover;
-  border: 1px dashed rgba(45,42,38,0.22);
+  border: 1px solid rgba(45,42,38,0.14);
   background: linear-gradient(180deg, rgba(45,42,38,0.05), rgba(45,42,38,0.09));
 }
 .team-name { margin: 0; font-size: 18px; letter-spacing: -0.02em; color: var(--ink); }
