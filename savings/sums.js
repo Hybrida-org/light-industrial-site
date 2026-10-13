@@ -17,23 +17,28 @@
     sliders: {
       docsPerWeek: { min: 5,    max: 150,   step: 5,   start: 30 },
       minsPerDoc:  { min: 3,    max: 30,    step: 1,   start: 12 },
-      salary:      { min: 6000, max: 25000, step: 500, start: 11000 },
+      salary:      { min: 6000, max: 40000, step: 500, start: 18000 },
       errorRate:   { min: 0,    max: 40,    step: 1,   start: 15 },
       shortRate:   { min: 0,    max: 40,    step: 1,   start: 20 }
     },
 
     weeksPerMonth: 4.33,
-    reviewMinutesPerDoc: 2,      // we do not remove all of it — somebody still approves
+    // Today's paperwork time is typing plus the chasing it causes. With intake the
+    // typing becomes a glance, errors settle to the matching-memory floor, and a
+    // short delivery is confirmed at the door instead of chased at month end.
+    reviewShare: 0.15,           // share of today's typing time that remains as checking
+    fixMinutesPerError: 20,      // find it, correct the stock, call the supplier
+    chaseMinutesPerShort: 15,    // reconcile a short delivery against the invoice later
+    confirmMinutesPerShort: 3,   // confirm it at the door with the photo in hand
     workingHoursPerMonth: 173,   // one person's month
 
-    // Published document-intake prices, ex VAT, by documents a month. Three bands,
-    // as before; the base came down to R2,500 with HYBRIDA-896, which also moved
-    // what the base means — it buys the module and the first 50 documents, not a
-    // document allowance on its own.
+    // Document Intake is R2,500 a month with 50 documents included. Above that the
+    // price is quoted, not published, so the sum measures against the base price at
+    // any volume and the working-out says so. ponytail: single band, add a ladder
+    // here when one is published.
     tiers: [
       { upToDocs: 50,       price: 2500 },
-      { upToDocs: 150,      price: 6500 },
-      { upToDocs: Infinity, price: 12000 }
+      { upToDocs: Infinity, price: 2500 }
     ],
 
     settledErrorRate: 2,    // where matching memory lands it
@@ -108,8 +113,19 @@
   // arithmetic of its own.
   function calculate(input) {
     var docs = Math.round(input.docsPerWeek * SETTINGS.weeksPerMonth);
-    var currentHours = docs * input.minsPerDoc / 60;
-    var newHours = docs * SETTINGS.reviewMinutesPerDoc / 60;
+    var errorDocs = docs * input.errorRate / 100;
+    var shortDocs = docs * input.shortRate / 100;
+
+    var typingHours = docs * input.minsPerDoc / 60;
+    var errorHours = errorDocs * SETTINGS.fixMinutesPerError / 60;
+    var shortHours = shortDocs * SETTINGS.chaseMinutesPerShort / 60;
+    var currentHours = typingHours + errorHours + shortHours;
+
+    var settledErrorDocs = docs * Math.min(SETTINGS.settledErrorRate, input.errorRate) / 100;
+    var newTypingHours = typingHours * SETTINGS.reviewShare;
+    var newErrorHours = settledErrorDocs * SETTINGS.fixMinutesPerError / 60;
+    var newShortHours = shortDocs * SETTINGS.confirmMinutesPerShort / 60;
+    var newHours = newTypingHours + newErrorHours + newShortHours;
     var hoursSaved = Math.max(currentHours - newHours, 0);
     var hourlyCost = input.salary / SETTINGS.workingHoursPerMonth;
     var labourSaved = hoursSaved * hourlyCost;
@@ -119,6 +135,12 @@
 
     return {
       docs: docs,
+      typingHours: typingHours,
+      errorHours: errorHours,
+      shortHours: shortHours,
+      newTypingHours: newTypingHours,
+      newErrorHours: newErrorHours,
+      newShortHours: newShortHours,
       currentHours: currentHours,
       newHours: newHours,
       hoursSaved: hoursSaved,

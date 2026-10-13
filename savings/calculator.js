@@ -174,10 +174,13 @@
     var lines = [
       s.docs + ' documents a month. ' + inputs.docsPerWeek.value + ' a week &times; ' +
         SETTINGS.weeksPerMonth + ' weeks.',
-      hoursWord(Math.round(s.currentHours)) + ' a month today. ' + s.docs +
-        ' documents &times; ' + inputs.minsPerDoc.value + ' minutes.',
-      hoursWord(Math.round(s.newHours)) + ' with intake. We still allow ' +
-        SETTINGS.reviewMinutesPerDoc + ' minutes a document for somebody to check and approve it.',
+      hoursWord(Math.round(s.currentHours)) + ' a month on paperwork today. ' +
+        hoursWord(Math.round(s.typingHours)) + ' typing (' + s.docs + ' documents &times; ' + inputs.minsPerDoc.value + ' minutes), ' +
+        hoursWord(Math.round(s.errorHours)) + ' fixing wrong lines (' + SETTINGS.fixMinutesPerError + ' minutes each) and ' +
+        hoursWord(Math.round(s.shortHours)) + ' chasing short deliveries (' + SETTINGS.chaseMinutesPerShort + ' minutes each).',
+      hoursWord(Math.round(s.newHours)) + ' with intake. A check instead of typing, errors down to ' +
+        SETTINGS.settledErrorRate + '% once it knows your suppliers, and a short delivery confirmed at the door in ' +
+        SETTINGS.confirmMinutesPerShort + ' minutes.',
       rands(s.hourlyCost) + ' an hour. ' + rands(+inputs.salary.value) + ' a month &divide; ' +
         SETTINGS.workingHoursPerMonth + ' working hours.',
       rands(s.labourSaved) + ' of labour freed a month. ' + hoursWord(Math.round(s.hoursSaved)) +
@@ -186,7 +189,7 @@
         ? 'Less ' + rands(s.price) + ' a month for document intake, ' + SETTINGS.tiers[0].upToDocs + ' documents included.'
         : 'Less an estimated ' + rands(s.price) + ' a month at ' + s.docs + ' documents. Over ' +
           SETTINGS.tiers[0].upToDocs + ' documents, talk to us for a price.',
-      '<b>' + (s.net > 0 ? rands(s.net) + ' net a month' : rands(s.net) + ' a month, it does not pay yet') + '.</b>'
+      '<b>' + (s.net > 0 ? rands(s.net) + ' net a month' : 'Short by ' + rands(-s.net) + ' a month at these numbers') + '.</b>'
     ];
     if (s.net > 0) lines.push('Set-up is included, so it pays for itself from month 1.');
     el('roiWorking').innerHTML = lines.map(function (line) { return '<li>' + line + '</li>'; }).join('');
