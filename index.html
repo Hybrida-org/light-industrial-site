@@ -831,7 +831,7 @@
 
   <!-- The maths lives in one file, shared with the results page. This script only
        reads the sliders, paints the teaser, and hands the numbers over. -->
-  <script src="savings/sums.js?v=20261013c"></script>
+  <script src="savings/sums.js?v=20261013d"></script>
   <script src="savings/tooltips.js"></script>
   <!-- After sums.js: the form reads the lead endpoint and the fallback email
        address from there, so one paste turns on every form on the site. -->
@@ -917,11 +917,11 @@
 
       result.setAttribute('data-state', 'time');
       var be = sums.breakEvenDocsPerWeek(readInputs());
-      var perHour = hours > 0 ? Math.round(-s.net / hours) : 0;
       verdict.textContent = 'Pays for itself';
       headline.innerHTML = be ? '<span class="calc-amount">From ' + be + ' notes a week</span>' : '<span class="calc-amount">Talk to us</span>';
-      sub.innerHTML = 'At ' + sliders.docsPerWeek.value + ' a week you get <b>' + hoursWord(hours) + '</b> back for <b>' +
-        rands(-s.net) + '</b> a month net. That is <b>' + rands(perHour) + ' an hour</b> for the time you get back.';
+      sub.innerHTML = 'At ' + sliders.docsPerWeek.value + ' a week you get <b>' + hoursWord(hours) + '</b> back. ' +
+        'That time is worth <b>' + rands(s.labourSaved) + '</b> a month at this salary, so Document Intake costs <b>' +
+        rands(-s.net) + '</b> a month more than it saves.';
     }
 
     // One of only two key events, so it has to mean something: it fires once, and
