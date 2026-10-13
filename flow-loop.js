@@ -42,7 +42,7 @@
       '" style="grid-row:' + CARD_POS[i][0] + ';grid-column:' + CARD_POS[i][1] + '">' +
       '<svg class="loop-ring" aria-hidden="true"><rect pathLength="1"/></svg>' +
       '<span class="loop-ci"><iconify-icon icon="' + st.icon + '"></iconify-icon></span>' +
-      '<span class="loop-cl">' + st.t + '</span><span class="loop-cs">' + st.s + '</span>' +
+      '<span class="loop-cl">' + st.t + '</span>' +
       '<span class="loop-who">' + (st.ai ? 'AI' : 'You') + '</span></button>';
   }
   function connHtml(c, i) {
