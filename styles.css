@@ -1078,3 +1078,5 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 @media (prefers-reduced-motion: reduce) { .loop-card.is-ai::after, .loop-card.is-ai.is-drawing .loop-ci { animation: none !important; } }
 .price-figure > span:last-child, .plan-price .plan-unit { margin-left: 6px; }
 @media (max-width: 720px) { .compare-table { font-size: 12px; } .compare-table th, .compare-table td { padding: 10px 6px; } .compare-table th[scope="row"] { white-space: normal; } .compare-table thead th { font-size: 11px; } }
+#modules .price-exvat { max-width: none; margin-left: 0; text-align: left; }
+.price-answer .price-figure > span:last-child { margin-left: 10px; }
