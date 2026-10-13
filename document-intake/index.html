@@ -72,12 +72,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=20261013c">
 <!-- The two module pages are one layout, so they share one stylesheet rather
      than keeping two copies of the same panel, card and role rules in step.
-     intake.css holds only what this page adds: the numbered steps. -->
-<link rel="stylesheet" href="../erp/erp.css">
-<link rel="stylesheet" href="intake.css">
+     intake.css holds only what this page adds: the three-screen process flow. -->
+<link rel="stylesheet" href="../erp/erp.css?v=20261013c">
+<link rel="stylesheet" href="intake.css?v=20261013c">
 </head>
 
 <body>
@@ -147,40 +147,59 @@
             </p>
           </div>
 
-          <ol class="intake-steps">
+          <div class="flow3 reveal-fade" style="transition-delay: 0.14s;">
 
-            <li class="intake-step reveal-fade" style="transition-delay: 0.14s;">
-              <div>
-                <h3 class="intake-step-title font-head">Photograph the delivery note or forward the email</h3>
-                <p class="intake-step-text">
-                  Photograph the delivery note on a phone, or forward the email. A PDF, a scan or a photo
-                  all go in the same way.
-                </p>
+            <article class="flow3-stage">
+              <div class="flow3-screen">
+                <div class="flow3-bar"><span>Inbox</span><span>Today</span></div>
+                <div class="flow3-photo"><img src="../public/01-capture.jpg" alt="" loading="lazy"></div>
+                <ul class="flow3-files">
+                  <li><span>DN 48213.jpg</span><span>Phone photo, 08:12</span></li>
+                  <li><span>INV 1187.pdf</span><span>Email, 08:40</span></li>
+                  <li><span>Quote Q-2290.pdf</span><span>Email, 09:05</span></li>
+                </ul>
               </div>
-            </li>
+              <h3 class="flow3-title font-head">Photograph it or forward the email</h3>
+              <p class="flow3-text">A phone photo at the gate, a PDF or a scan. Your suppliers change nothing.</p>
+            </article>
 
-            <li class="intake-step intake-step-lead reveal-fade" style="transition-delay: 0.18s;">
-              <div>
-                <h3 class="intake-step-title font-head">We read every line and match it to your stock codes</h3>
-                <p class="intake-step-text">
-                  Every line comes off the document and is matched to your stock codes, your suppliers and
-                  your units. A box of a hundred gloves books as two hundred pairs, because that is how you
-                  count them.
-                </p>
+            <div class="flow3-link" aria-hidden="true"></div>
+
+            <article class="flow3-stage">
+              <div class="flow3-screen">
+                <div class="flow3-bar"><span>DN 48213, Steelmart</span><span>4 lines</span></div>
+                <table class="flow3-table">
+                  <thead><tr><th>On the document</th><th>Your code</th><th>Qty</th></tr></thead>
+                  <tbody>
+                    <tr><td>Galv bolt M12x40, box 100</td><td>BLT-M12-40</td><td>2 bx = 200</td></tr>
+                    <tr><td>Angle iron 50x50x5, 6 m</td><td>ANG-50-5</td><td>12</td></tr>
+                    <tr class="is-short"><td>Cutting disc 115 mm</td><td>DSC-115</td><td>10 of 12</td></tr>
+                    <tr class="is-price"><td>Weld wire 0.9, 15 kg</td><td>WIR-09</td><td>4</td></tr>
+                  </tbody>
+                </table>
               </div>
-            </li>
+              <h3 class="flow3-title font-head">Every line read and matched to your stock codes</h3>
+              <p class="flow3-text">Supplier wording, pack sizes and units become your codes and your counts. A box of a hundred books as a hundred.</p>
+            </article>
 
-            <li class="intake-step reveal-fade" style="transition-delay: 0.22s;">
-              <div>
-                <h3 class="intake-step-title font-head">Your stock updates and odd lines are flagged</h3>
-                <p class="intake-step-text">
-                  Stock on hand and costs update, with the document filed against the movement. A price that
-                  moved, a short quantity or a line nobody ordered is flagged for a one-tap check.
-                </p>
+            <div class="flow3-link" aria-hidden="true"></div>
+
+            <article class="flow3-stage">
+              <div class="flow3-screen">
+                <div class="flow3-bar"><span>Booked, GRN 2211</span><span>09:14</span></div>
+                <ul class="flow3-stock">
+                  <li><span>BLT-M12-40</span><span>On hand 340 <i>to</i> 540</span></li>
+                  <li><span>ANG-50-5</span><span>On hand 18 <i>to</i> 30</span></li>
+                  <li class="is-short"><span>DSC-115</span><span>Short by 2. Supplier told.</span></li>
+                  <li class="is-price"><span>WIR-09</span><span>Price R412 <i>to</i> R450. Check?</span></li>
+                </ul>
+                <div class="flow3-actions"><span class="is-primary">Approve</span><span>Hold</span></div>
               </div>
-            </li>
+              <h3 class="flow3-title font-head">Stock updates, odd lines wait for a one-tap check</h3>
+              <p class="flow3-text">Counts and costs update with the photo filed against the movement. A short quantity or a moved price is the only thing you look at.</p>
+            </article>
 
-          </ol>
+          </div>
 
           <p class="erp-close reveal-fade" style="transition-delay: 0.26s;">
             For the first month or two you will be confirming matches as new supplier lines come through.
@@ -209,22 +228,24 @@
           <div class="erp-head">
             <p class="sec-chip reveal-fade">What it reads</p>
             <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
-              Supplier documents we read: quotes, invoices, delivery notes
+              Supplier quotes, invoices and delivery notes, read line by line
             </h2>
             <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
-              As a PDF, an email, a phone photo or a scan.
+              Send the document the way it arrives. We pull out every line, match it to your own stock codes, suppliers and units, check it against the paperwork that came before it, and book the result. Three document types, three jobs.
             </p>
           </div>
 
-          <div class="erp-grid">
+          <div class="erp-grid erp-grid-3">
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
               <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:document-text-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Supplier quotes become a list you can compare</h3>
+              <h3 class="erp-card-title font-head">Supplier quotes</h3>
               <ul class="erp-list">
-                <li>Lines, quantities and prices come out as a list you can compare.</li>
+                <li>Every line, quantity, unit and price comes out as a list, with the supplier's reference and validity date.</li>
+                <li>Quotes from different suppliers for the same job line up side by side in your codes, so you compare like with like.</li>
+                <li>Accept one and it becomes the purchase order the invoice and delivery note are checked against.</li>
               </ul>
             </article>
 
@@ -232,9 +253,11 @@
               <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:bill-list-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Invoices are checked against the order and the delivery</h3>
+              <h3 class="erp-card-title font-head">Supplier invoices</h3>
               <ul class="erp-list">
-                <li>Checked against what you ordered and what arrived, before you pay.</li>
+                <li>Invoice number, date, VAT and every line read, including multi-page invoices and credit lines.</li>
+                <li>Checked against what you ordered and what arrived. A price that moved, a quantity that differs or a line nobody ordered is flagged before you pay.</li>
+                <li>Cost prices update on your stock items, so your margins use what you actually paid.</li>
               </ul>
             </article>
 
@@ -242,9 +265,51 @@
               <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:delivery-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Delivery notes are matched and booked line by line</h3>
+              <h3 class="erp-card-title font-head">Delivery notes</h3>
               <ul class="erp-list">
-                <li>Matched line by line and booked in full or short, with the photo kept as proof.</li>
+                <li>Photographed at the gate and matched line by line to the order. Booked in full, or short, with what is still outstanding on record.</li>
+                <li>Supplier pack sizes convert to your units. A box of 100 books as 100, a 6 m length books as 6 m.</li>
+                <li>The photo is filed against the stock movement, so proof of delivery is never a piece of paper in a bakkie.</li>
+              </ul>
+            </article>
+
+          </div>
+
+          <div class="erp-grid erp-grid-3" style="margin-top: 28px;">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:camera-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">How documents reach us</h3>
+              <ul class="erp-list">
+                <li>Photograph it on a phone, straight from the yard or the counter.</li>
+                <li>Forward the supplier's email to your own intake address. Attachments are read, the email body too.</li>
+                <li>Drag a PDF or a scan into the app. Multi-page files are handled as one document.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:gallery-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">File types and conditions</h3>
+              <ul class="erp-list">
+                <li>PDF, JPG, PNG and HEIC, scans and photos.</li>
+                <li>Skew, shadow, creases and a thumb in the corner are fine. Handwritten quantities and corrections on a printed document are read.</li>
+                <li>Anything the system is not certain of is flagged for a one-tap confirm. It never guesses a quantity or a price.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:shield-check-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-card-title font-head">What it learns per supplier</h3>
+              <ul class="erp-list">
+                <li>Each supplier's layout, item names and pack sizes are remembered after the first confirm.</li>
+                <li>The same supplier line never needs matching twice. New lines are proposed, approved once, then remembered.</li>
+                <li>Documents are processed in South Africa and kept with the stock movement they created. See the <a href="/data-handling/">data handling</a> page.</li>
               </ul>
             </article>
 
@@ -279,7 +344,7 @@
             </p>
           </div>
 
-          <div class="erp-grid">
+          <div class="erp-grid erp-grid-3">
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
               <span class="erp-card-icon" aria-hidden="true">
