@@ -19,8 +19,7 @@
       minsPerDoc:  { min: 3,    max: 30,    step: 1,   start: 12 },
       salary:      { min: 6000, max: 40000, step: 500, start: 18000 },
       errorRate:   { min: 0,    max: 40,    step: 1,   start: 15 },
-      shortRate:   { min: 0,    max: 40,    step: 1,   start: 20 },
-      deliveryValue: { min: 1000, max: 60000, step: 500, start: 6000 }
+      shortRate:   { min: 0,    max: 40,    step: 1,   start: 20 }
     },
 
     weeksPerMonth: 4.33,
@@ -34,6 +33,7 @@
     // The money side. A short delivery you paid for in full, and a price that
     // crept up without anyone noticing, are rands as well as hours. Each is a
     // slice of a typical delivery's value.
+    avgDeliveryValue: 6000,      // a typical supplier delivery, ex VAT, used for the money side
     shortSlice: 0.04,            // share of a short delivery's value paid for but not received
     overpaySlice: 0.02,          // share of a delivery's value lost to a moved price or an extra line
     workingHoursPerMonth: 173,   // one person's month
@@ -79,8 +79,7 @@
     minsPerDoc: 'mins',
     salary: 'salary',
     errorRate: 'errors',
-    shortRate: 'short',
-    deliveryValue: 'value'
+    shortRate: 'short'
   };
 
   // Builds the results-page link for a set of inputs.
@@ -136,8 +135,8 @@
     var hoursSaved = Math.max(currentHours - newHours, 0);
     var hourlyCost = input.salary / SETTINGS.workingHoursPerMonth;
     var labourSaved = hoursSaved * hourlyCost;
-    var moneyShort = shortDocs * input.deliveryValue * SETTINGS.shortSlice;
-    var moneyOverpay = Math.max(errorDocs - settledErrorDocs, 0) * input.deliveryValue * SETTINGS.overpaySlice;
+    var moneyShort = shortDocs * SETTINGS.avgDeliveryValue * SETTINGS.shortSlice;
+    var moneyOverpay = Math.max(errorDocs - settledErrorDocs, 0) * SETTINGS.avgDeliveryValue * SETTINGS.overpaySlice;
     var moneySaved = moneyShort + moneyOverpay;
     var totalSaved = labourSaved + moneySaved;
     var price = priceFor(docs);
@@ -175,7 +174,7 @@
   function breakEvenDocsPerWeek(input) {
     var sl = SETTINGS.sliders.docsPerWeek;
     for (var d = input.docsPerWeek; d <= sl.max; d += sl.step) {
-      var r = calculate({ docsPerWeek: d, minsPerDoc: input.minsPerDoc, salary: input.salary, errorRate: input.errorRate, shortRate: input.shortRate, deliveryValue: input.deliveryValue });
+      var r = calculate({ docsPerWeek: d, minsPerDoc: input.minsPerDoc, salary: input.salary, errorRate: input.errorRate, shortRate: input.shortRate });
       if (r.net > 0) return d;
     }
     return null;

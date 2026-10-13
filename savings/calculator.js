@@ -24,8 +24,7 @@
     minsPerDoc: el('roiMins'),
     salary: el('roiSalary'),
     errorRate: el('roiErrors'),
-    shortRate: el('roiShort'),
-    deliveryValue: el('roiValue')
+    shortRate: el('roiShort')
   };
 
   // The one place the page turns controls into the plain object sums.js wants.
@@ -35,8 +34,7 @@
       minsPerDoc: +inputs.minsPerDoc.value,
       salary: +inputs.salary.value,
       errorRate: +inputs.errorRate.value,
-      shortRate: +inputs.shortRate.value,
-      deliveryValue: +inputs.deliveryValue.value
+      shortRate: +inputs.shortRate.value
     };
   }
 
@@ -139,20 +137,12 @@
     }
 
     result.setAttribute('data-state', 'pays');
-    if (s.net > 0) {
-      verdict.textContent = 'It pays for itself';
-      headline.innerHTML = 'You save <span class="roi-amount">' + rands(s.totalSaved) + '</span> a month.';
-      sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time (' + hoursWord(hours) + ') plus <b>' + rands(s.moneySaved) +
-        '</b> you stop paying on short deliveries and moved prices. Pays for itself from <b>month 1</b>. You keep <b>' +
-        rands(s.net) + '</b> a month after the subscription.';
-      return;
-    }
-    var be = SavingsSums.breakEvenDocsPerWeek(readInputs());
-    verdict.textContent = 'What you save';
+    var be = s.net > 0 ? null : SavingsSums.breakEvenDocsPerWeek(readInputs());
+    verdict.textContent = s.net > 0 ? 'It pays for itself' : 'What you save';
     headline.innerHTML = 'You save <span class="roi-amount">' + rands(s.totalSaved) + '</span> a month.';
     sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time (' + hoursWord(hours) + ') plus <b>' + rands(s.moneySaved) +
-      '</b> you stop paying on short deliveries and moved prices. ' +
-      (be ? 'Pays for itself from <b>' + be + ' notes a week</b>. Every extra delivery note closes the gap.' : 'Talk to us about the price at your volume.');
+      '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.' +
+      (s.net > 0 ? '' : (be ? ' It pays for itself from <b>' + be + ' notes a week</b>.' : ''));
   }
 
   // ── The sum, written out ────────────────────────────────────────────────────
@@ -173,7 +163,7 @@
       rands(s.labourSaved) + ' of labour freed a month. ' + hoursWord(Math.round(s.hoursSaved)) +
         ' &times; ' + rands(s.hourlyCost) + '.',
       rands(s.moneyShort) + ' stopped on short deliveries. ' + s.shortCaught + ' short deliveries a month &times; ' +
-        Math.round(SETTINGS.shortSlice * 100) + '% of a ' + rands(+inputs.deliveryValue.value) + ' delivery paid for but not received.',
+        Math.round(SETTINGS.shortSlice * 100) + '% of a typical ' + rands(SETTINGS.avgDeliveryValue) + ' delivery paid for but not received.',
       rands(s.moneyOverpay) + ' stopped on moved prices and extra lines. Wrong lines down from ' + inputs.errorRate.value + '% to ' +
         SETTINGS.settledErrorRate + '%, at ' + Math.round(SETTINGS.overpaySlice * 100) + '% of a delivery each.',
       '<b>' + rands(s.totalSaved) + ' saved a month.</b>',
@@ -181,9 +171,8 @@
         ? 'Less ' + rands(s.price) + ' a month for document intake, ' + SETTINGS.tiers[0].upToDocs + ' documents included.'
         : 'Less an estimated ' + rands(s.price) + ' a month at ' + s.docs + ' documents. Over ' +
           SETTINGS.tiers[0].upToDocs + ' documents, talk to us for a price.',
-      '<b>' + (s.net > 0 ? rands(s.net) + ' kept a month after the subscription' : 'Pays for itself from ' + (SavingsSums.breakEvenDocsPerWeek(readInputs()) || 'a higher volume') + ' notes a week') + '.</b>'
+      '<b>' + (s.net > 0 ? 'Pays for itself from month 1' : 'Pays for itself from ' + (SavingsSums.breakEvenDocsPerWeek(readInputs()) || 'a higher volume') + ' notes a week') + '.</b>'
     ];
-    if (s.net > 0) lines.push('There is no set-up fee, so it pays for itself from month 1.');
     el('roiWorking').innerHTML = lines.map(function (line) { return '<li>' + line + '</li>'; }).join('');
   }
 
@@ -203,7 +192,6 @@
     el('roiSalaryOut').textContent = rands(+inputs.salary.value);
     el('roiErrorsOut').textContent = inputs.errorRate.value + '%';
     el('roiShortOut').textContent = inputs.shortRate.value + '%';
-    el('roiValueOut').textContent = rands(+inputs.deliveryValue.value);
 
     var s = sums();
 

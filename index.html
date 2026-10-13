@@ -95,7 +95,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261013z">
+<link rel="stylesheet" href="styles.css?v=20261014d">
 </head>
 
 <body class="">
@@ -622,41 +622,6 @@
                 <input type="range" id="calcShort" aria-describedby="calcShortHint">
               </div>
 
-              <div class="calc-ctrl">
-                <div class="calc-ctrl-top">
-                  <span class="roi-label-row">
-                    <label for="calcValue">Average delivery value</label>
-                    <span class="roi-info-wrap">
-                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcValueHint">
-                        <span aria-hidden="true">i</span>
-                        <span class="calc-visually-hidden">What this means</span>
-                      </button>
-                      <span class="roi-tip" role="tooltip" id="calcValueHint">What a typical supplier delivery is worth, ex VAT. Short deliveries and moved prices are a slice of this.</span>
-                    </span>
-                  </span>
-                  <output id="calcValueOut" for="calcValue"></output>
-                </div>
-                <input type="range" id="calcValue" aria-describedby="calcValueHint">
-              </div>
-            </div>
-
-            <!-- The teaser. One number, half of it covered. The blurred part is a
-                 placeholder, never the real figure rendered small. A visitor who
-                 opens the inspector finds nothing we haven't shown them. -->
-            <div class="calc-result" id="calcResult" data-state="pays" aria-live="polite">
-              <div class="calc-figures">
-                <div class="calc-figure">
-                  <p class="calc-verdict">Hours back a month</p>
-                  <p class="calc-headline font-head"><span class="calc-amount" id="calcHours">0</span> hours</p>
-                  <p class="calc-sub" id="calcHoursSub"></p>
-                </div>
-                <div class="calc-figure">
-                  <p class="calc-verdict" id="calcVerdict">Money saved a month</p>
-                  <p class="calc-headline font-head" id="calcHeadline"></p>
-                  <p class="calc-sub" id="calcSub"></p>
-                </div>
-              </div>
-
               <ul class="calc-teaser-list">
                 <li>The month it pays for itself, and what you keep after that</li>
                 <li>Hours won back, and where your mistakes go over six months</li>
@@ -848,7 +813,7 @@
 
   <!-- The maths lives in one file, shared with the results page. This script only
        reads the sliders, paints the teaser, and hands the numbers over. -->
-  <script src="savings/sums.js?v=20261013e"></script>
+  <script src="savings/sums.js?v=20261013f"></script>
   <script src="savings/tooltips.js"></script>
   <!-- After sums.js: the form reads the lead endpoint and the fallback email
        address from there, so one paste turns on every form on the site. -->
@@ -878,16 +843,14 @@
       minsPerDoc: el('calcMins'),
       salary: el('calcSalary'),
       errorRate: el('calcErrors'),
-      shortRate: el('calcShort'),
-      deliveryValue: el('calcValue')
+      shortRate: el('calcShort')
     };
     var outs = {
       docsPerWeek: el('calcDocsOut'),
       minsPerDoc: el('calcMinsOut'),
       salary: el('calcSalaryOut'),
       errorRate: el('calcErrorsOut'),
-      shortRate: el('calcShortOut'),
-      deliveryValue: el('calcValueOut')
+      shortRate: el('calcShortOut')
     };
     var verdict = el('calcVerdict');
     var headline = el('calcHeadline');
@@ -904,8 +867,7 @@
         minsPerDoc: +sliders.minsPerDoc.value,
         salary: +sliders.salary.value,
         errorRate: +sliders.errorRate.value,
-        shortRate: +sliders.shortRate.value,
-        deliveryValue: +sliders.deliveryValue.value
+        shortRate: +sliders.shortRate.value
       };
     }
 
@@ -915,7 +877,6 @@
       outs.salary.textContent = rands(+sliders.salary.value);
       outs.errorRate.textContent = sliders.errorRate.value + '%';
       outs.shortRate.textContent = sliders.shortRate.value + '%';
-      outs.deliveryValue.textContent = rands(+sliders.deliveryValue.value);
 
       var s = sums.calculate(readInputs());
       var hours = Math.round(s.hoursSaved);
@@ -931,11 +892,9 @@
       result.setAttribute('data-state', 'pays');
       verdict.textContent = 'Money saved a month';
       headline.innerHTML = '<span class="calc-amount">' + rands(s.totalSaved) + '</span>';
-      sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time, plus <b>' + rands(s.moneySaved) +
-        '</b> you stop paying on short deliveries and moved prices. ' +
-        (s.net > 0
-          ? 'Pays for itself from <b>month 1</b>. You keep <b>' + rands(s.net) + '</b> after the subscription.'
-          : (be ? 'Pays for itself from <b>' + be + ' notes a week</b>.' : 'Talk to us about the price at your volume.'));
+      sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
+        '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.' +
+        (s.net > 0 ? '' : (be ? ' It pays for itself from <b>' + be + ' notes a week</b>.' : ''));
     }
 
     // One of only two key events, so it has to mean something: it fires once, and

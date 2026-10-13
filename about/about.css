@@ -115,3 +115,6 @@
 .powered-by small { font-family: 'Onest', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
 .intro-text a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 h2.about-sub { font-size: clamp(1.9rem, 2.8vw, 2.8rem); line-height: 1.05; letter-spacing: -0.04em; max-width: none; }
+
+.team-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 12px 0 0; font-size: 13px; }
+.team-links a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
