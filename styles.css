@@ -994,17 +994,37 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
    Sit inside the module pages' light panel (erp/erp.css), so they borrow the
    card colours used there. auto-fit lets the same grid hold three plans on
    Pricing and two on the lander without a second rule. */
-.plan-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; align-items: start; }
-.plan { display: flex; flex-direction: column; padding: 30px 28px 32px; border: 1px solid rgba(45,42,38,0.10); border-radius: 22px; background: rgba(255,255,255,0.46); }
-.plan-featured { border-color: rgba(168,138,109,0.34); background: rgba(255,255,255,0.64); }
-.plan-name { margin: 0; font-size: 19px; letter-spacing: -0.02em; color: var(--ink); }
-.plan-price { margin: 16px 0 0; font-size: clamp(1.9rem, 3vw, 2.5rem); line-height: 1; letter-spacing: -0.04em; color: var(--ink); }
-.plan-unit { font-family: 'Onest', sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0; color: var(--ink-soft); }
-.plan-terms { margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
-.plan .erp-list { margin-top: 22px; }
-.plan .btn-primary, .plan .btn-secondary { margin-top: 26px; align-self: flex-start; }
-.plan .btn-secondary + .btn-secondary { margin-top: 10px; }
-.plan-note { max-width: 68ch; margin: 36px auto 0; text-align: center; font-size: 15px; line-height: 1.8; color: var(--ink); }
+.plan-grid { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.plan { display: flex; flex-direction: column; padding: 30px 28px 30px; border: 1px solid rgba(45,42,38,0.10); border-radius: 24px; background: rgba(255,255,255,0.46); box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 16px 36px rgba(0,0,0,0.05); }
+.plan-for { margin: 0 0 8px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--bronze-ink); }
+.plan .sec-chip { margin-bottom: 8px; --chip-fg: var(--paper); }
+.plan-name { margin: 0; font-size: 22px; letter-spacing: -0.02em; color: var(--ink); }
+.plan-price { margin: 14px 0 0; font-size: clamp(2.2rem, 3.4vw, 2.9rem); line-height: 1; letter-spacing: -0.04em; color: var(--ink); font-weight: 600; }
+.plan-unit { margin-left: 8px; font-family: 'Onest', sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0; color: var(--ink-soft); }
+.plan-terms { margin: 12px 0 0; min-height: 44px; font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+.plan-cta { margin-top: 20px; width: 100%; justify-content: center; }
+.plan-list { list-style: none; margin: 24px 0 0; padding: 22px 0 0; border-top: 1px solid rgba(45,42,38,0.10); display: flex; flex-direction: column; gap: 11px; }
+.plan-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; line-height: 1.5; color: var(--ink); }
+.plan-list iconify-icon { flex: 0 0 auto; margin-top: 1px; color: var(--sage); }
+.plan-more { margin-top: auto; padding-top: 22px; font-size: 14px; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.plan-save { margin: auto 0 0; padding-top: 22px; font-size: 14px; line-height: 1.6; color: rgba(239,236,230,0.78); }
+.plan-featured { background: var(--ink); border-color: var(--ink); box-shadow: 0 24px 50px rgba(0,0,0,0.22); }
+.plan-featured .plan-name, .plan-featured .plan-price, .plan-featured .plan-list li { color: var(--paper); }
+.plan-featured .plan-terms, .plan-featured .plan-unit { color: rgba(239,236,230,0.70); }
+.plan-featured .plan-list { border-top-color: rgba(239,236,230,0.16); }
+.plan-featured .plan-list iconify-icon { color: var(--sage); }
+.plan-featured .btn-primary { background: var(--bronze); color: #15100b; }
+.plan-note { max-width: 68ch; margin: 28px auto 0; text-align: center; font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
+.compare { max-width: 1120px; margin: 44px auto 0; overflow-x: auto; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 14.5px; color: var(--ink); }
+.compare-table th, .compare-table td { padding: 13px 16px; border-bottom: 1px solid rgba(45,42,38,0.10); text-align: center; }
+.compare-table th[scope="row"] { text-align: left; font-weight: 400; color: var(--ink); }
+.compare-table thead th { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.02em; }
+.compare-table thead th:first-child { text-align: left; }
+.compare-table td { color: var(--ink-soft); }
+.compare-table .is-both { background: rgba(45,42,38,0.05); color: var(--ink); font-weight: 500; }
+.compare-table thead .is-both { background: var(--ink); color: var(--paper); border-radius: 10px 10px 0 0; }
+@media (max-width: 980px) { .plan-grid { grid-template-columns: 1fr; } .plan-terms { min-height: 0; } }
 
 /* Wordmark: "Light" light, "Industrial" heavy (logo D1) */
 .wordmark { display: flex; flex-direction: column; font-family: 'Poppins', sans-serif; font-weight: 800; line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase; color: var(--text); }
@@ -1040,8 +1060,8 @@ h1.font-head { font-weight: 500; }
 .erp-frame .erp-lede, .roi-frame .roi-intro { margin-left: 0; margin-right: 0; }
 
 /* Module page hero: copy left, photo right. Shared by Intake, ERP and the lander. */
-.erp-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 48px; align-items: center; }
-.erp-hero-grid .erp-head { margin-bottom: 0; max-width: none; }
-.erp-hero-media { margin: 0; border-radius: 22px; overflow: hidden; min-height: 380px; border: 1px solid rgba(45,42,38,0.06); box-shadow: 0 18px 42px rgba(0,0,0,0.08); }
-.erp-hero-media img { display: block; width: 100%; height: 100%; min-height: 380px; object-fit: cover; filter: saturate(0.88); }
-@media (max-width: 900px) { .erp-hero-grid { grid-template-columns: 1fr; gap: 28px; } .erp-hero-media, .erp-hero-media img { min-height: 240px; } }
+.erp-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 48px; align-items: start; }
+.erp-hero-grid .erp-head { margin-bottom: 0; max-width: none; padding-top: 8px; }
+.erp-hero-media { margin: 0; border-radius: 22px; overflow: hidden; aspect-ratio: 4 / 3; max-height: 460px; border: 1px solid rgba(45,42,38,0.06); box-shadow: 0 18px 42px rgba(0,0,0,0.08); }
+.erp-hero-media img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.88); }
+@media (max-width: 900px) { .erp-hero-grid { grid-template-columns: 1fr; gap: 28px; } }
