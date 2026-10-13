@@ -79,7 +79,8 @@
   border: 1px solid rgba(45,42,38,0.10); border-radius: 22px;
   background: rgba(255,255,255,0.46);
 }
-.erp-card-title { margin: 18px 0 0; font-size: 19px; letter-spacing: -0.02em; color: var(--ink); }
+.erp-card-head { display: flex; align-items: center; gap: 14px; }
+.erp-card-title { margin: 0; font-size: 19px; letter-spacing: -0.02em; color: var(--ink); }
 .erp-list { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
 /* A bronze dash instead of a bullet, drawn with padding rather than list-style
    so the wrapped second line lines up under the first. */

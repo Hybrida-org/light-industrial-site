@@ -72,12 +72,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css?v=20261013c">
+<link rel="stylesheet" href="../styles.css?v=20261013d">
 <!-- The two module pages are one layout, so they share one stylesheet rather
      than keeping two copies of the same panel, card and role rules in step.
      intake.css holds only what this page adds: the three-screen process flow. -->
-<link rel="stylesheet" href="../erp/erp.css?v=20261013c">
-<link rel="stylesheet" href="intake.css?v=20261013c">
+<link rel="stylesheet" href="../erp/erp.css?v=20261013d">
+<link rel="stylesheet" href="intake.css?v=20261013d">
 </head>
 
 <body>
@@ -238,10 +238,12 @@
           <div class="erp-grid erp-grid-3">
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:document-text-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Supplier quotes</h3>
+                <h3 class="erp-card-title font-head">Supplier quotes</h3>
+              </div>
               <ul class="erp-list">
                 <li>Every line, quantity, unit and price comes out as a list, with the supplier's reference and validity date.</li>
                 <li>Quotes from different suppliers for the same job line up side by side in your codes, so you compare like with like.</li>
@@ -250,10 +252,12 @@
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:bill-list-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Supplier invoices</h3>
+                <h3 class="erp-card-title font-head">Supplier invoices</h3>
+              </div>
               <ul class="erp-list">
                 <li>Invoice number, date, VAT and every line read, including multi-page invoices and credit lines.</li>
                 <li>Checked against what you ordered and what arrived. A price that moved, a quantity that differs or a line nobody ordered is flagged before you pay.</li>
@@ -262,10 +266,12 @@
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:delivery-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Delivery notes</h3>
+                <h3 class="erp-card-title font-head">Delivery notes</h3>
+              </div>
               <ul class="erp-list">
                 <li>Photographed at the gate and matched line by line to the order. Booked in full, or short, with what is still outstanding on record.</li>
                 <li>Supplier pack sizes convert to your units. A box of 100 books as 100, a 6 m length books as 6 m.</li>
@@ -278,10 +284,12 @@
           <div class="erp-grid erp-grid-3" style="margin-top: 28px;">
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:camera-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">How documents reach us</h3>
+                <h3 class="erp-card-title font-head">How documents reach us</h3>
+              </div>
               <ul class="erp-list">
                 <li>Photograph it on a phone, straight from the yard or the counter.</li>
                 <li>Forward the supplier's email to your own intake address. Attachments are read, the email body too.</li>
@@ -290,10 +298,12 @@
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:gallery-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">File types and conditions</h3>
+                <h3 class="erp-card-title font-head">File types and conditions</h3>
+              </div>
               <ul class="erp-list">
                 <li>PDF, JPG, PNG and HEIC, scans and photos.</li>
                 <li>Skew, shadow, creases and a thumb in the corner are fine. Handwritten quantities and corrections on a printed document are read.</li>
@@ -302,10 +312,12 @@
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:shield-check-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">What it learns per supplier</h3>
+                <h3 class="erp-card-title font-head">What it learns per supplier</h3>
+              </div>
               <ul class="erp-list">
                 <li>Each supplier's layout, item names and pack sizes are remembered after the first confirm.</li>
                 <li>The same supplier line never needs matching twice. New lines are proposed, approved once, then remembered.</li>
@@ -347,30 +359,36 @@
           <div class="erp-grid erp-grid-3">
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:graph-up-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Price changes per supplier, caught as they happen</h3>
+                <h3 class="erp-card-title font-head">Price changes per supplier, caught as they happen</h3>
+              </div>
               <ul class="erp-list">
                 <li>A line comes in dearer than last time and you hear about it before the invoice is paid.</li>
               </ul>
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:clock-circle-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Suppliers who deliver short or late, flagged early</h3>
+                <h3 class="erp-card-title font-head">Suppliers who deliver short or late, flagged early</h3>
+              </div>
               <ul class="erp-list">
                 <li>Short deliveries and slow lead times show up as a pattern, not a surprise at month end.</li>
               </ul>
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:chart-2-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">What you will run out of, forecast from the flow</h3>
+                <h3 class="erp-card-title font-head">What you will run out of, forecast from the flow</h3>
+              </div>
               <ul class="erp-list">
                 <li>What comes in and what goes out on job cards adds up to a view of what runs short next, so you order before it bites.</li>
               </ul>
@@ -410,30 +428,36 @@
           <div class="erp-grid">
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:calculator-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Works with QuickBooks, Xero and Sage</h3>
+                <h3 class="erp-card-title font-head">Works with QuickBooks, Xero and Sage</h3>
+              </div>
               <ul class="erp-list">
                 <li>Works with QuickBooks, Xero and Sage.</li>
               </ul>
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:box-minimalistic-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Feeds your ERP or stock system in your own codes</h3>
+                <h3 class="erp-card-title font-head">Feeds your ERP or stock system in your own codes</h3>
+              </div>
               <ul class="erp-list">
                 <li>We map what we read to your own stock codes, so it lands in the system you already use.</li>
               </ul>
             </article>
 
             <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
-              <span class="erp-card-icon" aria-hidden="true">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:refresh-linear" width="20" height="20"></iconify-icon>
               </span>
-              <h3 class="erp-card-title font-head">Learns each supplier from your corrections</h3>
+                <h3 class="erp-card-title font-head">Learns each supplier from your corrections</h3>
+              </div>
               <ul class="erp-list">
                 <li>Every correction you make is kept. The next document from that supplier reads better than the last.</li>
               </ul>
