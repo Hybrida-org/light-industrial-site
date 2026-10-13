@@ -137,12 +137,10 @@
     }
 
     result.setAttribute('data-state', 'pays');
-    var be = s.net > 0 ? null : SavingsSums.breakEvenDocsPerWeek(readInputs());
     verdict.textContent = s.net > 0 ? 'It pays for itself' : 'What you save';
     headline.innerHTML = 'You save <span class="roi-amount">' + rands(s.totalSaved) + '</span> a month.';
     sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time (' + hoursWord(hours) + ') plus <b>' + rands(s.moneySaved) +
-      '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.' +
-      (s.net > 0 ? '' : (be ? ' It pays for itself from <b>' + be + ' notes a week</b>.' : ''));
+      '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.';
   }
 
   // ── The sum, written out ────────────────────────────────────────────────────
@@ -171,9 +169,9 @@
         ? 'Less ' + rands(s.price) + ' a month for document intake, ' + SETTINGS.tiers[0].upToDocs + ' documents included.'
         : 'Less an estimated ' + rands(s.price) + ' a month at ' + s.docs + ' documents. Over ' +
           SETTINGS.tiers[0].upToDocs + ' documents, talk to us for a price.',
-      '<b>' + (s.net > 0 ? 'Pays for itself from month 1' : 'Pays for itself from ' + (SavingsSums.breakEvenDocsPerWeek(readInputs()) || 'a higher volume') + ' notes a week') + '.</b>'
+      s.net > 0 ? '<b>Pays for itself from month 1.</b>' : ''
     ];
-    el('roiWorking').innerHTML = lines.map(function (line) { return '<li>' + line + '</li>'; }).join('');
+    el('roiWorking').innerHTML = lines.filter(Boolean).map(function (line) { return '<li>' + line + '</li>'; }).join('');
   }
 
   // Only the first band is published. The upper bands stay in sums.js because

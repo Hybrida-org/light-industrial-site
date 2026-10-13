@@ -854,7 +854,7 @@
 
   <!-- The maths lives in one file, shared with the results page. This script only
        reads the sliders, paints the teaser, and hands the numbers over. -->
-  <script src="savings/sums.js?v=20261013f"></script>
+  <script src="savings/sums.js?v=20261013g"></script>
   <script src="savings/tooltips.js"></script>
   <!-- After sums.js: the form reads the lead endpoint and the fallback email
        address from there, so one paste turns on every form on the site. -->
@@ -929,13 +929,11 @@
       against.textContent = 'Measured against document intake at ' + rands(s.price) +
         ' a month at ' + s.docs + ' documents, ex VAT.';
 
-      var be = s.net > 0 ? null : sums.breakEvenDocsPerWeek(readInputs());
       result.setAttribute('data-state', 'pays');
       verdict.textContent = 'Money saved a month';
       headline.innerHTML = '<span class="calc-amount">' + rands(s.totalSaved) + '</span>';
       sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
-        '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.' +
-        (s.net > 0 ? '' : (be ? ' It pays for itself from <b>' + be + ' notes a week</b>.' : ''));
+        '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.';
     }
 
     // One of only two key events, so it has to mean something: it fires once, and
