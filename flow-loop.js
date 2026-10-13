@@ -40,7 +40,6 @@
   function cardHtml(st, i) {
     return '<button type="button" class="loop-card' + (st.ai ? ' is-ai' : ' is-you') + '" data-i="' + i +
       '" style="grid-row:' + CARD_POS[i][0] + ';grid-column:' + CARD_POS[i][1] + '">' +
-      '<svg class="loop-ring" aria-hidden="true"><rect pathLength="1"/></svg>' +
       '<span class="loop-ci"><iconify-icon icon="' + st.icon + '"></iconify-icon></span>' +
       '<span class="loop-cl">' + st.t + '</span>' +
       '<span class="loop-who">' + (st.ai ? 'AI' : 'You') + '</span></button>';
@@ -48,8 +47,7 @@
   function connHtml(c, i) {
     var v = c[2] === 'v', r = c[2] === 'r';
     var x1 = v ? '50%' : (r ? '100%' : '0'), x2 = v ? '50%' : (r ? '0' : '100%');
-    return '<svg class="loop-conn' + (v ? ' is-v' : '') + '" data-c="' + i + '" aria-hidden="true" style="grid-row:' + c[0] + ';grid-column:' + c[1] + '">' +
-      '<line pathLength="1" x1="' + x1 + '" y1="' + (v ? '0' : '50%') + '" x2="' + x2 + '" y2="' + (v ? '100%' : '50%') + '"/></svg>';
+    return '<div class="loop-conn' + (v ? ' is-v' : (r ? ' is-r' : '')) + '" data-c="' + i + '" aria-hidden="true" style="grid-row:' + c[0] + ';grid-column:' + c[1] + '"><span class="loop-dot"></span></div>';
   }
 
   document.querySelectorAll('[data-flow-loop]').forEach(function (host) {
@@ -68,14 +66,7 @@
     loop.style.setProperty('--ring-ms', RING_MS + 'ms');
     loop.style.setProperty('--conn-ms', CONN_MS + 'ms');
 
-    function sizeRings() {
-      cards.forEach(function (c) {
-        var r = c.querySelector('rect'), w = c.offsetWidth, h = c.offsetHeight;
-        r.setAttribute('x', 0.5); r.setAttribute('y', 0.5);
-        r.setAttribute('width', Math.max(w - 1, 0)); r.setAttribute('height', Math.max(h - 1, 0));
-        r.setAttribute('rx', 15.5);
-      });
-    }
+    function sizeRings() {}
     function clearTimers() { timers.forEach(clearTimeout); timers = []; }
     function words(i) {
       tEl.textContent = STEPS[i].t; dEl.textContent = STEPS[i].d; iEl.textContent = i + 1;

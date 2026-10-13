@@ -1080,3 +1080,35 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 @media (max-width: 720px) { .compare-table { font-size: 12px; } .compare-table th, .compare-table td { padding: 10px 6px; } .compare-table th[scope="row"] { white-space: normal; } .compare-table thead th { font-size: 11px; } }
 #modules .price-exvat { max-width: none; margin-left: 0; text-align: left; }
 .price-answer .price-figure > span:last-child { margin-left: 10px; }
+
+/* Flow look: white cards, soft shadow, dashed connectors with a travelling dot,
+   a glow ring on the active card. Overrides the traced-border rules above. */
+.loop-grid { grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr; grid-template-rows: auto 40px auto; padding: 14px 10px; }
+.loop-card { background: #fbfaf7; border: 1.5px solid transparent; border-radius: 18px; padding: 22px 12px 18px; gap: 10px; box-shadow: 0 10px 28px rgba(45,42,38,0.08); clip-path: none; }
+.loop-card.is-ai { background: #fbfaf7; border-color: transparent; }
+.loop-card.is-you { border-style: solid; background: #fbfaf7; }
+.loop-card.is-active { transform: scale(1.05); border-color: var(--bronze); box-shadow: 0 0 0 6px rgba(168,138,109,0.16), 0 16px 36px rgba(45,42,38,0.14); }
+.loop-card.is-ai.is-active { border-color: #8ea596; box-shadow: 0 0 0 6px rgba(142,165,150,0.22), 0 16px 36px rgba(45,42,38,0.14); }
+.loop-card.is-done { box-shadow: 0 10px 28px rgba(45,42,38,0.08); }
+.loop-ci { width: 64px; height: 64px; border-radius: 16px; font-size: 26px; background: rgba(168,138,109,0.16); color: var(--bronze-ink); border: 0; }
+.loop-card.is-ai .loop-ci { background: rgba(142,165,150,0.22); color: #3f5d4b; }
+.loop-card.is-active .loop-ci, .loop-card.is-ai.is-active .loop-ci { background: var(--ink); color: var(--paper); }
+.loop-card.is-ai.is-active .loop-ci { background: #3f5d4b; }
+.loop-cl { font-size: 14px; }
+.loop-card.is-ai::after, .loop-card.is-ai.is-drawing::after { display: none; animation: none; }
+.loop-card.is-ai.is-drawing .loop-ci { animation: none; }
+.loop-ring { display: none; }
+/* connectors: dashed line with a dot running along it, all the time */
+.loop-conn { position: relative; width: 100%; height: 100%; z-index: 1; }
+.loop-conn::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed rgba(45,42,38,0.22); }
+.loop-conn.is-v::before { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 2px dashed rgba(45,42,38,0.22); }
+.loop-dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--bronze); top: calc(50% - 4.5px); left: -4px; opacity: 0; animation: loop-dot-h 2.4s ease-in-out infinite; }
+.loop-conn.is-r .loop-dot { animation-name: loop-dot-hr; }
+.loop-conn.is-v .loop-dot { left: calc(50% - 4.5px); top: -4px; animation-name: loop-dot-v; }
+.loop-conn[data-c="1"] .loop-dot, .loop-conn[data-c="4"] .loop-dot { background: var(--sage); animation-delay: 0.8s; }
+.loop-conn[data-c="2"] .loop-dot, .loop-conn[data-c="5"] .loop-dot { animation-delay: 1.6s; }
+.loop-conn.is-v .loop-dot { background: #3f5d4b; animation-delay: 0.4s; }
+@keyframes loop-dot-h { 0% { left: -4px; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: calc(100% - 5px); opacity: 0; } }
+@keyframes loop-dot-hr { 0% { left: calc(100% - 5px); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: -4px; opacity: 0; } }
+@keyframes loop-dot-v { 0% { top: -4px; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: calc(100% - 5px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .loop-dot { animation: none; opacity: 0; } }
