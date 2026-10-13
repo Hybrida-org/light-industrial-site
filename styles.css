@@ -1090,3 +1090,11 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .flow-det-d { margin: 0; }
 .flow-host { margin-top: 36px; }
 .flow-section-head { max-width: 760px; }
+
+/* Calculator teaser: two live figures stacked. */
+.calc-figures { display: flex; flex-direction: column; gap: 18px; }
+.calc-figure { padding-top: 16px; border-top: 1px solid rgba(45,42,38,0.10); }
+.calc-figure:first-child { padding-top: 0; border-top: 0; }
+.calc-figures .calc-headline { font-size: clamp(1.9rem, 2.8vw, 2.6rem); margin-top: 6px; }
+.calc-figures .calc-sub { font-size: 15px; margin-top: 4px; }
+.calc-figures .calc-figure:first-child .calc-amount { color: #4f6b59; }

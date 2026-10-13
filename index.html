@@ -95,7 +95,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261013g">
+<link rel="stylesheet" href="styles.css?v=20261013h">
 </head>
 
 <body class="">
@@ -627,9 +627,18 @@
                  placeholder, never the real figure rendered small. A visitor who
                  opens the inspector finds nothing we haven't shown them. -->
             <div class="calc-result" id="calcResult" data-state="pays" aria-live="polite">
-              <p class="calc-verdict" id="calcVerdict"></p>
-              <p class="calc-headline font-head" id="calcHeadline"></p>
-              <p class="calc-sub" id="calcSub"></p>
+              <div class="calc-figures">
+                <div class="calc-figure">
+                  <p class="calc-verdict">Hours back a month</p>
+                  <p class="calc-headline font-head"><span class="calc-amount" id="calcHours">0</span> hours</p>
+                  <p class="calc-sub" id="calcHoursSub"></p>
+                </div>
+                <div class="calc-figure">
+                  <p class="calc-verdict" id="calcVerdict">Pays for itself</p>
+                  <p class="calc-headline font-head" id="calcHeadline"></p>
+                  <p class="calc-sub" id="calcSub"></p>
+                </div>
+              </div>
 
               <ul class="calc-teaser-list">
                 <li>The month it pays for itself, and what you keep after that</li>
@@ -890,27 +899,27 @@
       var s = sums.calculate(readInputs());
       var hours = Math.round(s.hoursSaved);
 
+      el('calcHours').textContent = hours;
+      el('calcHoursSub').textContent = hoursWord(Math.round(s.currentHours)) + ' on paperwork today, ' +
+        hoursWord(Math.round(s.newHours)) + ' with intake.';
+
       against.textContent = 'Measured against document intake at ' + rands(s.price) +
         ' a month at ' + s.docs + ' documents, ex VAT.';
 
       if (s.net > 0) {
         result.setAttribute('data-state', 'pays');
-        verdict.textContent = 'It pays for itself';
-        headline.innerHTML = 'Pays for itself from <span class="calc-amount">month 1</span>.';
-        sub.innerHTML = 'After that you keep money every month, and get <b>' +
-          hoursWord(hours) + '</b> of somebody&rsquo;s time back.';
+        verdict.textContent = 'Pays for itself';
+        headline.innerHTML = '<span class="calc-amount">Month 1</span>';
+        sub.innerHTML = 'The time is worth <b>' + rands(s.labourSaved) + '</b> a month. You keep <b>' +
+          rands(s.net) + '</b> after the subscription.';
         return;
       }
 
-      // The rands do not carry it at these numbers, so the hours lead instead —
-      // shown in full, because a covered number nobody can uncover is not a tease.
-      // Never a negative on the page, and never "never".
       result.setAttribute('data-state', 'time');
-      verdict.textContent = 'What you get back';
-      headline.innerHTML = 'Win back <span class="calc-amount">' + hoursWord(hours) +
-        '</span> every month.';
-      sub.innerHTML = 'At these numbers the hours come back before the money does. ' +
-        'The full results show you exactly where the line is.';
+      verdict.textContent = 'Pays for itself';
+      headline.innerHTML = '<span class="calc-amount">Not yet</span>';
+      sub.innerHTML = 'The time is worth <b>' + rands(s.labourSaved) + '</b> a month, <b>' +
+        rands(-s.net) + '</b> short of the subscription at these numbers.';
     }
 
     // One of only two key events, so it has to mean something: it fires once, and
