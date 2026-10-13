@@ -74,3 +74,23 @@
 .flow3-title { margin: 20px 0 8px; font-size: 18px; letter-spacing: -0.02em; color: var(--ink); }
 .flow3-text { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
 @media (max-width: 900px) { .flow3 { grid-template-columns: 1fr; gap: 28px; } .flow3-link { display: none; } }
+
+/* Four screens with the order record as the spine. */
+.flow3-4 { grid-template-columns: 1fr 28px 1fr 28px 1.15fr 28px 1fr; }
+.flow3-4 .flow3-link { margin-top: 140px; }
+.flow3-4 .flow3-screen { font-size: 12px; min-height: 286px; }
+.flow3-4 .flow3-table td, .flow3-4 .flow3-table th { padding: 8px 10px; }
+.flow3-4 .flow3-photo { height: 118px; }
+.flow3-stage-lead .flow3-screen { border-color: var(--brick); box-shadow: 0 0 0 3px rgba(155,59,45,0.10), 0 14px 34px rgba(0,0,0,0.08); }
+.flow3-chain { list-style: none; margin: 0; padding: 10px 14px 12px 14px; position: relative; }
+.flow3-chain::before { content: ""; position: absolute; left: 19px; top: 18px; bottom: 18px; width: 1px; background: rgba(45,42,38,0.18); }
+.flow3-chain li { position: relative; display: flex; justify-content: space-between; gap: 8px; padding: 7px 0 7px 20px; }
+.flow3-chain li::before { content: ""; position: absolute; left: 1px; top: 12px; width: 9px; height: 9px; border-radius: 50%; background: #fbfaf7; border: 2px solid var(--sage); }
+.flow3-chain li.is-short::before { border-color: var(--brick); background: var(--brick); }
+.flow3-chain li.is-price::before { border-color: var(--bronze); background: var(--bronze); }
+.flow3-chain li.is-open::before { border-color: rgba(45,42,38,0.35); }
+.flow3-chain li span:last-child { color: var(--ink-soft); white-space: nowrap; }
+.flow3-chain li.is-short span:last-child { color: var(--brick); }
+.flow3-chain li.is-price span:last-child { color: var(--bronze-ink); }
+@media (max-width: 1100px) { .flow3-4 { grid-template-columns: 1fr 1fr; gap: 24px; } .flow3-4 .flow3-link { display: none; } }
+@media (max-width: 640px) { .flow3-4 { grid-template-columns: 1fr; } }

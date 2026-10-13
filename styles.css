@@ -1066,3 +1066,27 @@ h1.font-head { font-weight: 500; }
 .erp-hero-media img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.88); }
 @media (max-width: 900px) { .erp-hero-grid { grid-template-columns: 1fr; gap: 28px; } }
 .erp-hero-grid .erp-cta-row { justify-content: flex-start; }
+
+/* One list marker everywhere: the small brick sheet from the logo. Wins over the
+   page stylesheets by the ul. prefix. */
+ul.erp-list li::before, ul.module-list-v1 li::before, ul.proof-list li::before, ul.calc-teaser-list li::before, ul.price-includes li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em; width: 11px; height: 4px; border-radius: 1px; background: var(--brick); transform: rotate(-6deg); opacity: 1;
+}
+ul.erp-list li, ul.module-list-v1 li, ul.proof-list li, ul.calc-teaser-list li, ul.price-includes li { padding-left: 22px; position: relative; }
+ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.calc-teaser-list li::after, ul.price-includes li::after { content: none; }
+.legal-article ul li::marker { color: var(--brick); }
+
+/* Flow loop, restyled to the brand: paper cards, brick for the two AI steps, no
+   badges or pulse rings. Overrides the token block above. */
+.flow-wr { max-width: 640px; --flow-card: #fbfaf7; --flow-detail: rgba(255,255,255,0.5); --flow-border: rgba(45,42,38,0.14); --flow-border-strong: rgba(45,42,38,0.28); --dot-1: var(--bronze); --dot-2: var(--brick); --dot-3: var(--sage); }
+.flow-c--ai { background: #fbfaf7; border: 1.5px solid var(--brick); }
+.flow-c.is-active { box-shadow: 0 0 0 1.5px var(--ink), 0 10px 22px rgba(45,42,38,0.12); }
+.flow-tag { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; background: var(--brick); color: var(--paper); white-space: nowrap; }
+.flow-ci--bronze { background: rgba(168,138,109,0.20); color: var(--bronze-ink); }
+.flow-ci--brick { background: rgba(155,59,45,0.12); color: var(--brick); }
+.flow-ci--sage { background: rgba(142,165,150,0.26); color: #3f5d4b; }
+.flow-ci--ink { background: rgba(45,42,38,0.10); color: var(--ink); }
+.flow-det { text-align: left; }
+.flow-det-d { margin: 0; }
+.flow-host { margin-top: 36px; }
+.flow-section-head { max-width: 760px; }

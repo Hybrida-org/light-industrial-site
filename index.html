@@ -95,7 +95,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261013f">
+<link rel="stylesheet" href="styles.css?v=20261013g">
 </head>
 
 <body class="">
@@ -261,6 +261,30 @@
     </div>
   </section>
 
+  <!-- HOW IT WORKS: the order-to-stock loop, rendered by flow-loop.js (shared with the Intake page). -->
+  <section id="how" class="studio-section">
+    <div class="studio-shell">
+      <div class="studio-frame">
+        <div class="flow-inner">
+          <div class="flow-section-head">
+            <p class="sec-chip reveal-fade">How it works</p>
+            <h2 class="modules-title-v1 font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">From purchase order to stock on the shelf, on the paperwork you already get.</span>
+            </h2>
+            <p class="modules-text-v1 reveal-para" style="transition-delay: 0.18s;">
+              Every document your supplier sends is read and linked to the order it belongs to. Tap a step.
+            </p>
+          </div>
+          <div class="flow-host reveal-fade" data-flow-loop style="transition-delay: 0.3s;"></div>
+          <div class="cta-row reveal-fade" style="transition-delay: 0.36s; justify-content: flex-start; margin-top: 36px;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>Book a 30-min demo</a>
+            <a href="/document-intake/" class="btn-secondary" data-site-link="document-intake">See Document Intake</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 4: FOUR OUTCOMES -->
   <section id="features" class="ritual-panels-section">
     <div class="ritual-panels-shell">
@@ -399,15 +423,25 @@
           </div>
 
           <div class="audience-grid-v1">
-            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.12s; flex-basis: calc(50% - 9px);">
-              <span class="audience-icon-v1"><iconify-icon icon="solar:fire-bold-duotone"></iconify-icon></span>
-              <h3 class="audience-name-v1 font-head">Manufacturers and fabricators</h3>
-              <p class="audience-text-v1">Producers: manufacturers, fabricators, engineering shops, refrigeration and panel builders. You buy to a job, and the parts bill has to tie back to the quote.</p>
+            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.12s;">
+              <span class="audience-icon-v1"><iconify-icon icon="solar:buildings-2-bold-duotone"></iconify-icon></span>
+              <h3 class="audience-name-v1 font-head">Manufacturers</h3>
+              <p class="audience-text-v1">Production that only runs when parts land on time and the counts can be trusted. PCB, furniture, plastics, signage, refrigeration.</p>
             </article>
-            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.20s; flex-basis: calc(50% - 9px);">
+            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.18s;">
+              <span class="audience-icon-v1"><iconify-icon icon="solar:fire-bold-duotone"></iconify-icon></span>
+              <h3 class="audience-name-v1 font-head">Fabricators and engineering workshops</h3>
+              <p class="audience-text-v1">Steel and metal shops turning a supplier quote into a job card without retyping, with the parts bill tied back to the quote.</p>
+            </article>
+            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.24s;">
               <span class="audience-icon-v1"><iconify-icon icon="solar:box-bold-duotone"></iconify-icon></span>
-              <h3 class="audience-name-v1 font-head">Wholesalers and merchants</h3>
-              <p class="audience-text-v1">Middlemen: wholesalers, trade suppliers, tile shops and merchants. Stock comes in by the pallet and goes out by the piece, and the count has to hold.</p>
+              <h3 class="audience-name-v1 font-head">Wholesalers and distributors</h3>
+              <p class="audience-text-v1">Stock in by the pallet, out by the piece. High volumes matched to suppliers and booked without hand-keying.</p>
+            </article>
+            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.30s;">
+              <span class="audience-icon-v1"><iconify-icon icon="solar:cart-large-minimalistic-bold-duotone"></iconify-icon></span>
+              <h3 class="audience-name-v1 font-head">Trade counters and merchants</h3>
+              <p class="audience-text-v1">Builders' merchants, tile shops and trade suppliers whose counter and contract sales depend on a live on-hand number.</p>
             </article>
           </div>
           <div class="flex flex-wrap justify-center gap-3 mt-10 reveal-fade" style="transition-delay: 0.3s;">
@@ -722,6 +756,7 @@
   <!-- FOOTER -->
   <footer class="site-footer-v1" data-site-footer></footer>
 
+  <script src="flow-loop.js?v=20261013g"></script>
   <script src="site-chrome.js"></script>
 
   <script>

@@ -72,9 +72,10 @@
    ten-line one sitting beside it. */
 .erp-grid {
   max-width: 1120px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; align-items: start;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; align-items: stretch;
 }
 .erp-card {
+  display: flex; flex-direction: column;
   padding: 28px 28px 30px;
   border: 1px solid rgba(45,42,38,0.10); border-radius: 22px;
   background: rgba(255,255,255,0.46);
