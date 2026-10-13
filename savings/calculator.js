@@ -154,18 +154,22 @@
     // Below an hour a month there is no story to tell, in rands or in time. Say so
     // plainly — it costs us a lead and buys the one thing worth more.
     if (hours < 1) {
-      verdict.textContent = 'Too small to bother';
-      headline.innerHTML = 'It does not pay <span class="roi-amount">yet</span>.';
-      sub.innerHTML = 'At this volume the paperwork is not costing you enough to be worth ' +
-        'automating. A cheap capture tool and a spreadsheet will do the job for less than we ' +
-        'charge. Come back when the deliveries start piling up.';
+      verdict.textContent = 'A small sum at this volume';
+      headline.innerHTML = 'Under an hour a month <span class="roi-amount">today</span>.';
+      sub.innerHTML = 'At this volume the paperwork is not costing you much time yet. Book a call and we will tell you ' +
+        'straight whether it is worth it now, or when the deliveries pick up.';
       return;
     }
 
-    verdict.hidden = true;
-    headline.innerHTML = 'Win back <span class="roi-amount">' + hoursWord(hours) + '</span> every month.';
-    sub.innerHTML = 'The time you&rsquo;d save is worth about <b>' + rands(s.labourSaved) +
-      '</b> a month. That does not cover the monthly price. You&rsquo;d get the hours back, but not the money.';
+    var be = SavingsSums.breakEvenDocsPerWeek(readInputs());
+    var perHour = Math.round(-s.net / hours);
+    verdict.textContent = 'Pays for itself';
+    headline.innerHTML = be
+      ? 'Pays for itself from <span class="roi-amount">' + be + ' notes a week</span>.'
+      : 'Win back <span class="roi-amount">' + hoursWord(hours) + '</span> every month.';
+    sub.innerHTML = 'At ' + inputs.docsPerWeek.value + ' a week you get <b>' + hoursWord(hours) + '</b> back for <b>' +
+      rands(-s.net) + '</b> a month net, which is <b>' + rands(perHour) + ' an hour</b> for the time you get back. ' +
+      (be ? 'Every extra delivery note a week moves it closer.' : 'Talk to us about the price at your volume.');
   }
 
   // ── The sum, written out ────────────────────────────────────────────────────
@@ -189,7 +193,7 @@
         ? 'Less ' + rands(s.price) + ' a month for document intake, ' + SETTINGS.tiers[0].upToDocs + ' documents included.'
         : 'Less an estimated ' + rands(s.price) + ' a month at ' + s.docs + ' documents. Over ' +
           SETTINGS.tiers[0].upToDocs + ' documents, talk to us for a price.',
-      '<b>' + (s.net > 0 ? rands(s.net) + ' net a month' : 'Short by ' + rands(-s.net) + ' a month at these numbers') + '.</b>'
+      '<b>' + (s.net > 0 ? rands(s.net) + ' net a month' : rands(-s.net) + ' a month net for ' + hoursWord(Math.round(s.hoursSaved)) + ' back') + '.</b>'
     ];
     if (s.net > 0) lines.push('Set-up is included, so it pays for itself from month 1.');
     el('roiWorking').innerHTML = lines.map(function (line) { return '<li>' + line + '</li>'; }).join('');

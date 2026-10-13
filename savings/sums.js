@@ -155,6 +155,17 @@
     };
   }
 
+  // The documents-a-week at which the sum turns positive, holding the other
+  // inputs. Null when it does not within the slider range.
+  function breakEvenDocsPerWeek(input) {
+    var sl = SETTINGS.sliders.docsPerWeek;
+    for (var d = input.docsPerWeek; d <= sl.max; d += sl.step) {
+      var r = calculate({ docsPerWeek: d, minsPerDoc: input.minsPerDoc, salary: input.salary, errorRate: input.errorRate, shortRate: input.shortRate });
+      if (r.net > 0) return d;
+    }
+    return null;
+  }
+
   // Month one is where they are today; month six is where matching memory lands
   // them. The curve between is a smooth decay, not a straight line, because most
   // of the learning happens in the first few weeks.
@@ -174,6 +185,7 @@
     QUERY_KEYS: QUERY_KEYS,
     resultsLinkFor: resultsLinkFor,
     calculate: calculate,
+    breakEvenDocsPerWeek: breakEvenDocsPerWeek,
     errorCurve: errorCurve,
     priceFor: priceFor,
     rands: rands,
