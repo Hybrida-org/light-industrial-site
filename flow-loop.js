@@ -57,7 +57,7 @@
         '<div class="loop-copy"><div class="loop-shot"></div><p class="loop-copy-k">Step <span class="loop-copy-i">1</span> of ' + STEPS.length + ' <span class="loop-copy-who"></span></p>' +
         '<h3 class="loop-copy-t"></h3><p class="loop-copy-d"></p></div>' +
         '<div class="loop-right"><div class="loop-grid">' + STEPS.map(cardHtml).join('') + CONN_POS.map(connHtml).join('') + '</div>' +
-        '<p class="loop-legend"><span class="is-ai">AI</span><span class="is-you">You</span> Four of the eight steps are yours. Each one takes a minute.</p></div>' +
+        '<p class="loop-legend"><span class="is-ai">AI</span><span class="is-you">You</span> Four of the eight steps are yours. Each one takes a minute. The AI steps are Document Intake, the rest is Core ERP.</p></div>' +
       '</div>';
     var loop = host.querySelector('.loop');
     var cards = host.querySelectorAll('.loop-card');
