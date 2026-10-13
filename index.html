@@ -622,6 +622,25 @@
                 <input type="range" id="calcShort" aria-describedby="calcShortHint">
               </div>
 
+            </div>
+
+            <!-- The teaser. One number, half of it covered. The blurred part is a
+                 placeholder, never the real figure rendered small. A visitor who
+                 opens the inspector finds nothing we haven't shown them. -->
+            <div class="calc-result" id="calcResult" data-state="pays" aria-live="polite">
+              <div class="calc-figures">
+                <div class="calc-figure">
+                  <p class="calc-verdict">Hours back a month</p>
+                  <p class="calc-headline font-head"><span class="calc-amount" id="calcHours">0</span> hours</p>
+                  <p class="calc-sub" id="calcHoursSub"></p>
+                </div>
+                <div class="calc-figure">
+                  <p class="calc-verdict" id="calcVerdict">Money saved a month</p>
+                  <p class="calc-headline font-head" id="calcHeadline"></p>
+                  <p class="calc-sub" id="calcSub"></p>
+                </div>
+              </div>
+
               <ul class="calc-teaser-list">
                 <li>The month it pays for itself, and what you keep after that</li>
                 <li>Hours won back, and where your mistakes go over six months</li>
