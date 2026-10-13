@@ -1112,3 +1112,10 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 @keyframes loop-dot-hr { 0% { left: calc(100% - 5px); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: -4px; opacity: 0; } }
 @keyframes loop-dot-v { 0% { top: -4px; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: calc(100% - 5px); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .loop-dot { animation: none; opacity: 0; } }
+
+/* Full-width flow: no words panel. */
+.loop { grid-template-columns: 1fr; gap: 0; }
+.loop-copy { display: none; }
+.loop-grid { grid-template-columns: 1fr 44px 1fr 44px 1fr 44px 1fr; grid-template-rows: auto 48px auto; max-width: 1080px; margin: 0 auto; }
+.loop-card { padding: 26px 16px 22px; }
+.loop-cl { font-size: 15px; }
