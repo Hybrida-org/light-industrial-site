@@ -432,27 +432,28 @@ box-shadow: inset 0 1px 0 rgba(231,227,218,0.03);
 /* TWO MODULES (dark) — same card language as the outcomes cards, two-up. */
 .modules-section-v1 { position: relative; }
 .modules-shell-v1 { max-width: 1500px; margin: 0 auto; padding: 0 24px 24px; }
-.modules-frame-v1 { position: relative; overflow: hidden; border: 1px solid rgba(231,227,218,0.08); border-radius: 30px; background: radial-gradient(circle at top center, rgba(168,138,109,0.08), transparent 18%), linear-gradient(180deg, rgba(23,26,28,0.94), rgba(14,16,17,0.98)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 30px 90px rgba(0,0,0,0.20); }
-.modules-frame-v1::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 16%, transparent 84%, rgba(255,255,255,0.015)), radial-gradient(circle at 82% 16%, rgba(142,165,150,0.04), transparent 20%); }
+/* Paper, same frame as the outcomes section, so the page alternates dark / paper under the hero. */
+.modules-frame-v1 { position: relative; overflow: hidden; border: 1px solid rgba(45,42,38,0.08); border-radius: 30px; background: radial-gradient(circle at top center, rgba(168,138,109,0.05), transparent 22%), radial-gradient(circle at 14% 18%, rgba(142,165,150,0.04), transparent 20%), linear-gradient(180deg, #f2eee8 0%, #e8e3db 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.52), 0 24px 60px rgba(0,0,0,0.06); }
+.modules-frame-v1::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent 18%, transparent 82%, rgba(255,255,255,0.10)), radial-gradient(circle at 84% 18%, rgba(142,165,150,0.04), transparent 20%); }
 .modules-inner-v1 { position: relative; z-index: 1; padding: 84px 34px; }
 .modules-top-v1 { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 48px; }
 .modules-kicker-v1 { margin: 0 0 -4px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
-.modules-title-v1 { margin: 0; max-width: none; font-size: clamp(2.5rem, 4.5vw, 4.9rem); line-height: 0.92; letter-spacing: -0.065em; color: var(--text); }
+.modules-title-v1 { margin: 0; max-width: none; font-size: clamp(2.5rem, 4.5vw, 4.9rem); line-height: 0.92; letter-spacing: -0.065em; color: var(--ink); }
 .modules-title-v1 .reveal-line { display: block; }
-.modules-text-v1 { margin: 2px 0 0; max-width: 700px; font-size: 16px; line-height: 1.9; color: rgba(231,227,218,0.72); }
+.modules-text-v1 { margin: 2px 0 0; max-width: 700px; font-size: 16px; line-height: 1.9; color: var(--ink-soft); }
 .modules-grid-v1 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
-.module-card-v1 { min-width: 0; display: flex; flex-direction: column; border-radius: 30px; border: 1px solid rgba(231,227,218,0.07); background: linear-gradient(180deg, rgba(231,227,218,0.05), rgba(231,227,218,0.02)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 18px 42px rgba(0,0,0,0.22); padding: 20px 20px 24px; }
-.module-card-media-v1 { position: relative; overflow: hidden; min-height: 300px; border-radius: 22px; background: #1a1d1f; border: 1px solid rgba(231,227,218,0.06); }
+.module-card-v1 { min-width: 0; display: flex; flex-direction: column; border-radius: 30px; border: 1px solid rgba(45,42,38,0.06); background: linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.14)), rgba(255,255,255,0.18); box-shadow: inset 0 1px 0 rgba(255,255,255,0.62), 0 18px 42px rgba(0,0,0,0.06); padding: 20px 20px 24px; }
+.module-card-media-v1 { position: relative; overflow: hidden; min-height: 300px; border-radius: 22px; background: #d8d3cb; border: 1px solid rgba(45,42,38,0.06); }
 .module-card-image-v1 { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms ease, filter 700ms ease; filter: saturate(0.84) brightness(0.88); }
 .module-card-v1:hover .module-card-image-v1 { transform: scale(1.035); filter: saturate(0.90) brightness(0.95); }
 .module-card-media-v1::after { content: ""; position: absolute; inset: 0; border-radius: 22px; background: linear-gradient(180deg, rgba(13,15,16,0.00) 0%, rgba(13,15,16,0.10) 58%, rgba(13,15,16,0.42) 100%); pointer-events: none; }
 .module-card-frame-v1 { position: absolute; inset: 16px; z-index: 2; border-radius: 16px; border: 1px solid rgba(168,138,109,0.20); opacity: 0.82; transition: border-color 220ms ease, opacity 220ms ease; }
 .module-card-v1:hover .module-card-frame-v1 { border-color: rgba(168,138,109,0.34); opacity: 1; }
 .module-card-body-v1 { display: flex; flex-direction: column; flex: 1; padding: 16px 8px 0; }
-.module-index-v1 { display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; margin: 0 0 14px; border-radius: 999px; border: 1px solid rgba(168,138,109,0.16); background: rgba(168,138,109,0.08); font-size: 10px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(214,190,166,0.88); width: fit-content; }
-.module-title-v1 { margin: 0; font-size: 29px; line-height: 1; letter-spacing: -0.05em; color: var(--text); }
+.module-index-v1 { display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; margin: 0 0 14px; border-radius: 999px; border: 1px solid rgba(168,138,109,0.16); background: rgba(168,138,109,0.08); font-size: 10px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); width: fit-content; }
+.module-title-v1 { margin: 0; font-size: 29px; line-height: 1; letter-spacing: -0.05em; color: var(--ink); }
 .module-list-v1 { margin: 18px 0 26px; padding: 0; list-style: none; display: grid; gap: 10px; }
-.module-list-v1 li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.75; color: rgba(231,227,218,0.82); }
+.module-list-v1 li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
 .module-list-v1 li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 9px; height: 1px; background: var(--bronze); }
 /* margin-top:auto keeps the two buttons on one line even when the two blocks
    of copy end up different lengths. */
