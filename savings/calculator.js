@@ -319,7 +319,7 @@
         'Minutes per document today: ' + inputs.minsPerDoc.value,
         'Monthly cost of the person handling them: ' + rands(+inputs.salary.value),
         'Captured lines needing updates: ' + inputs.errorRate.value + '%',
-        'Deliveries arriving short or wrong: ' + inputs.shortRate.value + '%',
+        'Short or wrong deliveries: ' + inputs.shortRate.value + '%',
         '',
         'Documents a month: ' + s.docs,
         'Hours saved a month: ' + Math.round(s.hoursSaved),
