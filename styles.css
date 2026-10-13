@@ -1030,7 +1030,11 @@ h1.font-head { font-weight: 500; }
 .ritual-panels-title .reveal-line, .testimonials-title-v1 .reveal-line, .final-title-v1 .reveal-line, .price-title .reveal-line, .calc-title .reveal-line { display: inline; }
 .ritual-panels-text, .testimonials-text-v1, .final-text-v1 { margin-left: 0; margin-right: 0; font-size: 17px; line-height: 1.7; }
 
-/* Section chip: small label top-left of a section, brick accent from the logo. */
-.sec-chip { display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin: 0 0 16px; padding: 7px 12px; border-radius: 999px; border: 1px solid rgba(155,59,45,0.38); background: rgba(155,59,45,0.10); font-family: 'Poppins', sans-serif; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--text); }
-.sec-chip::before { content: ""; width: 7px; height: 7px; border-radius: 999px; background: var(--brick); }
-.modules-top-v1 .sec-chip, .price-head .sec-chip, .calc-head .sec-chip, .final-head-v1 .sec-chip { color: var(--brick); }
+/* Section label: the brick sheet from the logo mark, then the label. No pill, no dot. */
+.sec-chip { display: inline-flex; align-items: center; gap: 10px; width: fit-content; margin: 0 0 18px; font-family: 'Poppins', sans-serif; font-size: 12px; line-height: 1; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--chip-fg, var(--text)); }
+.sec-chip::before { content: ""; width: 22px; height: 7px; border-radius: 1.5px; background: var(--brick); transform: rotate(-6deg); }
+/* Paper frames flip the chip text to brick. Dark frames keep the default pale text. */
+.modules-frame-v1, .price-frame, .calc-frame, .final-frame-v1, .studio-frame, .bottom-paper, .erp-frame, .roi-frame { --chip-fg: var(--brick); }
+/* Section heads sit top-left on every page. Specific enough to beat the page stylesheets. */
+.erp-frame .erp-head, .roi-frame .roi-head, .roi-frame .roi-extras-head { text-align: left; margin-left: 0; margin-right: 0; }
+.erp-frame .erp-lede, .roi-frame .roi-intro { margin-left: 0; margin-right: 0; }

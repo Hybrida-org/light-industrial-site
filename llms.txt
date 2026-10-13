@@ -27,6 +27,12 @@ faster than they get captured, and a specific person's day is being eaten by it.
 - Keeps a record of what was delivered, which the paper delivery note usually
   does not survive to provide.
 
+- AI agents on top of Document Intake watch the pattern across documents:
+  price changes per supplier, short or late deliveries, and a forecast of what
+  runs out next.
+- Core ERP has AI built in. Ask it about stock, job costs or supplier spend,
+  and let it draft purchase orders for approval.
+
 ## Pages
 
 - [Home](https://lightindustrial.co.za/): what it does, who it is for, how it
