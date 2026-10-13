@@ -72,7 +72,7 @@
 /* ── The people ────────────────────────────────────────────────────────────── */
 /* Four across. With one sentence each the cards are short, so the section is
    one screen instead of two scrolls of two-up cards. */
-.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .team-card {
   padding: 24px 22px 26px;
   border: 1px solid rgba(45,42,38,0.10); border-radius: 20px;
