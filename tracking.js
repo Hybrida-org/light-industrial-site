@@ -215,7 +215,7 @@ window.LI_TRACKING = {
   }, { passive: true });
 
   if (type === 'home' && window.IntersectionObserver) onReady(function () {
-    var el = document.getElementById('pricing');
+    var el = document.getElementById('pricing') || document.getElementById('modules');
     if (!el) return;
     var io = new IntersectionObserver(function (entries) {
       if (!entries.some(function (en) { return en.isIntersecting; })) return;
