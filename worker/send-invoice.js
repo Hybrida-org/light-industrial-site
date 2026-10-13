@@ -3,7 +3,7 @@
 //
 // Set these before it will work (see worker/README.md for the how):
 //   RESEND_API_KEY  (secret) — from https://resend.com/api-keys
-//   TO_EMAIL        (var)    — where invoices go, e.g. danika@lightindustrial.co.za
+//   TO_EMAIL        (var)    — where invoices go, e.g. donovan@lightindustrial.co.za
 //   FROM_EMAIL      (var)    — a verified sender on your Resend domain,
 //                              e.g. "Light Industrial <invoices@lightindustrial.co.za>"
 //   ALLOWED_ORIGIN  (var)    — the site allowed to POST here,

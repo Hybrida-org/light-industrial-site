@@ -45,7 +45,7 @@
      if you change one, change both. */
   var SETTINGS = (window.SavingsSums && window.SavingsSums.SETTINGS) || {};
   var LEAD_ENDPOINT = SETTINGS.leadEndpoint || '';
-  var CONTACT_EMAIL = SETTINGS.contactEmail || 'danika@lightindustrial.co.za';
+  var CONTACT_EMAIL = SETTINGS.contactEmail || 'donovan@lightindustrial.co.za';
 
   /* A real submission lands on its own page. A page load is a far more reliable
      conversion signal for Google Ads than a JavaScript event, which ad blockers

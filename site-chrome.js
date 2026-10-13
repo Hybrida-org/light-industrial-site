@@ -67,7 +67,7 @@
     return self.src.replace(/site-chrome\.js(\?.*)?$/, '');
   })();
 
-  var CONTACT_EMAIL = 'danika@lightindustrial.co.za';
+  var CONTACT_EMAIL = 'donovan@lightindustrial.co.za';
   var CONTACT_MAILTO = 'mailto:' + CONTACT_EMAIL + '?subject=Light%20Industrial%20enquiry';
   var DEMO_URL = 'https://calendly.com/donovan-lightindustrial/30min';
 

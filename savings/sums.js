@@ -44,7 +44,7 @@
     // forms fall back to the visitor's own email app, exactly like the homepage
     // form does. It never silently swallows a lead.
     leadEndpoint: '',
-    contactEmail: 'danika@lightindustrial.co.za',
+    contactEmail: 'donovan@lightindustrial.co.za',
     thankYouUrl: '/thank-you/',
     resultsUrl: '/savings/'
   };
