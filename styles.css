@@ -1014,4 +1014,4 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .brand-svg { width: 48px; height: 48px; flex: 0 0 auto; }
 .site-footer-mark-v1 .brand-svg { width: 42px; height: 42px; }
 .site-footer-mark-v1 { border: none; background: none; }
-h1.font-head { font-weight: 600; }
+h1.font-head { font-weight: 500; }
