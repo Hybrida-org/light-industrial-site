@@ -48,6 +48,14 @@ faster than they get captured, and a specific person's day is being eaten by it.
   email, a 30-minute walkthrough booking, and a form that asks how much supplier
   paperwork arrives each week.
 
+## Legal
+
+- [Privacy](https://lightindustrial.co.za/privacy/), [Terms](https://lightindustrial.co.za/terms/),
+  [Accessibility](https://lightindustrial.co.za/accessibility/) and
+  [Data handling](https://lightindustrial.co.za/data-handling/): POPIA privacy policy,
+  website terms, WCAG 2.2 AA statement, and how prospects' demo documents are
+  handled (processed in South Africa, read-only, deleted within 30 days).
+
 ## Pricing
 
 All prices in South African rand, per month, excluding VAT. Month to month, no

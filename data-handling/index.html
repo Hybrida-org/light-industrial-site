@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<script src="/tracking.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data handling for demos and trials | Light Industrial</title>
+<meta name="description" content="How Light Industrial handles the supplier documents prospects send us for a demo or trial: processed in South Africa, read-only access, deleted within 30 days.">
+<link rel="canonical" href="https://lightindustrial.co.za/data-handling/">
+<link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="Data handling for demos and trials | Light Industrial">
+<meta property="og:description" content="How Light Industrial handles the supplier documents prospects send us for a demo or trial: processed in South Africa, read-only access, deleted within 30 days.">
+<meta property="og:url" content="https://lightindustrial.co.za/data-handling/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/01-capture.jpg">
+<meta property="og:image:alt" content="A delivery note being photographed on a workshop floor">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Data handling for demos and trials",
+  "description": "How Light Industrial handles the supplier documents prospects send us for a demo or trial: processed in South Africa, read-only access, deleted within 30 days.",
+  "url": "https://lightindustrial.co.za/data-handling/",
+  "dateModified": "2026-10-13",
+  "inLanguage": "en-ZA",
+  "isPartOf": { "@type": "WebSite", "name": "Light Industrial", "url": "https://lightindustrial.co.za/" },
+  "publisher": { "@type": "Organization", "name": "Light Industrial", "url": "https://lightindustrial.co.za/" }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+/* Legal pages: the nav sits in normal flow (no hero), and the article reads on
+   the same paper panel the Home page uses for its outcomes section. Only the
+   long-form text styles are added here. Tailwind's preflight resets lists and
+   headings, so they are set back explicitly. */
+.legal-header { padding: 24px; }
+.legal-header .nav-wrap { position: static; transform: none; left: auto; margin: 0 auto; }
+.skip-link { position: absolute; left: -999px; top: 8px; z-index: 100; padding: 10px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); }
+.skip-link:focus { left: 16px; }
+.legal-article { max-width: 72ch; margin: 0 auto; color: var(--ink-soft); font-size: 16px; line-height: 1.8; }
+.legal-kicker { margin: 0 0 14px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
+.legal-article h1 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.2rem); line-height: 1.04; letter-spacing: -0.045em; color: var(--ink); }
+.legal-updated { margin: 16px 0 0; font-size: 14px; color: var(--ink-soft); }
+.legal-toc { margin: 32px 0 0; padding: 20px 24px; border: 1px solid rgba(45,42,38,0.08); border-radius: 20px; background: rgba(255,255,255,0.34); }
+.legal-toc p { margin: 0 0 8px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
+.legal-toc ol { margin: 0; padding-left: 20px; list-style: decimal; columns: 2; column-gap: 24px; font-size: 15px; }
+.legal-toc li { break-inside: avoid; padding: 2px 0; }
+.legal-article h2 { margin: 44px 0 12px; font-size: 24px; line-height: 1.2; letter-spacing: -0.03em; color: var(--ink); scroll-margin-top: 24px; }
+.legal-article h3 { margin: 24px 0 8px; font-size: 17px; font-weight: 600; color: var(--ink); }
+.legal-article p { margin: 0 0 14px; }
+.legal-article ul { margin: 0 0 14px; padding-left: 22px; list-style: disc; }
+.legal-article li { margin: 0 0 6px; }
+.legal-article a { color: var(--bronze-ink); text-decoration: underline; text-underline-offset: 3px; }
+.legal-article a:hover { color: var(--ink); }
+.legal-article a:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; border-radius: 4px; }
+.legal-placeholder { display: block; margin: 0 0 14px; padding: 10px 14px; border-left: 3px solid var(--bronze); background: rgba(168,138,109,0.10); color: var(--ink); font-size: 15px; }
+.legal-table-wrap { overflow-x: auto; margin: 0 0 18px; }
+.legal-article table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.legal-article th, .legal-article td { padding: 10px 12px; border-bottom: 1px solid rgba(45,42,38,0.10); text-align: left; vertical-align: top; }
+.legal-article th { color: var(--ink); font-weight: 600; background: rgba(255,255,255,0.34); }
+.legal-article code { font-size: 13px; padding: 1px 5px; border-radius: 4px; background: rgba(45,42,38,0.07); color: var(--ink); }
+@media (max-width: 720px) { .legal-toc ol { columns: 1; } .outcomes-inner-v1 { padding: 48px 20px; } }
+</style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="legal-header">
+    <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+    <div class="nav-wrap" data-site-nav></div>
+  </header>
+
+  <main id="main">
+    <section class="outcomes-section-v1">
+      <div class="outcomes-shell-v1">
+        <div class="outcomes-frame-v1">
+          <div class="outcomes-inner-v1">
+            <article class="legal-article">
+              <p class="legal-kicker">Legal</p>
+              <h1 class="font-head">How we handle your documents during a demo or trial</h1>
+              <p class="legal-updated">Last updated 13 October 2026</p>
+              <nav class="legal-toc" aria-label="On this page">
+                <p>On this page</p>
+                <ol>
+                  <li><a href="#what-this-page-covers">What this page covers</a></li>
+                  <li><a href="#where-your-documents-are-processed">Where your documents are processed</a></li>
+                  <li><a href="#what-we-do-with-them">What we do with them</a></li>
+                  <li><a href="#access-to-your-systems-is-read-only">Access to your systems is read-only</a></li>
+                  <li><a href="#personal-information-on-documents">Personal information on documents</a></li>
+                  <li><a href="#when-we-delete-demo-documents">When we delete demo documents</a></li>
+                  <li><a href="#who-can-see-them">Who can see them</a></li>
+                  <li><a href="#what-we-do-not-claim">What we do not claim</a></li>
+                  <li><a href="#questions">Questions</a></li>
+                </ol>
+              </nav>
+
+<p>This page is for prospects who send us their own supplier quotes, invoices and delivery notes during a demo or trial. It says where those documents go, who sees them and when they are deleted. It is short because the rules are short.</p>
+<p>For the public website and its cookies, see the <a href="../privacy/index.html">privacy policy</a>. Once you subscribe, the subscription agreement covers your production data.</p>
+
+<h2 id="what-this-page-covers">What this page covers</h2>
+<p>A demo or trial works best on your own paperwork. You may email us a batch of documents, upload them during a session, or forward them from your inbox. This page covers those documents and any stock list or supplier list you give us alongside them.</p>
+
+<h2 id="where-your-documents-are-processed">Where your documents are processed</h2>
+<p>Documents you give us for a demo or trial are stored and processed in South Africa.</p>
+
+<h2 id="what-we-do-with-them">What we do with them</h2>
+<p>We use them to run your demo or trial and to show you the result: the lines we read, the stock codes we matched and the exceptions we flagged. We do not use them for anything else. We do not share them with other customers or prospects.</p>
+
+<h2 id="access-to-your-systems-is-read-only">Access to your systems is read-only</h2>
+<p>If you connect a stock, ERP or accounting system during a trial, we read from it to match your stock codes and suppliers. We do not write to it. Nothing in your live system changes during a demo or trial unless you ask us in writing to switch that on.</p>
+
+<h2 id="personal-information-on-documents">Personal information on documents</h2>
+<p>Supplier paperwork often carries names, email addresses and phone numbers of supplier staff and of your own people. We treat that as your information. We do not add those people to any marketing list, and we do not contact them.</p>
+
+<h2 id="when-we-delete-demo-documents">When we delete demo documents</h2>
+<p>We delete demo and trial documents when you ask, and in any case within 30 days of the demo or the end of the trial. We confirm by email when it is done. If you subscribe, the documents you choose to keep move under the subscription agreement instead.</p>
+
+<h2 id="who-can-see-them">Who can see them</h2>
+<p>Only the people running your demo or trial can open your documents. Light Industrial is a small team in Cape Town, so in practice that is one or two named people. Access is removed when the documents are deleted.</p>
+
+<h2 id="what-we-do-not-claim">What we do not claim</h2>
+<p>We do not hold ISO 27001, SOC 2 or any other security certification, and we do not claim one. If your procurement process needs a questionnaire answered, send it and we will answer it plainly.</p>
+
+<h2 id="questions">Questions</h2>
+<p>Email <a href="mailto:danika@lightindustrial.co.za">danika@lightindustrial.co.za</a>. Ask for deletion the same way, and we will confirm when it is done.</p>
+
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-v1" data-site-footer></footer>
+
+  <script src="../site-chrome.js"></script>
+
+  <script>
+  // Fade the footer in as it comes up. Same behaviour as the other pages.
+  (function () {
+    var els = document.querySelectorAll('.reveal-fade');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+  </script>
+</body></html>

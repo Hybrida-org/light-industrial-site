@@ -46,9 +46,10 @@
   ];
 
   var LEGAL_PAGES = [
-    { label: 'Privacy',       folder: 'privacy',       built: false },
-    { label: 'Terms',         folder: 'terms',         built: false },
-    { label: 'Accessibility', folder: 'accessibility', built: false }
+    { label: 'Privacy',       folder: 'privacy',       built: true },
+    { label: 'Terms',         folder: 'terms',         built: true },
+    { label: 'Accessibility', folder: 'accessibility', built: true },
+    { label: 'Data handling', folder: 'data-handling', built: true }
   ];
 
   // Footer-only links: real pages that don't earn a slot in the top nav.
@@ -166,7 +167,10 @@
 
     var legalLinks = LEGAL_PAGES.map(function (page) {
       return '<a href="' + hrefFor(page) + '">' + page.label + '</a>';
-    }).join('\n              ');
+    }).join('\n              ') +
+      // Reopens the cookie banner from tracking.js. On a page without that
+      // script the link does nothing, which beats a dead href.
+      '\n              <a href="#" data-cookie-settings>Cookie settings</a>';
 
     return '' +
       '<div class="site-footer-shell-v1">' +
@@ -247,6 +251,12 @@
   fill('[data-site-footer]', footerMarkup());
   fill('[data-site-phone]', phoneMarkup());
   applySiteLinks();
+
+  var cookieLink = document.querySelector('[data-cookie-settings]');
+  if (cookieLink) cookieLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.LI_TRACKING && window.LI_TRACKING.openSettings && window.LI_TRACKING.openSettings();
+  });
 
   // Mobile menu toggle. It lives here because the button it drives is created
   // here — a page script could run before this file on a page that loads it late.
