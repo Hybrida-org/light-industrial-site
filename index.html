@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
+<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- "Light industrial" is a property and zoning term in South Africa — people search it
      to rent factory units. It stays as the brand name, never the category word.
@@ -1182,7 +1183,7 @@
         if (!response.ok) throw new Error('Worker returned ' + response.status);
         // A page load is a far more reliable conversion signal for Google Ads than a
         // JavaScript event, which ad blockers and flaky networks can swallow.
-        window.location.href = SETTINGS.thankYouUrl;
+        window.location.href = SETTINGS.thankYouUrl + '?src=hero';
       }).catch(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send';
