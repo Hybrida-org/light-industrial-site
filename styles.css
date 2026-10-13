@@ -989,71 +989,9 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .calc-figures .calc-sub { font-size: 15px; margin-top: 4px; }
 .calc-figures .calc-figure:first-child .calc-amount { color: #4f6b59; }
 
-/* ===== HOW IT WORKS — the order-to-stock loop (flow-loop.js) =====
-   Words for the step you are on down the left, six cards in a snake on the
-   right. A brick line traces the active card's border, then runs along the
-   connector to the next card. */
 .flow-inner { position: relative; z-index: 1; padding: 72px 34px 76px; }
 .flow-section-head { max-width: 1040px; }
-.loop { display: grid; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1.38fr); gap: 36px; align-items: stretch; margin-top: 36px; }
-.loop-copy { display: flex; flex-direction: column; min-height: 420px; padding: 22px 24px; border-radius: 20px; background: rgba(255,255,255,0.5); border: 1px solid rgba(45,42,38,0.10); }
-.loop-copy-k { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--bronze-ink); }
-.loop-copy-t { margin: 0; min-height: 1.3em; font-family: 'Poppins', sans-serif; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
-.loop-copy-d { margin: 10px 0 0; min-height: 7.2em; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
-.loop-copy-n { margin: 18px 0 0; font-size: 13px; color: var(--ink-soft); }
-.loop-grid { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr; grid-template-rows: auto 30px auto; align-items: stretch; padding: 14px 10px; }
-.loop-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 16px 10px 14px; border: 1px solid rgba(45,42,38,0.14); border-radius: 16px; background: #fbfaf7; cursor: pointer; font: inherit; color: inherit; z-index: 2; transition: background 180ms ease, border-color 180ms ease, transform 900ms cubic-bezier(.2,.7,.2,1), box-shadow 900ms ease; }
-.loop-card:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
-.loop-card.is-active { border-color: rgba(45,42,38,0.28); transform: scale(1.18); z-index: 3; box-shadow: 0 16px 36px rgba(0,0,0,0.14); }
-.loop-card:hover:not(.is-active) { transform: translateY(-2px); }
-.loop-card.is-ai { border-color: rgba(142,165,150,0.7); background: #e2e8e3; }
-.loop-card.is-you { border-style: dashed; background: #f2efe9; }
-.loop-ci { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; background: rgba(45,42,38,0.06); color: var(--ink); transition: background 180ms ease, color 180ms ease; }
-.loop-card.is-ai .loop-ci { background: rgba(142,165,150,0.28); color: #3f5d4b; }
-.loop-card.is-active .loop-ci { background: var(--ink); color: var(--paper); }
-.loop-card.is-ai.is-active .loop-ci { background: #3f5d4b; color: var(--paper); }
-.loop-cl { font-family: 'Poppins', sans-serif; font-size: 12.5px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); }
-.loop-cs { font-size: 11.5px; line-height: 1.35; color: var(--ink-soft); }
-.loop-who { margin-top: 4px; font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; background: rgba(45,42,38,0.07); color: var(--ink-soft); }
-.loop-card.is-ai .loop-who { background: #3f5d4b; color: var(--paper); }
-.loop-copy.is-ai .loop-copy-who { background: #3f5d4b; color: var(--paper); }
-.loop-copy-who { margin-left: 8px; padding: 2px 7px; border-radius: 3px; background: rgba(45,42,38,0.07); color: var(--ink-soft); font-size: 10px; }
-.loop-legend { margin: 14px 0 0; font-size: 13px; color: var(--ink-soft); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-.loop-legend span { font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
-.loop-legend .is-ai { background: #3f5d4b; color: var(--paper); }
-.loop-legend .is-you { border: 1px dashed rgba(45,42,38,0.35); color: var(--ink-soft); }
-/* The ring: a rect the size of the card, stroke drawn with pathLength=1. */
-.loop-ring { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); overflow: visible; pointer-events: none; }
-.loop-ring rect { fill: none; stroke: var(--bronze); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.loop-card.is-drawing .loop-ring rect { animation: loop-draw var(--ring-ms, 2600ms) linear forwards; }
-.loop-card.is-done .loop-ring rect { stroke-dashoffset: 0; }
-/* Connectors: a faint dashed line, with the brick line drawn over it. */
-.loop-conn { width: 100%; height: 100%; overflow: visible; position: relative; z-index: 1; }
-.loop-conn::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed rgba(45,42,38,0.25); }
-.loop-conn.is-v::before { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 1px dashed rgba(45,42,38,0.25); }
-.loop-conn line { stroke: var(--bronze); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.loop-conn.is-drawing line { animation: loop-draw var(--conn-ms, 700ms) linear forwards; }
-.loop-conn.is-done line { stroke-dashoffset: 0; }
-@keyframes loop-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-@media (prefers-reduced-motion: reduce) { .loop-ring rect, .loop-conn line { animation: none !important; } }
-
-/* The small screen for the active step, above the words. */
-.loop-shot { aspect-ratio: 260 / 140; margin: 0 0 16px; padding: 6px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.55); border: 1px solid rgba(45,42,38,0.10); opacity: 0; transform: translateY(4px); }
-.loop-art { display: block; width: 100%; height: auto; }
-.loop-shot.is-in { animation: loop-shot-in 320ms ease forwards; }
-@keyframes loop-shot-in { to { opacity: 1; transform: none; } }
-.loop-shot-bar { display: flex; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--ink); color: var(--paper); font-family: 'Poppins', sans-serif; font-size: 11px; }
-.loop-shot-row { display: flex; justify-content: space-between; gap: 10px; padding: 7px 12px; border-top: 1px solid rgba(45,42,38,0.08); }
-.loop-shot-row:first-child { border-top: 0; }
-.loop-shot-row span:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; }
-.loop-shot-row span:last-child { color: var(--ink-soft); white-space: nowrap; }
-.loop-shot-row.is-ok span:last-child { color: #3f5d4b; }
-.loop-shot-row.is-short span:last-child { color: var(--brick); }
-.loop-shot-row.is-price span:last-child { color: var(--bronze-ink); }
-.loop-shot-photo { height: 96px; overflow: hidden; }
-.loop-shot-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.85); }
 @media (max-width: 1100px) { .loop { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .loop-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; gap: 10px; } .loop-card { grid-row: auto !important; grid-column: auto !important; } .loop-conn { display: none; } }
 
 /* Dark variant of the module-page frame, same gradient as the dark Home
    sections. Flips the ink tokens so every rule in erp.css reads on it. */
@@ -1065,18 +1003,55 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .erp-frame.is-dark .btn-primary { background: var(--bronze); color: #15100b; }
 .erp-frame.is-dark .btn-secondary { color: var(--text); border-color: rgba(231,227,218,0.22); background: rgba(231,227,218,0.06); }
 .erp-frame.is-dark .erp-hero-media { border-color: rgba(231,227,218,0.08); }
-/* AI steps draw differently: a sage scan band sweeps the card and the icon tile
-   breathes while the ring traces. Human steps just trace. */
-.loop-card.is-ai::after { content: ""; position: absolute; left: 0; right: 0; top: -40%; height: 40%; background: linear-gradient(180deg, rgba(142,165,150,0) 0%, rgba(142,165,150,0.35) 50%, rgba(142,165,150,0) 100%); opacity: 0; pointer-events: none; }
-.loop-card.is-ai.is-drawing::after { animation: loop-scan var(--ring-ms, 2600ms) ease-in-out infinite; }
-.loop-card.is-ai { clip-path: inset(-2px round 16px); }
-@keyframes loop-scan { 0% { top: -40%; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
-.loop-card.is-ai.is-drawing .loop-ci { animation: loop-breathe 1.3s ease-in-out infinite; }
-@keyframes loop-breathe { 0%, 100% { box-shadow: 0 0 0 0 rgba(63,93,75,0.0); } 50% { box-shadow: 0 0 0 8px rgba(63,93,75,0.18); } }
-.loop-card.is-ai .loop-ring rect { stroke: #3f5d4b; }
-.loop-card.is-ai.is-drawing .loop-ring { filter: drop-shadow(0 0 4px rgba(63,93,75,0.45)); }
-@media (prefers-reduced-motion: reduce) { .loop-card.is-ai::after, .loop-card.is-ai.is-drawing .loop-ci { animation: none !important; } }
 .price-figure > span:last-child, .plan-price .plan-unit { margin-left: 6px; }
 @media (max-width: 720px) { .compare-table { font-size: 12px; } .compare-table th, .compare-table td { padding: 10px 6px; } .compare-table th[scope="row"] { white-space: normal; } .compare-table thead th { font-size: 11px; } }
 #modules .price-exvat { max-width: none; margin-left: 0; text-align: left; }
 .price-answer .price-figure > span:last-child { margin-left: 10px; }
+
+/* ===== HOW IT WORKS — the order-to-payment loop (flow-loop.js) =====
+   Words and a small drawing for the step you are on down the left, the eight
+   steps as a checklist on the right. A bronze spine fills from step to step,
+   finished steps get a tick, the step you are on is highlighted. */
+.flow-inner { position: relative; z-index: 1; padding: 72px 34px 76px; }
+.flow-section-head { max-width: 1040px; }
+.loop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: stretch; margin-top: 36px; }
+.loop-copy { display: flex; flex-direction: column; min-height: 420px; padding: 22px 24px; border-radius: 20px; background: rgba(255,255,255,0.5); border: 1px solid rgba(45,42,38,0.10); }
+.loop-copy-k { margin: 0 0 10px; font-family: 'Poppins', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--bronze-ink); }
+.loop-copy-who { margin-left: 8px; padding: 2px 7px; border-radius: 3px; background: rgba(45,42,38,0.07); color: var(--ink-soft); font-size: 10px; }
+.loop-copy.is-ai .loop-copy-who { background: #3f5d4b; color: var(--paper); }
+.loop-copy-t { margin: 0; min-height: 1.3em; font-family: 'Poppins', sans-serif; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
+.loop-copy-d { margin: 10px 0 0; min-height: 7.2em; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+.loop-shot { aspect-ratio: 260 / 140; margin: 0 0 16px; padding: 6px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.55); border: 1px solid rgba(45,42,38,0.10); opacity: 0; transform: translateY(4px); }
+.loop-shot.is-in { animation: loop-shot-in 320ms ease forwards; }
+@keyframes loop-shot-in { to { opacity: 1; transform: none; } }
+.loop-art { display: block; width: 100%; height: auto; }
+
+.loop-list { list-style: none; margin: 0; padding: 0; position: relative; }
+.loop-list::before { content: ""; position: absolute; left: 23px; top: 24px; bottom: 24px; width: 2px; background: rgba(45,42,38,0.12); border-radius: 2px; }
+.loop-step { position: relative; display: grid; grid-template-columns: 48px 1fr auto; gap: 16px; align-items: center; width: 100%; padding: 8px 12px 8px 0; border: 0; border-radius: 14px; background: transparent; text-align: left; cursor: pointer; font: inherit; color: inherit; transition: background 200ms ease, transform 500ms cubic-bezier(.2,.7,.2,1); }
+.loop-step:hover { background: rgba(255,255,255,0.4); }
+.loop-step:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+.loop-step.is-active { transform: translateX(6px); }
+/* the spine segment under this step's icon, filled while the step runs */
+.loop-seg { position: absolute; left: 23px; top: 50%; width: 2px; height: 0; background: var(--bronze); border-radius: 2px; z-index: 1; }
+.loop-step.is-drawing .loop-seg { animation: loop-seg-fill var(--ring-ms, 2600ms) linear forwards; }
+.loop-step.is-done .loop-seg { height: 100%; }
+.loop-step:last-child .loop-seg { display: none; }
+@keyframes loop-seg-fill { from { height: 0; } to { height: 100%; } }
+.loop-ci { position: relative; z-index: 2; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; background: #f3f0ea; border: 1px solid rgba(45,42,38,0.14); color: var(--ink); transition: background 220ms ease, border-color 220ms ease, color 220ms ease, transform 500ms cubic-bezier(.2,.7,.2,1); }
+.loop-step.is-ai .loop-ci { background: #e2e8e3; border-color: rgba(142,165,150,0.7); color: #3f5d4b; }
+.loop-step.is-active .loop-ci { transform: scale(1.12); background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.loop-step.is-ai.is-active .loop-ci { background: #3f5d4b; border-color: #3f5d4b; }
+.loop-step.is-done .loop-ci { background: var(--bronze); border-color: var(--bronze); color: var(--paper); }
+.loop-step.is-ai.is-done .loop-ci { background: #3f5d4b; border-color: #3f5d4b; }
+.loop-step.is-done .loop-ci iconify-icon { display: none; }
+.loop-step.is-done .loop-ci::after { content: ""; width: 12px; height: 7px; border-left: 2.5px solid var(--paper); border-bottom: 2.5px solid var(--paper); transform: rotate(-45deg) translateY(-2px); }
+.loop-cl { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink-soft); transition: color 200ms ease; }
+.loop-step.is-active .loop-cl, .loop-step.is-done .loop-cl { color: var(--ink); }
+.loop-who { font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; background: rgba(45,42,38,0.07); color: var(--ink-soft); }
+.loop-step.is-ai .loop-who { background: #3f5d4b; color: var(--paper); }
+/* AI steps pulse softly while they run */
+.loop-step.is-ai.is-drawing .loop-ci { animation: loop-breathe 1.3s ease-in-out infinite; }
+@keyframes loop-breathe { 0%, 100% { box-shadow: 0 0 0 0 rgba(63,93,75,0); } 50% { box-shadow: 0 0 0 8px rgba(63,93,75,0.18); } }
+@media (prefers-reduced-motion: reduce) { .loop-seg, .loop-ci, .loop-shot { animation: none !important; } }
+@media (max-width: 900px) { .loop { grid-template-columns: 1fr; gap: 24px; } .loop-copy { min-height: 0; } .loop-copy-d { min-height: 0; } }
