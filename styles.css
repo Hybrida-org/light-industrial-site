@@ -1015,3 +1015,7 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .site-footer-mark-v1 .brand-svg { width: 42px; height: 42px; }
 .site-footer-mark-v1 { border: none; background: none; }
 h1.font-head { font-weight: 500; }
+
+.works-with { display: inline-flex; align-items: center; gap: 16px; }
+.works-with > span { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; color: var(--ink); }
+.works-with img { height: 26px; width: auto; }
