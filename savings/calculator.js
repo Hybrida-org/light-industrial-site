@@ -297,6 +297,21 @@
       output.classList.remove('is-locked');
     }
 
+    function netBand(net) {
+      if (net < 0) return 'negative';
+      if (net < 5000) return '0-5k';
+      if (net < 20000) return '5-20k';
+      return '20k+';
+    }
+
+    // Tell GTM the gate opened and a lead went through. Never the email.
+    function track(s) {
+      window.dataLayer = window.dataLayer || [];
+      var page = window.location.pathname;
+      window.dataLayer.push({ event: 'calculator_results_unlocked', page_path: page, docs_per_week: +inputs.docsPerWeek.value, net_monthly_band: netBand(s.net) });
+      window.dataLayer.push({ event: 'lead_form_submit', form_source: 'savings-results-page', page_path: page });
+    }
+
     // Private browsing throws on sessionStorage rather than returning null, so
     // both of these swallow it: a visitor who blocks storage sees the gate again,
     // which is annoying but correct. Nothing else breaks.
@@ -377,6 +392,7 @@
       remember(email);
 
       var s = sums();
+      track(s);
       // They gave us the email, so they get the results either way. A Worker that
       // is down is our problem, not theirs.
       if (SETTINGS.leadEndpoint) {

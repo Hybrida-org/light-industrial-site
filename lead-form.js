@@ -52,8 +52,7 @@
      and flaky networks can swallow. */
   var THANK_YOU_URL = SETTINGS.thankYouUrl || (ROOT + 'thank-you/index.html');
 
-  // Fill this in the day the privacy page ships (HYBRIDA-912).
-  var PRIVACY_URL = '';
+  var PRIVACY_URL = '/privacy/';
 
   /* The same form, framed two ways. Only the words around it change — the
      fields, the checks and where it sends are shared, so there is one form to
@@ -171,7 +170,7 @@
     if (field.type === 'checkbox') {
       var link = PRIVACY_URL
         ? ' <a href="' + PRIVACY_URL + '">How we handle your data</a>'
-        : '';  // no privacy page yet (HYBRIDA-912) — a dead link is worse than none
+        : '';
       return '' +
         '<div class="lf-field lf-field--check">' +
         '  <label class="lf-check" for="' + id + '">' +
@@ -288,6 +287,18 @@
       return first;
     }
 
+    /* Tell GTM a lead went through. Never the email, name or phone. */
+    function trackSubmit(lead) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'lead_form_submit',
+        form_source: lead.source,
+        page_path: window.location.pathname,
+        delivery_notes_band: lead.delivery_notes_per_week || undefined,
+        stock_system: lead.stock_system || undefined
+      });
+    }
+
     function answers() {
       var lead = { source: slot.getAttribute('data-source') || 'website', variant: variantName, page: window.location.pathname };
       FIELDS.forEach(function (field) {
@@ -330,6 +341,7 @@
         body: JSON.stringify(lead)
       }).then(function (response) {
         if (!response.ok) throw new Error('Worker returned ' + response.status);
+        trackSubmit(lead);
         window.location.href = THANK_YOU_URL;
       }).catch(function () {
         submitBtn.disabled = false;
