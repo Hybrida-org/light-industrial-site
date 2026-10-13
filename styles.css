@@ -1002,7 +1002,7 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .loop-copy-d { margin: 10px 0 0; min-height: 7.2em; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
 .loop-copy-n { margin: 18px 0 0; font-size: 13px; color: var(--ink-soft); }
 .loop-grid { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr; grid-template-rows: auto 30px auto; align-items: stretch; padding: 14px 10px; }
-.loop-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 16px 10px 14px; border: 1px solid rgba(45,42,38,0.14); border-radius: 16px; background: #fbfaf7; cursor: pointer; font: inherit; color: inherit; transition: background 180ms ease, border-color 180ms ease, transform 320ms cubic-bezier(.2,.8,.2,1), box-shadow 320ms ease; }
+.loop-card { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 16px 10px 14px; border: 1px solid rgba(45,42,38,0.14); border-radius: 16px; background: #fbfaf7; cursor: pointer; font: inherit; color: inherit; z-index: 2; transition: background 180ms ease, border-color 180ms ease, transform 900ms cubic-bezier(.2,.7,.2,1), box-shadow 900ms ease; }
 .loop-card:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
 .loop-card.is-active { border-color: rgba(45,42,38,0.28); transform: scale(1.18); z-index: 3; box-shadow: 0 16px 36px rgba(0,0,0,0.14); }
 .loop-card:hover:not(.is-active) { transform: translateY(-2px); }
@@ -1028,7 +1028,7 @@ ul.erp-list li::after, ul.module-list-v1 li::after, ul.proof-list li::after, ul.
 .loop-card.is-drawing .loop-ring rect { animation: loop-draw var(--ring-ms, 2600ms) linear forwards; }
 .loop-card.is-done .loop-ring rect { stroke-dashoffset: 0; }
 /* Connectors: a faint dashed line, with the brick line drawn over it. */
-.loop-conn { width: 100%; height: 100%; overflow: visible; position: relative; }
+.loop-conn { width: 100%; height: 100%; overflow: visible; position: relative; z-index: 1; }
 .loop-conn::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dashed rgba(45,42,38,0.25); }
 .loop-conn.is-v::before { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 1px dashed rgba(45,42,38,0.25); }
 .loop-conn line { stroke: var(--bronze); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
