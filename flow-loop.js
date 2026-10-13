@@ -17,13 +17,13 @@
     { t: 'You accept it', s: 'It becomes the order', icon: 'solar:check-circle-linear',
       d: 'Accept the quote and it becomes the firm order. Nothing is retyped.',
       shot: bar('Quotes for PO-0612', '3 in') + row('Steelmart', 'R18,420, accepted', 'is-ok') + row('Metalco', 'R19,100') + row('Bolt and Nut', 'R18,900') },
-    { t: 'Photograph the delivery note', s: 'At the gate, on a phone', icon: 'solar:camera-linear', ai: true,
+    { t: 'Photograph the delivery note', s: 'At the gate, on a phone', icon: 'solar:camera-linear',
       d: 'When the truck arrives, photograph the delivery note. We read it on the spot and match it to the order. We book partial deliveries as partial.',
       shot: '<div class="loop-shot-photo"><img src="/public/01-capture.jpg" alt="" loading="lazy"></div>' + row('DN 48213.jpg', 'Gate, 08:12') },
-    { t: 'We check every line', s: 'Short lines and moved prices flagged', icon: 'solar:checklist-minimalistic-linear',
+    { t: 'We check every line', s: 'Short lines and moved prices flagged', icon: 'solar:checklist-minimalistic-linear', ai: true,
       d: 'We flag a short quantity, a price that moved or a line nobody ordered for a one-tap check. We guess nothing.',
       shot: bar('DN 48213 vs PO-0612', '4 lines') + row('BLT-M12-40', '200 of 200', 'is-ok') + row('ANG-50-5', '12 of 12', 'is-ok') + row('DSC-115', '10 of 12, short', 'is-short') + row('WIR-09', 'R412 to R450', 'is-price') },
-    { t: 'Stock updates', s: 'Short balance stays open', icon: 'solar:box-minimalistic-linear',
+    { t: 'Stock updates', s: 'Short balance stays open', icon: 'solar:box-minimalistic-linear', ai: true,
       d: 'Stock on hand and cost update in the units you count in. The two discs still owed stay open on the order. We file the photo against the movement.',
       shot: bar('GRN 2211 booked', '09:14') + row('BLT-M12-40', '340 to 540') + row('ANG-50-5', '18 to 30') + row('DSC-115', '2 still owed', 'is-short') + row('Photo', 'Filed', 'is-ok') },
     { t: 'We read the invoice', s: 'Matched to quote, order and delivery', icon: 'solar:bill-list-linear', ai: true,
@@ -38,12 +38,12 @@
   var CONN_POS = [[1, 2, 'h'], [1, 4, 'h'], [1, 6, 'h'], [2, 7, 'v'], [3, 6, 'h'], [3, 4, 'h'], [3, 2, 'h']];
 
   function cardHtml(st, i) {
-    return '<button type="button" class="loop-card' + (st.ai ? ' is-ai' : '') + '" data-i="' + i +
+    return '<button type="button" class="loop-card' + (st.ai ? ' is-ai' : ' is-you') + '" data-i="' + i +
       '" style="grid-row:' + CARD_POS[i][0] + ';grid-column:' + CARD_POS[i][1] + '">' +
       '<svg class="loop-ring" aria-hidden="true"><rect pathLength="1"/></svg>' +
       '<span class="loop-ci"><iconify-icon icon="' + st.icon + '"></iconify-icon></span>' +
       '<span class="loop-cl">' + st.t + '</span><span class="loop-cs">' + st.s + '</span>' +
-      (st.ai ? '<span class="loop-ai">AI</span>' : '') + '</button>';
+      '<span class="loop-who">' + (st.ai ? 'AI does this' : 'You') + '</span></button>';
   }
   function connHtml(c, i) {
     var v = c[2] === 'v';
@@ -54,14 +54,15 @@
   document.querySelectorAll('[data-flow-loop]').forEach(function (host) {
     host.innerHTML =
       '<div class="loop">' +
-        '<div class="loop-copy"><div class="loop-shot"></div><p class="loop-copy-k">Step <span class="loop-copy-i">1</span> of ' + STEPS.length + '</p>' +
+        '<div class="loop-copy"><div class="loop-shot"></div><p class="loop-copy-k">Step <span class="loop-copy-i">1</span> of ' + STEPS.length + ' <span class="loop-copy-who"></span></p>' +
         '<h3 class="loop-copy-t"></h3><p class="loop-copy-d"></p></div>' +
-        '<div class="loop-grid">' + STEPS.map(cardHtml).join('') + CONN_POS.map(connHtml).join('') + '</div>' +
+        '<div class="loop-right"><div class="loop-grid">' + STEPS.map(cardHtml).join('') + CONN_POS.map(connHtml).join('') + '</div>' +
+        '<p class="loop-legend"><span class="is-ai">AI does this</span><span class="is-you">Your part</span> Four of the eight steps are yours. Each one takes a minute.</p></div>' +
       '</div>';
     var loop = host.querySelector('.loop');
     var cards = host.querySelectorAll('.loop-card');
     var conns = host.querySelectorAll('.loop-conn');
-    var tEl = host.querySelector('.loop-copy-t'), dEl = host.querySelector('.loop-copy-d'), iEl = host.querySelector('.loop-copy-i'), shotEl = host.querySelector('.loop-shot');
+    var kEl = host.querySelector('.loop-copy-who'), tEl = host.querySelector('.loop-copy-t'), dEl = host.querySelector('.loop-copy-d'), iEl = host.querySelector('.loop-copy-i'), shotEl = host.querySelector('.loop-shot');
     var cur = 0, timers = [], running = false;
     loop.style.setProperty('--ring-ms', RING_MS + 'ms');
     loop.style.setProperty('--conn-ms', CONN_MS + 'ms');
@@ -77,6 +78,7 @@
     function clearTimers() { timers.forEach(clearTimeout); timers = []; }
     function words(i) {
       tEl.textContent = STEPS[i].t; dEl.textContent = STEPS[i].d; iEl.textContent = i + 1;
+      kEl.textContent = STEPS[i].ai ? 'AI does this' : 'Your part';
       shotEl.innerHTML = STEPS[i].shot; shotEl.classList.remove('is-in'); void shotEl.offsetWidth; shotEl.classList.add('is-in');
     }
     function reset() {

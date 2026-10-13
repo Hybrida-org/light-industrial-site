@@ -108,3 +108,10 @@
 @media (max-width: 560px) {
   .team-grid { grid-template-columns: 1fr; }
 }
+
+.powered-by { display: inline-flex; align-items: center; gap: 12px; margin-top: 22px; padding: 10px 16px 10px 10px; border-radius: 14px; border: 1px solid rgba(45,42,38,0.12); background: rgba(255,255,255,0.5); text-decoration: none; color: var(--ink); }
+.powered-by img { width: 44px; height: auto; display: block; }
+.powered-by span { display: flex; flex-direction: column; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 16px; line-height: 1.1; }
+.powered-by small { font-family: 'Onest', sans-serif; font-weight: 400; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
+.intro-text a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+h2.about-sub { font-size: clamp(1.9rem, 2.8vw, 2.8rem); line-height: 1.05; letter-spacing: -0.04em; max-width: none; }

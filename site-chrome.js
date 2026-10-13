@@ -203,7 +203,7 @@
       '        </div>' +
       '      </div>' +
       '      <div class="site-footer-bottom-v1 reveal-fade" style="transition-delay: 0.24s;">' +
-      '        <div class="site-footer-meta-v1">© 2026 Light Industrial. Document intelligence and operations software.</div>' +
+      '        <div class="site-footer-meta-v1">© 2026 Light Industrial, a <a href="https://hybrida.co.za" target="_blank" rel="noopener">Hybrida</a> product. Document intelligence and operations software.</div>' +
       '        <div class="site-footer-legal-v1">' + legalLinks + '</div>' +
       '      </div>' +
       '    </div>' +
