@@ -44,8 +44,13 @@
     },
     {
       "@type": "Question",
+      "name": "Does it handle bills of materials and bills of quantities?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. A product carries its bill of materials (BOM), so a quote shows the customer one line and shows you the parts and the cost. A build job card consumes the parts and puts the finished good into stock. If you work from a bill of quantities (BOQ), load it, quote from it, and we raise the purchase orders per supplier from the same list." }
+    },
+    {
+      "@type": "Question",
       "name": "Is it an MRP system?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. There is no production scheduling. It runs quote to job card to delivery note, and keeps the stock right along the way." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No. There is no production scheduling or routing. It runs quote to job card to delivery note with bills of materials, finished goods and stock kept right along the way. If you need routings and a production schedule, run them alongside and let us keep the stock honest." }
     }
   ]
 }
@@ -57,8 +62,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../styles.css?v=20261013r">
-<link rel="stylesheet" href="erp.css?v=20261013r">
+<link rel="stylesheet" href="../styles.css?v=20261013s">
+<link rel="stylesheet" href="erp.css?v=20261013s">
 </head>
 
 <body>
@@ -135,7 +140,7 @@
                 <h3 class="erp-card-title font-head">Stock records and supplier prices</h3>
               </div>
               <ul class="erp-list">
-                <li>One record per item with your own codes, units and bin location. A price per supplier per item, with the history of what you paid.</li>
+                <li>One record per item with your own codes, units and bin location. Raw materials, consumables, finished goods and assemblies. A price per supplier per item, with the history of what you paid.</li>
                 <li>The last delivered price sits on the order line, so the next order starts from what you actually paid.</li>
               </ul>
             </article>
@@ -158,10 +163,12 @@
                 <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:document-add-linear" width="20" height="20"></iconify-icon>
               </span>
-                <h3 class="erp-card-title font-head">Quotes with product bundles and your units</h3>
+                <h3 class="erp-card-title font-head">Quotes with bills of materials and your units</h3>
               </div>
               <ul class="erp-list">
-                <li>Group parts into a product so the customer sees one line and you see the parts list. Buy in sheets, quote in metres.</li>
+                <li>Build a product from its bill of materials (BOM). The customer sees one line, you see the parts list and the cost.</li>
+                <li>Quote in the units you sell and buy in the units you stock. Buy in sheets, quote in metres.</li>
+                <li>Working from a bill of quantities (BOQ)? Load it and quote from it, and we raise the purchase orders per supplier from the same list.</li>
                 <li>Accept the quote and it becomes the job, with nothing retyped.</li>
               </ul>
             </article>
@@ -171,11 +178,12 @@
                 <span class="erp-card-icon" aria-hidden="true">
                 <iconify-icon icon="solar:clipboard-list-linear" width="20" height="20"></iconify-icon>
               </span>
-                <h3 class="erp-card-title font-head">Job cards from approved quotes</h3>
+                <h3 class="erp-card-title font-head">Job cards and work orders from approved quotes</h3>
               </div>
               <ul class="erp-list">
                 <li>Open a job from the quote. Issue parts to it. See what it cost against what you quoted.</li>
-                <li>Build your own products too: a build job card uses up the parts and puts the finished good on the shelf at its parts cost.</li>
+                <li>Build your own products too: a build job card consumes the BOM parts and puts the finished good on the shelf at its parts cost.</li>
+                <li>Finished goods, assemblies and sub-assemblies sit in stock like any other item, so you can sell from the shelf or build to order.</li>
               </ul>
             </article>
 
@@ -483,10 +491,16 @@
               </div></div>
             </div>
 
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.24s;">
+              <button class="faq-question-v1" type="button"><span>Does it handle bills of materials and bills of quantities?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                Yes. A product carries its bill of materials (BOM), so a quote shows the customer one line and shows you the parts and the cost. A build job card consumes the parts and puts the finished good into stock. If you work from a bill of quantities (BOQ), load it, quote from it, and we raise the purchase orders per supplier from the same list.
+              </div></div>
+            </div>
             <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.26s;">
               <button class="faq-question-v1" type="button"><span>Is it an MRP system?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                No. There is no production scheduling. It runs quote to job card to delivery note, and keeps the stock right along the way.
+                No. There is no production scheduling or routing. It runs quote to job card to delivery note with bills of materials, finished goods and stock kept right along the way. If you need routings and a production schedule, run them alongside and let us keep the stock honest.
               </div></div>
             </div>
           </div>

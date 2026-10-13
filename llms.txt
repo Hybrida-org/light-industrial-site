@@ -30,6 +30,9 @@ faster than they get captured, and a specific person's day is being eaten by it.
 - AI agents on top of Document Intake watch the pattern across documents:
   price changes per supplier, short or late deliveries, and a forecast of what
   runs out next.
+- Core ERP: stock, suppliers, purchase orders, quotes with bills of materials
+  (BOM), bills of quantities (BOQ), job cards, finished goods and assemblies,
+  delivery notes, returns, stock take on a phone.
 - Core ERP has AI built in. Ask it about stock, job costs or supplier spend,
   and let it draft purchase orders for approval.
 
