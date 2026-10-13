@@ -436,12 +436,12 @@ box-shadow: inset 0 1px 0 rgba(231,227,218,0.03);
 .modules-frame-v1 { position: relative; overflow: hidden; border: 1px solid rgba(45,42,38,0.08); border-radius: 30px; background: radial-gradient(circle at top center, rgba(168,138,109,0.05), transparent 22%), radial-gradient(circle at 14% 18%, rgba(142,165,150,0.04), transparent 20%), linear-gradient(180deg, #f2eee8 0%, #e8e3db 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.52), 0 24px 60px rgba(0,0,0,0.06); }
 .modules-frame-v1::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent 18%, transparent 82%, rgba(255,255,255,0.10)), radial-gradient(circle at 84% 18%, rgba(142,165,150,0.04), transparent 20%); }
 .modules-inner-v1 { position: relative; z-index: 1; padding: 84px 34px; }
-.modules-top-v1 { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 48px; }
+.modules-top-v1 { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
 .modules-kicker-v1 { margin: 0 0 -4px; font-size: 11px; line-height: 1; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze); }
-.modules-title-v1 { margin: 0; max-width: none; font-size: clamp(2.5rem, 4.5vw, 4.9rem); line-height: 0.92; letter-spacing: -0.065em; color: var(--ink); }
+.modules-title-v1 { margin: 0; max-width: none; font-size: clamp(1.9rem, 2.8vw, 2.8rem); line-height: 1.05; letter-spacing: -0.04em; color: var(--ink); }
 .modules-title-v1 .reveal-line { display: block; }
-.modules-text-v1 { margin: 2px 0 0; max-width: 700px; font-size: 16px; line-height: 1.9; color: var(--ink-soft); }
-.modules-grid-v1 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.modules-text-v1 { margin: 2px 0 0; max-width: 700px; font-size: 17px; line-height: 1.7; color: var(--ink); }
+.modules-grid-v1 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: stretch; }
 .module-card-v1 { min-width: 0; display: flex; flex-direction: column; border-radius: 30px; border: 1px solid rgba(45,42,38,0.06); background: linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0.14)), rgba(255,255,255,0.18); box-shadow: inset 0 1px 0 rgba(255,255,255,0.62), 0 18px 42px rgba(0,0,0,0.06); padding: 20px 20px 24px; }
 .module-card-media-v1 { position: relative; overflow: hidden; min-height: 300px; border-radius: 22px; background: #d8d3cb; border: 1px solid rgba(45,42,38,0.06); }
 .module-card-image-v1 { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 700ms ease, filter 700ms ease; filter: saturate(0.84) brightness(0.88); }
