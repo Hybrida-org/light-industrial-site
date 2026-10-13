@@ -65,7 +65,7 @@ faster than they get captured, and a specific person's day is being eaten by it.
 ## Pricing
 
 All prices in South African rand, per month, excluding VAT. Month to month, no
-contract. Set-up is included. Moving data from a current system is quoted after
+contract. Live from day one. Data migration and consulting are quoted after
 a short call.
 
 - Document Intake: R2,500 a month. 50 documents a month included; more volume on

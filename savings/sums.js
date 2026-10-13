@@ -19,7 +19,8 @@
       minsPerDoc:  { min: 3,    max: 30,    step: 1,   start: 12 },
       salary:      { min: 6000, max: 40000, step: 500, start: 18000 },
       errorRate:   { min: 0,    max: 40,    step: 1,   start: 15 },
-      shortRate:   { min: 0,    max: 40,    step: 1,   start: 20 }
+      shortRate:   { min: 0,    max: 40,    step: 1,   start: 20 },
+      deliveryValue: { min: 1000, max: 60000, step: 500, start: 6000 }
     },
 
     weeksPerMonth: 4.33,
@@ -30,6 +31,11 @@
     fixMinutesPerError: 20,      // find it, correct the stock, call the supplier
     chaseMinutesPerShort: 15,    // reconcile a short delivery against the invoice later
     confirmMinutesPerShort: 3,   // confirm it at the door with the photo in hand
+    // The money side. A short delivery you paid for in full, and a price that
+    // crept up without anyone noticing, are rands as well as hours. Each is a
+    // slice of a typical delivery's value.
+    shortSlice: 0.04,            // share of a short delivery's value paid for but not received
+    overpaySlice: 0.02,          // share of a delivery's value lost to a moved price or an extra line
     workingHoursPerMonth: 173,   // one person's month
 
     // Document Intake is R2,500 a month with 50 documents included. Above that the
@@ -73,7 +79,8 @@
     minsPerDoc: 'mins',
     salary: 'salary',
     errorRate: 'errors',
-    shortRate: 'short'
+    shortRate: 'short',
+    deliveryValue: 'value'
   };
 
   // Builds the results-page link for a set of inputs.
@@ -107,7 +114,7 @@
     return SETTINGS.tiers[SETTINGS.tiers.length - 1].price;
   }
 
-  // `input` carries the five slider values. Set-up is included, so there is no
+  // `input` carries the slider values. There is no set-up fee, so there is no
   // once-off figure: the sum pays back from month 1 or not at all. Every
   // number the two pages show comes out of here, so neither of them does
   // arithmetic of its own.
@@ -129,9 +136,13 @@
     var hoursSaved = Math.max(currentHours - newHours, 0);
     var hourlyCost = input.salary / SETTINGS.workingHoursPerMonth;
     var labourSaved = hoursSaved * hourlyCost;
+    var moneyShort = shortDocs * input.deliveryValue * SETTINGS.shortSlice;
+    var moneyOverpay = Math.max(errorDocs - settledErrorDocs, 0) * input.deliveryValue * SETTINGS.overpaySlice;
+    var moneySaved = moneyShort + moneyOverpay;
+    var totalSaved = labourSaved + moneySaved;
     var price = priceFor(docs);
     // Rounded to the nearest R100 — false precision reads as a made-up number.
-    var net = Math.round((labourSaved - price) / 100) * 100;
+    var net = Math.round((totalSaved - price) / 100) * 100;
 
     return {
       docs: docs,
@@ -146,6 +157,10 @@
       hoursSaved: hoursSaved,
       hourlyCost: hourlyCost,
       labourSaved: labourSaved,
+      moneyShort: moneyShort,
+      moneyOverpay: moneyOverpay,
+      moneySaved: moneySaved,
+      totalSaved: totalSaved,
       price: price,
       net: net,
       // Null, never a negative and never Infinity: when the sum does not pay yet
@@ -160,7 +175,7 @@
   function breakEvenDocsPerWeek(input) {
     var sl = SETTINGS.sliders.docsPerWeek;
     for (var d = input.docsPerWeek; d <= sl.max; d += sl.step) {
-      var r = calculate({ docsPerWeek: d, minsPerDoc: input.minsPerDoc, salary: input.salary, errorRate: input.errorRate, shortRate: input.shortRate });
+      var r = calculate({ docsPerWeek: d, minsPerDoc: input.minsPerDoc, salary: input.salary, errorRate: input.errorRate, shortRate: input.shortRate, deliveryValue: input.deliveryValue });
       if (r.net > 0) return d;
     }
     return null;

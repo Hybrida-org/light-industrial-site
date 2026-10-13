@@ -82,7 +82,7 @@
       "name": "How long does it take to go live?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Set-up is included. Document Intake goes live from a few of your supplier documents and your stock list, so you are reading real paperwork in the first week. Core ERP depends on how much data you bring across. We quote that after a short call and give you a go-live date on the same call."
+        "text": "You are live from day one. Sign up, forward your first supplier document and Document Intake reads it. Core ERP is ready to quote on day one. If you want us to move your data across from your current system, or to consult on how you work, we quote that separately after a short call."
       }
     }
   ]
@@ -506,7 +506,7 @@
           </div>
 
           <p class="price-exvat">
-            Set-up included. Moving your data is quoted after a short call. Prices exclude VAT.
+            Live from day one. Data migration and consulting are quoted separately. Prices exclude VAT.
           </p>
 
         </div>
@@ -621,6 +621,23 @@
                 </div>
                 <input type="range" id="calcShort" aria-describedby="calcShortHint">
               </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcValue">Average delivery value</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcValueHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcValueHint">What a typical supplier delivery is worth, ex VAT. Short deliveries and moved prices are a slice of this.</span>
+                    </span>
+                  </span>
+                  <output id="calcValueOut" for="calcValue"></output>
+                </div>
+                <input type="range" id="calcValue" aria-describedby="calcValueHint">
+              </div>
             </div>
 
             <!-- The teaser. One number, half of it covered. The blurred part is a
@@ -634,7 +651,7 @@
                   <p class="calc-sub" id="calcHoursSub"></p>
                 </div>
                 <div class="calc-figure">
-                  <p class="calc-verdict" id="calcVerdict">Pays for itself</p>
+                  <p class="calc-verdict" id="calcVerdict">Money saved a month</p>
                   <p class="calc-headline font-head" id="calcHeadline"></p>
                   <p class="calc-sub" id="calcSub"></p>
                 </div>
@@ -720,7 +737,7 @@
             <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.38s;">
               <button class="faq-question-v1" type="button"><span>How long does it take to go live?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                Set-up is included. Document Intake goes live from a few of your supplier documents and your stock list, so you are reading real paperwork in the first week. Core ERP depends on how much data you bring across. We quote that after a short call and give you a go-live date on the same call.
+                You are live from day one. Sign up, forward your first supplier document and Document Intake reads it. Core ERP is ready to quote on day one. If you want us to move your data across from your current system, or to consult on how you work, we quote that separately after a short call.
               </div></div>
             </div>
           </div>
@@ -831,7 +848,7 @@
 
   <!-- The maths lives in one file, shared with the results page. This script only
        reads the sliders, paints the teaser, and hands the numbers over. -->
-  <script src="savings/sums.js?v=20261013d"></script>
+  <script src="savings/sums.js?v=20261013e"></script>
   <script src="savings/tooltips.js"></script>
   <!-- After sums.js: the form reads the lead endpoint and the fallback email
        address from there, so one paste turns on every form on the site. -->
@@ -861,14 +878,16 @@
       minsPerDoc: el('calcMins'),
       salary: el('calcSalary'),
       errorRate: el('calcErrors'),
-      shortRate: el('calcShort')
+      shortRate: el('calcShort'),
+      deliveryValue: el('calcValue')
     };
     var outs = {
       docsPerWeek: el('calcDocsOut'),
       minsPerDoc: el('calcMinsOut'),
       salary: el('calcSalaryOut'),
       errorRate: el('calcErrorsOut'),
-      shortRate: el('calcShortOut')
+      shortRate: el('calcShortOut'),
+      deliveryValue: el('calcValueOut')
     };
     var verdict = el('calcVerdict');
     var headline = el('calcHeadline');
@@ -885,7 +904,8 @@
         minsPerDoc: +sliders.minsPerDoc.value,
         salary: +sliders.salary.value,
         errorRate: +sliders.errorRate.value,
-        shortRate: +sliders.shortRate.value
+        shortRate: +sliders.shortRate.value,
+        deliveryValue: +sliders.deliveryValue.value
       };
     }
 
@@ -895,6 +915,7 @@
       outs.salary.textContent = rands(+sliders.salary.value);
       outs.errorRate.textContent = sliders.errorRate.value + '%';
       outs.shortRate.textContent = sliders.shortRate.value + '%';
+      outs.deliveryValue.textContent = rands(+sliders.deliveryValue.value);
 
       var s = sums.calculate(readInputs());
       var hours = Math.round(s.hoursSaved);
@@ -906,22 +927,15 @@
       against.textContent = 'Measured against document intake at ' + rands(s.price) +
         ' a month at ' + s.docs + ' documents, ex VAT.';
 
-      if (s.net > 0) {
-        result.setAttribute('data-state', 'pays');
-        verdict.textContent = 'Pays for itself';
-        headline.innerHTML = '<span class="calc-amount">Month 1</span>';
-        sub.innerHTML = 'The time is worth <b>' + rands(s.labourSaved) + '</b> a month. You keep <b>' +
-          rands(s.net) + '</b> after the subscription.';
-        return;
-      }
-
-      result.setAttribute('data-state', 'time');
-      var be = sums.breakEvenDocsPerWeek(readInputs());
-      verdict.textContent = 'Pays for itself';
-      headline.innerHTML = be ? '<span class="calc-amount">From ' + be + ' notes a week</span>' : '<span class="calc-amount">Talk to us</span>';
-      sub.innerHTML = 'At ' + sliders.docsPerWeek.value + ' a week you get <b>' + hoursWord(hours) + '</b> back. ' +
-        'That time is worth <b>' + rands(s.labourSaved) + '</b> a month at this salary, so Document Intake costs <b>' +
-        rands(-s.net) + '</b> a month more than it saves.';
+      var be = s.net > 0 ? null : sums.breakEvenDocsPerWeek(readInputs());
+      result.setAttribute('data-state', 'pays');
+      verdict.textContent = 'Money saved a month';
+      headline.innerHTML = '<span class="calc-amount">' + rands(s.totalSaved) + '</span>';
+      sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time, plus <b>' + rands(s.moneySaved) +
+        '</b> you stop paying on short deliveries and moved prices. ' +
+        (s.net > 0
+          ? 'Pays for itself from <b>month 1</b>. You keep <b>' + rands(s.net) + '</b> after the subscription.'
+          : (be ? 'Pays for itself from <b>' + be + ' notes a week</b>.' : 'Talk to us about the price at your volume.'));
     }
 
     // One of only two key events, so it has to mean something: it fires once, and
