@@ -4,7 +4,7 @@ How measurement works on lightindustrial.co.za, which accounts exist, where each
 
 ## How it fits together
 
-One script, `tracking.js`, loads first in the `<head>` of every page. It sets Consent Mode v2 defaults (everything denied except security), shows the cookie banner, stores the choice in localStorage under `li_consent`, loads Google Tag Manager when `gtmId` is set, and pushes the events listed below into `window.dataLayer`.
+One script, `tracking.js`, loads first in the `<head>` of every page. It sets Consent Mode v2 defaults (everything denied except security), shows the cookie banner only when `consentBanner` is true (off since 2026-10-14: POPIA does not require one, so consent defaults to granted and the footer link is hidden), stores the choice in localStorage under `li_consent`, loads Google Tag Manager when `gtmId` is set, and pushes the events listed below into `window.dataLayer`.
 
 Everything else runs inside GTM. GA4, Google Ads, Meta, LinkedIn, Clarity and HubSpot are tags in the container. You paste their IDs once, in GTM, as variables. Nothing vendor-specific is hard-coded on the site.
 

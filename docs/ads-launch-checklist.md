@@ -18,7 +18,7 @@ Tick every box before spending. Merges Adbot's advice (2026-09-07) and the websi
 - [ ] `[Hybrida legal entity name and registration number]` and `[Information Officer name]` placeholders replaced
 - [ ] Cookie settings link in the footer opens the panel
 
-## Consent banner
+## Consent banner (off: `consentBanner: false` in tracking.js, skip this section)
 
 - [ ] Banner shows on first visit with Accept all, Only necessary, Cookie settings
 - [ ] Only necessary: no Meta, LinkedIn, Clarity or HubSpot request in the Network tab

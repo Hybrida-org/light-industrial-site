@@ -19,7 +19,10 @@ window.LI_TRACKING = {
   metaPixelId: '',           // 15-16 digits
   linkedinPartnerId: '',
   clarityId: '',
-  hubspotPortalId: '148893758', hubspotRegion: 'eu1'
+  hubspotPortalId: '148893758', hubspotRegion: 'eu1',
+  // No banner: POPIA does not require one, so consent defaults to granted and
+  // nothing is shown. Set true to bring the banner and the denied defaults back.
+  consentBanner: false
 };
 
 (function () {
@@ -56,10 +59,10 @@ window.LI_TRACKING = {
   }
 
   var stored = readConsent();
-  var defaults = consentSignals(null);
+  var defaults = consentSignals(T.consentBanner ? null : { analytics: true, marketing: true });
   defaults.wait_for_update = 500;
   gtag('consent', 'default', defaults);
-  if (stored) gtag('consent', 'update', consentSignals(stored));
+  if (T.consentBanner && stored) gtag('consent', 'update', consentSignals(stored));
 
   function setConsent(analytics, marketing) {
     var c = { analytics: !!analytics, marketing: !!marketing, ts: Date.now() };
@@ -184,7 +187,7 @@ window.LI_TRACKING = {
     if (document.body) fn();
     else document.addEventListener('DOMContentLoaded', fn);
   }
-  onReady(function () { if (!stored) showBanner(false); });
+  onReady(function () { if (T.consentBanner && !stored) showBanner(false); });
 
   // ── Events ─────────────────────────────────────────────────────────────────
   document.addEventListener('click', function (e) {

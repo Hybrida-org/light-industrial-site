@@ -3,10 +3,10 @@
    page marks the two spots with <div data-site-nav> and <div data-site-footer>
    and this script fills them in.
 
-   Load it with a plain <script src="site-chrome.js"></script> placed after the
+   Load it with a plain <script src="site-chrome.js?v=20261014s"></script> placed after the
    footer placeholder but BEFORE a page's own scripts: those scripts bind the
    contact and demo buttons, and the nav's button has to exist by then. A page
-   in a sub-folder points at "../site-chrome.js".
+   in a sub-folder points at "../site-chrome.js?v=20261014s".
 
    Change a link once, here, and it changes everywhere.
 
@@ -168,9 +168,9 @@
     var legalLinks = LEGAL_PAGES.map(function (page) {
       return '<a href="' + hrefFor(page) + '">' + page.label + '</a>';
     }).join('\n              ') +
-      // Reopens the cookie banner from tracking.js. On a page without that
-      // script the link does nothing, which beats a dead href.
-      '\n              <a href="#" data-cookie-settings>Cookie settings</a>';
+      // Reopens the cookie banner from tracking.js, only while the banner is on.
+      (window.LI_TRACKING && window.LI_TRACKING.consentBanner
+        ? '\n              <a href="#" data-cookie-settings>Cookie settings</a>' : '');
 
     return '' +
       '<div class="site-footer-shell-v1">' +
