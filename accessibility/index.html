@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<script src="/tracking.js?v=20261014r"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility statement | Light Industrial</title>
+<meta name="description" content="Light Industrial aims to meet WCAG 2.2 AA. What we have done, what still falls short, and how to report an accessibility problem on the site.">
+<link rel="canonical" href="https://lightindustrial.co.za/accessibility/">
+<link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="Accessibility statement | Light Industrial">
+<meta property="og:description" content="Light Industrial aims to meet WCAG 2.2 AA. What we have done, what still falls short, and how to report an accessibility problem on the site.">
+<meta property="og:url" content="https://lightindustrial.co.za/accessibility/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/01-capture.jpg">
+<meta property="og:image:alt" content="A delivery note being photographed on a workshop floor">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Accessibility statement",
+  "description": "Light Industrial aims to meet WCAG 2.2 AA. What we have done, what still falls short, and how to report an accessibility problem on the site.",
+  "url": "https://lightindustrial.co.za/accessibility/",
+  "dateModified": "2026-10-13",
+  "inLanguage": "en-ZA",
+  "isPartOf": { "@type": "WebSite", "name": "Light Industrial", "url": "https://lightindustrial.co.za/" },
+  "publisher": { "@type": "Organization", "name": "Light Industrial", "url": "https://lightindustrial.co.za/" }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20261014y">
+<style>
+/* Legal pages: the nav sits in normal flow (no hero), and the article reads on
+   the same paper panel the Home page uses for its outcomes section. Only the
+   long-form text styles are added here. Tailwind's preflight resets lists and
+   headings, so they are set back explicitly. */
+.legal-header { padding: 24px; }
+.legal-header .nav-wrap { position: static; transform: none; left: auto; margin: 0 auto; }
+.skip-link { position: absolute; left: -999px; top: 8px; z-index: 100; padding: 10px 14px; border-radius: 999px; background: var(--paper); color: var(--ink); }
+.skip-link:focus { left: 16px; }
+.legal-article { max-width: 72ch; margin: 0 auto; color: var(--ink-soft); font-size: 16px; line-height: 1.8; }
+.legal-kicker { margin: 0 0 14px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
+.legal-article h1 { margin: 0; font-size: clamp(2.1rem, 3.8vw, 3.2rem); line-height: 1.04; letter-spacing: -0.045em; color: var(--ink); }
+.legal-updated { margin: 16px 0 0; font-size: 14px; color: var(--ink-soft); }
+.legal-toc { margin: 32px 0 0; padding: 20px 24px; border: 1px solid rgba(45,42,38,0.08); border-radius: 20px; background: rgba(255,255,255,0.34); }
+.legal-toc p { margin: 0 0 8px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bronze-ink); }
+.legal-toc ol { margin: 0; padding-left: 20px; list-style: decimal; columns: 2; column-gap: 24px; font-size: 15px; }
+.legal-toc li { break-inside: avoid; padding: 2px 0; }
+.legal-article h2 { margin: 44px 0 12px; font-size: 24px; line-height: 1.2; letter-spacing: -0.03em; color: var(--ink); scroll-margin-top: 24px; }
+.legal-article h3 { margin: 24px 0 8px; font-size: 17px; font-weight: 600; color: var(--ink); }
+.legal-article p { margin: 0 0 14px; }
+.legal-article ul { margin: 0 0 14px; padding-left: 22px; list-style: disc; }
+.legal-article li { margin: 0 0 6px; }
+.legal-article a { color: var(--bronze-ink); text-decoration: underline; text-underline-offset: 3px; }
+.legal-article a:hover { color: var(--ink); }
+.legal-article a:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; border-radius: 4px; }
+.legal-placeholder { display: block; margin: 0 0 14px; padding: 10px 14px; border-left: 3px solid var(--bronze); background: rgba(168,138,109,0.10); color: var(--ink); font-size: 15px; }
+.legal-table-wrap { overflow-x: auto; margin: 0 0 18px; }
+.legal-article table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; line-height: 1.5; }
+.legal-article th, .legal-article td { padding: 10px 12px; border-bottom: 1px solid rgba(45,42,38,0.10); text-align: left; vertical-align: top; }
+.legal-article th { color: var(--ink); font-weight: 600; background: rgba(255,255,255,0.34); }
+.legal-article code { font-size: 13px; padding: 1px 5px; border-radius: 4px; background: rgba(45,42,38,0.07); color: var(--ink); }
+@media (max-width: 720px) { .legal-toc ol { columns: 1; } .outcomes-inner-v1 { padding: 48px 20px; } }
+</style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="legal-header">
+    <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+    <div class="nav-wrap" data-site-nav></div>
+  </header>
+
+  <main id="main">
+    <section class="outcomes-section-v1">
+      <div class="outcomes-shell-v1">
+        <div class="outcomes-frame-v1">
+          <div class="outcomes-inner-v1">
+            <article class="legal-article">
+              <h1 class="font-head">Accessibility statement for the Light <b class="wm">Industrial</b> website</h1>
+              <p class="legal-updated">Last updated 13 October 2026</p>
+              <nav class="legal-toc" aria-label="On this page">
+                <p>On this page</p>
+                <ol>
+                  <li><a href="#our-commitment">Our commitment</a></li>
+                  <li><a href="#the-standard-we-aim-for">The standard we aim for</a></li>
+                  <li><a href="#what-we-have-done">What we have done</a></li>
+                  <li><a href="#known-limitations">Known limitations</a></li>
+                  <li><a href="#how-to-report-a-problem">How to report a problem</a></li>
+                </ol>
+              </nav>
+
+<p>We want everyone who runs a workshop, a stores desk or a buying office to be able to read this site and get in touch, whatever device or assistive technology they use.</p>
+
+<h2 id="our-commitment">Our commitment</h2>
+<p>Accessibility is part of how we build the site, not a check at the end. We check new pages with a keyboard and a screen reader, and we fix problems people report.</p>
+
+<h2 id="the-standard-we-aim-for">The standard we aim for</h2>
+<p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. We have not had the site audited by an outside party and do not claim full conformance yet.</p>
+
+<h2 id="what-we-have-done">What we have done</h2>
+<ul>
+  <li><strong>Headings.</strong> Every page has one H1 and uses H2 and H3 in order, so screen reader users can move by heading.</li>
+  <li><strong>Landmarks.</strong> Pages use header, nav, main and footer elements. Navigation menus are labelled.</li>
+  <li><strong>Contrast.</strong> Body text and buttons are set against their backgrounds to reach the 4.5:1 ratio for normal text and 3:1 for large text, on both the dark background and the light panels. Where we found a panel falling short we darkened it.</li>
+  <li><strong>Keyboard.</strong> Every link, button, form field and menu can be reached and operated with a keyboard, with a visible focus ring. The mobile menu closes with Escape.</li>
+  <li><strong>Reduced motion.</strong> The site's styles honour the "reduce motion" setting in your system. When it is on, animations and transitions are cut to almost nothing, including the fade-in of sections and the animated diagram on the Home page.</li>
+  <li><strong>Forms.</strong> Every field has a visible label. Errors are described in text, not colour alone.</li>
+  <li><strong>Text.</strong> Pages are built to reflow on a phone and when text is zoomed. Every image has alt text, and decorative images are marked so screen readers skip them.</li>
+  <li><strong>Skip link.</strong> The legal pages start with a "Skip to content" link. We are adding it to the rest of the site.</li>
+</ul>
+
+<h2 id="known-limitations">Known limitations</h2>
+<ul>
+  <li>The navigation and footer are built by a script after the page loads. With JavaScript turned off they do not appear. The page content itself still does.</li>
+  <li>Several sections on the Home, module and pricing pages fade in as you scroll. With JavaScript blocked they may stay hidden. The legal pages do not use this effect.</li>
+  <li>The demo booking opens Calendly in a new tab. Calendly's accessibility is Calendly's responsibility, and you can email us to book instead.</li>
+  <li>Icons are loaded from a third-party library. If it fails to load, the icon is missing, but the text next to it still reads correctly.</li>
+  <li>Some sections on the Home page place text over photographs. We have darkened the overlays, but contrast may still fall short on a few phones in bright light.</li>
+  <li>The site has not yet been tested with every combination of browser and screen reader.</li>
+</ul>
+
+<h2 id="how-to-report-a-problem">How to report a problem</h2>
+<p>If something on the site is hard to use, tell us. Email <a href="mailto:donovan@lightindustrial.co.za">donovan@lightindustrial.co.za</a> with the page address, what you were trying to do and the browser or assistive technology you use. We reply within 24 hours on working days and aim to fix a confirmed barrier within 10 working days. If we cannot fix it quickly, we will give you the information another way.</p>
+
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer-v1" data-site-footer></footer>
+
+  <script src="../site-chrome.js"></script>
+
+  <script>
+  // Fade the footer in as it comes up. Same behaviour as the other pages.
+  (function () {
+    var els = document.querySelectorAll('.reveal-fade');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+  })();
+  </script>
+</body></html>

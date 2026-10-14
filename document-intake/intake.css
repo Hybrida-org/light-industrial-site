@@ -1,0 +1,47 @@
+/* Document Intake page — only what this page adds on top of erp/erp.css.
+   The two module pages are one layout: panels, cards, roles, prices and the
+   small-screen rules all live in erp.css and are shared, so the pages cannot
+   drift apart. What is here is the numbered step list, which the ERP page has
+   no use for.
+
+   The ERP page's equivalent section is a tappable diagram on the home page.
+   This is written out instead: a visitor arriving from an ad should be able to
+   read the whole sequence without tapping anything. */
+
+.intake-steps {
+  max-width: 900px; margin: 0 auto; padding: 0;
+  list-style: none;                 /* the numbers are drawn, so the marker would double up */
+  display: flex; flex-direction: column; gap: 22px;
+}
+.intake-step {
+  display: flex; gap: 20px; padding: 26px 28px;
+  border: 1px solid rgba(45,42,38,0.10); border-radius: 22px;
+  background: rgba(255,255,255,0.46);
+}
+/* Same 42px circle as .erp-card-icon so a step sits at the same weight as a
+   card icon elsewhere on the page — a number in place of a picture. */
+.intake-step-no {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 999px;
+  border: 1px solid rgba(168,138,109,0.26); background: rgba(168,138,109,0.10);
+  color: var(--bronze-ink); font-size: 14px; letter-spacing: -0.01em;
+}
+.intake-step-title { margin: 0 0 8px; font-size: 18px; letter-spacing: -0.02em; color: var(--ink); }
+.intake-step-text { margin: 0; font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+
+@media (max-width: 880px) {
+  /* Number above the text once the card narrows, matching how erp.css stacks
+     the assistant rows at the same width. */
+  .intake-step { flex-direction: column; gap: 14px; padding: 22px 20px; }
+}
+
+/* Step 02 is the differentiator — product/how-it-works.md calls the reading a
+   commodity and the per-supplier matching the moat — so it carries a warmer
+   wash and a solid number to stop a skimming reader on the right step. */
+.intake-step-lead {
+  border-color: rgba(168,138,109,0.34);
+  background: rgba(255,255,255,0.66);
+}
+.intake-step-lead .intake-step-no {
+  background: var(--bronze-ink); border-color: var(--bronze-ink); color: #fff;
+}

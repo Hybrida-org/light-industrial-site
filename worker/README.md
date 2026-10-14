@@ -1,7 +1,7 @@
 # Invoice form → Resend (Cloudflare Worker)
 
 This tiny Worker receives the website's "Send a supplier invoice" form (fields +
-uploaded file) and emails it to Danika via Resend, with the invoice attached.
+uploaded file) and emails it to Donovan via Resend, with the invoice attached.
 
 The Worker exists because a static site (GitHub Pages) can't safely hold the
 Resend API key or send email itself. The key lives only in the Worker.

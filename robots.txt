@@ -1,0 +1,22 @@
+# Everything on this site is public marketing — crawl all of it.
+User-agent: *
+Allow: /
+
+# Named explicitly because the site is meant to be readable by answer engines,
+# and some scanners will not infer it from the wildcard above.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://lightindustrial.co.za/sitemap.xml

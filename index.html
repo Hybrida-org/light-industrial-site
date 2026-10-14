@@ -1,14 +1,168 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
+<script src="/tracking.js?v=20261014r"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Light Industrial | Operations software for manufacturers, wholesalers &amp; trade suppliers</title>
+<!-- "Light industrial" is a property and zoning term in South Africa — people search it
+     to rent factory units. It stays as the brand name, never the category word.
+     See Research A (2026-09-17). -->
+<title>Stock control software that reads paperwork | Light Industrial</title>
+<meta name="description" content="Stock control software for South African manufacturers, workshops and merchants. AI reads supplier invoices and delivery notes and books your stock. From R2,500 a month.">
+<link rel="canonical" href="https://lightindustrial.co.za/">
+<link rel="icon" href="public/favicon.svg" type="image/svg+xml">
+
+<!-- How a shared link looks in WhatsApp, Slack and email. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="Stock control software that reads supplier paperwork">
+<meta property="og:description" content="Stock control software for South African manufacturers, workshops and merchants. AI reads supplier invoices and delivery notes and books your stock. From R2,500 a month.">
+<meta property="og:url" content="https://lightindustrial.co.za/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/00-Hero-bg.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1080">
+<meta property="og:image:alt" content="A steel fabricator cutting metal in a workshop">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Tells search and AI engines what this business is. No claim here that is not true. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Light Industrial",
+  "url": "https://lightindustrial.co.za/",
+  "description": "Document intelligence and operations software for South African manufacturers, workshops and merchants. Reads supplier quotes, invoices and delivery notes, matches them to your stock, and keeps buying, receiving and stock in one place.",
+  "email": "donovan@lightindustrial.co.za",
+  "areaServed": { "@type": "Country", "name": "South Africa" }
+}
+</script>
+
+<!-- FAQ structured data, so answer engines have something exact to quote.
+     KEEP IN SYNC with the FAQ section further down the page. This is a
+     duplicate of that copy, and search engines penalise schema that does not
+     match what a visitor sees. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What formats can you read?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PDFs, emailed invoices, scanned pages, and photos taken on a phone in the yard. Crumpled, skew or shot in bad light, it still reads. If a supplier can send it, we read it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the photo is messy or handwritten?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We read it. Printed line items come straight through. Handwritten quantities and corrections on the page are read too. Anything the system is not certain of is flagged for a one-tap confirm, and we never guess a quantity or a price. Every confirm teaches the system that supplier's layout, so the next document from them needs fewer checks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work with my accounting software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We integrate with QuickBooks, Xero and Sage. Document Intake is sold on its own and plugs into the system you already run, so nothing gets replaced. Core ERP keeps your books in step with stock, quotes and delivery notes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it create duplicate suppliers or items?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every line is matched to your existing suppliers, stock codes and units, even when the supplier calls the item something different or sells it in a different pack size. Anything new is proposed for you to approve once, then remembered."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to go live?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You are live from day one. Sign up, forward your first supplier document and Document Intake reads it. Core ERP is ready to quote on day one. If you want us to move your data across from your current system, or to consult on how you work, we quote that separately after a short call."
+      }
+    }
+  ]
+}
+</script>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=20261014y">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Light Industrial",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "url": "https://lightindustrial.co.za/",
+  "description": "Document intelligence and operations software for South African manufacturers, workshops and merchants. Document Intake reads supplier quotes, invoices and delivery notes into stock. Core ERP runs stock, purchase orders, quotes with bills of materials, job cards and delivery notes.",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Document Intake",
+      "price": "2500",
+      "priceCurrency": "ZAR",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "2500",
+        "priceCurrency": "ZAR",
+        "unitText": "month"
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Core ERP",
+      "price": "6500",
+      "priceCurrency": "ZAR",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "6500",
+        "priceCurrency": "ZAR",
+        "unitText": "month"
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Both modules",
+      "price": "9000",
+      "priceCurrency": "ZAR",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "9000",
+        "priceCurrency": "ZAR",
+        "unitText": "month"
+      }
+    }
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Light Industrial",
+    "url": "https://lightindustrial.co.za/",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Hybrida",
+      "url": "https://hybrida.co.za/"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "22 on Sloane, 39 Somerset Rd, Green Point",
+      "addressLocality": "Cape Town",
+      "postalCode": "8005",
+      "addressCountry": "ZA"
+    },
+    "email": "donovan@lightindustrial.co.za"
+  }
+}
+</script>
 </head>
 
 <body class="">
@@ -18,231 +172,217 @@
       <div class="top-image-zone">
         <img src="public/00-Hero-bg.jpg" alt="Steel fabricator cutting metal, sparks flying in a dark workshop" class="reveal-img">
 
-        <div class="nav-wrap">
-          <div class="nav-pill">
-            <div class="flex items-center gap-3">
-              <span class="brand-mark font-head">LI</span>
-              <div>
-                <div class="font-head text-[13px] uppercase tracking-[0.24em] brand-name">Light Industrial</div>
-                <div class="mt-[2px] text-[10px] uppercase tracking-[0.18em] brand-sub">Operations platform</div>
-              </div>
-            </div>
-
-            <nav class="flex items-center gap-8 text-sm">
-              <a href="#problem" class="nav-link">The problem</a>
-              <a href="#how" class="nav-link">How it works</a>
-              <a href="#features" class="nav-link">Features</a>
-              <a href="#who" class="nav-link">Who it's for</a>
-            </nav>
-
-            <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="nav-book-btn" data-open-contact>Get in touch</a>
-
-            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
-              <iconify-icon icon="solar:hamburger-menu-linear" width="20" height="20"></iconify-icon>
-            </button>
-          </div>
-
-          <div class="mobile-menu" id="mobileMenu" hidden>
-            <a href="#problem" class="mobile-menu-link">The problem</a>
-            <a href="#how" class="mobile-menu-link">How it works</a>
-            <a href="#features" class="mobile-menu-link">Features</a>
-            <a href="#who" class="mobile-menu-link">Who it's for</a>
-            <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="mobile-menu-cta" data-open-contact>Get in touch</a>
-          </div>
-        </div>
+        <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+        <div class="nav-wrap" data-site-nav></div>
 
         <div class="hero-copy">
-          <div class="eyebrow reveal-fade">
-            <span class="eyebrow-dot"></span>
-            Operations software for light industry
+          <div class="hero-copy-left">
+            <h1 class="hero-title font-head reveal-trigger">
+              <span class="block">
+                <span class="reveal-word" style="transition-delay: 0.1s;">Stock</span>
+                <span class="reveal-word" style="transition-delay: 0.2s;">control</span>
+                <span class="reveal-word" style="transition-delay: 0.3s;">software</span>
+                <span class="reveal-word" style="transition-delay: 0.4s;">that</span>
+                <span class="reveal-word" style="transition-delay: 0.5s;">reads</span>
+                <span class="reveal-word" style="transition-delay: 0.6s;">your</span>
+                <span class="reveal-word" style="transition-delay: 0.7s;">supplier</span>
+                <span class="reveal-word" style="transition-delay: 0.8s;">paperwork.</span>
+              </span>
+            </h1>
+
+            <div class="hero-divider reveal-fade" style="transition-delay: 0.7s;"></div>
+
+            <p class="hero-text reveal-para" style="transition-delay: 0.8s;">
+              Document intelligence and operations software for South African manufacturers, workshops and merchants.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-x-7 gap-y-3 mt-7 text-sm reveal-fade" style="transition-delay: 0.9s;">
+              <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="font-medium text-[var(--paper)] underline underline-offset-4 decoration-[rgba(168,138,109,0.8)]" data-open-demo>Book a 30-min demo</a>
+              <a href="/pricing/" class="text-[rgba(231,227,218,0.88)] underline underline-offset-4 decoration-[rgba(231,227,218,0.4)]">See pricing</a>
+            </div>
           </div>
 
-          <h1 class="hero-title font-head reveal-trigger">
-            <span class="block">
-              <span class="reveal-word" style="transition-delay: 0.1s;">Snap</span>
-              <span class="reveal-word" style="transition-delay: 0.2s;">the</span>
-              <span class="reveal-word" style="transition-delay: 0.3s;">paperwork.</span>
-            </span>
-            <span class="block">
-              <span class="reveal-word" style="transition-delay: 0.4s;">Skip</span>
-              <span class="reveal-word" style="transition-delay: 0.5s;">the</span>
-              <span class="reveal-word" style="transition-delay: 0.6s;">data</span>
-              <span class="reveal-word" style="transition-delay: 0.7s;">entry.</span>
-            </span>
-          </h1>
+          <!-- Mini lead form. Two fields only; it posts to the same place as the
+               full form at the bottom of the page, tagged 'hero' so the source is
+               visible in HubSpot. -->
+          <div class="hero-form-panel reveal-fade" style="transition-delay: 0.9s;">
+            <h2 class="hero-form-title font-head">Get a call back</h2>
 
-          <div class="hero-divider reveal-fade" style="transition-delay: 0.7s;"></div>
+            <form class="hero-form" id="heroForm" novalidate>
+              <div class="hero-field">
+                <label for="hf-email">Work email</label>
+                <input type="email" id="hf-email" name="email" placeholder="you@company.co.za" autocomplete="email" inputmode="email" aria-describedby="hf-email-err">
+                <p class="hero-field-error" id="hf-email-err" hidden></p>
+              </div>
 
-          <p class="hero-text reveal-para" style="transition-delay: 0.8s;">
-            For the manufacturers, wholesalers and trade suppliers who are done keying every
-            supplier document into two systems. Snap it, check it, and your stock and books stay current.
+              <div class="hero-field">
+                <label for="hf-phone">Phone</label>
+                <input type="tel" id="hf-phone" name="phone" placeholder="021 555 0123" autocomplete="tel" inputmode="tel" aria-describedby="hf-phone-err">
+                <p class="hero-field-error" id="hf-phone-err" hidden></p>
+              </div>
+
+              <!-- Spam trap: hidden from people, filled in by bots. Never remove the label. -->
+              <div class="hp-wrap" aria-hidden="true">
+                <label for="hf-website">Website</label>
+                <input type="text" id="hf-website" name="website" tabindex="-1" autocomplete="off">
+              </div>
+
+              <p class="hero-form-error" id="hf-error" role="alert" hidden></p>
+              <button type="submit" class="hero-form-btn" id="hf-submit">Send</button>
+            </form>
+
+            <div class="hero-form-done" id="hf-done" hidden>
+              <div class="hero-form-tick" aria-hidden="true">&#10003;</div>
+              <h3 id="hf-done-title" tabindex="-1">Got it.</h3>
+              <p id="hf-done-msg">We'll be in touch within 24 hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: PROOF STRIP. The paper band under the hero image carries the
+           capture hook on the left and the one proof line we allow on the right. -->
+      <div class="bottom-paper" style="padding: 34px 40px;">
+        <div class="flex flex-wrap items-center justify-between gap-x-10 gap-y-3">
+          <p class="font-head m-0 text-lg font-semibold tracking-tight text-[var(--ink)]">Snap the paperwork. Skip the data entry.</p>
+          <div class="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-[var(--ink-soft)]">
+            <span>In daily use at South African manufacturers.</span>
+            <span class="works-with">Works with
+              <span><img src="public/logos/quickbooks.svg" alt="" width="26" height="26">QuickBooks</span>
+              <span><img src="public/logos/xero.svg" alt="" width="26" height="26">Xero</span>
+              <span><img src="public/logos/sage.svg" alt="Sage" width="34" height="34" style="height:34px"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: THE TWO MODULES.
+       The card says what the module is and what it costs. The module page
+       carries the full feature list.
+       The two buttons carry data-site-link, so site-chrome.js writes their href
+       from the one page list. The href written below is the no-JavaScript fallback. -->
+  <section id="modules" class="modules-section-v1">
+    <div class="modules-shell-v1">
+      <div class="modules-frame-v1">
+        <div class="modules-inner-v1">
+          <div class="modules-top-v1">
+            <p class="sec-chip reveal-fade">Pricing</p>
+            <h2 class="modules-title-v1 font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">Document Intake and Core ERP.</span>
+            </h2>
+
+            <p class="modules-text-v1 reveal-para" style="transition-delay: 0.18s;">
+              Pick one or take both. Month to month, live from day one. Document Intake handles the paperwork coming in. Core ERP runs the work going out.
+            </p>
+          </div>
+
+          <div class="modules-grid-v1">
+            <!-- MODULE 1: DOCUMENT INTAKE -->
+            <article class="module-card-v1 reveal-fade" style="transition-delay: 0.20s;">
+              <div class="module-card-media-v1">
+                <img src="public/01-capture.jpg" alt="Photographing a supplier delivery note" class="module-card-image-v1">
+                <div class="module-card-frame-v1"></div>
+              </div>
+              <div class="module-card-body-v1">
+                <h3 class="module-title-v1 font-head">Document Intake</h3>
+                <p class="font-head m-0 mt-4 text-2xl font-semibold text-[var(--ink)]"><span class="text-sm font-normal text-[var(--ink-soft)]">From </span>R2,500<span class="text-sm font-normal text-[var(--ink-soft)]"> a month, 50 documents included</span></p>
+                <ul class="module-list-v1">
+                  <li>Photograph or forward supplier quotes, invoices and delivery notes.</li>
+                  <li>We read every line, match it to your stock codes, suppliers and units, and flag what doesn't add up.</li>
+                  <li>AI agents on top spot price changes and forecast what runs out.</li>
+                  <li>Sold on its own. It plugs into what you already run.</li>
+                </ul>
+                <a class="module-btn-v1" href="/document-intake/" data-site-link="document-intake">
+                  See Document Intake
+                  <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" aria-hidden="true"></iconify-icon>
+                </a>
+              </div>
+            </article>
+
+            <!-- MODULE 2: CORE ERP -->
+            <article class="module-card-v1 reveal-fade" style="transition-delay: 0.35s;">
+              <div class="module-card-media-v1">
+                <img src="public/04-line-items.jpg" alt="Job paperwork on a workshop desk" class="module-card-image-v1">
+                <div class="module-card-frame-v1"></div>
+              </div>
+              <div class="module-card-body-v1">
+                <h3 class="module-title-v1 font-head">Core ERP</h3>
+                <p class="font-head m-0 mt-4 text-2xl font-semibold text-[var(--ink)]"><span class="text-sm font-normal text-[var(--ink-soft)]">From </span>R6,500<span class="text-sm font-normal text-[var(--ink-soft)]"> a month, 3 users included, R750 per extra user</span></p>
+                <ul class="module-list-v1">
+                  <li>Stock, suppliers, purchase orders, quotes with bills of materials, job cards and delivery notes in one place.</li>
+                  <li>A quote becomes a job, the job becomes a delivery note, the stock updates itself.</li>
+                  <li>AI built in. Ask it about your stock and let it draft the purchase orders.</li>
+                  <li>Integrates with QuickBooks, Xero and Sage.</li>
+                </ul>
+                <a class="module-btn-v1" href="/erp/" data-site-link="erp">
+                  See Core ERP
+                  <iconify-icon icon="solar:arrow-right-linear" width="18" height="18" aria-hidden="true"></iconify-icon>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="price-answer max-w-none mt-7 flex flex-wrap items-center justify-between gap-6 reveal-fade" style="position: static; transition-delay: 0.34s;">
+            <div>
+              <p class="price-answer-label">Both modules cost</p>
+              <p class="price-figure"><span class="text-base font-normal text-[rgba(239,236,230,0.66)]">From </span>R9,000<span class="text-base font-normal text-[rgba(239,236,230,0.66)]"> a month</span></p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <a href="/pricing/" class="price-cta !w-auto !mt-0">See pricing</a>
+              <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="price-cta !w-auto !mt-0" data-open-demo>Book a 30-min demo</a>
+            </div>
+          </div>
+
+          <p class="price-exvat" style="text-align:left;">
+            Live from day one. Data migration and consulting are quoted separately. Prices exclude VAT.
           </p>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="bottom-paper">
-        <div class="method-layout">
-          <div class="method-left">
-            <p class="section-kicker">Order to shelf</p>
-            <h2 class="section-title section-title-split font-head reveal-trigger">
-              <span class="reveal-line" style="transition-delay: 0.1s;">From the order you place</span>
-              <span class="reveal-line" style="transition-delay: 0.3s;">to the stock on your shelf.</span>
-              <span class="reveal-line" style="transition-delay: 0.5s;">One clear view.</span>
+  <!-- HOW IT WORKS: the order-to-stock loop, rendered by flow-loop.js (shared with the Intake page). -->
+  <section id="how" class="studio-section">
+    <div class="studio-shell">
+      <div class="studio-frame">
+        <div class="flow-inner">
+          <div class="flow-section-head">
+            <p class="sec-chip reveal-fade">How it works</p>
+            <h2 class="modules-title-v1 font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">Raise the order. We read what the supplier sends. Your stock updates and you pay for what arrived.</span>
             </h2>
-
-            <div class="mt-8">
-              <p class="text-[11px] uppercase tracking-[0.18em] text-[var(--ink-soft)] opacity-60 mb-4">( What it does )</p>
-              <p class="section-text max-w-[520px] reveal-para" style="transition-delay: 0.4s;">
-                Light Industrial keeps your buying, receiving and stock in one place. It starts the
-                moment paperwork comes in. Snap a quote, invoice or delivery note and the system
-                reads every line, matches it to your stock and suppliers, and updates your counts.
-                You check what it flags; you never retype.
-              </p>
-
-              <div class="cta-row mt-8 reveal-fade" style="transition-delay: 0.6s;">
-                <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="btn-primary" data-open-contact>
-                  Get in touch
-                  <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
-                </a>
-                <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="btn-secondary" data-open-demo>Book a 15-min demo</a>
-              </div>
-
-              <div class="icon-pulse mt-6">
-                <iconify-icon icon="solar:asterisk-bold-duotone" class="text-3xl"></iconify-icon>
-                <div class="sonar-ring"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="method-right">
-            <p class="section-text max-w-[620px] method-right-text reveal-para" style="transition-delay: 0.2s;">
-              However your suppliers send it, whether a PDF, an email, or a photo of a handwritten sheet, it
-              lands as clean line items, matched and ready to receive. No new system for them. No
-              retyping for you.
+            <p class="modules-text-v1 reveal-para" style="transition-delay: 0.18s;">
+              Document Intake reads what the supplier sends. Core ERP holds the order, the stock and the job. Take both and the whole loop runs in one place.
             </p>
-
-            <div class="method-cards-grid">
-              <article class="method-card group cursor-pointer reveal-seq" style="transition-delay: 0.72s;">
-                <img src="public/01-capture.jpg" alt="Steel workshop with overhead crane moving beams" class="method-card-image reveal-img">
-                <div class="method-card-overlay"></div>
-                <div class="method-card-content">
-                  <div class="flex items-end justify-between text-sm text-[var(--paper)]">
-                    <div>
-                      <p class="font-medium tracking-tight">Capture</p>
-                    </div>
-                    <span class="opacity-70">Photo / PDF / email</span>
-                  </div>
-                </div>
-              </article>
-
-              <article class="method-card group cursor-pointer reveal-seq" style="transition-delay: 0.94s;">
-                <img src="public/02-match-stock.jpg" alt="Warehouse stock aisle with racking and boxes" class="method-card-image reveal-img">
-                <div class="method-card-overlay"></div>
-                <div class="method-card-content">
-                  <div class="flex items-end justify-between text-sm text-[var(--paper)]">
-                    <div>
-                      <p class="font-medium tracking-tight">Match &amp; stock</p>
-                    </div>
-                    <span class="opacity-70">Stock / suppliers</span>
-                  </div>
-                </div>
-              </article>
-            </div>
+          </div>
+          <div class="flow-host reveal-fade" data-flow-loop style="transition-delay: 0.3s;"></div>
+          <div class="cta-row reveal-fade" style="transition-delay: 0.36s; justify-content: flex-start; margin-top: 36px;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>Book a 30-min demo</a>
+            <a href="/document-intake/" class="btn-secondary" data-site-link="document-intake">See Document Intake</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 5: THE PROBLEM -->
-  <section id="problem" class="outcomes-section-v1">
-    <div class="outcomes-shell-v1">
-      <div class="outcomes-frame-v1">
-        <div class="outcomes-inner-v1">
-          <div class="outcomes-top-v1">
-            <div class="outcomes-eyebrow-v1 reveal-fade">The daily grind</div>
-
-            <h2 class="outcomes-title-v1 font-head reveal-trigger">
-              <span class="reveal-line" style="transition-delay: 0.10s;">Where the day</span>
-              <span class="reveal-line" style="transition-delay: 0.24s;">gets lost.</span>
-            </h2>
-
-            <p class="outcomes-text-v1 reveal-para" style="transition-delay: 0.18s;">
-              You've outgrown spreadsheets, but a full ERP is overkill. So the business runs on email,
-              spreadsheets and a disconnected accounting package, and the admin piles up. Three places
-              it costs you every week.
-            </p>
-          </div>
-
-          <div class="outcomes-grid-v1">
-            <article class="outcome-card-v1 reveal-fade" style="transition-delay: 0.20s;">
-              <div class="outcome-card-media-v1">
-                <img src="public/08-problem-1.jpg" alt="Worker cutting steel" class="outcome-card-image-v1">
-                <div class="outcome-card-frame-v1"></div>
-              </div>
-              <div class="outcome-card-body-v1">
-                <span class="outcome-index-v1">Manual re-entry</span>
-                <h3 class="outcome-title-v1 font-head">Typed by hand, twice.</h3>
-                <p class="outcome-text-v1">
-                  Someone keys every quote and invoice into stock and accounts by hand. It's slow, and wrong
-                  often enough to matter.
-                </p>
-              </div>
-            </article>
-
-            <article class="outcome-card-v1 reveal-fade" style="transition-delay: 0.35s;">
-              <div class="outcome-card-media-v1">
-                <img src="public/09-problem-2.jpg" alt="Warehouse stock aisle" class="outcome-card-image-v1">
-                <div class="outcome-card-frame-v1"></div>
-              </div>
-              <div class="outcome-card-body-v1">
-                <span class="outcome-index-v1">Mismatched counts</span>
-                <h3 class="outcome-title-v1 font-head">The shelf and the system disagree.</h3>
-                <p class="outcome-text-v1">
-                  The system says one thing, the shelf says another. Nobody fully trusts the on-hand
-                  number when it matters.
-                </p>
-              </div>
-            </article>
-
-            <article class="outcome-card-v1 reveal-fade" style="transition-delay: 0.50s;">
-              <div class="outcome-card-media-v1">
-                <img src="public/10-problem-3.jpg" alt="Welder working on steel" class="outcome-card-image-v1">
-                <div class="outcome-card-frame-v1"></div>
-              </div>
-              <div class="outcome-card-body-v1">
-                <span class="outcome-index-v1">Month-end</span>
-                <h3 class="outcome-title-v1 font-head">Days lost matching paper.</h3>
-                <p class="outcome-text-v1">
-                  Delivery notes to orders to invoices, by hand, to catch what was missed. Every single
-                  month.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 2: FEATURES / SMART CAPTURE PANELS -->
+  <!-- SECTION 4: FOUR OUTCOMES -->
   <section id="features" class="ritual-panels-section">
     <div class="ritual-panels-shell">
       <div class="ritual-panels-frame">
         <div class="ritual-panels-header">
           <div class="ritual-panels-header-grid">
             <div>
-              <p class="ritual-panels-kicker reveal-fade editorial-eyebrow" style="transition-delay: 0s">Working behind the scenes</p>
+              <p class="sec-chip reveal-fade">What you get</p>
               <h2 class="ritual-panels-title font-head reveal-trigger">
-                <span class="reveal-line" style="transition-delay: 0.1s">A smart ops assistant</span>
-                <span class="reveal-line" style="transition-delay: 0.24s">that watches the numbers</span>
-                <span class="reveal-line" style="transition-delay: 0.38s">so you don't have to.</span>
+                <span class="reveal-line" style="transition-delay: 0.1s">You get clean line items, correct stock counts </span>
+                <span class="reveal-line" style="transition-delay: 0.24s">and your typing hours back.</span>
               </h2>
             </div>
             <div>
               <p class="ritual-panels-text reveal-para editorial-para" style="transition-delay: 0.55s">
-                Four things the platform handles in the background, keeping your data clean, your stock
-                right and your books in sync.
+                AI reads the supplier paperwork and books the stock. You only check what it flags.
               </p>
             </div>
           </div>
@@ -254,15 +394,14 @@
             <img src="public/03-Suppliers.jpg" alt="Clean, matched data from supplier paperwork" class="ritual-panel-image">
             <div class="ritual-panel-overlay"></div>
             <div class="ritual-panel-base">
-              <h3 class="ritual-panel-title font-head">Clean data</h3>
+              <h3 class="ritual-panel-title font-head">Line items matched to your stock codes</h3>
             </div>
             <div class="ritual-panel-detail">
               <div class="ritual-panel-line"></div>
-              <p class="ritual-panel-detail-title font-head">Matched to your world</p>
+              <p class="ritual-panel-detail-title font-head">No duplicates to tidy up later</p>
               <p class="ritual-panel-detail-text">
-                Every quote, invoice and delivery note comes in as clean line items, matched to the
-                suppliers and stock you already have. No duplicates. Anything new is proposed for you
-                to approve.
+                Every quote, invoice and delivery note lands as clean line items, matched to the suppliers
+                and stock you already have. Anything new waits for you to approve it.
               </p>
               <div class="ritual-panel-tags">
                 <span>Matched records</span>
@@ -277,539 +416,368 @@
             <img src="public/05-Units.jpg" alt="Stock counted in the units you use" class="ritual-panel-image">
             <div class="ritual-panel-overlay"></div>
             <div class="ritual-panel-base">
-              <h3 class="ritual-panel-title font-head">Your units</h3>
+              <h3 class="ritual-panel-title font-head">Stock counts in your units</h3>
             </div>
             <div class="ritual-panel-detail">
               <div class="ritual-panel-line"></div>
-              <p class="ritual-panel-detail-title font-head">Counted the way you use it</p>
+              <p class="ritual-panel-detail-title font-head">Boxes in, units on the shelf</p>
               <p class="ritual-panel-detail-text">
-                Suppliers ship in boxes; you count in units. It converts on arrival and handles partial
-                deliveries, so stock always reads the way it really sits on the shelf.
+                Suppliers ship in boxes. You count in units. We convert on arrival and handle partial
+                deliveries, so stock reads the way it sits on the shelf.
               </p>
               <div class="ritual-panel-tags">
                 <span>Boxes to units</span>
                 <span>Partial receipts</span>
-                <span>Accurate counts</span>
+                <span>Counts that hold</span>
               </div>
             </div>
           </article>
 
           <!-- PANEL 03 -->
           <article class="ritual-panel group reveal-fade editorial-panel" style="transition-delay: 1.10s">
-            <img src="public/07-studio-main.jpg" alt="AI watching the numbers across the operation" class="ritual-panel-image">
+            <img src="public/07-studio-main.jpg" alt="Checking the numbers across the operation" class="ritual-panel-image">
             <div class="ritual-panel-overlay"></div>
             <div class="ritual-panel-base">
-              <h3 class="ritual-panel-title font-head">The numbers</h3>
+              <h3 class="ritual-panel-title font-head">We check every document against the order</h3>
             </div>
             <div class="ritual-panel-detail">
               <div class="ritual-panel-line"></div>
-              <p class="ritual-panel-detail-title font-head">AI that watches the numbers</p>
+              <p class="ritual-panel-detail-title font-head">Short deliveries and price changes caught before you pay</p>
               <p class="ritual-panel-detail-text">
-                In the background, it learns your patterns and flags what looks off: a price jump, an
-                odd quantity, or stock that's stopped moving. You catch it before it costs you.
+                We check the delivery note against the order and the invoice against both. A price that
+                moved, a quantity that is short, a line you did not order. You see it before you pay.
               </p>
               <div class="ritual-panel-tags">
-                <span>Price-jump alerts</span>
-                <span>Anomaly flags</span>
-                <span>Slow-mover watch</span>
+                <span>Order to invoice</span>
+                <span>Price changes</span>
+                <span>Short deliveries</span>
               </div>
             </div>
           </article>
 
           <!-- PANEL 04 -->
           <article class="ritual-panel group reveal-fade editorial-panel" style="transition-delay: 1.30s">
-            <img src="public/06-partial-receipts.jpg" alt="Accounting kept in sync" class="ritual-panel-image">
+            <img src="public/06-partial-receipts.jpg" alt="Two people working through printed figures by hand" class="ritual-panel-image">
             <div class="ritual-panel-overlay"></div>
             <div class="ritual-panel-base">
-              <h3 class="ritual-panel-title font-head">Your books</h3>
+              <h3 class="ritual-panel-title font-head">You stop typing invoices</h3>
             </div>
             <div class="ritual-panel-detail">
               <div class="ritual-panel-line"></div>
-              <p class="ritual-panel-detail-title font-head">In sync with your accounts</p>
+              <p class="ritual-panel-detail-title font-head">Photograph it and it books itself</p>
               <p class="ritual-panel-detail-text">
-                Your accounting stays your accounting. Customers, invoices and transactions sync with
-                Xero, QuickBooks and Sage, so nothing gets entered twice and your bookkeeper keeps
-                working where they already do.
+                Capturing eats the day. Photograph the paperwork and it books itself. The admin that took
+                an afternoon happens while you get on with the work.
               </p>
               <div class="ritual-panel-tags">
-                <span>Xero</span>
-                <span>QuickBooks</span>
-                <span>Sage</span>
+                <span>No retyping</span>
+                <span>No double capture</span>
+                <span>Less chasing</span>
               </div>
             </div>
           </article>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 3: HOW IT WORKS -->
-  <section id="how" class="studio-section">
-    <div class="studio-shell">
-      <div class="studio-frame">
-        <div class="flow-inner">
-          <div class="flow-head">
-            <p class="studio-kicker reveal-fade" style="transition-delay: 0s;">How it works</p>
-            <h2 class="flow-title font-head reveal-trigger">
-              <span class="reveal-line" style="transition-delay: 0.1s;">Snap it. We read it.</span>
-              <span class="reveal-line" style="transition-delay: 0.24s;">Your stock updates.</span>
-            </h2>
-            <p class="flow-intro reveal-para" style="transition-delay: 0.42s;">
-              The whole loop runs on the documents your suppliers already send. Snap a quote or delivery
-              note and the system takes it from there, reading, matching and keeping your stock current.
-              Tap any step to see what happens.
-            </p>
-          </div>
-
-          <div class="flow-wr reveal-fade" style="transition-delay: 0.5s;">
-            <div class="flow-ws">
-
-              <!-- Row 1: Steps 1–3 -->
-              <div class="flow-row">
-                <button type="button" class="flow-c" data-flow="0" aria-label="Step 1: Raise PO">
-                  <span class="flow-ci flow-ci--blue"><iconify-icon icon="solar:document-add-linear"></iconify-icon></span>
-                  <span class="flow-cl">Raise PO</span>
-                  <span class="flow-cs">Create and send to suppliers</span>
-                  <span class="flow-sn">01</span>
-                </button>
-                <div class="flow-cn flow-r1c1"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
-                <button type="button" class="flow-c flow-c--ai" data-flow="1" aria-label="Step 2: Suppliers reply">
-                  <span class="flow-badge">OCR</span>
-                  <span class="flow-pulse"></span>
-                  <span class="flow-ci flow-ci--purple"><iconify-icon icon="solar:scanner-linear"></iconify-icon></span>
-                  <span class="flow-cl">Suppliers reply</span>
-                  <span class="flow-cs">Quotes arrive, AI reads them</span>
-                  <span class="flow-sn">02</span>
-                </button>
-                <div class="flow-cn flow-r1c2"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
-                <button type="button" class="flow-c" data-flow="2" aria-label="Step 3: Accept quote">
-                  <span class="flow-ci flow-ci--green"><iconify-icon icon="solar:check-circle-linear"></iconify-icon></span>
-                  <span class="flow-cl">Accept quote</span>
-                  <span class="flow-cs">Compare quotes, accept one</span>
-                  <span class="flow-sn">03</span>
-                </button>
-              </div>
-
-              <!-- Turn connector -->
-              <div class="flow-turn">
-                <div class="flow-turn-line"><div class="flow-turn-dot"></div></div>
-              </div>
-
-              <!-- Row 2: Steps 4–6 (flows right-to-left so the turn line reads 3 -> 4) -->
-              <div class="flow-row flow-row-rev">
-                <button type="button" class="flow-c flow-c--ai" data-flow="3" aria-label="Step 4: Capture receipt">
-                  <span class="flow-badge">OCR</span>
-                  <span class="flow-pulse"></span>
-                  <span class="flow-ci flow-ci--purple"><iconify-icon icon="solar:camera-linear"></iconify-icon></span>
-                  <span class="flow-cl">Capture receipt</span>
-                  <span class="flow-cs">Snap delivery note on arrival</span>
-                  <span class="flow-sn">04</span>
-                </button>
-                <div class="flow-cn flow-r2c1"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
-                <button type="button" class="flow-c" data-flow="4" aria-label="Step 5: Match to stock">
-                  <span class="flow-ci flow-ci--teal"><iconify-icon icon="solar:checklist-minimalistic-linear"></iconify-icon></span>
-                  <span class="flow-cl">Match to stock</span>
-                  <span class="flow-cs">Received lines matched to stock</span>
-                  <span class="flow-sn">05</span>
-                </button>
-                <div class="flow-cn flow-r2c2"><div class="flow-cn-l"></div><div class="flow-cn-d"></div></div>
-                <button type="button" class="flow-c" data-flow="5" aria-label="Step 6: Stock updates">
-                  <span class="flow-ci flow-ci--amber"><iconify-icon icon="solar:box-minimalistic-linear"></iconify-icon></span>
-                  <span class="flow-cl">Stock updates</span>
-                  <span class="flow-cs">Levels rise, audit trail logged</span>
-                  <span class="flow-sn">06</span>
-                </button>
-              </div>
-
-            </div>
-
-            <!-- Detail panel -->
-            <div class="flow-det" id="flowDet" aria-live="polite">
-              <p class="flow-det-t" id="flowDt">The full order-to-stock loop</p>
-              <p id="flowDd" style="margin:0">From purchase order to updated stock counts, running on the paperwork your suppliers already send. AI reads the documents at steps 02 and 04.</p>
-            </div>
-          </div>
+        <div class="flex flex-wrap justify-center gap-3 mt-10 reveal-fade" style="transition-delay: 0.3s;">
+          <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="module-btn-v1 !m-0" data-open-demo>Book a 30-min demo</a>
+          <a href="/pricing/" class="module-btn-v1 !m-0 !bg-none !bg-[rgba(231,227,218,0.08)] !shadow-none border border-[rgba(231,227,218,0.18)]">See pricing</a>
         </div>
       </div>
     </div>
   </section>
 
-  <script>
-    (function () {
-      var flowData = [
-        { t: 'Raise a purchase order', d: 'Create a PO and send it to your suppliers. You say exactly what you need, and it goes out for them to quote against.' },
-        { t: 'Suppliers reply', d: 'The quotes come back as PDFs, emails, or photos of handwritten sheets. OCR reads each one and pulls out every line, price and quantity. No typing.' },
-        { t: 'Accept the quote', d: 'Compare the quotes on price and what you are getting, then approve the one that works best. The quote you accept becomes your firm order, ready to receive goods against.' },
-        { t: 'Capture the receipt', d: 'When goods arrive, snap the delivery note. OCR reads it, checks it against the order and flags any differences, handling partial deliveries automatically.' },
-        { t: 'Match to your stock', d: 'Received lines are matched to your existing stock items and suppliers. Anything unfamiliar is flagged for a one-tap confirm. No duplicates, no guessing.' },
-        { t: 'Stock updates itself', d: 'Levels rise automatically once the receipt is matched, in the units you actually count, and every change is logged with a full audit trail.' }
-      ];
-      var titleEl = document.getElementById('flowDt');
-      var descEl = document.getElementById('flowDd');
-      var cards = document.querySelectorAll('.flow-c[data-flow]');
-      cards.forEach(function (card) {
-        card.addEventListener('click', function () {
-          var i = +card.getAttribute('data-flow');
-          if (!flowData[i]) return;
-          titleEl.textContent = flowData[i].t;
-          descEl.textContent = flowData[i].d;
-          cards.forEach(function (c) { c.classList.remove('is-active'); });
-          card.classList.add('is-active');
-        });
-      });
-    })();
-  </script>
-
-  <!-- SECTION 4: GROWS WITH YOU -->
-  <!-- Section 4 hidden for now. Restore by removing this comment wrapper.
-  <section id="platform" class="membership-section-v2">
-    <div class="membership-shell-v2">
-      <div class="membership-frame-v2">
-        <div class="membership-inner-v2">
-          <div class="membership-top-v2">
-            <div class="membership-eyebrow-v2 reveal-fade">One platform</div>
-
-            <h2 class="membership-title-v2 font-head reveal-trigger">
-              <span class="reveal-line" style="transition-delay: 0.1s;">It starts with capture</span>
-              <span class="reveal-line" style="transition-delay: 0.24s;">and grows with you.</span>
-            </h2>
-
-            <div class="membership-copy-v2">
-              <p class="membership-text-v2 reveal-para" style="transition-delay: 0.16s;">
-                OCR capture is the wedge — everything else is downstream of getting clean, structured data
-                out of the paperwork. Add inventory, quoting and accounting when you're ready, on the same
-                clean data.
-              </p>
-            </div>
-          </div>
-
-          <div class="membership-main-v2">
-            <div class="membership-points-v2">
-              <div class="membership-point-v2 reveal-fade" style="transition-delay: 0.1s;">
-                <span class="membership-point-number-v2">01</span>
-                <div class="membership-point-content-v2">
-                  <h3 class="membership-point-title-v2 font-head">Capture is the wedge</h3>
-                  <p class="membership-point-text-v2">Start with the pain everyone feels daily — the retyping — and let the platform follow.</p>
-                </div>
-              </div>
-
-              <div class="membership-point-v2 reveal-fade" style="transition-delay: 0.18s;">
-                <span class="membership-point-number-v2">02</span>
-                <div class="membership-point-content-v2">
-                  <h3 class="membership-point-title-v2 font-head">Inventory in your units</h3>
-                  <p class="membership-point-text-v2">Stock tracked in the units you actually consume, not the boxes suppliers ship in.</p>
-                </div>
-              </div>
-
-              <div class="membership-point-v2 reveal-fade" style="transition-delay: 0.26s;">
-                <span class="membership-point-number-v2">03</span>
-                <div class="membership-point-content-v2">
-                  <h3 class="membership-point-title-v2 font-head">Quoting from your data</h3>
-                  <p class="membership-point-text-v2">Turn live stock and pricing into client quotes without rekeying a thing.</p>
-                </div>
-              </div>
-
-              <div class="membership-point-v2 reveal-fade" style="transition-delay: 0.34s;">
-                <span class="membership-point-number-v2">04</span>
-                <div class="membership-point-content-v2">
-                  <h3 class="membership-point-title-v2 font-head">Accounting stays in sync</h3>
-                  <p class="membership-point-text-v2">Customers and invoices sync with your accounting package — QuickBooks first.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="membership-cards-v2">
-              <article class="membership-card-v2 featured reveal-fade" style="transition-delay: 0.40s;">
-                <div class="membership-card-top-v2">
-                  <div class="membership-card-topbar-v2">
-                    <h3 class="membership-card-label-v2">Where it starts</h3>
-                    <span class="membership-card-badge-v2">The wedge</span>
-                  </div>
-
-                  <h4 class="membership-card-name-v2 font-head">Smart capture</h4>
-
-                  <p class="membership-card-desc-v2">
-                    The core: read supplier documents, match them to your world, and receive stock —
-                    with a human in the loop on anything unclear.
-                  </p>
-                </div>
-
-                <div class="membership-card-actions-v2">
-                  <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="membership-plan-btn-v2 primary" data-open-contact>Send us an invoice</a>
-                  <a href="#how" class="membership-plan-btn-v2 secondary">See how it works</a>
-                </div>
-
-                <div class="membership-card-bottom-v2">
-                  <p class="membership-includes-v2">Included</p>
-                  <p class="membership-includes-note-v2">Everything you need to stop retyping.</p>
-                  <div class="membership-feature-list-v2">
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>OCR capture from PDF, email or photo</span></div>
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>Line-item matching to your catalogue</span></div>
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>Supplier normalisation</span></div>
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>Partial receipts &amp; audit trail</span></div>
-                  </div>
-                </div>
-              </article>
-
-              <article class="membership-card-v2 reveal-fade" style="transition-delay: 0.55s;">
-                <div class="membership-card-top-v2">
-                  <div class="membership-card-topbar-v2">
-                    <h3 class="membership-card-label-v2">And it grows</h3>
-                  </div>
-
-                  <h4 class="membership-card-name-v2 font-head">The platform</h4>
-
-                  <p class="membership-card-desc-v2">
-                    When you're ready, the rest of the operation runs on the same clean data — inventory,
-                    quoting and your accounting package.
-                  </p>
-                </div>
-
-                <div class="membership-card-actions-v2">
-                  <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="membership-plan-btn-v2 secondary" data-open-demo>Book a 15-min demo</a>
-                  <a href="#who" class="membership-plan-btn-v2 secondary">See who it's for</a>
-                </div>
-
-                <div class="membership-card-bottom-v2">
-                  <p class="membership-includes-v2">Grows with you</p>
-                  <p class="membership-includes-note-v2">Add modules when the time is right.</p>
-                  <div class="membership-feature-list-v2">
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>Inventory in the units you consume</span></div>
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>Quoting from live stock &amp; pricing</span></div>
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>QuickBooks accounting sync</span></div>
-                    <div class="membership-feature-row-v2"><iconify-icon icon="solar:check-circle-bold"></iconify-icon><span>One source of truth across it all</span></div>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  -->
-
-  <!-- SECTION 6: WHO IT'S FOR / TESTIMONIALS -->
+  <!-- SECTION 5: WHO IT'S FOR -->
   <section id="who" class="testimonials-section-v1">
     <div class="testimonials-shell-v1">
       <div class="testimonials-frame-v1">
         <div class="testimonials-inner-v1">
           <div class="testimonials-head-v1">
-            <div class="testimonials-eyebrow-v1 reveal-fade">Who it's for</div>
 
+            <p class="sec-chip reveal-fade">Who it's for</p>
             <h2 class="testimonials-title-v1 font-head reveal-trigger">
-              <span class="reveal-line" style="transition-delay: 0.10s;">Built for the people</span>
-              <span class="reveal-line" style="transition-delay: 0.24s;">who run the floor.</span>
+              <span class="reveal-line" style="transition-delay: 0.10s;">Stock control software for South African </span>
+              <span class="reveal-line" style="transition-delay: 0.24s;">manufacturers, workshops and merchants.</span>
             </h2>
 
             <p class="testimonials-text-v1 reveal-para" style="transition-delay: 0.18s;">
-              Manufacturers, fabricators, wholesalers and trade suppliers doing 50 to 500 transactions a
-              month, businesses that have outgrown spreadsheets but don't need a full ERP. If you wear
-              five hats and can't lose half your day to data entry, it's built for you.
+              Businesses that buy stock in, make or move it, and sell it out. Too big for spreadsheets,
+              too small for a big ERP.
             </p>
           </div>
 
-          <!-- Business types -->
           <div class="audience-grid-v1">
             <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.12s;">
               <span class="audience-icon-v1"><iconify-icon icon="solar:buildings-2-bold-duotone"></iconify-icon></span>
               <h3 class="audience-name-v1 font-head">Manufacturers</h3>
-              <p class="audience-text-v1">Production that only runs when parts land on time and the counts can be trusted.</p>
+              <p class="audience-text-v1">Production that only runs when parts land on time and the counts can be trusted. PCB, furniture, plastics, signage, refrigeration.</p>
             </article>
-            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.20s;">
+            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.18s;">
               <span class="audience-icon-v1"><iconify-icon icon="solar:fire-bold-duotone"></iconify-icon></span>
-              <h3 class="audience-name-v1 font-head">Fabricators</h3>
-              <p class="audience-text-v1">Steel and metal shops turning a supplier quote into a job without the retyping.</p>
+              <h3 class="audience-name-v1 font-head">Fabricators and engineering workshops</h3>
+              <p class="audience-text-v1">Steel and metal shops turning a supplier quote into a job card without retyping, with the parts bill tied back to the quote.</p>
             </article>
-            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.28s;">
+            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.24s;">
               <span class="audience-icon-v1"><iconify-icon icon="solar:box-bold-duotone"></iconify-icon></span>
-              <h3 class="audience-name-v1 font-head">Wholesalers</h3>
-              <p class="audience-text-v1">High volumes of stock in and out, matched to suppliers without hand-keying.</p>
+              <h3 class="audience-name-v1 font-head">Wholesalers and distributors</h3>
+              <p class="audience-text-v1">Stock in by the pallet, out by the piece. High volumes matched to suppliers and booked without hand-keying.</p>
             </article>
-            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.36s;">
-              <span class="audience-icon-v1"><iconify-icon icon="solar:delivery-bold-duotone"></iconify-icon></span>
-              <h3 class="audience-name-v1 font-head">Trade suppliers</h3>
-              <p class="audience-text-v1">Counter and contract sales that depend on live, accurate on-hand numbers.</p>
+            <article class="audience-card-v1 reveal-fade" style="transition-delay: 0.30s;">
+              <span class="audience-icon-v1"><iconify-icon icon="solar:cart-large-minimalistic-bold-duotone"></iconify-icon></span>
+              <h3 class="audience-name-v1 font-head">Trade counters and merchants</h3>
+              <p class="audience-text-v1">Builders' merchants, tile shops and trade suppliers whose counter and contract sales depend on a live on-hand number.</p>
             </article>
           </div>
-
-          <!-- Reviews: hidden until we have real client testimonials to show.
-               Restore this block (delete this comment wrapper) to bring them back.
-          <div class="testimonials-grid-v1">
-            <article class="testimonial-featured-v1 reveal-fade" style="transition-delay: 0.12s;">
-              <div>
-                <div class="testimonial-featured-top-v1">
-                  <div class="testimonial-rating-v1" aria-label="5 star rating">
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  </div>
-                  <span class="testimonial-badge-v1">Most repeated feedback</span>
-                </div>
-
-                <h3 class="testimonial-quote-v1 font-head">
-                  “Partial receipts alone fixed our stock counts.”
-                </h3>
-
-                <p class="testimonial-body-v1">
-                  We were re-keying every supplier invoice into two systems. Now I snap it and check the
-                  flags — the shelf and the system finally agree, and month-end went from days to hours.
-                  My afternoons are back.
-                </p>
-              </div>
-
-              <div class="testimonial-featured-footer-v1">
-                <div class="testimonial-person-v1">
-                  <span class="testimonial-name-v1">Priya Naidoo</span>
-                  <span class="testimonial-role-v1">Ops manager · Wholesaler</span>
-                </div>
-                <span class="testimonial-meta-v1">Capture · Match · Receive</span>
-              </div>
-            </article>
-
-            <div class="testimonials-side-v1">
-              <article class="testimonial-card-v1 reveal-fade" style="transition-delay: 0.18s;">
-                <div class="testimonial-card-head-v1">
-                  <div>
-                    <div class="testimonial-card-name-v1">Johan Meyer</div>
-                    <div class="testimonial-card-role-v1">Owner · Steel fabricator</div>
-                  </div>
-                  <div class="testimonial-rating-v1" aria-label="5 star rating">
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  </div>
-                </div>
-                <p class="testimonial-card-text-v1">
-                  “A photo of the quote and it's in — I stopped keying invoices into two systems overnight.”
-                </p>
-              </article>
-
-              <article class="testimonial-card-v1 reveal-fade" style="transition-delay: 0.24s;">
-                <div class="testimonial-card-head-v1">
-                  <div>
-                    <div class="testimonial-card-name-v1">Daniel Louw</div>
-                    <div class="testimonial-card-role-v1">Procurement · Trade supplier</div>
-                  </div>
-                  <div class="testimonial-rating-v1" aria-label="5 star rating">
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  </div>
-                </div>
-                <p class="testimonial-card-text-v1">
-                  “It proposes new suppliers instead of creating junk. That's why my team actually uses it.”
-                </p>
-              </article>
-
-              <article class="testimonial-card-v1 reveal-fade" style="transition-delay: 0.30s;">
-                <div class="testimonial-card-head-v1">
-                  <div>
-                    <div class="testimonial-card-name-v1">Thandi Mokoena</div>
-                    <div class="testimonial-card-role-v1">Director · Manufacturer</div>
-                  </div>
-                  <div class="testimonial-rating-v1" aria-label="5 star rating">
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                    <iconify-icon icon="solar:star-bold"></iconify-icon>
-                  </div>
-                </div>
-                <p class="testimonial-card-text-v1">
-                  “Boxes to units, handled at receipt. Our on-hand numbers are finally worth trusting.”
-                </p>
-              </article>
-            </div>
+          <div class="flex flex-wrap justify-center gap-3 mt-10 reveal-fade" style="transition-delay: 0.3s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="module-btn-v1 !m-0" data-open-demo>Book a 30-min demo</a>
+            <a href="/pricing/" class="module-btn-v1 !m-0 !bg-none !bg-[rgba(231,227,218,0.08)] !shadow-none border border-[rgba(231,227,218,0.18)]">See pricing</a>
           </div>
-          -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 7: FAQ + FINAL CTA -->
+  <!-- SECTION 6: PRICING SUMMARY. Static. The full page is /pricing/. -->
+  <!-- SECTION 7: SAVINGS CALCULATOR, STEP 1, the teaser.
+       Five sliders and one part-hidden headline. The full answer, the charts and
+       the working live at /savings/, behind an email. Every number here comes
+       from savings/sums.js. Nothing numeric is written into this markup. -->
+  <section id="calculator" class="calc-section">
+    <div class="calc-shell">
+      <div class="calc-frame">
+        <div class="calc-inner">
+
+          <div class="calc-head">
+            <p class="sec-chip reveal-fade">ROI calculator</p>
+            <h2 class="calc-title font-head reveal-trigger">
+              <span class="reveal-line" style="transition-delay: 0.10s;">What supplier paperwork </span>
+              <span class="reveal-line" style="transition-delay: 0.24s;">costs you now.</span>
+            </h2>
+            <p class="calc-intro reveal-para" style="transition-delay: 0.18s;">
+              Move the sliders to match your business. We do the sum.
+            </p>
+          </div>
+
+          <div class="calc-grid reveal-fade" style="transition-delay: 0.26s;">
+
+            <div class="calc-controls">
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcDocs">Delivery notes a week</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcDocsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcDocsHint">Delivery notes, supplier invoices and quotes coming through the door.</span>
+                    </span>
+                  </span>
+                  <output id="calcDocsOut" for="calcDocs"></output>
+                </div>
+                <input type="range" id="calcDocs" aria-describedby="calcDocsHint">
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcMins">Minutes per document today</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcMinsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcMinsHint">Checking it against the order, chasing what&rsquo;s short, filing it, typing it in.</span>
+                    </span>
+                  </span>
+                  <output id="calcMinsOut" for="calcMins"></output>
+                </div>
+                <input type="range" id="calcMins" aria-describedby="calcMinsHint">
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcSalary">What that person costs</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcSalaryHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcSalaryHint">A month, to the business. Not their take-home pay.</span>
+                    </span>
+                  </span>
+                  <output id="calcSalaryOut" for="calcSalary"></output>
+                </div>
+                <input type="range" id="calcSalary" aria-describedby="calcSalaryHint">
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcErrors">Supplier price changes / line updates</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcErrorsHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcErrorsHint">Share of your monthly supplier spend billed above the quote, or on lines that had to be re-captured. Intake flags a moved price before the invoice is approved.</span>
+                    </span>
+                  </span>
+                  <output id="calcErrorsOut" for="calcErrors"></output>
+                </div>
+                <input type="range" id="calcErrors" aria-describedby="calcErrorsHint">
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcShort">Delivery shortfalls &amp; billing errors</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcShortHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcShortHint">Share of your monthly supplier spend that arrives short, swapped or billed wrong. Intake checks every delivery against the order at the door.</span>
+                    </span>
+                  </span>
+                  <output id="calcShortOut" for="calcShort"></output>
+                </div>
+                <input type="range" id="calcShort" aria-describedby="calcShortHint">
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcSpend">Monthly supplier spend</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcSpendHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcSpendHint">Roughly what you pay suppliers a month, ex VAT. Set it from your last few months of invoices. The leakage figure is a share of this.</span>
+                    </span>
+                  </span>
+                  <output id="calcSpendOut" for="calcSpend"></output>
+                </div>
+                <input type="range" id="calcSpend" aria-describedby="calcSpendHint">
+              </div>
+
+            </div>
+
+            <!-- The teaser. One number, half of it covered. The blurred part is a
+                 placeholder, never the real figure rendered small. A visitor who
+                 opens the inspector finds nothing we haven't shown them. -->
+            <div class="calc-result" id="calcResult" data-state="pays" aria-live="polite">
+              <div class="calc-figures">
+                <div class="calc-figure">
+                  <p class="calc-verdict">Hours back a month</p>
+                  <p class="calc-headline font-head"><span class="calc-amount" id="calcHours">0</span> hours</p>
+                  <p class="calc-sub" id="calcHoursSub"></p>
+                </div>
+                <div class="calc-figure">
+                  <p class="calc-verdict" id="calcVerdict">Money saved a month</p>
+                  <p class="calc-headline font-head" id="calcHeadline"></p>
+                  <p class="calc-sub" id="calcSub"></p>
+                </div>
+              </div>
+
+              <ul class="calc-teaser-list">
+                <li>The month it pays for itself, and what you keep after that</li>
+                <li>Hours won back, and where your mistakes go over six months</li>
+                <li>Short deliveries caught, and which suppliers keep doing it</li>
+              </ul>
+
+              <!-- Step 2 starts here: one field, then the results page. -->
+              <form class="calc-gate" id="calcGate" novalidate>
+                <label class="calc-gate-label" for="calcEmail">Work email</label>
+                <div class="calc-gate-row">
+                  <input type="email" id="calcEmail" name="email" placeholder="you@yourcompany.co.za" autocomplete="email" required>
+                  <button type="submit" class="calc-cta" id="calcGateBtn">See my full results</button>
+                </div>
+                <p class="calc-gate-note" id="calcGateNote">Your numbers go with you to the next page.</p>
+                <!-- A person never sees this. Anything in it came from a bot. -->
+                <div class="calc-honeypot" aria-hidden="true"><label for="calcWebsite">Website</label><input type="text" id="calcWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+              </form>
+
+              <p class="calc-against" id="calcAgainst"></p>
+            </div>
+
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-3 mt-10 reveal-fade" style="transition-delay: 0.3s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="final-btn-v1 primary" data-open-demo>Book a 30-min demo</a>
+            <a href="/pricing/" class="final-btn-v1 secondary">See pricing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: FAQ + CLOSING CTA.
+       KEEP THE FAQ IN SYNC with the FAQPage JSON-LD in the head. Search engines
+       penalise schema that does not match what a visitor sees. -->
   <section id="cta" class="final-section-v1">
     <div class="final-shell-v1">
       <div class="final-frame-v1">
         <div class="final-inner-v1">
           <div class="final-head-v1">
-            <div class="final-eyebrow-v1 reveal-fade">Questions + next step</div>
 
+            <p class="sec-chip reveal-fade">FAQ</p>
             <h2 class="final-title-v1 font-head reveal-trigger">
-              <span class="reveal-line" style="transition-delay: 0.10s;">A few answers before</span>
-              <span class="reveal-line" style="transition-delay: 0.24s;">you send your</span>
-              <span class="reveal-line" style="transition-delay: 0.38s;">first invoice.</span>
+              <span class="reveal-line" style="transition-delay: 0.10s;">Common questions </span>
+              <span class="reveal-line" style="transition-delay: 0.24s;">about Light <b class="wm">Industrial</b>.</span>
             </h2>
-
-            <p class="final-text-v1 reveal-para" style="transition-delay: 0.18s;">
-              The practical things, answered plainly, then a simple way to see it on your own documents.
-            </p>
           </div>
 
           <div class="faq-list-v1">
-            <div class="faq-item-v1 reveal-fade active" style="transition-delay: 0.14s;">
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.14s;">
               <button class="faq-question-v1" type="button"><span>What formats can you read?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                PDFs, emailed invoices, scanned pages, and photos taken on a phone in the yard. If a supplier can send it, we can usually read it.
+                PDFs, emailed invoices, scanned pages, and photos taken on a phone in the yard. Crumpled, skew or shot in bad light, it still reads. If a supplier can send it, we read it.
               </div></div>
             </div>
 
             <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.20s;">
               <button class="faq-question-v1" type="button"><span>What if the photo is messy or handwritten?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                Anything unclear is flagged for a quick confirm rather than guessed. You stay in control.
+                We read it. Printed line items come straight through. Handwritten quantities and corrections on the page are read too. Anything the system is not certain of is flagged for a one-tap confirm, and we never guess a quantity or a price. Every confirm teaches the system that supplier's layout, so the next document from them needs fewer checks.
               </div></div>
             </div>
 
             <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.26s;">
               <button class="faq-question-v1" type="button"><span>Does it work with my accounting software?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                Yes. It syncs customers, invoices and transactions with Xero, QuickBooks and Sage, so nothing's entered twice, and your bookkeeper keeps working where they already do.
+                Yes. We integrate with QuickBooks, Xero and Sage. Document Intake is sold on its own and plugs into the system you already run, so nothing gets replaced. Core ERP keeps your books in step with stock, quotes and delivery notes.
               </div></div>
             </div>
 
             <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.32s;">
               <button class="faq-question-v1" type="button"><span>Will it create duplicate suppliers or items?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                No. Captured details are matched to your existing records; anything new is proposed for you to approve, never silently created.
+                No. Every line is matched to your existing suppliers, stock codes and units, even when the supplier calls the item something different or sells it in a different pack size. Anything new is proposed for you to approve once, then remembered.
               </div></div>
             </div>
 
             <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.38s;">
-              <button class="faq-question-v1" type="button"><span>How do I start?</span><div class="faq-icon-v1">+</div></button>
+              <button class="faq-question-v1" type="button"><span>How long does it take to go live?</span><div class="faq-icon-v1">+</div></button>
               <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
-                Get in touch, or book a 15-minute demo. We'll walk you through it and see if it's a fit. No signup, no pressure.
+                You are live from day one. Sign up, forward your first supplier document and Document Intake reads it. Core ERP is ready to quote on day one. If you want us to move your data across from your current system, or to consult on how you work, we quote that separately after a short call.
               </div></div>
             </div>
           </div>
-
-          <p class="faq-note-v1 reveal-fade" style="transition-delay: 0.38s;">
-            Light Industrial is built to slot into how you already work. No new system for your
-            suppliers, and no rip-and-replace for your accounts.
-          </p>
 
           <div class="final-cta-wrap-v1">
             <div class="final-cta-panel-v1 reveal-fade" style="transition-delay: 0.18s;">
               <div class="final-cta-grid-v1">
                 <div class="final-cta-copy-v1">
-                  <span class="final-cta-kicker-v1">See it for yourself</span>
-                  <h3 class="final-cta-title-v1 font-head">See it on your own paperwork. Book a quick walkthrough.</h3>
+                  <h3 class="final-cta-title-v1 font-head">Book a 30-minute demo on your own paperwork.</h3>
                   <p class="final-cta-text-v1">
-                    Nothing sells it like seeing it run on the kind of paperwork you deal with every
-                    day. Book a short call and we'll walk you through it. No setup, no commitment.
+                    We run it on the documents you deal with every day.
                   </p>
                 </div>
 
                 <div class="final-cta-actions-v1">
-                  <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="final-btn-v1 primary" data-open-contact>Get in touch</a>
-                  <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="final-btn-v1 secondary" data-open-demo>Book a 15-min demo</a>
+                  <a href="#contact-form" class="final-btn-v1 primary">Get in touch</a>
+                  <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="final-btn-v1 secondary" data-open-demo>Book a 30-min demo</a>
                 </div>
               </div>
             </div>
@@ -819,56 +787,26 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="site-footer-v1">
-    <div class="site-footer-shell-v1">
-      <div class="site-footer-frame-v1">
-        <div class="site-footer-inner-v1">
-          <div class="site-footer-top-v1">
-            <div class="site-footer-brand-v1 reveal-fade" style="transition-delay: 0.08s;">
-              <div class="site-footer-mark-v1 font-head">LI</div>
-              <h2 class="site-footer-name-v1 font-head">Light Industrial</h2>
-              <p class="site-footer-text-v1">
-                The operations platform for light industrial businesses. Clean data, accurate stock and
-                books that stay in sync, from the order you place to the stock on your shelf.
-              </p>
-            </div>
-
-            <div class="reveal-fade" style="transition-delay: 0.14s;">
-              <p class="site-footer-heading-v1">Navigate</p>
-              <div class="site-footer-links-v1">
-                <a href="#hero" class="site-footer-link-v1">Home</a>
-                <a href="#features" class="site-footer-link-v1">Features</a>
-                <a href="#how" class="site-footer-link-v1">How it works</a>
-                <!-- <a href="#platform" class="site-footer-link-v1">The platform</a> -->
-                <a href="#who" class="site-footer-link-v1">Who it's for</a>
-              </div>
-            </div>
-
-            <div class="reveal-fade" style="transition-delay: 0.20s;">
-              <p class="site-footer-heading-v1">Connect</p>
-              <div class="site-footer-contact-v1">
-                <a href="mailto:danika@lightindustrial.co.za?subject=Light%20Industrial%20enquiry" class="site-footer-contact-item-v1" data-open-contact>Get in touch</a>
-                <a href="mailto:danika@lightindustrial.co.za" class="site-footer-contact-item-v1">danika@lightindustrial.co.za</a>
-                <a href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener" class="site-footer-contact-item-v1" data-open-demo>Book a 15-min demo</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="site-footer-bottom-v1 reveal-fade" style="transition-delay: 0.24s;">
-            <div class="site-footer-meta-v1">© 2026 Light Industrial. Operations software for light industry.</div>
-            <div class="site-footer-legal-v1">
-              <!-- Legal pages not built yet — hidden for now.
-              <a href="#">Privacy</a>
-              <a href="#">Terms</a>
-              <a href="#">Accessibility</a>
-              -->
-            </div>
-          </div>
+  <!-- LEAD FORM. The last thing on the page, and the same component as the
+       Contact Us page (built by /lead-form.js). It replaced a pop-up: a form
+       you can already see gets filled in far more often than one you have to
+       click to open, and it gives every "Get in touch" button somewhere on the
+       page to land. See HYBRIDA-905. -->
+  <section id="contact-form" class="home-form-section">
+    <div class="home-form-shell">
+      <div class="home-form-frame">
+        <div class="home-form-inner">
+          <div data-lead-form data-variant="contact"></div>
         </div>
       </div>
     </div>
-  </footer>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer-v1" data-site-footer></footer>
+
+  <script src="flow-loop.js?v=20261014x"></script>
+  <script src="site-chrome.js"></script>
 
   <script>
     (function () {
@@ -914,61 +852,243 @@
     <div class="modal">
       <div class="modal-head">
         <div>
-          <span class="eyebrow">15-minute demo</span>
+          <span class="eyebrow">30-minute demo</span>
           <h2 id="demoModalTitle">Pick a time that works for you</h2>
-          <p>Grab a slot with Danika and we'll walk you through the capture-and-match flow on your own documents.</p>
+          <p>Grab a slot and we'll walk you through the capture-and-match flow on your own documents.</p>
         </div>
         <button type="button" class="modal-close" data-close-demo aria-label="Close">&times;</button>
       </div>
       <div class="cal-wrap">
-        <div class="calendly-inline-widget" id="calWidget" data-cal-url="https://calendly.com/danika-lightindustrial/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=a88a6d"></div>
+        <div class="calendly-inline-widget" id="calWidget" data-cal-url="https://calendly.com/donovan-lightindustrial/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=a88a6d"></div>
         <div class="cal-loading" id="calLoading">Loading the scheduler…</div>
         <div class="cal-fallback" id="calFallback" hidden>
           <p>Couldn't load the scheduler here.</p>
-          <a class="modal-btn" href="https://calendly.com/danika-lightindustrial/30min" target="_blank" rel="noopener">Open the booking page →</a>
+          <a class="modal-btn" href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener">Open the booking page →</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Get-in-touch contact modal -->
-  <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" hidden>
-    <div class="modal modal--form">
-      <div class="modal-body">
-        <div class="modal-head">
-          <div>
-            <span class="eyebrow">Get in touch</span>
-            <h2 id="contactModalTitle">Let's talk</h2>
-            <p>Tell us a bit about your setup and we'll get back to you within one business day.</p>
-          </div>
-          <button type="button" class="modal-close" data-close-contact aria-label="Close">&times;</button>
-        </div>
-        <form class="modal-form" id="contactForm" novalidate>
-          <div class="field">
-            <label for="cf-name">Name <span class="req">*</span></label>
-            <input type="text" id="cf-name" name="name" placeholder="Your full name" required autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="cf-email">Email <span class="req">*</span></label>
-            <input type="email" id="cf-email" name="email" placeholder="you@company.co.za" required autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="cf-message">Message</label>
-            <textarea id="cf-message" name="message" placeholder="What you're running today, and what you'd like to sort out"></textarea>
-          </div>
-          <p class="modal-error" id="cf-error" role="alert" hidden></p>
-          <button type="submit" class="modal-btn" id="cf-submit">Send message →</button>
-          <div class="modal-foot" id="cf-foot">Opens your email so you can hit send</div>
-        </form>
-      </div>
-      <div class="modal-success" hidden>
-        <div class="tick" aria-hidden="true">✓</div>
-        <h2 id="cf-success-title">Almost there</h2>
-        <p id="cf-success-msg">Your email app should have opened with your message ready. Hit send and we'll get back to you.</p>
-        <button type="button" class="modal-btn" data-close-contact style="margin-top:20px;">Done</button>
-      </div>
-    </div>
-  </div>
+  <!-- The maths lives in one file, shared with the results page. This script only
+       reads the sliders, paints the teaser, and hands the numbers over. -->
+  <script src="savings/sums.js?v=20261014a"></script>
+  <script src="savings/tooltips.js"></script>
+  <!-- After sums.js: the form reads the lead endpoint and the fallback email
+       address from there, so one paste turns on every form on the site. -->
+  <script src="lead-form.js"></script>
+  <script>
+  // Savings calculator, step 1 — the home-page teaser.
+  //
+  // Shows one headline with its key figure covered, then trades the full results
+  // for a work email. Every number comes from savings/sums.js; there are none here.
+  (function () {
+    'use strict';
+
+    var sums = window.SavingsSums;
+    if (!sums) return;
+
+    var SETTINGS = sums.SETTINGS;
+    var rands = sums.rands;
+    var hoursWord = sums.hoursWord;
+
+    var el = function (id) { return document.getElementById(id); };
+
+    var result = el('calcResult');
+    if (!result) return;
+
+    var sliders = {
+      docsPerWeek: el('calcDocs'),
+      minsPerDoc: el('calcMins'),
+      salary: el('calcSalary'),
+      errorRate: el('calcErrors'),
+      shortRate: el('calcShort'),
+      spend: el('calcSpend')
+    };
+    var outs = {
+      docsPerWeek: el('calcDocsOut'),
+      minsPerDoc: el('calcMinsOut'),
+      salary: el('calcSalaryOut'),
+      errorRate: el('calcErrorsOut'),
+      shortRate: el('calcShortOut'),
+      spend: el('calcSpendOut')
+    };
+    var verdict = el('calcVerdict');
+    var headline = el('calcHeadline');
+    var sub = el('calcSub');
+    var against = el('calcAgainst');
+
+    // The covered figure. It is a placeholder, not the real number blurred, so
+    // there is nothing to read in the inspector that we haven't shown on screen.
+    var HIDDEN = '<span class="calc-blur" aria-hidden="true">00</span><span class="calc-visually-hidden">hidden until you see the full results</span>';
+
+    function readInputs() {
+      return {
+        docsPerWeek: +sliders.docsPerWeek.value,
+        minsPerDoc: +sliders.minsPerDoc.value,
+        salary: +sliders.salary.value,
+        errorRate: +sliders.errorRate.value,
+        shortRate: +sliders.shortRate.value,
+        spend: +sliders.spend.value
+      };
+    }
+
+    function render() {
+      outs.docsPerWeek.textContent = sliders.docsPerWeek.value;
+      outs.minsPerDoc.textContent = sliders.minsPerDoc.value + ' min';
+      outs.salary.textContent = rands(+sliders.salary.value);
+      outs.errorRate.textContent = sliders.errorRate.value + '%';
+      outs.shortRate.textContent = sliders.shortRate.value + '%';
+      outs.spend.textContent = rands(+sliders.spend.value);
+
+      var s = sums.calculate(readInputs());
+      var hours = Math.round(s.hoursSaved);
+
+      el('calcHours').textContent = hours;
+      el('calcHoursSub').textContent = hoursWord(Math.round(s.currentHours)) + ' on paperwork today, ' +
+        hoursWord(Math.round(s.newHours)) + ' with intake.';
+
+      against.textContent = 'Measured against document intake at ' + rands(s.price) +
+        ' a month at ' + s.docs + ' documents, ex VAT.';
+
+      if (s.net > 0) {
+        result.setAttribute('data-state', 'pays');
+        verdict.textContent = 'Net monthly gain';
+        headline.innerHTML = '<span class="calc-amount">' + rands(s.net) + '</span>';
+        sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
+          '</b> of leakage stopped, less Document Intake at <b>' + rands(s.price) + '</b> a month. Pays for itself in <b>' +
+          sums.paybackWord(s.paybackDays) + '</b>.';
+      } else {
+        result.setAttribute('data-state', 'time');
+        verdict.textContent = 'Saved a month';
+        headline.innerHTML = '<span class="calc-amount">' + rands(s.totalSaved) + '</span>';
+        sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
+          '</b> of leakage stopped. Document Intake is <b>' + rands(s.price) + '</b> a month, so at this volume the win is the hours.';
+      }
+    }
+
+    // One of only two key events, so it has to mean something: it fires once, and
+    // only after the visitor has actually moved a slider. A default nobody touched
+    // is not a signal. Harmless while no tag manager is listening.
+    var reported = false;
+    function reportCompleted() {
+      if (reported) return;
+      reported = true;
+      var s = sums.calculate(readInputs());
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'calculator_completed',
+        step: 'teaser',
+        documents_per_month: s.docs,
+        minutes_per_document: +sliders.minsPerDoc.value,
+        monthly_staff_cost: +sliders.salary.value,
+        hours_saved: Math.round(s.hoursSaved),
+        monthly_net: s.net,
+        break_even_month: s.breakEvenMonth,
+        outcome: s.net > 0 ? 'pays_back' : 'time_only'
+      });
+    }
+
+    Object.keys(sliders).forEach(function (name) {
+      var slider = sliders[name];
+      var config = SETTINGS.sliders[name];
+      slider.min = config.min;
+      slider.max = config.max;
+      slider.step = config.step;
+      slider.value = config.start;
+      slider.addEventListener('input', render);
+      slider.addEventListener('change', reportCompleted);
+    });
+
+    render();
+
+    // ── Step 2: the email, then the results page ──────────────────────────────
+
+    var gate = el('calcGate');
+    var field = el('calcEmail');
+    var button = el('calcGateBtn');
+    var note = el('calcGateNote');
+
+    function looksLikeEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function goToResults(input) {
+      window.location.href = sums.resultsLinkFor(input);
+    }
+
+    // The lead matters more than the page turn, so a failed send never blocks the
+    // results — they gave us the email, they get what they were promised.
+    function sendLead(email, input, s) {
+      if (!SETTINGS.leadEndpoint) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'calculator_lead', endpoint: 'none' });
+        return Promise.resolve();
+      }
+      return fetch(SETTINGS.leadEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          source: 'home-savings-calculator',
+          variant: 'calculator_lead',
+          delivery_notes_per_week: input.docsPerWeek,
+          minutes_per_document: input.minsPerDoc,
+          monthly_staff_cost: input.salary,
+          error_rate_percent: input.errorRate,
+          short_delivery_percent: input.shortRate,
+          monthly_supplier_spend: input.spend,
+          documents_per_month: s.docs,
+          hours_saved: Math.round(s.hoursSaved),
+          monthly_net: s.net,
+          break_even_month: s.breakEvenMonth
+        })
+      });
+    }
+
+    gate.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var email = field.value.trim();
+
+      if (!looksLikeEmail(email)) {
+        note.textContent = 'That email address does not look right — check it and try again.';
+        field.focus();
+        return;
+      }
+
+      var input = readInputs();
+
+      // Show the bot the normal path and drop it, rather than telling it it failed.
+      if (el('calcWebsite').value) { goToResults(input); return; }
+
+      button.disabled = true;
+      button.textContent = 'One moment…';
+      reportCompleted();
+
+      // Remembered so the results page knows this visitor already paid the toll
+      // and does not ask a second time. Session only — it dies with the tab.
+      try { window.sessionStorage.setItem('savingsEmail', email); } catch (error) { /* private mode */ }
+
+      sendLead(email, input, sums.calculate(input))
+        .catch(function () { /* the results are still owed either way */ })
+        .then(function () { goToResults(input); });
+    });
+  })();
+  </script>
+
+
+
+  <script>
+  // Measure the scrollbar once, so the modals can fill the gap they leave behind.
+  // Re-measured on resize because the width can change between monitors.
+  (function () {
+    function measure() {
+      var width = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.setProperty('--scrollbar-width', Math.max(0, width) + 'px');
+    }
+    measure();
+    window.addEventListener('resize', measure);
+  })();
+  </script>
 
   <script>
   // Booking (Calendly) modal
@@ -1032,68 +1152,148 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
   })();
 
-  // Get-in-touch contact modal (opens the visitor's email to Danika)
-  (function () {
-    var CONTACT_EMAIL = 'danika@lightindustrial.co.za';
-
-    var overlay = document.getElementById('contactModal');
-    if (!overlay) return;
-    var form = document.getElementById('contactForm');
-    var body = overlay.querySelector('.modal-body');
-    var success = overlay.querySelector('.modal-success');
-    var errorEl = document.getElementById('cf-error');
-    var submitBtn = document.getElementById('cf-submit');
-    var successTitle = document.getElementById('cf-success-title');
-    var successMsg = document.getElementById('cf-success-msg');
-    var lastFocus = null;
-
-    function v(n) { return (form.elements[n].value || '').trim(); }
-    function clearError() { errorEl.hidden = true; }
-    function open() {
-      lastFocus = document.activeElement;
-      overlay.hidden = false; void overlay.offsetWidth;
-      overlay.classList.add('open'); document.body.classList.add('modal-open');
-      var first = overlay.querySelector('input, textarea, button'); if (first) first.focus();
-    }
-    function close() {
-      overlay.classList.remove('open'); document.body.classList.remove('modal-open');
-      setTimeout(function () {
-        overlay.hidden = true; body.hidden = false; success.hidden = true;
-        clearError(); submitBtn.disabled = false; submitBtn.innerHTML = 'Send message →'; form.reset();
-      }, 280);
-      if (lastFocus && lastFocus.focus) lastFocus.focus();
-    }
-    function showSuccess(title, msg) {
-      successTitle.textContent = title; successMsg.textContent = msg;
-      body.hidden = true; success.hidden = false;
-    }
-    document.querySelectorAll('[data-open-contact]').forEach(function (btn) {
-      btn.addEventListener('click', function (e) { e.preventDefault(); open(); });
-    });
-    overlay.querySelectorAll('[data-close-contact]').forEach(function (btn) { btn.addEventListener('click', close); });
-    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      var lines = ['Name: ' + v('name'), 'Email: ' + v('email'), '', 'Message:', v('message') || '—'];
-      var mailto = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Light Industrial enquiry — ' + v('name')) + '&body=' + encodeURIComponent(lines.join('\n'));
-      window.location.href = mailto;
-      showSuccess('Almost there', "Your email app should have opened with your message ready. Hit send and we'll get back to you.");
-    });
-  })();
   </script>
 
   <script>
-  // Mobile nav menu toggle
+  // Hero mini lead form — see HYBRIDA-904.
+  //
+  // Two fields and nothing else: the job of this form is to be cheap to fill in,
+  // not to qualify anyone. It posts the same JSON to the same endpoint as the
+  // full form at the bottom of the page, tagged variant 'hero' so HubSpot can
+  // tell them apart.
   (function () {
-    var btn = document.querySelector('.mobile-menu-btn');
-    var menu = document.getElementById('mobileMenu');
-    if (!btn || !menu) return;
-    function setOpen(open) { menu.hidden = !open; btn.setAttribute('aria-expanded', String(open)); }
-    btn.addEventListener('click', function () { setOpen(menu.hidden); });
-    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    var form = document.getElementById('heroForm');
+    if (!form || !window.SavingsSums) return;
+
+    // The endpoint, the fallback address and the thank-you page all live in
+    // savings/sums.js, so pasting the deployed Worker URL in one place turns on
+    // every form on the site at once.
+    var SETTINGS = window.SavingsSums.SETTINGS;
+
+    var panel = document.querySelector('.hero-form-panel');
+    var done = document.getElementById('hf-done');
+    var formError = document.getElementById('hf-error');
+    var submitBtn = document.getElementById('hf-submit');
+
+    // One rule per field. `check` only runs once the field has something in it, so
+    // nobody is told their email is wrong before they have finished typing it.
+    var RULES = [
+      {
+        name: 'email', empty: 'We need an email address to reply to.',
+        check: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
+        invalid: "That email doesn't look right — check for a typo?"
+      },
+      {
+        name: 'phone', empty: 'We need a number to call you on.',
+        check: function (v) { return v.replace(/[^0-9]/g, '').length >= 9; },
+        invalid: 'That number looks too short. Include the area code.'
+      }
+    ];
+
+    function fieldOf(rule) { return form.elements[rule.name]; }
+    function errorOf(rule) { return document.getElementById('hf-' + rule.name + '-err'); }
+
+    // Returns the message to show, or '' when the field is fine.
+    function problemWith(rule) {
+      var value = (fieldOf(rule).value || '').trim();
+      if (!value) return rule.empty;
+      if (rule.check && !rule.check(value)) return rule.invalid;
+      return '';
+    }
+
+    function showProblem(rule, message) {
+      var el = fieldOf(rule);
+      var errorEl = errorOf(rule);
+      errorEl.textContent = message;
+      errorEl.hidden = !message;
+      if (message) { el.setAttribute('aria-invalid', 'true'); }
+      else { el.removeAttribute('aria-invalid'); }
+    }
+
+    // Check on the way out of a field, but only correct as they type once they have
+    // already been told — fixing someone mid-word is annoying.
+    RULES.forEach(function (rule) {
+      var el = fieldOf(rule);
+      el.addEventListener('blur', function () { showProblem(rule, problemWith(rule)); });
+      el.addEventListener('input', function () {
+        if (el.getAttribute('aria-invalid')) showProblem(rule, problemWith(rule));
+      });
+    });
+
+    function firstProblem() {
+      var first = null;
+      RULES.forEach(function (rule) {
+        var message = problemWith(rule);
+        showProblem(rule, message);
+        if (message && !first) first = rule;
+      });
+      return first;
+    }
+
+    function showDone() {
+      form.hidden = true;
+      done.hidden = false;
+      document.getElementById('hf-done-title').focus();
+    }
+
+    function lead() {
+      return {
+        email: form.elements.email.value.trim(),
+        phone: form.elements.phone.value.trim(),
+        source: 'website',
+        variant: 'hero'
+      };
+    }
+
+    // Fallback while the endpoint is empty: hand the details to the visitor's own
+    // email app. Weaker than posting to HubSpot, but it does not lose the lead.
+    function sendByEmail(details) {
+      window.location.href = 'mailto:' + SETTINGS.contactEmail +
+        '?subject=' + encodeURIComponent('Light Industrial — call back request') +
+        '&body=' + encodeURIComponent('Email: ' + details.email + '\nPhone: ' + details.phone);
+      // Deliberately not the thank-you page: nothing has reached us until they press
+      // send, and only this message tells them to.
+      panel.querySelector('#hf-done-msg').textContent =
+        "Your email app should have opened with your details ready. Hit send and we'll call you back.";
+      showDone();
+    }
+
+    function sendToWorker(details) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      fetch(SETTINGS.leadEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(details)
+      }).then(function (response) {
+        if (!response.ok) throw new Error('Worker returned ' + response.status);
+        // A page load is a far more reliable conversion signal for Google Ads than a
+        // JavaScript event, which ad blockers and flaky networks can swallow.
+        window.location.href = SETTINGS.thankYouUrl + '?src=hero';
+      }).catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send';
+        formError.innerHTML = 'Something went wrong on our side. Email ' +
+          '<a href="mailto:' + SETTINGS.contactEmail + '">' + SETTINGS.contactEmail + '</a> and we\'ll pick it up.';
+        formError.hidden = false;
+      });
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      formError.hidden = true;
+
+      var bad = firstProblem();
+      if (bad) { fieldOf(bad).focus(); return; }
+
+      // A person never sees this field, so anything in it came from a bot. Show the
+      // normal thank-you and drop it, rather than telling the bot it failed.
+      if (form.elements.website.value) { showDone(); return; }
+
+      var details = lead();
+      if (SETTINGS.leadEndpoint) sendToWorker(details); else sendByEmail(details);
+    });
   })();
   </script>
+
 </body></html>

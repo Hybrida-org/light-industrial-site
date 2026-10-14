@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<script src="/tracking.js?v=20261014r"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core ERP: stock, quotes, job cards | Light Industrial</title>
+<meta name="description" content="Stock control software for South African workshops. Stock, purchase orders, quotes with bills of materials, job cards, delivery notes and stock take on a phone. R6,500 a month.">
+<link rel="canonical" href="https://lightindustrial.co.za/erp/">
+<link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="Core ERP: stock control, quotes and job cards">
+<meta property="og:description" content="Stock control software for South African workshops. Stock, purchase orders, quotes with bills of materials, job cards, delivery notes and stock take on a phone. R6,500 a month.">
+<meta property="og:url" content="https://lightindustrial.co.za/erp/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/02-match-stock.jpg">
+<meta property="og:image:alt" content="Stock shelves in a workshop stores room">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need the Document Intake module?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The ERP works on its own. Document Intake is an add-on for R2,500 a month. Your storeman photographs the supplier's delivery note and the system reads it, matches it to the purchase order and books the stock." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it replace Sage or QuickBooks?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Your accountant keeps their system. We integrate with QuickBooks, Xero and Sage." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I start with fewer than 3 users?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. 3 users is the minimum and is included in the R6,500 a month. Each user after that is R750 a month." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a contract?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. It is month to month. You are live from day one. Data migration and consulting are quoted separately. Moving your data from the current system is quoted after a short call. Prices exclude VAT." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it handle bills of materials and bills of quantities?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. A product carries its bill of materials (BOM), so a quote shows the customer one line and shows you the parts and the cost. A build job card consumes the parts and puts the finished good into stock. If you work from a bill of quantities (BOQ), load it, quote from it, and we raise the purchase orders per supplier from the same list." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it an MRP system?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. There is no production scheduling or routing. It runs quote to job card to delivery note with bills of materials, finished goods and stock kept right along the way. If you need routings and a production schedule, run them alongside and let us keep the stock honest." }
+    }
+  ]
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20261014y">
+<link rel="stylesheet" href="erp.css?v=20261014y">
+</head>
+
+<body>
+  <header class="erp-header">
+    <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+    <div class="nav-wrap" data-site-nav></div>
+  </header>
+
+  <main>
+
+  <!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+  <!-- Ads landing page: price and both CTAs sit above the fold. The pricing
+       button carries data-site-link so site-chrome.js points it at /pricing/. -->
+  <section id="hero" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-hero-grid">
+<div class="erp-head">
+            <h1 class="erp-title font-head reveal-fade" style="transition-delay: 0.06s;">
+              Stock control software with quotes, job cards and delivery notes.
+            </h1>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              A quote becomes a job, the job becomes a delivery note, and the stock updates itself.
+            </p>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.12s; margin-top: 12px; color: var(--ink); font-weight: 500;">
+              R6,500 a month. 3 users included. Month to month.
+            </p>
+            <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+              <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+                 class="btn-primary" data-open-demo>
+                Book a 30-min demo
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+              <a href="#" data-site-link="pricing" class="btn-secondary">
+                See pricing
+              </a>
+            </div>
+          </div>
+          <figure class="erp-hero-media reveal-fade" style="transition-delay: 0.18s;">
+            <img src="../public/04-line-items.jpg" alt="Job paperwork on a workshop desk" loading="eager" width="1200" height="900">
+          </figure>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT IT DOES ──────────────────────────────────────────────────────── -->
+  <section id="what-it-does" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame is-dark">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">What it does</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              What Core ERP stock control software does.
+            </h2>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              We digitise the whole warehouse: every item, every count, every movement, from the phone in the storeman's hand to the books. Stock, buying, quoting, jobs and delivery in one system, with a full audit trail.
+            </p>
+          </div>
+
+          <div class="erp-grid">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.10s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:box-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Stock records and supplier prices</h3>
+              </div>
+              <ul class="erp-list">
+                <li>One record per item with your own codes, units and bin location. Raw materials, consumables, finished goods and assemblies. A price per supplier per item, with the history of what you paid.</li>
+                <li>The last delivered price sits on the order line, so the next order starts from what you actually paid.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:cart-large-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Purchase orders and receiving stock</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Raise the order, PDF it, email it. Receive against it, partial deliveries included, and the stock updates.</li>
+                <li>Add Document Intake and the supplier's delivery note books the receipt for you.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:document-add-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Quotes with bills of materials and your units</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Build a product from its bill of materials (BOM). The customer sees one line, you see the parts list and the cost.</li>
+                <li>Quote in the units you sell and buy in the units you stock. Buy in sheets, quote in metres.</li>
+                <li>Working from a bill of quantities (BOQ)? Load it and quote from it, and we raise the purchase orders per supplier from the same list.</li>
+                <li>Accept the quote and it becomes the job, with nothing retyped.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:clipboard-list-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Job cards and work orders from approved quotes</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Open a job from the quote. Issue parts to it. See what it cost against what you quoted.</li>
+                <li>Build your own products too: a build job card consumes the BOM parts and puts the finished good on the shelf at its parts cost.</li>
+                <li>Finished goods, assemblies and sub-assemblies sit in stock like any other item, so you can sell from the shelf or build to order.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.26s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:delivery-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Delivery notes and returns</h3>
+              </div>
+              <ul class="erp-list">
+                <li>The delivery note comes off the quote, so nothing is retyped. Delivered deducts the stock.</li>
+                <li>Returns go back into stock with a reason, and the credit is on record.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.30s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:checklist-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Stock take on a phone, every movement on record</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Count the warehouse on a phone, bin by bin. Draft counts save as you go, so a count can run over a few days without losing anything.</li>
+                <li>Before a count is posted, anything that moved since it was counted is flagged. Then the storeman posts it and stock is corrected in one go.</li>
+                <li>Every movement is logged with who, when and why, so a number on the screen can always be traced back to a document or a count.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.34s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:calculator-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Accounting integration</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Integrates with QuickBooks, Xero and Sage. Your accountant keeps their system.</li>
+                <li>Customers, suppliers and invoices stay in step, without double capture.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.34s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:magic-stick-3-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">AI built in, working on your data</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Ask it what is low, what a job cost, or who you paid most last quarter. It drafts purchase orders from what is running short and you approve them.</li>
+              </ul>
+            </article>
+
+          </div>
+
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.30s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+               class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="#" data-site-link="pricing" class="btn-secondary">
+              See pricing
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHO SEES WHAT ─────────────────────────────────────────────────────── -->
+  <section id="who" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">Who sees what</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Who sees what in the stock control software.
+            </h2>
+          </div>
+
+          <div class="erp-role-grid">
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.10s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:settings-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">Admin</h3>
+              <p class="erp-role-text">Sets up items, prices and users.</p>
+            </article>
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.14s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:phone-calling-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">Sales</h3>
+              <p class="erp-role-text">Quotes, converts to jobs, follows up.</p>
+            </article>
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.18s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:box-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">Storeman</h3>
+              <p class="erp-role-text">Receives, issues, counts.</p>
+            </article>
+
+          </div>
+
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.30s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+               class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="#" data-site-link="pricing" class="btn-secondary">
+              See pricing
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ADD DOCUMENT INTAKE ───────────────────────────────────────────────── -->
+  <!-- Link resolved by site-chrome.js to /document-intake/, which carries the
+       mirror panel pointing back here. -->
+  <section id="intake" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame erp-frame-accent is-dark">
+        <div class="erp-inner erp-inner-tight">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">Add Document Intake</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Supplier invoices book themselves.
+            </h2>
+          </div>
+
+          <div class="erp-prose">
+            <p class="reveal-fade" style="transition-delay: 0.10s;">
+              Add Document Intake for R2,500 a month. Your storeman photographs the supplier&rsquo;s delivery
+              note. We read it, match it to the purchase order and book the stock.
+            </p>
+          </div>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+               class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="#" data-site-link="document-intake" class="btn-secondary">
+              See Document Intake
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ───────────────────────────────────────────────────────────── -->
+  <section id="pricing" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">Pricing</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Core ERP, R6,500 a month.
+            </h2>
+          </div>
+
+          <div class="erp-price reveal-fade" style="transition-delay: 0.10s;">
+            <p class="erp-price-figure font-head">R6,500 <span class="erp-price-unit">a month, excl. VAT</span></p>
+            <p class="erp-price-text">3 users included. R750 a month per extra user. Month to month.</p>
+            <p class="erp-price-text">ERP and Document Intake together: R9,000 a month.</p>
+            <p class="erp-price-text">Live from day one. Data migration and consulting are quoted separately.</p>
+            <div class="cta-row erp-cta-row">
+              <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+                 class="btn-primary" data-open-demo>
+                Book a 30-min demo
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+              <a href="#" data-site-link="pricing" class="btn-secondary">
+                Full pricing
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GOING LIVE ────────────────────────────────────────────────────────── -->
+  <section id="start" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame is-dark">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">Going live</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              How South African workshops go live.
+            </h2>
+          </div>
+
+          <div class="erp-role-grid">
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.10s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:calendar-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">1. A 30-minute call about how you work</h3>
+              <p class="erp-role-text">We look at how you quote, buy and deliver today.</p>
+            </article>
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.14s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:import-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">2. Load your items, suppliers and customers</h3>
+              <p class="erp-role-text">Import them from a spreadsheet yourself, or we move them across from your current system for a quoted fee.</p>
+            </article>
+
+            <article class="erp-role reveal-fade" style="transition-delay: 0.18s;">
+              <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:play-circle-linear" width="20" height="20"></iconify-icon>
+              </span>
+              <h3 class="erp-role-name font-head">3. Your team starts quoting</h3>
+              <p class="erp-role-text">You are live from day one. We stay on the phone through the first quotes and deliveries.</p>
+            </article>
+
+          </div>
+
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.30s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+               class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="#" data-site-link="pricing" class="btn-secondary">
+              See pricing
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────────────── -->
+  <!-- Same markup and toggle as the home page FAQ. Answers mirror the FAQPage
+       JSON-LD in the head; change both together. -->
+  <section id="faq" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">FAQ</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Core ERP stock control software questions.
+            </h2>
+          </div>
+
+          <div class="faq-list-v1">
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.10s;">
+              <button class="faq-question-v1" type="button"><span>Do I need the Document Intake module?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                No. The ERP works on its own. Document Intake is an add-on for R2,500 a month. Your storeman photographs the supplier&rsquo;s delivery note and the system reads it, matches it to the purchase order and books the stock.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.14s;">
+              <button class="faq-question-v1" type="button"><span>Does it replace Sage or QuickBooks?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                No. Your accountant keeps their system. We integrate with QuickBooks, Xero and Sage.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.18s;">
+              <button class="faq-question-v1" type="button"><span>Can I start with fewer than 3 users?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                No. 3 users is the minimum and is included in the R6,500 a month. Each user after that is R750 a month.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.22s;">
+              <button class="faq-question-v1" type="button"><span>Is there a contract?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                No. It is month to month. You are live from day one. Data migration and consulting are quoted separately. Moving your data from the current system is quoted after a short call. Prices exclude VAT.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.24s;">
+              <button class="faq-question-v1" type="button"><span>Does it handle bills of materials and bills of quantities?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                Yes. A product carries its bill of materials (BOM), so a quote shows the customer one line and shows you the parts and the cost. A build job card consumes the parts and puts the finished good into stock. If you work from a bill of quantities (BOQ), load it, quote from it, and we raise the purchase orders per supplier from the same list.
+              </div></div>
+            </div>
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.26s;">
+              <button class="faq-question-v1" type="button"><span>Is it an MRP system?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                No. There is no production scheduling or routing. It runs quote to job card to delivery note with bills of materials, finished goods and stock kept right along the way. If you need routings and a production schedule, run them alongside and let us keep the stock honest.
+              </div></div>
+            </div>
+          </div>
+
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.30s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+               class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="#" data-site-link="pricing" class="btn-secondary">
+              See pricing
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── READY? ────────────────────────────────────────────────────────────── -->
+  <!-- The one CTA at the bottom of the page. Same form component as Home and
+       Contact Us — see /lead-form.js. -->
+  <section id="contact-form" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+          <div data-lead-form data-variant="contact"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer-v1" data-site-footer></footer>
+
+  <script src="../site-chrome.js"></script>
+  <!-- sums.js is loaded for its settings only: the lead endpoint, the fallback
+       email address and the thank-you page live there, shared with every form. -->
+  <script src="../savings/sums.js"></script>
+  <script src="../lead-form.js"></script>
+
+  <script>
+  // Fade sections in as they come up. Same behaviour as the other pages.
+  (function () {
+    var els = document.querySelectorAll('.reveal-fade');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+
+    // FAQ accordion, same behaviour as the home page.
+    var faqItems = document.querySelectorAll('.faq-item-v1');
+    faqItems.forEach(function (item) {
+      var btn = item.querySelector('.faq-question-v1');
+      var answer = item.querySelector('.faq-answer-v1');
+      btn.addEventListener('click', function () {
+        var isActive = item.classList.contains('active');
+        faqItems.forEach(function (other) { other.classList.remove('active'); other.querySelector('.faq-answer-v1').style.maxHeight = null; });
+        if (!isActive) { item.classList.add('active'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

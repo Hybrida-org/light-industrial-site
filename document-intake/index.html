@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<script src="/tracking.js?v=20261014r"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document Intake: invoices read into stock | Light Industrial</title>
+<meta name="description" content="Photograph or forward supplier quotes, invoices and delivery notes. AI reads every line, matches it to your stock codes and books it. R2,500 a month, 50 documents included.">
+<link rel="canonical" href="https://lightindustrial.co.za/document-intake/">
+<link rel="icon" href="../public/favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Light Industrial">
+<meta property="og:title" content="Document Intake: supplier invoices read into stock">
+<meta property="og:description" content="Photograph or forward supplier quotes, invoices and delivery notes. AI reads every line, matches it to your stock codes and books it. R2,500 a month, 50 documents included.">
+<meta property="og:url" content="https://lightindustrial.co.za/document-intake/">
+<meta property="og:image" content="https://lightindustrial.co.za/public/01-capture.jpg">
+<meta property="og:image:alt" content="Photographing a supplier delivery note in a stores room">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What can it read?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Supplier quotes, invoices and delivery notes. As a PDF, an email, a scan or a phone photo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work with my accounting software?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It works with QuickBooks, Xero and Sage. It also runs alongside your ERP or stock system, and we map what we read to your own stock codes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when something does not match?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is flagged for a one-tap check before it is booked. A price that moved, a short quantity or a line nobody ordered. You decide, and the system keeps your decision for the next document from that supplier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does it cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "R2,500 a month excluding VAT, with 50 documents included. More volume, talk to us. You are live from day one. Data migration and consulting are quoted separately."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Book a 30-minute demo. We walk through it on your own documents and see if it is a fit."
+      }
+    }
+  ]
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css?v=20261014y">
+<!-- The two module pages are one layout, so they share one stylesheet rather
+     than keeping two copies of the same panel, card and role rules in step.
+     intake.css holds only what this page adds. -->
+<link rel="stylesheet" href="../erp/erp.css?v=20261014y">
+<link rel="stylesheet" href="intake.css?v=20261014y">
+</head>
+
+<body>
+  <header class="erp-header">
+    <!-- Nav and footer are built by /site-chrome.js so links change in one place. -->
+    <div class="nav-wrap" data-site-nav></div>
+  </header>
+
+  <main>
+
+  <!-- ── HERO ──────────────────────────────────────────────────────────────── -->
+  <!-- Ads landing page: the price and the demo button sit above the fold.
+       data-site-link resolves the pricing href at run time from site-chrome.js;
+       the static href is the fallback. -->
+  <section id="hero" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-hero-grid">
+<div class="erp-head">
+            <h1 class="erp-title font-head reveal-fade" style="transition-delay: 0.06s;">
+              We read supplier invoices and delivery notes and book them into stock
+            </h1>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              Photograph or forward a supplier quote, invoice or delivery note and we read every line, match
+              it to your own stock codes and units, and book it.
+              AI agents on top spot price changes and forecast what runs out.
+              R2,500 a month. Includes 50 documents. Works alongside the system you already run.
+            </p>
+            <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+              <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener"
+                 class="btn-primary" data-open-demo>
+                Book a 30-min demo
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+              <a href="../pricing/" data-site-link="pricing" class="btn-secondary">
+                See pricing
+              </a>
+            </div>
+          </div>
+          <figure class="erp-hero-media reveal-fade" style="transition-delay: 0.18s;">
+            <img src="../public/01-capture.jpg" alt="Photographing a supplier delivery note on a phone" loading="eager" width="1200" height="900">
+          </figure>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──────────────────────────────────────────────────────── -->
+  <!-- Three steps. Step 02 carries the accent because the matching is the
+       differentiator. -->
+  <section id="how-it-works" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">How it works</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              How Document Intake reads a supplier delivery note
+            </h2>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              AI reads the document, matches each line to your stock codes and flags anything that does not add up. Your suppliers send what they already send. They set up nothing.
+            </p>
+          </div>
+
+          <div class="flow-host reveal-fade" data-flow-loop style="transition-delay: 0.12s;"></div>
+
+
+
+          <p class="erp-close reveal-fade" style="transition-delay: 0.26s;">
+            For the first month or two you will be confirming matches as new supplier lines come through.
+            After that most documents book themselves.
+          </p>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="../pricing/" data-site-link="pricing" class="btn-secondary">See pricing</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT IT READS ─────────────────────────────────────────────────────── -->
+  <section id="what-it-reads" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame is-dark">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">What it reads</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              We read supplier quotes, invoices and delivery notes line by line
+            </h2>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              Send the document the way it arrives. We read every line, match it to your codes, check it against the paperwork before it, and book the result.
+            </p>
+          </div>
+
+          <div class="erp-grid erp-grid-3">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:document-text-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Supplier quotes</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Every line, quantity, unit and price, plus the reference and validity date.</li>
+                <li>Quotes from different suppliers line up side by side in your codes.</li>
+                <li>Accept one and it becomes the purchase order everything else is checked against.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:bill-list-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Supplier invoices</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Number, date, VAT and every line, multi-page included.</li>
+                <li>Checked against the order and the delivery before you pay. A moved price or an extra line is flagged.</li>
+                <li>Cost prices update on your stock items.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:delivery-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Delivery notes</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Matched line by line to the order. Booked in full or short, with the balance on record.</li>
+                <li>Pack sizes convert to your units. A box of 100 books as 100.</li>
+                <li>The photo is filed against the stock movement as proof of delivery.</li>
+              </ul>
+            </article>
+
+          </div>
+
+          <div class="erp-grid erp-grid-3" style="margin-top: 28px;">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:camera-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">How documents reach us</h3>
+              </div>
+              <ul class="erp-list">
+                <li>A phone photo from the yard or the counter.</li>
+                <li>An email forwarded to your own intake address, attachments and all.</li>
+                <li>A PDF or scan dropped into the app, multi-page included.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:gallery-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">File types and conditions</h3>
+              </div>
+              <ul class="erp-list">
+                <li>PDF, JPG, PNG and HEIC. Scans and photos.</li>
+                <li>Skew, shadow and creases are fine. Handwritten corrections are read.</li>
+                <li>Anything uncertain is flagged for a one-tap confirm. It never guesses.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:shield-check-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">What it learns per supplier</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Each supplier's layout, item names and pack sizes, after the first confirm.</li>
+                <li>The same line never needs matching twice. New ones are approved once.</li>
+                <li>Processed in South Africa and kept with the movement they created. See <a href="/data-handling/">data handling</a>.</li>
+              </ul>
+            </article>
+
+          </div>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="../pricing/" data-site-link="pricing" class="btn-secondary">See pricing</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INTELLIGENCE ─────────────────────────────────────────────────────── -->
+  <section id="intelligence" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">Intelligence</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              AI agents that watch your supplier paperwork
+            </h2>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              Every document we read is a data point. Our agents read the pattern across them and tell you what changed.
+            </p>
+          </div>
+
+          <div class="erp-grid erp-grid-3">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:graph-up-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">We catch price changes per supplier as they happen</h3>
+              </div>
+              <ul class="erp-list">
+                <li>A line comes in dearer than last time and you hear about it before the invoice is paid.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:clock-circle-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">We flag suppliers who deliver short or late</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Short deliveries and slow lead times show up as a pattern, not a surprise at month end.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:chart-2-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">We forecast what you will run out of</h3>
+              </div>
+              <ul class="erp-list">
+                <li>What comes in and what goes out on job cards adds up to a view of what runs short next, so you order before it bites.</li>
+              </ul>
+            </article>
+
+          </div>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="../pricing/" data-site-link="pricing" class="btn-secondary">See pricing</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WORKS WITH WHAT YOU ALREADY RUN ───────────────────────────────────── -->
+  <section id="works-with" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame is-dark">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">Integrations</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Works with QuickBooks, Xero, Sage and your stock system
+            </h2>
+            <p class="erp-lede reveal-fade" style="transition-delay: 0.10s;">
+              Document Intake feeds the system you have. You keep it.
+            </p>
+          </div>
+
+          <div class="erp-grid">
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.14s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:calculator-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Works with QuickBooks, Xero and Sage</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Works with QuickBooks, Xero and Sage.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.18s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:box-minimalistic-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Feeds your ERP or stock system in your own codes</h3>
+              </div>
+              <ul class="erp-list">
+                <li>We map what we read to your own stock codes, so it lands in the system you already use.</li>
+              </ul>
+            </article>
+
+            <article class="erp-card reveal-fade" style="transition-delay: 0.22s;">
+              <div class="erp-card-head">
+                <span class="erp-card-icon" aria-hidden="true">
+                <iconify-icon icon="solar:refresh-linear" width="20" height="20"></iconify-icon>
+              </span>
+                <h3 class="erp-card-title font-head">Learns each supplier from your corrections</h3>
+              </div>
+              <ul class="erp-list">
+                <li>Every correction you make is kept. The next document from that supplier reads better than the last.</li>
+              </ul>
+            </article>
+
+          </div>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="../pricing/" data-site-link="pricing" class="btn-secondary">See pricing</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ───────────────────────────────────────────────────────────── -->
+  <section id="pricing" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">Pricing</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Document Intake, R2,500 a month
+            </h2>
+          </div>
+
+          <div class="erp-price reveal-fade" style="transition-delay: 0.10s;">
+            <p class="erp-price-figure font-head">R2,500 <span class="erp-price-unit">a month, excl VAT</span></p>
+            <p class="erp-price-text">
+              Includes 50 documents a month. More volume, talk to us. You are live from day one. Data migration and consulting are quoted separately. Moving your data
+              from the current system is quoted after a short call.
+            </p>
+            <div class="cta-row erp-cta-row">
+              <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>
+                Book a 30-min demo
+                <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+              </a>
+              <a href="../pricing/" data-site-link="pricing" class="btn-secondary">See pricing</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CORE ERP CROSS-SELL ───────────────────────────────────────────────── -->
+  <section id="erp" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame erp-frame-accent is-dark">
+        <div class="erp-inner erp-inner-tight">
+          <div class="erp-prose">
+            <p class="reveal-fade" style="transition-delay: 0.06s;">
+              This handles what comes in. Core ERP runs what goes out: quotes, job cards, delivery notes and
+              stock, from R6,500 a month.
+            </p>
+          </div>
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="../erp/" data-site-link="erp" class="btn-secondary">See Core ERP</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────────────── -->
+  <!-- Same accordion markup and styles as Home (styles.css .faq-*-v1). The
+       questions here match the FAQPage JSON-LD in the head, one to one. -->
+  <section id="faq" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+
+          <div class="erp-head">
+            <p class="sec-chip reveal-fade">FAQ</p>
+            <h2 class="erp-title erp-title-sm font-head reveal-fade" style="transition-delay: 0.06s;">
+              Document Intake questions
+            </h2>
+          </div>
+
+          <div class="faq-list-v1">
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.10s;">
+              <button class="faq-question-v1" type="button"><span>What can it read?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                Supplier quotes, invoices and delivery notes. As a PDF, an email, a scan or a phone photo.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.14s;">
+              <button class="faq-question-v1" type="button"><span>Does it work with my accounting software?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                Yes. It works with QuickBooks, Xero and Sage. It also runs alongside your ERP or stock system,
+                and we map what we read to your own stock codes.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.18s;">
+              <button class="faq-question-v1" type="button"><span>What happens when something does not match?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                It is flagged for a one-tap check before it is booked. A price that moved, a short quantity or
+                a line nobody ordered. You decide, and the system keeps your decision for the next document
+                from that supplier.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.22s;">
+              <button class="faq-question-v1" type="button"><span>What does it cost?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                R2,500 a month excluding VAT, with 50 documents included. More volume, talk to us. Set-up is
+                included. Moving data from your current system is quoted after a short call.
+              </div></div>
+            </div>
+
+            <div class="faq-item-v1 reveal-fade" style="transition-delay: 0.26s;">
+              <button class="faq-question-v1" type="button"><span>How do I start?</span><div class="faq-icon-v1">+</div></button>
+              <div class="faq-answer-v1"><div class="faq-answer-inner-v1">
+                Book a 30-minute demo. We walk through it on your own documents and see if it is a fit.
+              </div></div>
+            </div>
+          </div>
+
+          <div class="cta-row erp-cta-row reveal-fade" style="transition-delay: 0.14s;">
+            <a href="https://calendly.com/donovan-lightindustrial/30min" target="_blank" rel="noopener" class="btn-primary" data-open-demo>
+              Book a 30-min demo
+              <iconify-icon icon="solar:arrow-right-linear" width="18" height="18"></iconify-icon>
+            </a>
+            <a href="../pricing/" data-site-link="pricing" class="btn-secondary">See pricing</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── READY? ────────────────────────────────────────────────────────────── -->
+  <!-- The one form on the page. Same component as Home, ERP and Contact Us,
+       see /lead-form.js. -->
+  <section id="contact-form" class="erp-section">
+    <div class="erp-shell">
+      <div class="erp-frame">
+        <div class="erp-inner">
+          <div data-lead-form data-variant="contact"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer-v1" data-site-footer></footer>
+
+  <script src="../flow-loop.js?v=20261014x"></script>
+  <script src="../site-chrome.js"></script>
+  <!-- sums.js is loaded for its settings only: the lead endpoint, the fallback
+       email address and the thank-you page live there, shared with every form. -->
+  <script src="../savings/sums.js"></script>
+  <script src="../lead-form.js"></script>
+
+  <script>
+  // Fade sections in as they come up. Same behaviour as the other pages.
+  (function () {
+    var els = document.querySelectorAll('.reveal-fade');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function (el) { observer.observe(el); });
+
+    // FAQ accordion, one open at a time. Same as Home.
+    var items = document.querySelectorAll('.faq-item-v1');
+    items.forEach(function (item) {
+      var answer = item.querySelector('.faq-answer-v1');
+      item.querySelector('.faq-question-v1').addEventListener('click', function () {
+        var open = item.classList.contains('active');
+        items.forEach(function (o) { o.classList.remove('active'); o.querySelector('.faq-answer-v1').style.maxHeight = null; });
+        if (!open) { item.classList.add('active'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

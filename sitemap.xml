@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Add a <url> block per page as the site grows (/af/). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lightindustrial.co.za/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/savings/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/document-intake/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/erp/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/pricing/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/about/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/contact/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/privacy/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/terms/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/accessibility/</loc>
+  </url>
+  <url>
+    <loc>https://lightindustrial.co.za/data-handling/</loc>
+  </url>
+</urlset>

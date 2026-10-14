@@ -7,3 +7,6 @@ worker/.dev.vars
 
 # macOS
 .DS_Store
+
+# Local-only copy preview (draft rewrites, never deploy)
+preview/
