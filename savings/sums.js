@@ -15,28 +15,21 @@
     // What a visitor sees before touching anything. "start" should describe a
     // real in-market buyer, not the smallest one.
     sliders: {
-      docsPerWeek: { min: 5,    max: 150,   step: 5,   start: 30 },
-      minsPerDoc:  { min: 3,    max: 30,    step: 1,   start: 12 },
-      salary:      { min: 6000, max: 40000, step: 500, start: 18000 },
-      errorRate:   { min: 0,    max: 40,    step: 1,   start: 15 },
-      shortRate:   { min: 0,    max: 40,    step: 1,   start: 20 }
+      docsPerWeek: { min: 5,     max: 300,     step: 5,     start: 60 },
+      minsPerDoc:  { min: 1,     max: 15,      step: 1,     start: 3 },
+      salary:      { min: 6000,  max: 40000,   step: 500,   start: 15000 },
+      errorRate:   { min: 0,     max: 20,      step: 1,     start: 5 },
+      shortRate:   { min: 0,     max: 20,      step: 1,     start: 3 },
+      spend:       { min: 20000, max: 1000000, step: 10000, start: 100000 }
     },
 
-    weeksPerMonth: 4.33,
-    // Today's paperwork time is typing plus the chasing it causes. With intake the
-    // typing becomes a glance, errors settle to the matching-memory floor, and a
-    // short delivery is confirmed at the door instead of chased at month end.
-    reviewShare: 0.15,           // share of today's typing time that remains as checking
-    fixMinutesPerError: 20,      // find it, correct the stock, call the supplier
-    chaseMinutesPerShort: 15,    // reconcile a short delivery against the invoice later
-    confirmMinutesPerShort: 3,   // confirm it at the door with the photo in hand
-    // The money side. A short delivery you paid for in full, and a price that
-    // crept up without anyone noticing, are rands as well as hours. Each is a
-    // slice of a typical delivery's value.
-    avgDeliveryValue: 6000,      // a typical supplier delivery, ex VAT, used for the money side
-    shortSlice: 0.04,            // share of a short delivery's value paid for but not received
-    overpaySlice: 0.02,          // share of a delivery's value lost to a moved price or an extra line
-    workingHoursPerMonth: 173,   // one person's month
+    weeksPerYear: 52,
+    monthsPerYear: 12,
+    // Somebody still glances at each document and approves it. Set to 0 to claim
+    // every typing minute back.
+    reviewShare: 0.15,
+    workingHoursPerMonth: 160,   // one person's month
+    daysPerMonth: 30,            // for "pays for itself in N days"
 
     // Document Intake is R2,500 a month with 50 documents included. Above that the
     // price is quoted, not published, so the sum measures against the base price at
@@ -47,9 +40,9 @@
       { upToDocs: Infinity, price: 2500 }
     ],
 
+    // The "mistakes, month by month" tile only.
     settledErrorRate: 2,    // where matching memory lands it
     decayMonths: 6,         // how long that takes
-    longPaybackMonths: 24,  // past this we say so rather than let the number stand
 
     // Paste the deployed Worker URL here to send real leads. While it is empty the
     // forms fall back to the visitor's own email app, exactly like the homepage
@@ -79,7 +72,8 @@
     minsPerDoc: 'mins',
     salary: 'salary',
     errorRate: 'errors',
-    shortRate: 'short'
+    shortRate: 'short',
+    spend: 'spend'
   };
 
   // Builds the results-page link for a set of inputs.
@@ -114,43 +108,36 @@
   }
 
   // `input` carries the slider values. There is no set-up fee, so there is no
-  // once-off figure: the sum pays back from month 1 or not at all. Every
+  // once-off figure: the sum pays back inside the month or not at all. Every
   // number the two pages show comes out of here, so neither of them does
   // arithmetic of its own.
+  //
+  //   documents a month   = notes a week x 52 / 12
+  //   admin hours         = documents x minutes / 60
+  //   hourly rate         = monthly cost / 160
+  //   labour saved        = admin hours x (1 - reviewShare) x hourly rate
+  //   leakage saved       = monthly spend x (short% + price creep%)
+  //   net                 = labour + leakage - price, to the nearest R100
   function calculate(input) {
-    var docs = Math.round(input.docsPerWeek * SETTINGS.weeksPerMonth);
-    var errorDocs = docs * input.errorRate / 100;
-    var shortDocs = docs * input.shortRate / 100;
-
-    var typingHours = docs * input.minsPerDoc / 60;
-    var errorHours = errorDocs * SETTINGS.fixMinutesPerError / 60;
-    var shortHours = shortDocs * SETTINGS.chaseMinutesPerShort / 60;
-    var currentHours = typingHours + errorHours + shortHours;
-
-    var settledErrorDocs = docs * Math.min(SETTINGS.settledErrorRate, input.errorRate) / 100;
-    var newTypingHours = typingHours * SETTINGS.reviewShare;
-    var newErrorHours = settledErrorDocs * SETTINGS.fixMinutesPerError / 60;
-    var newShortHours = shortDocs * SETTINGS.confirmMinutesPerShort / 60;
-    var newHours = newTypingHours + newErrorHours + newShortHours;
-    var hoursSaved = Math.max(currentHours - newHours, 0);
+    var docs = Math.round(input.docsPerWeek * SETTINGS.weeksPerYear / SETTINGS.monthsPerYear);
+    var currentHours = docs * input.minsPerDoc / 60;
+    var newHours = currentHours * SETTINGS.reviewShare;
+    var hoursSaved = currentHours - newHours;
     var hourlyCost = input.salary / SETTINGS.workingHoursPerMonth;
     var labourSaved = hoursSaved * hourlyCost;
-    var moneyShort = shortDocs * SETTINGS.avgDeliveryValue * SETTINGS.shortSlice;
-    var moneyOverpay = Math.max(errorDocs - settledErrorDocs, 0) * SETTINGS.avgDeliveryValue * SETTINGS.overpaySlice;
+    var moneyShort = input.spend * input.shortRate / 100;
+    var moneyOverpay = input.spend * input.errorRate / 100;
     var moneySaved = moneyShort + moneyOverpay;
     var totalSaved = labourSaved + moneySaved;
     var price = priceFor(docs);
     // Rounded to the nearest R100 — false precision reads as a made-up number.
     var net = Math.round((totalSaved - price) / 100) * 100;
+    // Days of saving it takes to cover the month's price. Null when it does not
+    // inside the month: never a negative and never Infinity on the page.
+    var paybackDays = net > 0 ? Math.ceil(price / (totalSaved / SETTINGS.daysPerMonth)) : null;
 
     return {
       docs: docs,
-      typingHours: typingHours,
-      errorHours: errorHours,
-      shortHours: shortHours,
-      newTypingHours: newTypingHours,
-      newErrorHours: newErrorHours,
-      newShortHours: newShortHours,
       currentHours: currentHours,
       newHours: newHours,
       hoursSaved: hoursSaved,
@@ -162,11 +149,18 @@
       totalSaved: totalSaved,
       price: price,
       net: net,
-      // Null, never a negative and never Infinity: when the sum does not pay yet
-      // there is no payback month to show, and both pages fall back to hours.
+      paybackDays: paybackDays,
       breakEvenMonth: net > 0 ? 1 : null,
+      roiPercent: net > 0 ? Math.round(net / price * 100) : 0,
       shortCaught: Math.round(docs * input.shortRate / 100)
     };
+  }
+
+  // "9 days", "3 weeks". Only called when paybackDays is a number.
+  function paybackWord(days) {
+    if (days <= 14) return days === 1 ? '1 day' : days + ' days';
+    var weeks = Math.ceil(days / 7);
+    return weeks === 1 ? '1 week' : weeks + ' weeks';
   }
 
   // The documents-a-week at which the sum turns positive, holding the other
@@ -174,7 +168,7 @@
   function breakEvenDocsPerWeek(input) {
     var sl = SETTINGS.sliders.docsPerWeek;
     for (var d = input.docsPerWeek; d <= sl.max; d += sl.step) {
-      var r = calculate({ docsPerWeek: d, minsPerDoc: input.minsPerDoc, salary: input.salary, errorRate: input.errorRate, shortRate: input.shortRate });
+      var r = calculate({ docsPerWeek: d, minsPerDoc: input.minsPerDoc, salary: input.salary, errorRate: input.errorRate, shortRate: input.shortRate, spend: input.spend });
       if (r.net > 0) return d;
     }
     return null;
@@ -203,6 +197,7 @@
     errorCurve: errorCurve,
     priceFor: priceFor,
     rands: rands,
-    hoursWord: hoursWord
+    hoursWord: hoursWord,
+    paybackWord: paybackWord
   };
 })(window);

@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Onest:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css?v=20261014y">
-<link rel="stylesheet" href="savings.css?v=20261014y">
+<link rel="stylesheet" href="savings.css?v=20261014z">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,13 +126,13 @@
               <div class="roi-ctrl">
                 <div class="roi-ctrl-top">
                   <span class="roi-label-row">
-                    <label for="roiErrors">Captured lines needing updates</label>
+                    <label for="roiErrors">Supplier price changes / line updates</label>
                     <span class="roi-info-wrap">
                       <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiErrorsHint">
                         <span aria-hidden="true">i</span>
                         <span class="roi-visually-hidden">What this means</span>
                       </button>
-                      <span class="roi-tip" role="tooltip" id="roiErrorsHint">The share of lines that go in with the wrong code, quantity or price today. It drops as the system learns your suppliers.</span>
+                      <span class="roi-tip" role="tooltip" id="roiErrorsHint">Share of your monthly supplier spend billed above the quote, or on lines that had to be re-captured. Intake flags a moved price before the invoice is approved.</span>
                     </span>
                   </span>
                   <output id="roiErrorsOut" for="roiErrors"></output>
@@ -143,18 +143,35 @@
               <div class="roi-ctrl">
                 <div class="roi-ctrl-top">
                   <span class="roi-label-row">
-                    <label for="roiShort">Short or wrong deliveries</label>
+                    <label for="roiShort">Delivery shortfalls &amp; billing errors</label>
                     <span class="roi-info-wrap">
                       <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiShortHint">
                         <span aria-hidden="true">i</span>
                         <span class="roi-visually-hidden">What this means</span>
                       </button>
-                      <span class="roi-tip" role="tooltip" id="roiShortHint">Missing items, swapped items, quantities that don&rsquo;t match the order.</span>
+                      <span class="roi-tip" role="tooltip" id="roiShortHint">Share of your monthly supplier spend that arrives short, swapped or billed wrong. Intake checks every delivery against the order at the door.</span>
                     </span>
                   </span>
                   <output id="roiShortOut" for="roiShort"></output>
                 </div>
                 <input type="range" id="roiShort" aria-describedby="roiShortHint">
+              </div>
+
+              <div class="roi-ctrl">
+                <div class="roi-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="roiSpend">Monthly supplier spend</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="roiSpendHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="roi-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="roiSpendHint">Roughly what you pay suppliers a month, ex VAT. Set it from your last few months of invoices. The leakage figure is a share of this.</span>
+                    </span>
+                  </span>
+                  <output id="roiSpendOut" for="roiSpend"></output>
+                </div>
+                <input type="range" id="roiSpend" aria-describedby="roiSpendHint">
               </div>
 
             </div>
@@ -186,6 +203,7 @@
                 <p class="roi-headline font-head" id="roiHeadline"></p>
                 <p class="roi-sub" id="roiSub"></p>
                 <p class="roi-flag" id="roiFlag" hidden></p>
+                <ul class="roi-takeaways" id="roiTakeaways"></ul>
               </div>
 
               <div class="roi-tiles">
@@ -233,7 +251,7 @@
                 <div class="roi-tile roi-tile--locked">
                   <p class="roi-tile-label">Supplier scorecard <span class="roi-example-chip">Example</span></p>
                   <table class="roi-scorecard">
-                    <thead><tr><th scope="col">Supplier</th><th scope="col">Short or wrong</th></tr></thead>
+                    <thead><tr><th scope="col">Supplier</th><th scope="col">Short or billed wrong</th></tr></thead>
                     <tbody>
                       <tr><td>Supplier A</td><td>4%</td></tr>
                       <tr><td>Supplier B</td><td>19%</td></tr>
@@ -288,7 +306,7 @@
           <span class="reveal-line" style="transition-delay: 0.24s;">calculator does not count</span>
         </h2>
         <p class="roi-intro reveal-para" style="transition-delay: 0.18s;">
-          The calculator counts hours, because five sliders can only tell us hours. These three
+          The calculator counts hours and the leakage you can put a number on. These three
           are worth more. We do not put a price on them.
         </p>
       </div>
@@ -351,8 +369,8 @@
 
   <script src="../site-chrome.js"></script>
 
-  <script src="sums.js?v=20261013g"></script>
-  <script src="calculator.js?v=20261013g"></script>
+  <script src="sums.js?v=20261014a"></script>
+  <script src="calculator.js?v=20261014a"></script>
   <script src="tooltips.js"></script>
 
   <script>

@@ -13,6 +13,8 @@
   var hoursWord = window.SavingsSums.hoursWord;
   var errorCurve = window.SavingsSums.errorCurve;
   var QUERY_KEYS = window.SavingsSums.QUERY_KEYS;
+  var paybackWord = window.SavingsSums.paybackWord;
+  var breakEvenDocsPerWeek = window.SavingsSums.breakEvenDocsPerWeek;
 
   var el = function (id) { return document.getElementById(id); };
 
@@ -24,7 +26,8 @@
     minsPerDoc: el('roiMins'),
     salary: el('roiSalary'),
     errorRate: el('roiErrors'),
-    shortRate: el('roiShort')
+    shortRate: el('roiShort'),
+    spend: el('roiSpend')
   };
 
   // The one place the page turns controls into the plain object sums.js wants.
@@ -34,7 +37,8 @@
       minsPerDoc: +inputs.minsPerDoc.value,
       salary: +inputs.salary.value,
       errorRate: +inputs.errorRate.value,
-      shortRate: +inputs.shortRate.value
+      shortRate: +inputs.shortRate.value,
+      spend: +inputs.spend.value
     };
   }
 
@@ -50,8 +54,6 @@
     el('roiBarAfter').style.width = Math.max((s.newHours / longest) * 100, 2) + '%';
     el('roiBarTodayVal').textContent = hoursWord(Math.round(s.currentHours));
     el('roiBarAfterVal').textContent = hoursWord(Math.round(s.newHours));
-    el('roiTimeNote').textContent = 'Win back ' + hoursWord(Math.round(s.hoursSaved)) +
-      ' every single month.';
   }
 
   // ── Tile 2: one line, six months ────────────────────────────────────────────
@@ -136,11 +138,35 @@
         'The sum still works, but a number that big is worth a conversation rather than a slider.';
     }
 
-    result.setAttribute('data-state', 'pays');
-    verdict.textContent = s.net > 0 ? 'It pays for itself' : 'What you save';
-    headline.innerHTML = 'You save <span class="roi-amount">' + rands(s.totalSaved) + '</span> a month.';
-    sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time (' + hoursWord(hours) + ') plus <b>' + rands(s.moneySaved) +
-      '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.';
+    var takeaways = [
+      '<b>Hours recovered:</b> ' + hoursWord(hours) + ' a month freed up for your team.',
+      '<b>Preventable leakage:</b> ' + rands(s.moneySaved) + ' a month saved from overcharges and short deliveries.'
+    ];
+
+    if (s.net > 0) {
+      result.setAttribute('data-state', 'pays');
+      verdict.textContent = 'Net monthly gain';
+      headline.innerHTML = '<span class="roi-amount">' + rands(s.net) + '</span> a month.';
+      sub.innerHTML = 'Pays for itself in <b>' + paybackWord(s.paybackDays) + '</b>. ' +
+        '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
+        '</b> of leakage stopped, less Document Intake at <b>' + rands(s.price) + '</b> a month.';
+      takeaways.push('<b>Payback:</b> fully covers the ' + rands(s.price) + ' software cost and returns ' +
+        s.roiPercent + '% on it every month.');
+    } else {
+      // Never a negative on the page. The win is the hours, and we say what it
+      // would take for the rands to follow.
+      result.setAttribute('data-state', 'time');
+      verdict.textContent = 'What you win back';
+      headline.innerHTML = '<span class="roi-amount">' + (hours ? hoursWord(hours) : 'Under an hour') + '</span> a month.';
+      sub.innerHTML = '<b>' + rands(s.totalSaved) + '</b> a month saved against Document Intake at <b>' +
+        rands(s.price) + '</b> a month. At this volume the win is the time, not the rands.';
+      var enough = breakEvenDocsPerWeek(readInputs());
+      takeaways.push('<b>Payback:</b> ' + (enough
+        ? 'from about ' + enough + ' delivery notes a week it pays for itself on these numbers.'
+        : 'not at this volume. Worth a conversation rather than a slider.'));
+    }
+
+    el('roiTakeaways').innerHTML = takeaways.map(function (t) { return '<li>' + t + '</li>'; }).join('');
   }
 
   // ── The sum, written out ────────────────────────────────────────────────────
@@ -148,28 +174,27 @@
   function renderWorking(s) {
     var lines = [
       s.docs + ' documents a month. ' + inputs.docsPerWeek.value + ' a week &times; ' +
-        SETTINGS.weeksPerMonth + ' weeks.',
-      hoursWord(Math.round(s.currentHours)) + ' a month on paperwork today. ' +
-        hoursWord(Math.round(s.typingHours)) + ' typing (' + s.docs + ' documents &times; ' + inputs.minsPerDoc.value + ' minutes), ' +
-        hoursWord(Math.round(s.errorHours)) + ' fixing wrong lines (' + SETTINGS.fixMinutesPerError + ' minutes each) and ' +
-        hoursWord(Math.round(s.shortHours)) + ' chasing short deliveries (' + SETTINGS.chaseMinutesPerShort + ' minutes each).',
-      hoursWord(Math.round(s.newHours)) + ' with intake. A check instead of typing, errors down to ' +
-        SETTINGS.settledErrorRate + '% once it knows your suppliers, and a short delivery confirmed at the door in ' +
-        SETTINGS.confirmMinutesPerShort + ' minutes.',
+        SETTINGS.weeksPerYear + ' weeks &divide; ' + SETTINGS.monthsPerYear + ' months.',
+      hoursWord(Math.round(s.currentHours)) + ' a month on paperwork today. ' + s.docs + ' documents &times; ' +
+        inputs.minsPerDoc.value + ' minutes.',
+      hoursWord(Math.round(s.newHours)) + ' with intake. Someone still glances at each document and approves it, about ' +
+        Math.round(SETTINGS.reviewShare * 100) + '% of the time it takes today.',
       rands(s.hourlyCost) + ' an hour. ' + rands(+inputs.salary.value) + ' a month &divide; ' +
         SETTINGS.workingHoursPerMonth + ' working hours.',
       rands(s.labourSaved) + ' of labour freed a month. ' + hoursWord(Math.round(s.hoursSaved)) +
         ' &times; ' + rands(s.hourlyCost) + '.',
-      rands(s.moneyShort) + ' stopped on short deliveries. ' + s.shortCaught + ' short deliveries a month &times; ' +
-        Math.round(SETTINGS.shortSlice * 100) + '% of a typical ' + rands(SETTINGS.avgDeliveryValue) + ' delivery paid for but not received.',
-      rands(s.moneyOverpay) + ' stopped on moved prices and extra lines. Wrong lines down from ' + inputs.errorRate.value + '% to ' +
-        SETTINGS.settledErrorRate + '%, at ' + Math.round(SETTINGS.overpaySlice * 100) + '% of a delivery each.',
+      rands(s.moneyShort) + ' stopped on short deliveries and billing errors. ' + inputs.shortRate.value + '% of ' +
+        rands(+inputs.spend.value) + ' supplier spend a month.',
+      rands(s.moneyOverpay) + ' stopped on moved prices and re-captured lines. ' + inputs.errorRate.value + '% of ' +
+        rands(+inputs.spend.value) + '.',
       '<b>' + rands(s.totalSaved) + ' saved a month.</b>',
       s.docs <= SETTINGS.tiers[0].upToDocs
         ? 'Less ' + rands(s.price) + ' a month for document intake, ' + SETTINGS.tiers[0].upToDocs + ' documents included.'
         : 'Less an estimated ' + rands(s.price) + ' a month at ' + s.docs + ' documents. Over ' +
           SETTINGS.tiers[0].upToDocs + ' documents, talk to us for a price.',
-      s.net > 0 ? '<b>Pays for itself from month 1.</b>' : ''
+      s.net > 0
+        ? '<b>' + rands(s.net) + ' net a month, to the nearest R100. Pays for itself in ' + paybackWord(s.paybackDays) + '.</b>'
+        : ''
     ];
     el('roiWorking').innerHTML = lines.filter(Boolean).map(function (line) { return '<li>' + line + '</li>'; }).join('');
   }
@@ -190,6 +215,7 @@
     el('roiSalaryOut').textContent = rands(+inputs.salary.value);
     el('roiErrorsOut').textContent = inputs.errorRate.value + '%';
     el('roiShortOut').textContent = inputs.shortRate.value + '%';
+    el('roiSpendOut').textContent = rands(+inputs.spend.value);
 
     var s = sums();
 
@@ -203,6 +229,7 @@
       : (s.shortCaught === 1 ? 'A short or mismatched delivery a month, caught'
                               : 'Short or mismatched deliveries a month, caught') +
         ' at the dock, before you approve the supplier invoice.';
+    el('roiTimeNote').textContent = 'Win back ' + hoursWord(Math.round(s.hoursSaved)) + ' every single month.';
 
     renderWorking(s);
     el('roiTerms').textContent = tierSentence();
@@ -316,13 +343,14 @@
         'Delivery notes a week: ' + inputs.docsPerWeek.value,
         'Minutes per document today: ' + inputs.minsPerDoc.value,
         'Monthly cost of the person handling them: ' + rands(+inputs.salary.value),
-        'Captured lines needing updates: ' + inputs.errorRate.value + '%',
-        'Short or wrong deliveries: ' + inputs.shortRate.value + '%',
+        'Supplier price changes / line updates: ' + inputs.errorRate.value + '%',
+        'Delivery shortfalls & billing errors: ' + inputs.shortRate.value + '%',
+        'Monthly supplier spend: ' + rands(+inputs.spend.value),
         '',
         'Documents a month: ' + s.docs,
         'Hours saved a month: ' + Math.round(s.hoursSaved),
         'Net a month: ' + rands(s.net),
-        'Pays for itself: ' + (s.breakEvenMonth ? 'from month ' + s.breakEvenMonth : 'not at this volume')
+        'Pays for itself: ' + (s.paybackDays ? 'in ' + paybackWord(s.paybackDays) : 'not at this volume')
       ];
     }
 
@@ -348,6 +376,7 @@
           monthly_staff_cost: +inputs.salary.value,
           error_rate_percent: +inputs.errorRate.value,
           short_delivery_percent: +inputs.shortRate.value,
+          monthly_supplier_spend: +inputs.spend.value,
           documents_per_month: s.docs,
           hours_saved: Math.round(s.hoursSaved),
           monthly_net: s.net,

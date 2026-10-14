@@ -1,6 +1,6 @@
 # Savings calculator — the sum, the words, and what is still open
 
-**Status:** Built, 2026-09-23, to `HYBRIDA-797`. One calculator, two steps.
+**Status:** Built, 2026-09-23, to `HYBRIDA-797`. One calculator, two steps. Sum and labels reworked 2026-10-13.
 **Replaces:** the three-input homepage calculator and the five-input `/intake/`
 page, which disagreed with each other on purpose until somebody chose. The
 stricter sum won.
@@ -19,86 +19,72 @@ stricter sum won.
 | **The drawing** | the teaser script inside `index.html`, and `savings/calculator.js` |
 | **`/intake/`** | a redirect to `/savings/`. The Document Intake module page is still to build (`HYBRIDA-898`) |
 
-Neither page does arithmetic of its own. The teaser hands its five slider values
+Neither page does arithmetic of its own. The teaser hands its six slider values
 to `/savings/` in the address bar, so the results open on the visitor's own
 numbers, and a shared link still shows something sensible.
 
-## 2. The five inputs
+## 2. The six inputs
+
+Reworked 2026-10-13: the leakage side is now a share of supplier spend, so a
+spend input joined the five, the two percentage sliders were relabelled and
+their defaults dropped to single digits.
 
 | Input | Default | Range |
 |---|---|---|
-| Delivery notes a week | 30 | 5–150 |
-| Minutes a document, today | 12 | 3–30 |
-| What that person costs a month | R11,000 | R6,000–R25,000 |
-| Captured lines needing a fix | 15% | 0–40% |
-| Deliveries arriving short or wrong | 20% | 0–40% |
+| Delivery notes a week | 60 | 5–300 |
+| Minutes per document today | 3 | 1–15 |
+| What that person costs a month | R15,000 | R6,000–R40,000 |
+| Supplier price changes / line updates | 5% | 0–20% |
+| Delivery shortfalls & billing errors | 3% | 0–20% |
+| Monthly supplier spend | R100,000 | R20,000–R1,000,000 |
 
-Plus two setup toggles, on the results page only: **keeping their own system**
-(+R15,000, ticked by default, because most buyers are) and **data migration**
-(+R5,000). The teaser leaves these out and assumes the common case — they are
-detail, and detail is what step 2 is for.
-
-**"Minutes a document" needs its label to do real work.** Somebody reading it as
-*typing time* will say 12 minutes is ridiculous, and they would be right. What we
-mean is the whole loop: taking the delivery, checking it against the order,
-chasing what is short, filing the paper, and capturing it.
+**The two percentages are a share of spend, not a share of deliveries.** The
+tooltips say so. That is what makes "spend × percentage" an honest sum rather
+than a wild one.
 
 ## 3. The sum, in plain words
 
-1. Documents a month = notes a week × 4.33
+1. Documents a month = notes a week × 52 ÷ 12
 2. Hours today = documents × minutes ÷ 60
-3. Hours after = documents × **2 minutes** ÷ 60 — somebody still checks and approves
-4. What an hour of that person costs = monthly cost ÷ **173** working hours
+3. Hours after = hours today × **15%** — somebody still glances and approves. `reviewShare` in `sums.js`; set to 0 to claim every minute
+4. What an hour of that person costs = monthly cost ÷ **160** working hours
 5. Labour freed = hours saved × cost per hour
-6. Net a month = labour freed − our monthly price, **rounded to the nearest R100**
-7. Payback month = setup fee ÷ net a month, rounded up
+6. Leakage stopped = monthly spend × (shortfalls % + price changes %)
+7. Net a month = labour freed + leakage stopped − R2,500, **rounded to the nearest R100**
+8. Pays for itself in N days = R2,500 ÷ (monthly saving ÷ 30), rounded up. Shown in days up to 14, weeks after
+9. Return = net ÷ R2,500, as a percentage
 
-**The price follows the document count**, using the published tiers: R3,500 up to
-50 documents a month, R6,500 up to 150, R12,000 above. All ex VAT, stated on screen.
-
-**The 2 minutes and the 173 hours are the honest version.** The old homepage sum
-used 160 hours and claimed we remove 80% of the work, which produced a bigger
-number for the same business. This one is smaller and defensible.
+There is no set-up fee, so there is no payback month: it pays back inside the
+first month or it does not.
 
 ## 4. The rules that do not move
 
-- **The headline is the payback month, never annual savings.**
+- **The headline is the net monthly gain, with "pays for itself in N days" under it.**
 - **When net is zero or less, the headline switches to hours won back.** Never a
-  negative on the page, and never the word "never".
-- **The 2 minutes a document is fixed and labelled**, not a slider.
+  negative on the page, and never the word "never". The third takeaway then says
+  from how many notes a week it would pay.
+- **Three takeaways under the headline, always:** hours recovered, preventable
+  leakage, payback.
 - **No dashboard claim, no credit-note recovery figure, no accuracy percentage.**
 - **Rounding to the nearest R100.** False precision reads as a made-up number.
-
-Two guards beyond that:
-
 - **More than one person's whole month** on paperwork: show the number, but say it
   is past what a calculator can honestly answer.
-- **A payback longer than 24 months**: say so rather than let the number stand.
 
 ## 5. What it says on the default sliders
 
-Worth knowing before anybody demos it:
-
 | | |
 |---|---|
-| Documents a month | 130 |
-| Hours today / after / saved | 26 / 4 / 22 |
-| Cost per hour | R63.58 |
-| Labour freed | R1,378 |
-| Our price at 130 documents | R6,500 |
-| Setup (base + keeping their own system) | R30,000 |
-| **Net a month** | **−R5,100** |
-| **Headline** | **"Win back 22 hours every month"** |
+| Documents a month | 260 |
+| Hours today / after / saved | 13 / 2 / 11 |
+| Cost per hour | R93.75 |
+| Labour freed | R1,036 |
+| Leakage stopped | R8,000 (R3,000 short, R5,000 moved prices) |
+| Saved a month | R9,036 |
+| **Net a month** | **R6,500** |
+| **Headline** | **"Net monthly gain R6,500 a month. Pays for itself in 9 days."** |
+| Return | 260% |
 
-So the page opens on time, not money. That is the fallback rule working exactly
-as specified — but it means the first thing a visitor reads is us not promising a
-saving. **This is open question 25 and it is Donovan's call:** either the defaults
-are wrong, or the ICP is narrower than the slider ranges suggest.
-
-It is not a bug in the arithmetic. Our own qualification rule says a business
-below real receiving volume is better off with a cheap tool and a spreadsheet.
-The calculator saying "hours, not rands" to a small shop is that rule applied
-honestly, in public. It will disqualify people, and it should.
+`node savings/sums.check.js` asserts exactly these numbers.
 
 ## 6. The email, and the tracked event
 

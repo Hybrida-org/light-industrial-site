@@ -613,13 +613,13 @@
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
                   <span class="roi-label-row">
-                    <label for="calcErrors">Captured lines needing updates</label>
+                    <label for="calcErrors">Supplier price changes / line updates</label>
                     <span class="roi-info-wrap">
                       <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcErrorsHint">
                         <span aria-hidden="true">i</span>
                         <span class="calc-visually-hidden">What this means</span>
                       </button>
-                      <span class="roi-tip" role="tooltip" id="calcErrorsHint">The share of lines that go in with the wrong code, quantity or price today.</span>
+                      <span class="roi-tip" role="tooltip" id="calcErrorsHint">Share of your monthly supplier spend billed above the quote, or on lines that had to be re-captured. Intake flags a moved price before the invoice is approved.</span>
                     </span>
                   </span>
                   <output id="calcErrorsOut" for="calcErrors"></output>
@@ -630,18 +630,35 @@
               <div class="calc-ctrl">
                 <div class="calc-ctrl-top">
                   <span class="roi-label-row">
-                    <label for="calcShort">Short or wrong deliveries</label>
+                    <label for="calcShort">Delivery shortfalls &amp; billing errors</label>
                     <span class="roi-info-wrap">
                       <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcShortHint">
                         <span aria-hidden="true">i</span>
                         <span class="calc-visually-hidden">What this means</span>
                       </button>
-                      <span class="roi-tip" role="tooltip" id="calcShortHint">Missing items, swapped items, quantities that don&rsquo;t match the order.</span>
+                      <span class="roi-tip" role="tooltip" id="calcShortHint">Share of your monthly supplier spend that arrives short, swapped or billed wrong. Intake checks every delivery against the order at the door.</span>
                     </span>
                   </span>
                   <output id="calcShortOut" for="calcShort"></output>
                 </div>
                 <input type="range" id="calcShort" aria-describedby="calcShortHint">
+              </div>
+
+              <div class="calc-ctrl">
+                <div class="calc-ctrl-top">
+                  <span class="roi-label-row">
+                    <label for="calcSpend">Monthly supplier spend</label>
+                    <span class="roi-info-wrap">
+                      <button type="button" class="roi-info" aria-expanded="false" aria-controls="calcSpendHint">
+                        <span aria-hidden="true">i</span>
+                        <span class="calc-visually-hidden">What this means</span>
+                      </button>
+                      <span class="roi-tip" role="tooltip" id="calcSpendHint">Roughly what you pay suppliers a month, ex VAT. Set it from your last few months of invoices. The leakage figure is a share of this.</span>
+                    </span>
+                  </span>
+                  <output id="calcSpendOut" for="calcSpend"></output>
+                </div>
+                <input type="range" id="calcSpend" aria-describedby="calcSpendHint">
               </div>
 
             </div>
@@ -854,7 +871,7 @@
 
   <!-- The maths lives in one file, shared with the results page. This script only
        reads the sliders, paints the teaser, and hands the numbers over. -->
-  <script src="savings/sums.js?v=20261013g"></script>
+  <script src="savings/sums.js?v=20261014a"></script>
   <script src="savings/tooltips.js"></script>
   <!-- After sums.js: the form reads the lead endpoint and the fallback email
        address from there, so one paste turns on every form on the site. -->
@@ -884,14 +901,16 @@
       minsPerDoc: el('calcMins'),
       salary: el('calcSalary'),
       errorRate: el('calcErrors'),
-      shortRate: el('calcShort')
+      shortRate: el('calcShort'),
+      spend: el('calcSpend')
     };
     var outs = {
       docsPerWeek: el('calcDocsOut'),
       minsPerDoc: el('calcMinsOut'),
       salary: el('calcSalaryOut'),
       errorRate: el('calcErrorsOut'),
-      shortRate: el('calcShortOut')
+      shortRate: el('calcShortOut'),
+      spend: el('calcSpendOut')
     };
     var verdict = el('calcVerdict');
     var headline = el('calcHeadline');
@@ -908,7 +927,8 @@
         minsPerDoc: +sliders.minsPerDoc.value,
         salary: +sliders.salary.value,
         errorRate: +sliders.errorRate.value,
-        shortRate: +sliders.shortRate.value
+        shortRate: +sliders.shortRate.value,
+        spend: +sliders.spend.value
       };
     }
 
@@ -918,6 +938,7 @@
       outs.salary.textContent = rands(+sliders.salary.value);
       outs.errorRate.textContent = sliders.errorRate.value + '%';
       outs.shortRate.textContent = sliders.shortRate.value + '%';
+      outs.spend.textContent = rands(+sliders.spend.value);
 
       var s = sums.calculate(readInputs());
       var hours = Math.round(s.hoursSaved);
@@ -929,11 +950,20 @@
       against.textContent = 'Measured against document intake at ' + rands(s.price) +
         ' a month at ' + s.docs + ' documents, ex VAT.';
 
-      result.setAttribute('data-state', 'pays');
-      verdict.textContent = 'Money saved a month';
-      headline.innerHTML = '<span class="calc-amount">' + rands(s.totalSaved) + '</span>';
-      sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
-        '</b> you stop paying on short deliveries and moved prices. Document Intake is <b>' + rands(s.price) + '</b> a month.';
+      if (s.net > 0) {
+        result.setAttribute('data-state', 'pays');
+        verdict.textContent = 'Net monthly gain';
+        headline.innerHTML = '<span class="calc-amount">' + rands(s.net) + '</span>';
+        sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
+          '</b> of leakage stopped, less Document Intake at <b>' + rands(s.price) + '</b> a month. Pays for itself in <b>' +
+          sums.paybackWord(s.paybackDays) + '</b>.';
+      } else {
+        result.setAttribute('data-state', 'time');
+        verdict.textContent = 'Saved a month';
+        headline.innerHTML = '<span class="calc-amount">' + rands(s.totalSaved) + '</span>';
+        sub.innerHTML = '<b>' + rands(s.labourSaved) + '</b> of time plus <b>' + rands(s.moneySaved) +
+          '</b> of leakage stopped. Document Intake is <b>' + rands(s.price) + '</b> a month, so at this volume the win is the hours.';
+      }
     }
 
     // One of only two key events, so it has to mean something: it fires once, and
@@ -1006,6 +1036,7 @@
           monthly_staff_cost: input.salary,
           error_rate_percent: input.errorRate,
           short_delivery_percent: input.shortRate,
+          monthly_supplier_spend: input.spend,
           documents_per_month: s.docs,
           hours_saved: Math.round(s.hoursSaved),
           monthly_net: s.net,
