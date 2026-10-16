@@ -301,6 +301,8 @@
 
     function answers() {
       var lead = { source: slot.getAttribute('data-source') || 'website', variant: variantName, page: window.location.pathname };
+      // How they got here (UTMs, click IDs, HubSpot cookie), never their answers.
+      if (window.LI_TRACKING && LI_TRACKING.attribution) lead.attribution = LI_TRACKING.attribution();
       FIELDS.forEach(function (field) {
         var el = controlOf(field);
         lead[field.key] = el.type === 'checkbox' ? el.checked : (el.value || '').trim();

@@ -371,6 +371,7 @@
           email: email,
           source: 'savings-results-page',
           variant: 'calculator_lead',
+          attribution: (window.LI_TRACKING && LI_TRACKING.attribution) ? LI_TRACKING.attribution() : undefined,
           delivery_notes_per_week: +inputs.docsPerWeek.value,
           minutes_per_document: +inputs.minsPerDoc.value,
           monthly_staff_cost: +inputs.salary.value,

@@ -33,6 +33,7 @@ Only one ID goes on the site. The rest go into GTM.
 | Google Ads Conversion ID | GTM variable `Google Ads Conversion ID` | Same |
 | Lead conversion label | GTM variable `Lead Label` | Same |
 | Demo conversion label | GTM variable `Demo Label` | Same |
+| Demo booked conversion label | GTM variable `Demo Booked Label` | Same |
 | Meta Pixel ID | GTM variable `Meta Pixel ID` | Same |
 | LinkedIn Partner ID | GTM variable `LinkedIn Partner ID` | Same |
 | LinkedIn Lead conversion ID | GTM variable `LinkedIn Lead Conversion ID` | Same. This is the numeric ID of the conversion you create in Campaign Manager, not the Partner ID |
@@ -52,6 +53,7 @@ Every one of these must be replaced before you publish the container.
 | `AW-XXXXXXXXX` | `Google Ads Conversion ID` |
 | `LEAD_LABEL` | `Lead Label` |
 | `DEMO_LABEL` | `Demo Label` |
+| `DEMO_BOOKED_LABEL` | `Demo Booked Label` |
 | `META_PIXEL_ID` | `Meta Pixel ID` |
 | `LINKEDIN_PARTNER_ID` | `LinkedIn Partner ID` |
 | `LINKEDIN_LEAD_CONVERSION_ID` | `LinkedIn Lead Conversion ID` |
@@ -64,7 +66,7 @@ The Meta, LinkedIn and Clarity tags check their ID before loading. If the value 
 1. Create a GTM account and a Web container for lightindustrial.co.za.
 2. Admin > Import Container. Choose `docs/gtm-container.json`.
 3. Workspace: New. Import option: Merge, Overwrite conflicting tags. On a fresh container both options give the same result.
-4. Confirm. You should see 19 tags, 8 triggers, 18 variables, 7 folders.
+4. Confirm. You should see 21 tags, 9 triggers, 19 variables, 7 folders.
 5. Open Variables and replace every placeholder above.
 6. Admin > Container settings > turn on Enable consent overview. Open the consent overview and confirm every non-Google tag shows a required consent type.
 7. Preview (see Verification), then Submit > Publish.
@@ -80,6 +82,7 @@ All events are pushed by the site. GTM only listens.
 | `page_view_li` | `page_path`, `page_type` (home, intake, erp, pricing, about, contact, savings, lander, thank_you, legal) | `tracking.js` on every page load |
 | `lead_form_submit` | `form_source` (hero, website, meta, savings-results-page), `page_path`, `delivery_notes_band`, `stock_system` | `lead-form.js` after the Worker accepts the form, and `calculator.js` after the gate |
 | `demo_click` | `page_path`, `location` (hero, section, nav, footer) | Click on any `[data-open-demo]` link |
+| `demo_booked` | `page_path`, `location` (modal, calendly_redirect) | `tracking.js` when the Calendly modal posts `calendly.event_scheduled`, or when Calendly redirects to `/thank-you/?src=demo` after a booking in its own tab |
 | `calculator_results_unlocked` | `page_path`, `docs_per_week`, `net_monthly_band` | `calculator.js` when the email gate succeeds |
 | `pricing_view` | `page_path` | Pricing page load, and when the pricing section on Home scrolls into view |
 | `contact_click` | `method` (email, phone) | Click on a mailto or tel link |
@@ -92,7 +95,8 @@ What fires in each vendor:
 | Event | GA4 | Google Ads | Meta | LinkedIn |
 |---|---|---|---|---|
 | `lead_form_submit` | event, key event | Lead form submit (primary) | Lead | Lead conversion |
-| `demo_click` | event | Demo click (secondary) | Schedule | |
+| `demo_click` | event | Demo click (secondary) | | |
+| `demo_booked` | event, key event | Demo booked (primary) | Schedule | |
 | `calculator_results_unlocked` | event, key event | | | |
 | `pricing_view` | event | | ViewContent | |
 | `page_view_li`, `contact_click`, `scroll_75` | event | | | |
@@ -104,19 +108,20 @@ Clarity and HubSpot load on every page and receive no custom events.
 Mark exactly two events as key events in GA4. Admin > Events > toggle Mark as key event.
 
 1. `lead_form_submit`
-2. `calculator_results_unlocked`
+2. `demo_booked`
 
-Why only two. Adbot's advice is a maximum of two, so the reports and Google's bidding focus on what matters. Form submits are the lead. Calculator unlocks are the warm step before it. Demo clicks are a click on a link, not a booking, so they stay an ordinary event in GA4 and a secondary conversion in Ads.
+Why only two. Adbot's advice is a maximum of two, so the reports and Google's bidding focus on what matters. Form submits are the lead. A booked demo is the strongest signal the site produces. Calculator unlocks are the warm step before either and stay an ordinary event (changed 2026-10-14; it was the second key event before bookings were measurable). Demo clicks are a click on a link, not a booking, so they stay an ordinary event in GA4 and a secondary conversion in Ads.
 
 Events take 24 hours to appear in the Events list. Push each one in Preview first, or create them by name under Admin > Events > Create event if you do not want to wait.
 
 ## Google Ads conversions
 
-Create two conversion actions in Google Ads. Goals > Conversions > New conversion action > Website > Add a conversion action manually.
+Create three conversion actions in Google Ads. Goals > Conversions > New conversion action > Website > Add a conversion action manually.
 
 | Name | Category | Goal | Value | Count | Window |
 |---|---|---|---|---|---|
 | Lead form submit | Submit lead form | Primary | None | One | 30 days click |
+| Demo booked | Book appointment | Primary | None | One | 30 days click |
 | Demo click | Book appointment | Secondary | None | One | 30 days click |
 
 After saving, open each action, choose Use Google Tag Manager, and copy the Conversion ID and Conversion label into the GTM variables.
@@ -144,9 +149,21 @@ Meta events also require `ad_storage`. The base pixel fires once per page and th
 
 Create a project at clarity.microsoft.com, Settings > Overview > copy the Project ID into `Clarity ID`. Clarity records sessions, so it only loads with `analytics_storage` consent. Turn on Mask all text under Settings > Masking. The lead form fields are then blurred in recordings.
 
+## Attribution on the lead itself
+
+`tracking.js` stores the first visit's `utm_*`, `gclid`, `fbclid`, `msclkid`, `li_fat_id`, landing page and referrer in localStorage `li_attr`, once, and never overwrites it. Every lead form sends that object as `attribution`, with HubSpot's `hubspotutk` cookie and the page URL, and the Worker writes it onto the contact (`worker/lead/README.md` lists the properties). The same UTMs are appended to every Calendly link and to the modal URL, so a booking carries the campaign too. This means a lead's source survives ad blockers, blocked cookies and a visitor who reads four pages first.
+
+## Calendly
+
+- Event type: Donovan's 30-minute demo, `calendly.com/donovan-lightindustrial/30min`. On Home it opens in the modal; everywhere else the link opens Calendly in a new tab.
+- Integrations > HubSpot: connect it. Each booking creates or updates the contact and logs a meeting, and the `utm_*` on the link land on the contact. Requires a paid Calendly seat.
+- Event type > Confirmation page > Redirect to an external site: `https://lightindustrial.co.za/thank-you/?src=demo`, with "Pass event details" on. This is what counts bookings made in Calendly's own tab as `demo_booked`. Also paid.
+- Invitee questions: keep name, email, and add "Company" and "Phone" as required. Cheap to ask on a booking, expensive to chase afterwards.
+- Verify: book a test slot from the modal (DebugView shows `demo_booked` with `location: modal`), and one from the Pricing page link (`location: calendly_redirect`). Cancel both.
+
 ## HubSpot tracking
 
-Nothing to create. The container loads `js-eu1.hs-scripts.com/148893758.js` with `analytics_storage` consent. This ties page visits to the contact once they submit the form. The form itself posts through the Cloudflare Worker, not through this script, so leads arrive whether cookies are accepted or not.
+Nothing to create. The container loads `js-eu1.hs-scripts.com/148893758.js` with `analytics_storage` consent. This ties page visits to the contact once they submit the form. The form itself posts through the Cloudflare Worker in `worker/lead/` to the HubSpot Forms API, carrying the `hubspotutk` cookie when it exists, so leads arrive whether cookies are accepted or not and join their page views when they are.
 
 In HubSpot, Settings > Tracking & analytics > Tracking code > Advanced tracking: set Cookie consent to Do not show, the site banner already handles it. Add lightindustrial.co.za under Settings > Domains & URLs > Tracking domains.
 

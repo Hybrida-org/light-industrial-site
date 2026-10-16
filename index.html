@@ -1241,7 +1241,8 @@
         email: form.elements.email.value.trim(),
         phone: form.elements.phone.value.trim(),
         source: 'website',
-        variant: 'hero'
+        variant: 'hero',
+        attribution: (window.LI_TRACKING && LI_TRACKING.attribution) ? LI_TRACKING.attribution() : undefined
       };
     }
 

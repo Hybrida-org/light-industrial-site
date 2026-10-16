@@ -7,7 +7,11 @@
      1. sets Consent Mode v2 defaults before GTM loads,
      2. loads GTM when gtmId is set,
      3. remembers consent in localStorage 'li_consent' and shows a banner,
-     4. pushes the events listed in docs/tracking-setup.md into dataLayer.
+     4. pushes the events listed in docs/tracking-setup.md into dataLayer,
+     5. remembers how the visitor first arrived (UTMs, click IDs, landing
+        page) in localStorage 'li_attr', hands it to every lead form through
+        LI_TRACKING.attribution(), and carries the UTMs into Calendly links,
+     6. turns a Calendly booking into the demo_booked event.
 
    It must never throw when every ID below is empty. */
 window.LI_TRACKING = {
@@ -72,6 +76,62 @@ window.LI_TRACKING = {
     stored = c;
   }
 
+  // ── Attribution ────────────────────────────────────────────────────────────
+  // First touch only: the campaign that brought them here is the one that gets
+  // the credit, however many pages they read before filling in a form. HubSpot
+  // works the same out from its own cookie, but only once its script has loaded
+  // and the visitor has not blocked it; this copy travels with the lead itself.
+  var ATTR_KEY = 'li_attr';
+  var ATTR_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid', 'msclkid', 'li_fat_id'];
+  function readAttr() {
+    try { return JSON.parse(window.localStorage.getItem(ATTR_KEY) || 'null') || null; } catch (e) { return null; }
+  }
+  (function captureAttr() {
+    if (readAttr()) return;
+    var q; try { q = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var a = {}, any = false;
+    ATTR_PARAMS.forEach(function (k) { var v = q.get(k); if (v) { a[k] = v.slice(0, 200); any = true; } });
+    var ref = document.referrer || '';
+    if (!any && (!ref || ref.indexOf(window.location.host) !== -1)) return;  // direct visit: nothing to remember yet
+    a.landing_page = window.location.pathname + (q.toString() ? '?' + q.toString() : '');
+    a.referrer = ref.slice(0, 500);
+    a.first_seen = new Date().toISOString();
+    try { window.localStorage.setItem(ATTR_KEY, JSON.stringify(a)); } catch (e) { /* storage blocked */ }
+  })();
+  function cookie(name) {
+    var m = document.cookie.match('(?:^|; )' + name + '=([^;]*)');
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  // Everything a lead form should send alongside the answers. Never personal data.
+  T.attribution = function () {
+    var a = readAttr() || {};
+    a.hutk = cookie('hubspotutk');  // HubSpot's visitor cookie, so the contact joins its own page views
+    a.page_url = window.location.href.split('#')[0];
+    a.page_title = document.title;
+    return a;
+  };
+  // Calendly keeps utm_* from its link on the booking, and its HubSpot
+  // integration copies them onto the contact. So every demo link carries them.
+  function withUtms(url) {
+    var a = readAttr(); if (!a) return url;
+    var extra = ATTR_PARAMS.filter(function (k) { return k.indexOf('utm_') === 0 && a[k]; })
+      .map(function (k) { return k + '=' + encodeURIComponent(a[k]); }).join('&');
+    if (!extra) return url;
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + extra;
+  }
+  function onReady(fn) {
+    if (document.body) fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  onReady(function () {
+    var links = document.querySelectorAll('a[href*="calendly.com"], [data-cal-url]');
+    for (var i = 0; i < links.length; i++) {
+      var el = links[i];
+      if (el.hasAttribute('data-cal-url')) el.setAttribute('data-cal-url', withUtms(el.getAttribute('data-cal-url')));
+      else el.setAttribute('href', withUtms(el.getAttribute('href')));
+    }
+  });
+
   // ── GTM ────────────────────────────────────────────────────────────────────
   if (T.gtmId) {
     window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
@@ -102,11 +162,22 @@ window.LI_TRACKING = {
   // The hero mini form on Home redirects here on success, so this page load is
   // the lead event for it. The full form and the savings gate push their own
   // lead_form_submit inline and never land here.
+  // Calendly can redirect here with ?src=demo after a booking made in its own
+  // tab (a paid Calendly setting), which is how bookings from pages without the
+  // modal get counted.
   if (type === 'thank_you') {
     var src = 'hero';
     try { src = new URLSearchParams(location.search).get('src') || 'hero'; } catch (e) {}
-    push('lead_form_submit', { form_source: src, page_path: path });
+    if (src === 'demo') push('demo_booked', { page_path: path, location: 'calendly_redirect' });
+    else push('lead_form_submit', { form_source: src, page_path: path });
   }
+
+  // The Calendly modal posts a message when a slot is booked. That, not the
+  // click that opened it, is the demo conversion.
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://calendly.com') return;
+    if (e.data && e.data.event === 'calendly.event_scheduled') push('demo_booked', { page_path: path, location: 'modal' });
+  });
 
   // ── Banner ─────────────────────────────────────────────────────────────────
   var CSS = '' +
@@ -183,10 +254,6 @@ window.LI_TRACKING = {
   }
   T.openSettings = function () { onReady(function () { showBanner(true); }); };
 
-  function onReady(fn) {
-    if (document.body) fn();
-    else document.addEventListener('DOMContentLoaded', fn);
-  }
   onReady(function () { if (T.consentBanner && !stored) showBanner(false); });
 
   // ── Events ─────────────────────────────────────────────────────────────────
