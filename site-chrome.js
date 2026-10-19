@@ -3,10 +3,10 @@
    page marks the two spots with <div data-site-nav> and <div data-site-footer>
    and this script fills them in.
 
-   Load it with a plain <script src="site-chrome.js?v=20261014s"></script> placed after the
+   Load it with a plain <script src="site-chrome.js?v=20261019b"></script> placed after the
    footer placeholder but BEFORE a page's own scripts: those scripts bind the
    contact and demo buttons, and the nav's button has to exist by then. A page
-   in a sub-folder points at "../site-chrome.js?v=20261014s".
+   in a sub-folder points at "../site-chrome.js?v=20261019b".
 
    Change a link once, here, and it changes everywhere.
 
@@ -70,13 +70,14 @@
   var CONTACT_EMAIL = 'donovan@lightindustrial.co.za';
   var CONTACT_MAILTO = 'mailto:' + CONTACT_EMAIL + '?subject=Light%20Industrial%20enquiry';
   var DEMO_URL = 'https://calendly.com/donovan-lightindustrial/30min';
+  var LINKEDIN_URL = 'https://www.linkedin.com/company/144674059/';
 
   /* The phone number for the site, waiting on HYBRIDA-918. Paste it here in the
      shape a person should read it; PHONE_DIAL is the same number in the shape a
      phone should dial. While PHONE is empty nothing renders — a page with no
      number is better than a page with a wrong one. */
-  var PHONE = '';
-  var PHONE_DIAL = '';
+  var PHONE = '072 624 4915';
+  var PHONE_DIAL = '+27726244915';
 
   /* The office address, shown in the footer on every page. One line per line of
      the address; change it here and it changes site-wide. */
@@ -195,7 +196,9 @@
       '          <div class="site-footer-contact-v1">' +
       '            <a href="' + contactHref() + '" class="site-footer-contact-item-v1">Get in touch</a>' +
       '            <a href="mailto:' + CONTACT_EMAIL + '" class="site-footer-contact-item-v1">' + CONTACT_EMAIL + '</a>' +
+      (PHONE ? '            <a href="tel:' + PHONE_DIAL + '" class="site-footer-contact-item-v1">' + PHONE + '</a>' : '') +
       '            <a href="' + DEMO_URL + '" target="_blank" rel="noopener" class="site-footer-contact-item-v1" data-open-demo>Book a 30-min demo</a>' +
+      '            <a href="' + LINKEDIN_URL + '" target="_blank" rel="noopener" class="site-footer-contact-item-v1">LinkedIn</a>' +
       // Street address. <address> is the tag browsers and search engines read as
       // "this is where the business is"; the italics it adds are turned off in CSS.
       '            <address class="site-footer-address-v1">' + ADDRESS_LINES.join('<br>') + '</address>' +
