@@ -74,7 +74,7 @@ a short call.
 - Document Intake: R2,500 a month. 50 documents a month included; more volume on
   request. Works alongside the system the customer already runs (an ERP, an
   accounting package or spreadsheets).
-- Core ERP: R6,500 a month. 5 users included, R750 per extra user per month.
+- Core ERP: R6,500 a month. 5 users and one site included, R750 per extra user per month.
 - Both modules: R8,000 a month.
 
 ## Contact
