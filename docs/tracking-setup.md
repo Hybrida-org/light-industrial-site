@@ -29,7 +29,7 @@ Only one ID goes on the site. The rest go into GTM.
 | ID | Where | How |
 |---|---|---|
 | `gtmId` | `tracking.js`, config block at the top | Paste `GTM-XXXXXXX`. Deploy. Nothing loads until this is set |
-| GA4 Measurement ID | GTM variable `GA4 Measurement ID` | Variables > User-Defined > edit the constant |
+| GA4 Measurement ID | GTM variable `GA4 Measurement ID` | Already `G-4KGNMJWZFX` in the container. Until `gtmId` is set, `tracking.js` loads GA4 directly with this ID and forwards every site event to it |
 | Google Ads Conversion ID | GTM variable `Google Ads Conversion ID` | Same |
 | Lead conversion label | GTM variable `Lead Label` | Same |
 | Demo conversion label | GTM variable `Demo Label` | Same |

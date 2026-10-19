@@ -17,7 +17,7 @@
    It must never throw when every ID below is empty. */
 window.LI_TRACKING = {
   gtmId: '',                 // GTM-XXXXXXX
-  ga4Id: '',                 // G-XXXXXXXXXX  (set inside GTM, kept here for the doc)
+  ga4Id: 'G-4KGNMJWZFX',     // used directly only while gtmId is empty, see Direct GA4 below
   googleAdsId: '',           // AW-XXXXXXXXX
   googleAdsLeadLabel: '',    // conversion label for lead_form_submit
   googleAdsDemoLabel: '',    // conversion label for demo_click
@@ -205,6 +205,33 @@ window.LI_TRACKING = {
       else el.setAttribute('href', withUtms(el.getAttribute('href')));
     }
   });
+
+  // ── Direct GA4 (until GTM exists) ─────────────────────────────────────────
+  // With no GTM container, load GA4 itself and forward every { event } the
+  // site pushes to it as a GA4 event, params included. Setting gtmId turns
+  // this off, and the GA4 tags in the container take over with the same
+  // event names, so nothing is counted twice.
+  // ponytail: GA4 only on this path. Ads, Meta, LinkedIn and Clarity need GTM.
+  if (!T.gtmId && T.ga4Id) {
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(T.ga4Id);
+    (document.head || document.documentElement).appendChild(g);
+    gtag('js', new Date());
+    gtag('config', T.ga4Id);
+    var dlPush = window.dataLayer.push;
+    window.dataLayer.push = function () {
+      for (var i = 0; i < arguments.length; i++) {
+        var a = arguments[i];
+        if (a && typeof a.event === 'string' && a.event.indexOf('gtm.') !== 0) {
+          var p = {};
+          for (var k in a) if (k !== 'event') p[k] = a[k];
+          gtag('event', a.event, p);
+        }
+      }
+      return dlPush.apply(window.dataLayer, arguments);
+    };
+  }
 
   // ── GTM ────────────────────────────────────────────────────────────────────
   if (T.gtmId) {
