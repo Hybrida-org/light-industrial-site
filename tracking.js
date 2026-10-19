@@ -28,7 +28,7 @@ window.LI_TRACKING = {
   // The HubSpot form every lead form on the site submits to. Paste the form ID
   // from HubSpot (Marketing > Forms > the form > Share > Embed code, formId).
   // While it is empty the forms hand the lead to the visitor's mail app instead.
-  hubspotFormGuid: '',
+  hubspotFormGuid: '9bf3fdde-023f-4f9f-91f6-e683978abc73',
   // No banner: POPIA does not require one, so consent defaults to granted and
   // nothing is shown. Set true to bring the banner and the denied defaults back.
   consentBanner: false

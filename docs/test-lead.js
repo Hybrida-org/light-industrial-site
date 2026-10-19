@@ -15,7 +15,7 @@ const window = {
 const document = { referrer: '', cookie: 'hubspotutk=abc', title: 'Home', body: {}, head: { appendChild() {} },
   createElement: () => ({}), addEventListener() {}, querySelectorAll: () => [], getElementById: () => null, documentElement: {} };
 window.URLSearchParams = URLSearchParams;
-const src = fs.readFileSync(__dirname + '/../tracking.js', 'utf8').replace("hubspotFormGuid: ''", "hubspotFormGuid: 'guid'");
+const src = fs.readFileSync(__dirname + '/../tracking.js', 'utf8').replace(/hubspotFormGuid: '[^']*'/, "hubspotFormGuid: 'guid'");
 vm.runInNewContext(src, { window, document, URLSearchParams, JSON, Date, console });
 const T = window.LI_TRACKING;
 
