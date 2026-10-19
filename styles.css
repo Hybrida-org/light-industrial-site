@@ -918,6 +918,7 @@ body.modal-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); 
 .plan-featured .plan-list { border-top-color: rgba(239,236,230,0.16); }
 .plan-featured .plan-list iconify-icon { color: var(--sage); }
 .plan-featured .btn-primary { background: var(--bronze); color: #15100b; }
+.plan-featured .btn-secondary { color: var(--paper); border-color: rgba(239,236,230,0.22); background: rgba(239,236,230,0.06); }
 .plan-note { max-width: 68ch; margin: 28px auto 0; text-align: center; font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
 .compare { max-width: 1120px; margin: 44px auto 0; overflow-x: auto; }
 .compare-table { width: 100%; border-collapse: collapse; font-size: 14.5px; color: var(--ink); }

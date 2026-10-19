@@ -5,7 +5,7 @@ Tick every box before spending. Merges Adbot's advice (2026-09-07) and the websi
 ## Site truths
 
 - [ ] Category line reads the same on every page: Document intelligence and operations software for South African manufacturers, workshops and merchants
-- [ ] Prices in plain text on Home, Pricing and both module pages: R2,500, R6,500, R9,000, R750 per extra user, excluding VAT
+- [ ] Prices in plain text on Home, Pricing and both module pages: R2,500, R6,500, R8,000, R750 per extra user, excluding VAT
 - [ ] No testimonials, client names, counts, accuracy figures or certifications anywhere
 - [ ] Every section ends with Book a 30-min demo or See pricing
 - [ ] Lead form works end to end and the contact appears in HubSpot with the right properties
