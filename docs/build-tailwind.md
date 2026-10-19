@@ -1,0 +1,1 @@
+After adding Tailwind classes to any page or script, rebuild from the repo root: `npx -y tailwindcss@3.4.17 -c tailwind.config.js -o tailwind.css --minify`, then bump the `tailwind.css?v=` value on every page.
