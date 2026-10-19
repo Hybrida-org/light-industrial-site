@@ -4,7 +4,9 @@ How measurement works on lightindustrial.co.za, which accounts exist, where each
 
 ## How it fits together
 
-One script, `tracking.js`, loads first in the `<head>` of every page. It sets Consent Mode v2 defaults (everything denied except security), shows the cookie banner only when `consentBanner` is true (off since 2026-10-14: POPIA does not require one, so consent defaults to granted and the footer link is hidden), stores the choice in localStorage under `li_consent`, loads Google Tag Manager when `gtmId` is set, and pushes the events listed below into `window.dataLayer`.
+One script, `tracking.js`, loads first in the `<head>` of every page. It sets Consent Mode v2 defaults (everything denied except security), shows the cookie banner only when `consentBanner` is true (off since 2026-10-14: POPIA does not require one, so consent defaults to granted and the footer link is hidden), stores the choice in localStorage under `li_consent`, and pushes the events listed below into `window.dataLayer`.
+
+Google Tag Manager (container `GTM-5WX9N938`) loads from Google's standard snippet, pasted statically in every page: the `<script>` part straight after the `tracking.js` tag in `<head>` (tracking.js must run first so the consent defaults are in place before GTM), and the `<noscript>` iframe straight after the opening `<body>` tag. It is static so raw-HTML scanners such as Adbot's can see it. `tracking.js` no longer injects GTM. A new page must copy both snippets, or GTM and everything in it is missing on that page.
 
 Everything else runs inside GTM. GA4, Google Ads, Meta, LinkedIn, Clarity and HubSpot are tags in the container. You paste their IDs once, in GTM, as variables. Nothing vendor-specific is hard-coded on the site.
 
@@ -24,12 +26,13 @@ Use one shared Google account for GTM, GA4 and Ads so access does not depend on 
 
 ## Where each ID is pasted
 
-Only one ID goes on the site. The rest go into GTM.
+Only the container ID goes on the site. The rest go into GTM.
 
 | ID | Where | How |
 |---|---|---|
-| `gtmId` | `tracking.js`, config block at the top | Paste `GTM-XXXXXXX`. Deploy. Nothing loads until this is set |
-| GA4 Measurement ID | GTM variable `GA4 Measurement ID` | Already `G-4KGNMJWZFX` in the container. Until `gtmId` is set, `tracking.js` loads GA4 directly with this ID and forwards every site event to it |
+| GTM container ID | The GTM snippet in `<head>` and the noscript iframe after `<body>` of every page | `GTM-5WX9N938`. Both snippets on every page, a new page copies them |
+| `gtmId` | `tracking.js`, config block at the top | `GTM-5WX9N938`. It does not load GTM. Set, it only switches the direct-GA4 fallback off. Empty, `tracking.js` loads GA4 itself |
+| GA4 Measurement ID | GTM variable `GA4 Measurement ID` | Already `G-4KGNMJWZFX` in the container. If `gtmId` is emptied, `tracking.js` loads GA4 directly with this ID and forwards every site event to it |
 | Google Ads Conversion ID | GTM variable `Google Ads Conversion ID` | Same |
 | Lead conversion label | GTM variable `Lead Label` | Same |
 | Demo conversion label | GTM variable `Demo Label` | Same |
@@ -231,7 +234,7 @@ Delete the test leads from HubSpot afterwards.
 
 ## Cloudflare Pages
 
-- `tracking.js` and `gtm-container.json` are static files. Cloudflare caches them. After changing `gtmId`, purge the cache (Caching > Purge everything) or the old file serves for up to four hours.
+- `tracking.js` and `gtm-container.json` are static files. Cloudflare caches them. After changing `gtmId` or the GTM snippets, purge the cache (Caching > Purge everything) or the old file serves for up to four hours.
 - Do not add a Content-Security-Policy header without listing googletagmanager.com, google-analytics.com, googleadservices.com, connect.facebook.net, snap.licdn.com, px.ads.linkedin.com, clarity.ms and js-eu1.hs-scripts.com. The `_headers` file is where that would go. There is no CSP today.
 - Cloudflare Web Analytics is a separate beacon. Leave it off, GA4 already counts page views, and one fewer script on the page helps the speed score.
 - Bot Fight Mode can block Meta's domain verification crawler. Turn it off for the verification step if the record fails.
@@ -256,7 +259,7 @@ Hold the first review at the end of week one, the second at the end of month one
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| Nothing fires, no GTM request in the Network tab | `gtmId` empty in `tracking.js`, or cache serving the old file | Set the ID, deploy, purge the Cloudflare cache |
+| Nothing fires, no GTM request in the Network tab | The GTM snippet is missing from that page's `<head>` (new page that did not copy it), or cache serving the old file | Copy both GTM snippets from any other page, deploy, purge the Cloudflare cache |
 | GTM loads, GA4 shows no hits | `GA4 Measurement ID` still a placeholder | Replace the variable, publish the container |
 | Event visible in Preview but the GA4 tag did not fire | Event name typo between the site and the trigger | Names are exact. Compare against the Events table |
 | Meta Pixel Helper shows no pixel | Consent not granted, or ID still a placeholder | Accept all in the banner, check the variable |
