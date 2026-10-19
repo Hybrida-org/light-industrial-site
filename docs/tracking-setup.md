@@ -80,7 +80,7 @@ All events are pushed by the site. GTM only listens.
 | Event | Params | Fired by |
 |---|---|---|
 | `page_view_li` | `page_path`, `page_type` (home, intake, erp, pricing, about, contact, savings, lander, thank_you, legal) | `tracking.js` on every page load |
-| `lead_form_submit` | `form_source` (hero, website, meta, savings-results-page), `page_path`, `delivery_notes_band`, `stock_system` | `lead-form.js` after HubSpot accepts the form, the thank-you page for the hero form, and `calculator.js` after the gate |
+| `lead_form_submit` | `form_source` (hero, website, meta, savings-results-page), `page_path`, `delivery_notes_band`, `stock_system` | the thank-you page load after the hero form or the full form (`src`, `band`, `sys` in its query string), and `calculator.js` after the savings gate |
 | `demo_click` | `page_path`, `location` (hero, section, nav, footer) | Click on any `[data-open-demo]` link |
 | `demo_booked` | `page_path`, `location` (modal, calendly_redirect) | `tracking.js` when the Calendly modal posts `calendly.event_scheduled`, or when Calendly redirects to `/thank-you/?src=demo` after a booking in its own tab |
 | `calculator_results_unlocked` | `page_path`, `docs_per_week`, `net_monthly_band` | `calculator.js` when the email gate succeeds |

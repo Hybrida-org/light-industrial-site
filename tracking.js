@@ -233,17 +233,18 @@ window.LI_TRACKING = {
   var type = pageType();
   push('page_view_li', { page_path: path, page_type: type });
   if (type === 'pricing') push('pricing_view', { page_path: path });
-  // The hero mini form on Home redirects here on success, so this page load is
-  // the lead event for it. The full form and the savings gate push their own
-  // lead_form_submit inline and never land here.
+  // The hero form and the full form redirect here on success, so this page
+  // load is their lead event, counted once. The savings gate unlocks in place
+  // and pushes its own lead_form_submit.
   // Calendly can redirect here with ?src=demo after a booking made in its own
   // tab (a paid Calendly setting), which is how bookings from pages without the
   // modal get counted.
   if (type === 'thank_you') {
-    var src = 'hero';
-    try { src = new URLSearchParams(location.search).get('src') || 'hero'; } catch (e) {}
+    var q = null, src = 'hero';
+    try { q = new URLSearchParams(location.search); src = q.get('src') || 'hero'; } catch (e) {}
     if (src === 'demo') push('demo_booked', { page_path: path, location: 'calendly_redirect' });
-    else push('lead_form_submit', { form_source: src, page_path: path });
+    else push('lead_form_submit', { form_source: src, page_path: path,
+      delivery_notes_band: q && q.get('band'), stock_system: q && q.get('sys') });
   }
 
   // The Calendly modal posts a message when a slot is booked. That, not the

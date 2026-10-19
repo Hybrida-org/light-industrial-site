@@ -285,18 +285,6 @@
       return first;
     }
 
-    /* Tell GTM a lead went through. Never the email, name or phone. */
-    function trackSubmit(lead) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'lead_form_submit',
-        form_source: lead.source,
-        page_path: window.location.pathname,
-        delivery_notes_band: lead.delivery_notes_per_week || undefined,
-        stock_system: lead.stock_system || undefined
-      });
-    }
-
     function answers() {
       var lead = { source: slot.getAttribute('data-source') || 'website', variant: variantName, page: window.location.pathname };
       FIELDS.forEach(function (field) {
@@ -334,8 +322,11 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
       LI_TRACKING.sendLead(lead).then(function () {
-        trackSubmit(lead);
-        window.location.href = THANK_YOU_URL;
+        // The thank-you page pushes lead_form_submit from these, so a lead is
+        // counted once, on a page load, which ad blockers rarely swallow.
+        window.location.href = THANK_YOU_URL + '?src=' + encodeURIComponent(lead.source) +
+          '&band=' + encodeURIComponent(lead.delivery_notes_per_week || '') +
+          '&sys=' + encodeURIComponent(lead.stock_system || '');
       }).catch(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = variant.button;
