@@ -1,11 +1,13 @@
 /* tracking.js — consent, GTM and the dataLayer events for lightindustrial.co.za.
 
-   Loaded as the FIRST script in <head> of every page. Everything that talks to
+   Loaded as the FIRST script in <head> of every page, before Google's GTM
+   snippet that follows it. Everything that talks to
    a vendor (GA4, Google Ads, Meta, LinkedIn, Clarity, HubSpot tracking) fires
    inside GTM, so IDs are pasted once there. This file only:
 
      1. sets Consent Mode v2 defaults before GTM loads,
-     2. loads GTM when gtmId is set,
+     2. loads GA4 directly only while gtmId is empty (GTM itself is the static
+        snippet in each page, so a raw-HTML scanner can see it),
      3. remembers consent in localStorage 'li_consent' and shows a banner,
      4. pushes the events listed in docs/tracking-setup.md into dataLayer,
      5. remembers how the visitor first arrived (UTMs, click IDs, landing
@@ -16,7 +18,7 @@
 
    It must never throw when every ID below is empty. */
 window.LI_TRACKING = {
-  gtmId: '',                 // GTM-XXXXXXX
+  gtmId: 'GTM-5WX9N938',     // GTM loads from the static snippet in each page head; this only switches Direct GA4 off
   ga4Id: 'G-4KGNMJWZFX',     // used directly only while gtmId is empty, see Direct GA4 below
   googleAdsId: '',           // AW-XXXXXXXXX
   googleAdsLeadLabel: '',    // conversion label for lead_form_submit
@@ -231,15 +233,6 @@ window.LI_TRACKING = {
       }
       return dlPush.apply(window.dataLayer, arguments);
     };
-  }
-
-  // ── GTM ────────────────────────────────────────────────────────────────────
-  if (T.gtmId) {
-    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(T.gtmId);
-    (document.head || document.documentElement).appendChild(s);
   }
 
   // ── Page type ──────────────────────────────────────────────────────────────
