@@ -95,11 +95,11 @@ unlocked by removing a class, so the real numbers are never painted before an
 email has been given. The blurred figure in the teaser is a placeholder, not the
 real number shrunk down — there is nothing for an inspector to reveal.
 
-**The lead does not reach HubSpot yet.** `leadEndpoint` in `savings/sums.js` is
-empty, so it falls back to the visitor's own email app, exactly like the homepage
-form. It never silently swallows a lead. `HYBRIDA-907` closes that.
+**Where the lead goes.** `LI_TRACKING.sendLead()` in `tracking.js` posts it to HubSpot.
+While `hubspotFormGuid` there is empty, it falls back to the visitor's own email app,
+exactly like the homepage form.
 
-**The tracked event**, one of only two key events in Google Analytics:
+**The tracked event**, an ordinary event in Google Analytics since 2026-10-14 (the key events are `lead_form_submit` and `demo_booked`):
 
 - `calculator_completed` fires **once per visit**, only after the visitor has
   changed at least one input. Never on page load — a default nobody touched is

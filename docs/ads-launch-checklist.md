@@ -34,9 +34,10 @@ Tick every box before spending. Merges Adbot's advice (2026-09-07) and the websi
 
 ## Conversions verified
 
-- [ ] GA4: `lead_form_submit` and `calculator_results_unlocked` marked as key events, no others
-- [ ] GA4 DebugView shows all seven events with params and no personal data
-- [ ] Google Ads: Lead form submit (primary) and Demo click (secondary) read Recording conversions
+- [ ] GA4: `lead_form_submit` and `demo_booked` marked as key events, no others
+- [ ] GA4 DebugView shows all eight events with params and no personal data
+- [ ] Google Ads: Lead form submit (primary), Demo booked (primary) and Demo click (secondary) read Recording conversions
+- [ ] Calendly: HubSpot integration connected, confirmation redirect to `/thank-you/?src=demo`, a test booking shows `demo_booked` in DebugView and a meeting on the HubSpot contact
 - [ ] No GA4 import into Ads, so nothing counts twice
 - [ ] Meta: domain verified, Lead, Schedule, ViewContent configured, Pixel Helper green
 - [ ] LinkedIn Insight Tag Active, Lead conversion Active
@@ -109,7 +110,7 @@ Every paid link carries UTMs. Lowercase, hyphens, no spaces.
 
 - [ ] Google Ads auto-tagging on, UTMs set at campaign level as a tracking template
 - [ ] Meta URL parameters set at ad set level
-- [ ] HubSpot original source shows the UTMs on a test contact
+- [ ] HubSpot original source shows the UTMs on a test contact, and the `utm_*` properties written by the site agree with it
 
 ## Speed
 
@@ -119,8 +120,10 @@ Every paid link carries UTMs. Lowercase, hyphens, no spaces.
 
 ## HubSpot lead routing
 
-- [ ] Worker creates contact and deal in portal 148893758
-- [ ] Deal lands in the right pipeline stage and is assigned to Donovan
+- [ ] HubSpot form Website lead and the custom properties in `tracking-setup.md` § HubSpot form exist
+- [ ] Form ID pasted into `hubspotFormGuid` in `tracking.js`, mailto fallback gone
+- [ ] Workflow creates the deal in the right pipeline stage and assigns it to the SDR
+- [ ] A test lead from a `?utm_source=test` visit shows `utm_source` on the contact
 - [ ] Notification email arrives within a minute
 - [ ] `form_source` and `stock_system` land on the contact
 - [ ] Reply template ready, pointing to pricing and the calculator

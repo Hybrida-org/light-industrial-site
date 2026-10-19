@@ -354,7 +354,7 @@
       ];
     }
 
-    // No Worker deployed yet, so the lead goes through the visitor's own email app
+    // No HubSpot form ID yet, so the lead goes through the visitor's own email app
     // rather than being silently dropped. Weaker than posting to HubSpot, but it
     // never loses a lead.
     function sendByEmail(email, s) {
@@ -363,11 +363,8 @@
         '&body=' + encodeURIComponent(summaryLines(s).concat(['', 'Email: ' + email]).join('\n'));
     }
 
-    function sendToWorker(email, s) {
-      return fetch(SETTINGS.leadEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+    function sendToHubSpot(email, s) {
+      return LI_TRACKING.sendLead({
           email: email,
           source: 'savings-results-page',
           variant: 'calculator_lead',
@@ -381,7 +378,6 @@
           hours_saved: Math.round(s.hoursSaved),
           monthly_net: s.net,
           break_even_month: s.breakEvenMonth
-        })
       });
     }
 
@@ -404,10 +400,10 @@
 
       var s = sums();
       track(s);
-      // They gave us the email, so they get the results either way. A Worker that
-      // is down is our problem, not theirs.
-      if (SETTINGS.leadEndpoint) {
-        sendToWorker(email, s).catch(function () { /* nothing to tell them */ }).then(unlock);
+      // They gave us the email, so they get the results either way. If HubSpot is down,
+      // that is our problem, not theirs.
+      if (window.LI_TRACKING && LI_TRACKING.hubspotFormGuid) {
+        sendToHubSpot(email, s).catch(function () { /* nothing to tell them */ }).then(unlock);
       } else {
         unlock();
         sendByEmail(email, s);

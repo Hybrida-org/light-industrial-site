@@ -1019,15 +1019,12 @@
     // The lead matters more than the page turn, so a failed send never blocks the
     // results — they gave us the email, they get what they were promised.
     function sendLead(email, input, s) {
-      if (!SETTINGS.leadEndpoint) {
+      if (!(window.LI_TRACKING && LI_TRACKING.hubspotFormGuid)) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'calculator_lead', endpoint: 'none' });
         return Promise.resolve();
       }
-      return fetch(SETTINGS.leadEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      return LI_TRACKING.sendLead({
           email: email,
           source: 'home-savings-calculator',
           variant: 'calculator_lead',
@@ -1041,7 +1038,6 @@
           hours_saved: Math.round(s.hoursSaved),
           monthly_net: s.net,
           break_even_month: s.breakEvenMonth
-        })
       });
     }
 
@@ -1166,8 +1162,8 @@
     if (!form || !window.SavingsSums) return;
 
     // The endpoint, the fallback address and the thank-you page all live in
-    // savings/sums.js, so pasting the deployed Worker URL in one place turns on
-    // every form on the site at once.
+    // savings/sums.js. The HubSpot form ID in tracking.js turns on every form on
+    // the site at once.
     var SETTINGS = window.SavingsSums.SETTINGS;
 
     var panel = document.querySelector('.hero-form-panel');
@@ -1258,15 +1254,10 @@
       showDone();
     }
 
-    function sendToWorker(details) {
+    function sendToHubSpot(details) {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
-      fetch(SETTINGS.leadEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(details)
-      }).then(function (response) {
-        if (!response.ok) throw new Error('Worker returned ' + response.status);
+      LI_TRACKING.sendLead(details).then(function () {
         // A page load is a far more reliable conversion signal for Google Ads than a
         // JavaScript event, which ad blockers and flaky networks can swallow.
         window.location.href = SETTINGS.thankYouUrl + '?src=hero';
@@ -1291,7 +1282,7 @@
       if (form.elements.website.value) { showDone(); return; }
 
       var details = lead();
-      if (SETTINGS.leadEndpoint) sendToWorker(details); else sendByEmail(details);
+      if (window.LI_TRACKING && LI_TRACKING.hubspotFormGuid) sendToHubSpot(details); else sendByEmail(details);
     });
   })();
   </script>

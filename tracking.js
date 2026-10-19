@@ -7,7 +7,12 @@
      1. sets Consent Mode v2 defaults before GTM loads,
      2. loads GTM when gtmId is set,
      3. remembers consent in localStorage 'li_consent' and shows a banner,
-     4. pushes the events listed in docs/tracking-setup.md into dataLayer.
+     4. pushes the events listed in docs/tracking-setup.md into dataLayer,
+     5. remembers how the visitor first arrived (UTMs, click IDs, landing
+        page) in localStorage 'li_attr', hands it to every lead form through
+        LI_TRACKING.attribution(), and carries the UTMs into Calendly links,
+     6. turns a Calendly booking into the demo_booked event,
+     7. submits every lead form to HubSpot through LI_TRACKING.sendLead().
 
    It must never throw when every ID below is empty. */
 window.LI_TRACKING = {
@@ -20,6 +25,10 @@ window.LI_TRACKING = {
   linkedinPartnerId: '',
   clarityId: '',
   hubspotPortalId: '148893758', hubspotRegion: 'eu1',
+  // The HubSpot form every lead form on the site submits to. Paste the form ID
+  // from HubSpot (Marketing > Forms > the form > Share > Embed code, formId).
+  // While it is empty the forms hand the lead to the visitor's mail app instead.
+  hubspotFormGuid: '',
   // No banner: POPIA does not require one, so consent defaults to granted and
   // nothing is shown. Set true to bring the banner and the denied defaults back.
   consentBanner: false
@@ -72,6 +81,131 @@ window.LI_TRACKING = {
     stored = c;
   }
 
+  // ── Attribution ────────────────────────────────────────────────────────────
+  // First touch only: the campaign that brought them here is the one that gets
+  // the credit, however many pages they read before filling in a form. HubSpot
+  // works the same out from its own cookie, but only once its script has loaded
+  // and the visitor has not blocked it; this copy travels with the lead itself.
+  var ATTR_KEY = 'li_attr';
+  var ATTR_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid', 'msclkid', 'li_fat_id'];
+  function readAttr() {
+    try { return JSON.parse(window.localStorage.getItem(ATTR_KEY) || 'null') || null; } catch (e) { return null; }
+  }
+  (function captureAttr() {
+    if (readAttr()) return;
+    var q; try { q = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var a = {}, any = false;
+    ATTR_PARAMS.forEach(function (k) { var v = q.get(k); if (v) { a[k] = v.slice(0, 200); any = true; } });
+    var ref = document.referrer || '';
+    if (!any && (!ref || ref.indexOf(window.location.host) !== -1)) return;  // direct visit: nothing to remember yet
+    a.landing_page = window.location.pathname + (q.toString() ? '?' + q.toString() : '');
+    a.referrer = ref.slice(0, 500);
+    a.first_seen = new Date().toISOString();
+    try { window.localStorage.setItem(ATTR_KEY, JSON.stringify(a)); } catch (e) { /* storage blocked */ }
+  })();
+  function cookie(name) {
+    var m = document.cookie.match('(?:^|; )' + name + '=([^;]*)');
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  // Everything a lead form should send alongside the answers. Never personal data.
+  T.attribution = function () {
+    var a = readAttr() || {};
+    a.hutk = cookie('hubspotutk');  // HubSpot's visitor cookie, so the contact joins its own page views
+    a.page_url = window.location.href.split('#')[0];
+    a.page_title = document.title;
+    return a;
+  };
+  // ── Leads to HubSpot ───────────────────────────────────────────────────────
+  // The HubSpot Forms API takes a browser POST with no key (the form ID is not
+  // a secret), so there is no server of ours in the way. Site field name on the
+  // left, HubSpot contact property on the right. Every property on the right
+  // must exist on the HubSpot form, or HubSpot rejects the whole submission, so
+  // a rejection is retried with the core fields alone: a missing property must
+  // never cost a lead. docs/tracking-setup.md § HubSpot lists the properties.
+  var LEAD_FIELDS = {
+    email: 'email', company: 'company', phone: 'phone',
+    delivery_notes_per_week: 'delivery_notes_per_week', stock_system: 'stock_system',
+    source: 'lead_source_detail', variant: 'lead_form_variant', page: 'lead_page',
+    minutes_per_document: 'calc_minutes_per_document', monthly_staff_cost: 'calc_monthly_staff_cost',
+    error_rate_percent: 'calc_error_rate_percent', short_delivery_percent: 'calc_short_delivery_percent',
+    monthly_supplier_spend: 'calc_monthly_supplier_spend', documents_per_month: 'calc_documents_per_month',
+    hours_saved: 'calc_hours_saved', monthly_net: 'calc_monthly_net', break_even_month: 'calc_break_even_month'
+  };
+  var ATTR_FIELDS = {
+    utm_source: 'utm_source', utm_medium: 'utm_medium', utm_campaign: 'utm_campaign',
+    utm_content: 'utm_content', utm_term: 'utm_term', gclid: 'gclid',
+    landing_page: 'landing_page', referrer: 'first_referrer'
+  };
+  var CORE_FIELDS = ['email', 'firstname', 'lastname', 'company', 'phone'];
+  var CONSENT_TEXT = 'I\u2019m happy for Light Industrial to contact me about this enquiry.';
+  function text(v) {
+    return (v === undefined || v === null || v === false) ? '' : String(v).trim().slice(0, 1000);
+  }
+  // Pure: lead object in, HubSpot submission body out. Tested in docs/test-lead.js.
+  T.hubspotPayload = function (lead, attr) {
+    var fields = [];
+    function add(name, v) { v = text(v); if (v) fields.push({ name: name, value: v }); }
+    var parts = text(lead.name).split(/\s+/).filter(Boolean);
+    if (parts.length) {
+      add('firstname', parts.length > 1 ? parts.slice(0, -1).join(' ') : parts[0]);
+      if (parts.length > 1) add('lastname', parts[parts.length - 1]);
+    }
+    for (var k in LEAD_FIELDS) add(LEAD_FIELDS[k], lead[k]);
+    attr = attr || {};
+    for (var a in ATTR_FIELDS) add(ATTR_FIELDS[a], attr[a]);
+    var body = { fields: fields, context: {} };
+    if (attr.hutk) body.context.hutk = attr.hutk;
+    if (attr.page_url) body.context.pageUri = attr.page_url;
+    if (attr.page_title) body.context.pageName = attr.page_title;
+    if (lead.consent === true || lead.consent === 'yes') {
+      body.legalConsentOptions = { consent: { consentToProcess: true, text: CONSENT_TEXT } };
+    }
+    return body;
+  };
+  T.coreOnly = function (body) {
+    var copy = JSON.parse(JSON.stringify(body));
+    copy.fields = copy.fields.filter(function (f) { return CORE_FIELDS.indexOf(f.name) !== -1; });
+    return copy;
+  };
+  // Resolves when HubSpot has the lead, rejects when it does not.
+  T.sendLead = function (lead) {
+    var url = 'https://api-' + T.hubspotRegion + '.hsforms.com/submissions/v3/integration/submit/' +
+      T.hubspotPortalId + '/' + T.hubspotFormGuid;
+    function post(body) {
+      return window.fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    }
+    var body = T.hubspotPayload(lead, T.attribution());
+    return post(body).then(function (res) {
+      if (res.ok) return res;
+      return post(T.coreOnly(body)).then(function (res2) {
+        if (!res2.ok) throw new Error('HubSpot returned ' + res2.status);
+        return res2;
+      });
+    });
+  };
+
+  // Calendly keeps utm_* from its link on the booking, and its HubSpot
+  // integration copies them onto the contact. So every demo link carries them.
+  function withUtms(url) {
+    var a = readAttr(); if (!a) return url;
+    var extra = ATTR_PARAMS.filter(function (k) { return k.indexOf('utm_') === 0 && a[k]; })
+      .map(function (k) { return k + '=' + encodeURIComponent(a[k]); }).join('&');
+    if (!extra) return url;
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + extra;
+  }
+  function onReady(fn) {
+    if (document.body) fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  onReady(function () {
+    var links = document.querySelectorAll('a[href*="calendly.com"], [data-cal-url]');
+    for (var i = 0; i < links.length; i++) {
+      var el = links[i];
+      if (el.hasAttribute('data-cal-url')) el.setAttribute('data-cal-url', withUtms(el.getAttribute('data-cal-url')));
+      else el.setAttribute('href', withUtms(el.getAttribute('href')));
+    }
+  });
+
   // ── GTM ────────────────────────────────────────────────────────────────────
   if (T.gtmId) {
     window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
@@ -102,11 +236,22 @@ window.LI_TRACKING = {
   // The hero mini form on Home redirects here on success, so this page load is
   // the lead event for it. The full form and the savings gate push their own
   // lead_form_submit inline and never land here.
+  // Calendly can redirect here with ?src=demo after a booking made in its own
+  // tab (a paid Calendly setting), which is how bookings from pages without the
+  // modal get counted.
   if (type === 'thank_you') {
     var src = 'hero';
     try { src = new URLSearchParams(location.search).get('src') || 'hero'; } catch (e) {}
-    push('lead_form_submit', { form_source: src, page_path: path });
+    if (src === 'demo') push('demo_booked', { page_path: path, location: 'calendly_redirect' });
+    else push('lead_form_submit', { form_source: src, page_path: path });
   }
+
+  // The Calendly modal posts a message when a slot is booked. That, not the
+  // click that opened it, is the demo conversion.
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://calendly.com') return;
+    if (e.data && e.data.event === 'calendly.event_scheduled') push('demo_booked', { page_path: path, location: 'modal' });
+  });
 
   // ── Banner ─────────────────────────────────────────────────────────────────
   var CSS = '' +
@@ -183,10 +328,6 @@ window.LI_TRACKING = {
   }
   T.openSettings = function () { onReady(function () { showBanner(true); }); };
 
-  function onReady(fn) {
-    if (document.body) fn();
-    else document.addEventListener('DOMContentLoaded', fn);
-  }
   onReady(function () { if (T.consentBanner && !stored) showBanner(false); });
 
   // ── Events ─────────────────────────────────────────────────────────────────

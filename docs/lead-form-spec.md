@@ -131,13 +131,14 @@ Saying *who* and *by when* sets a real expectation. We then have to meet it.
 
 ## 5. What happens behind the scenes
 
-1. The form sends the answers to the Cloudflare Worker already sitting in `worker/`.
-2. The Worker holds the HubSpot password. **The website cannot** — anyone can read a
-   website's code, so a key in the page is a key given away.
-3. The Worker creates in HubSpot: a contact, a company, source "website", a deal where
-   HubSpot allows it, and a follow-up task for Danika at 08:00 the next working day.
-4. It emails danika@lightindustrial.co.za, copying admin@lightindustrial.co.za.
-5. It emails the visitor the ROI worksheet.
+1. The form posts the answers straight from the browser to a HubSpot form through the
+   HubSpot Forms API (`LI_TRACKING.sendLead()` in `tracking.js`). That API needs no key.
+   The form ID is public by design, so there is no password to hide and no server of
+   ours in the way. Changed 2026-10-19: the Cloudflare Worker this section used to
+   describe was removed.
+2. HubSpot creates or updates the contact with the answers and the first-touch UTMs.
+3. HubSpot workflows, not code, create the deal, the follow-up task at 08:00 the next
+   working day, and the notification email.
 
 **Blocking bots without blocking people:** one hidden field that a human never sees. Real
 people leave it empty; automated spam fills everything in. If it's filled, we bin the
@@ -156,8 +157,8 @@ submission quietly. No puzzles, no "pick the traffic lights" — those cost real
 
 ## 7. Things that must exist before this form can go live
 
-- **A HubSpot key** for the Worker. Without it the form can be built and tested, but can't
-  create a real lead.
+- **The HubSpot form ID** in `hubspotFormGuid` in `tracking.js`. Until it is pasted the
+  form falls back to the visitor's mail app.
 - **The ROI worksheet itself.** The button promises a PDF that nobody has made yet. We
   should not promise it until it exists.
 - **The privacy page**, for the link under the consent tick.
