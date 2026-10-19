@@ -80,7 +80,7 @@ All events are pushed by the site. GTM only listens.
 | Event | Params | Fired by |
 |---|---|---|
 | `page_view_li` | `page_path`, `page_type` (home, intake, erp, pricing, about, contact, savings, lander, thank_you, legal) | `tracking.js` on every page load |
-| `lead_form_submit` | `form_source` (hero, website, meta, savings-results-page), `page_path`, `delivery_notes_band`, `stock_system` | `lead-form.js` after the Worker accepts the form, and `calculator.js` after the gate |
+| `lead_form_submit` | `form_source` (hero, website, meta, savings-results-page), `page_path`, `delivery_notes_band`, `stock_system` | `lead-form.js` after HubSpot accepts the form, the thank-you page for the hero form, and `calculator.js` after the gate |
 | `demo_click` | `page_path`, `location` (hero, section, nav, footer) | Click on any `[data-open-demo]` link |
 | `demo_booked` | `page_path`, `location` (modal, calendly_redirect) | `tracking.js` when the Calendly modal posts `calendly.event_scheduled`, or when Calendly redirects to `/thank-you/?src=demo` after a booking in its own tab |
 | `calculator_results_unlocked` | `page_path`, `docs_per_week`, `net_monthly_band` | `calculator.js` when the email gate succeeds |
@@ -151,7 +151,7 @@ Create a project at clarity.microsoft.com, Settings > Overview > copy the Projec
 
 ## Attribution on the lead itself
 
-`tracking.js` stores the first visit's `utm_*`, `gclid`, `fbclid`, `msclkid`, `li_fat_id`, landing page and referrer in localStorage `li_attr`, once, and never overwrites it. Every lead form sends that object as `attribution`, with HubSpot's `hubspotutk` cookie and the page URL, and the Worker writes it onto the contact (`worker/lead/README.md` lists the properties). The same UTMs are appended to every Calendly link and to the modal URL, so a booking carries the campaign too. This means a lead's source survives ad blockers, blocked cookies and a visitor who reads four pages first.
+`tracking.js` stores the first visit's `utm_*`, `gclid`, `fbclid`, `msclkid`, `li_fat_id`, landing page and referrer in localStorage `li_attr`, once, and never overwrites it. Every lead form sends that object as `attribution`, with HubSpot's `hubspotutk` cookie and the page URL, and `LI_TRACKING.sendLead()` writes it onto the contact (properties listed under HubSpot form below). The same UTMs are appended to every Calendly link and to the modal URL, so a booking carries the campaign too. This means a lead's source survives ad blockers, blocked cookies and a visitor who reads four pages first.
 
 ## Calendly
 
@@ -163,7 +163,30 @@ Create a project at clarity.microsoft.com, Settings > Overview > copy the Projec
 
 ## HubSpot tracking
 
-Nothing to create. The container loads `js-eu1.hs-scripts.com/148893758.js` with `analytics_storage` consent. This ties page visits to the contact once they submit the form. The form itself posts through the Cloudflare Worker in `worker/lead/` to the HubSpot Forms API, carrying the `hubspotutk` cookie when it exists, so leads arrive whether cookies are accepted or not and join their page views when they are.
+Nothing to create. The container loads `js-eu1.hs-scripts.com/148893758.js` with `analytics_storage` consent. This ties page visits to the contact once they submit the form. Every lead form posts from the browser to the HubSpot Forms API on the EU host, carrying the `hubspotutk` cookie when it exists. Leads arrive whether cookies are accepted or not, and join their page views when they are.
+
+## HubSpot form
+
+One HubSpot form receives every lead form on the site. It is never embedded. It is the API target.
+
+1. Settings > Properties > Contact properties > Create, in a group called Website lead. Internal names must match exactly:
+
+   | Internal name | Type | Values |
+   |---|---|---|
+   | `delivery_notes_per_week` | Dropdown | under-10, 10-30, 30-100, over-100, unsure |
+   | `stock_system` | Dropdown | spreadsheet, sage, pastel, other-erp, nothing, other |
+   | `lead_source_detail` | Single-line text | website, meta, savings-results-page, home-savings-calculator |
+   | `lead_form_variant` | Single-line text | contact, worksheet, hero, calculator_lead |
+   | `lead_page` | Single-line text | path of the page the form was on |
+   | `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `gclid`, `landing_page`, `first_referrer` | Single-line text | first touch |
+   | `calc_minutes_per_document`, `calc_monthly_staff_cost`, `calc_error_rate_percent`, `calc_short_delivery_percent`, `calc_monthly_supplier_spend`, `calc_documents_per_month`, `calc_hours_saved`, `calc_monthly_net`, `calc_break_even_month` | Number | calculator inputs and result |
+
+2. Marketing > Forms > Create > Embedded form, named Website lead. Add email, first name, last name, company, phone and every property above. Only Email is required. Turn on submission notifications to the sales inbox.
+3. Copy the form ID (Share > Embed code, `formId`) into `hubspotFormGuid` in `tracking.js`. Commit and push. Every form on the site switches from the mailto fallback to HubSpot at once.
+4. If a property is missing from the form, HubSpot rejects the submission. The site then retries with email, name, company and phone only, so the lead still arrives. A contact with no `lead_form_variant` means a property name is wrong.
+5. `node docs/test-lead.js` checks the field mapping and the retry.
+
+Workflows (no code): form submission creates a deal in the sales pipeline, stage New lead, with a Call back task for 08:00 next working day. Calculator leads (`lead_form_variant` is calculator_lead) get a Send worksheet task and no deal. Lifecycle: Lead on submit, MQL at 10-30 notes a week or more, SQL when a meeting is booked.
 
 In HubSpot, Settings > Tracking & analytics > Tracking code > Advanced tracking: set Cookie consent to Do not show, the site banner already handles it. Add lightindustrial.co.za under Settings > Domains & URLs > Tracking domains.
 

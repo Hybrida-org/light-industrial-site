@@ -110,7 +110,7 @@ Every paid link carries UTMs. Lowercase, hyphens, no spaces.
 
 - [ ] Google Ads auto-tagging on, UTMs set at campaign level as a tracking template
 - [ ] Meta URL parameters set at ad set level
-- [ ] HubSpot original source shows the UTMs on a test contact, and the `utm_*` properties written by the Worker agree with it
+- [ ] HubSpot original source shows the UTMs on a test contact, and the `utm_*` properties written by the site agree with it
 
 ## Speed
 
@@ -120,8 +120,8 @@ Every paid link carries UTMs. Lowercase, hyphens, no spaces.
 
 ## HubSpot lead routing
 
-- [ ] HubSpot form `Website lead (Worker)` and the custom properties in `worker/lead/README.md` exist
-- [ ] `worker/lead/` deployed, URL pasted into `leadEndpoint` in `savings/sums.js`, mailto fallback gone
+- [ ] HubSpot form Website lead and the custom properties in `tracking-setup.md` § HubSpot form exist
+- [ ] Form ID pasted into `hubspotFormGuid` in `tracking.js`, mailto fallback gone
 - [ ] Workflow creates the deal in the right pipeline stage and assigns it to the SDR
 - [ ] A test lead from a `?utm_source=test` visit shows `utm_source` on the contact
 - [ ] Notification email arrives within a minute

@@ -44,10 +44,8 @@
     settledErrorRate: 2,    // where matching memory lands it
     decayMonths: 6,         // how long that takes
 
-    // Paste the deployed Worker URL here to send real leads. While it is empty the
-    // forms fall back to the visitor's own email app, exactly like the homepage
-    // form does. It never silently swallows a lead.
-    leadEndpoint: '',
+    // Where leads go is set once in tracking.js (hubspotFormGuid). While it is
+    // empty the forms fall back to the visitor's own email app.
     contactEmail: 'donovan@lightindustrial.co.za',
     thankYouUrl: '/thank-you/',
     resultsUrl: '/savings/'

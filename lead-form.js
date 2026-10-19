@@ -14,10 +14,9 @@
    docs/lead-form-spec.md for why each field is here, and HYBRIDA-905.
 
    ── Before go-live ────────────────────────────────────────────────────────
-   LEAD_ENDPOINT is empty until the Cloudflare Worker in worker/ is deployed.
-   While it is empty the form hands the answers to the visitor's own email app
-   instead of posting them. That is weaker than HubSpot, but it never silently
-   swallows a lead.
+   Leads go to HubSpot through LI_TRACKING.sendLead() in tracking.js. While
+   hubspotFormGuid is empty there, the form hands the answers to the
+   visitor's own email app instead. That never silently swallows a lead.
 
    PRIVACY_URL is empty until the privacy page exists (HYBRIDA-912). While it
    is empty the consent tick simply has no link under it — better than a link
@@ -38,13 +37,12 @@
     return self.src.replace(/lead-form\.js(\?.*)?$/, '');
   })();
 
-  /* Where a lead goes, who to fall back to, and where a sender lands afterwards
-     all live in savings/sums.js, so pasting the deployed Worker URL in that one
-     place turns on every form on the site at once (HYBRIDA-907). A page that
+  /* Who to fall back to and where a sender lands afterwards live in
+     savings/sums.js. Where a lead goes lives in tracking.js (HYBRIDA-907). A page that
      does not load sums.js falls back to the same values written out here — so
      if you change one, change both. */
   var SETTINGS = (window.SavingsSums && window.SavingsSums.SETTINGS) || {};
-  var LEAD_ENDPOINT = SETTINGS.leadEndpoint || '';
+  var LIVE = !!(window.LI_TRACKING && LI_TRACKING.hubspotFormGuid);
   var CONTACT_EMAIL = SETTINGS.contactEmail || 'donovan@lightindustrial.co.za';
 
   /* A real submission lands on its own page. A page load is a far more reliable
@@ -301,8 +299,6 @@
 
     function answers() {
       var lead = { source: slot.getAttribute('data-source') || 'website', variant: variantName, page: window.location.pathname };
-      // How they got here (UTMs, click IDs, HubSpot cookie), never their answers.
-      if (window.LI_TRACKING && LI_TRACKING.attribution) lead.attribution = LI_TRACKING.attribution();
       FIELDS.forEach(function (field) {
         var el = controlOf(field);
         lead[field.key] = el.type === 'checkbox' ? el.checked : (el.value || '').trim();
@@ -318,7 +314,7 @@
       done.querySelector('.lf-done-title').focus();
     }
 
-    /* Fallback while LEAD_ENDPOINT is empty: hand the details to the visitor's
+    /* Fallback while hubspotFormGuid is empty: hand the details to the visitor's
        own email app. Weaker than posting to HubSpot, but it does not lose the
        lead — and the old form's silent failure did. */
     function sendByEmail(lead) {
@@ -334,15 +330,10 @@
       showDone('Your email app should have opened with your details ready. Hit send and we’ll get back to you.');
     }
 
-    function sendToWorker(lead) {
+    function sendToHubSpot(lead) {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
-      fetch(LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(lead)
-      }).then(function (response) {
-        if (!response.ok) throw new Error('Worker returned ' + response.status);
+      LI_TRACKING.sendLead(lead).then(function () {
         trackSubmit(lead);
         window.location.href = THANK_YOU_URL;
       }).catch(function () {
@@ -368,7 +359,7 @@
       if (form.elements.website.value) { showDone(); return; }
 
       var lead = answers();
-      if (LEAD_ENDPOINT) sendToWorker(lead); else sendByEmail(lead);
+      if (LIVE) sendToHubSpot(lead); else sendByEmail(lead);
     });
   }
 

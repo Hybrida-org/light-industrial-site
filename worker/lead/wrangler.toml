@@ -1,9 +1,0 @@
-name = "light-industrial-lead"
-main = "lead.js"
-compatibility_date = "2024-11-01"
-
-# No secrets. The HubSpot Forms API is public by design; the form GUID is not a credential.
-[vars]
-HUBSPOT_PORTAL_ID = "148893758"
-HUBSPOT_FORM_GUID = ""             # paste from HubSpot: Marketing > Forms > the form > Share > embed code, the formId value
-ALLOWED_ORIGIN = "https://lightindustrial.co.za"
