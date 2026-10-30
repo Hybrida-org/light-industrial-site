@@ -168,6 +168,21 @@ Create a project at clarity.microsoft.com, Settings > Overview > copy the Projec
 
 Nothing to create. The container loads `js-eu1.hs-scripts.com/148893758.js` with `analytics_storage` consent. This ties page visits to the contact once they submit the form. Every lead form posts from the browser to the HubSpot Forms API on the EU host, carrying the `hubspotutk` cookie when it exists. Leads arrive whether cookies are accepted or not, and join their page views when they are.
 
+## Zoho webform
+
+Every lead form on the site also posts to a Zoho CRM webform, and Zoho is now the main destination. HubSpot (below) stays on as a parallel backup for now.
+
+- Form: Zoho CRM > Setup > Channels > Webforms > Leads > **Website lead**. Never embedded or hosted; `tracking.js` posts to it.
+- Fields: First Name, Last Name, Company, Email, Phone, Description, Lead Source (hidden, default "Website form") and UTM Source, UTM Medium, UTM Campaign (`LEADCF1`, `LEADCF2`, `LEADCF3`). No CAPTCHA (the site has its own honeypot), no acknowledgement email to the visitor.
+- Owner: Donovan (donovan@hybrida.co.za), who gets Zoho's new-Lead email. Duplicates go to Zoho's Awaiting Leads queue for approval instead of straight in.
+- Lead Source sent: "ROI calculator" for calculator leads, "Website form" for the rest. Both already exist on the picklist; never send a new value.
+- Description holds everything else as readable lines: form, source, page, delivery notes a week, stock system, every calculator value, all UTMs, gclid, landing page, referrer.
+- Zoho needs Last Name and Company. One-word names go in Last Name; no name falls back to the email's local part, no company to "Unknown".
+- The hidden inputs (`xnQsjsdp`, `xmIwtLD`, `actionType`, `returnURL`, `zc_gad`, the empty honeypot) and the action URL `https://crm.zoho.com/crm/WebToLeadForm` were copied from the form's Source Code view into the `ZOHO` block in `tracking.js`. They are public by design. If the form is rebuilt, copy the new ones in.
+- Zoho answers 200 with a redirect script whether or not it keeps the submission, so the response proves nothing. The post is `mode: 'no-cors'` and a fetch that does not throw counts as sent.
+- **Zoho silently drops submissions not posted from lightindustrial.co.za** (the form's Form Location URL is `https://lightindustrial.co.za/contact/`; any page on the domain works). A test from localhost or a preview host never arrives, and Zoho still says 200. To test, submit on the live site, or replay the post with `Origin: https://lightindustrial.co.za`. If the site moves domain, add the new URL to the webform first. `sendLead()` resolves if Zoho or HubSpot takes the lead and rejects only if both fail, which shows the mailto fallback.
+- `node docs/test-lead.js` checks the Zoho fields and the either-succeeds logic.
+
 ## HubSpot form
 
 One HubSpot form receives every lead form on the site. It is never embedded. It is the API target.
@@ -235,7 +250,7 @@ Delete the test leads from HubSpot afterwards.
 ## Cloudflare Pages
 
 - `tracking.js` and `gtm-container.json` are static files. Cloudflare caches them. After changing `gtmId` or the GTM snippets, purge the cache (Caching > Purge everything) or the old file serves for up to four hours.
-- Do not add a Content-Security-Policy header without listing googletagmanager.com, google-analytics.com, googleadservices.com, connect.facebook.net, snap.licdn.com, px.ads.linkedin.com, clarity.ms and js-eu1.hs-scripts.com. The `_headers` file is where that would go. There is no CSP today.
+- Do not add a Content-Security-Policy header without listing googletagmanager.com, google-analytics.com, googleadservices.com, connect.facebook.net, snap.licdn.com, px.ads.linkedin.com, clarity.ms, js-eu1.hs-scripts.com, api-eu1.hsforms.com and crm.zoho.com (the lead form posts). The `_headers` file is where that would go. There is no CSP today.
 - Cloudflare Web Analytics is a separate beacon. Leave it off, GA4 already counts page views, and one fewer script on the page helps the speed score.
 - Bot Fight Mode can block Meta's domain verification crawler. Turn it off for the verification step if the record fails.
 

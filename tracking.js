@@ -14,7 +14,7 @@
         page) in localStorage 'li_attr', hands it to every lead form through
         LI_TRACKING.attribution(), and carries the UTMs into Calendly links,
      6. turns a Calendly booking into the demo_booked event,
-     7. submits every lead form to HubSpot through LI_TRACKING.sendLead().
+     7. submits every lead form to Zoho CRM and HubSpot through LI_TRACKING.sendLead().
 
    It must never throw when every ID below is empty. */
 window.LI_TRACKING = {
@@ -169,14 +169,13 @@ window.LI_TRACKING = {
     copy.fields = copy.fields.filter(function (f) { return CORE_FIELDS.indexOf(f.name) !== -1; });
     return copy;
   };
-  // Resolves when HubSpot has the lead, rejects when it does not.
-  T.sendLead = function (lead) {
+  function postHubSpot(lead, attr) {
     var url = 'https://api-' + T.hubspotRegion + '.hsforms.com/submissions/v3/integration/submit/' +
       T.hubspotPortalId + '/' + T.hubspotFormGuid;
     function post(body) {
       return window.fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     }
-    var body = T.hubspotPayload(lead, T.attribution());
+    var body = T.hubspotPayload(lead, attr);
     return post(body).then(function (res) {
       if (res.ok) return res;
       return post(T.coreOnly(body)).then(function (res2) {
@@ -184,6 +183,82 @@ window.LI_TRACKING = {
         return res2;
       });
     });
+  }
+
+  // ── Leads to Zoho CRM ──────────────────────────────────────────────────────
+  // Zoho CRM > Setup > Channels > Webforms > Leads > "Website lead". That form
+  // makes Donovan the Lead owner and emails him. The values below come from its
+  // Source Code view (public by design, every embedded Zoho form shows them).
+  // If the form is ever rebuilt, copy the new ones in. LEADCF1-3 are the
+  // UTM Source, UTM Medium and UTM Campaign custom fields.
+  var ZOHO = {
+    action: 'https://crm.zoho.com/crm/WebToLeadForm',
+    hidden: {
+      xnQsjsdp: '02f8e98e4a1ea6080c61292babd87fcd92103b195601ebbf2f30b4e724cf837b',
+      zc_gad: '',
+      xmIwtLD: '2a5592fd156ae97ca62c77fc9421acd6c177c453e439bb382c27c91a0fc1a3308c755e958b155d932a1e61097973de62',
+      actionType: 'TGVhZHM=',
+      returnURL: 'https://lightindustrial.co.za/thank-you/',
+      aG9uZXlwb3Q: ''  // Zoho's own honeypot; must stay empty
+    },
+    // Field name: max length on the Zoho form.
+    fields: { 'First Name': 40, 'Last Name': 80, Company: 200, Email: 100, Phone: 30,
+      'Lead Source': 100, LEADCF1: 100, LEADCF2: 100, LEADCF3: 150, Description: 30000 },
+    // Existing Lead Source picklist values; never send one that is not on the list.
+    leadSource: { calculator_lead: 'ROI calculator', other: 'Website form' }
+  };
+  var DESCRIPTION = [
+    ['Form', 'variant'], ['Source', 'source'], ['Page', 'page'],
+    ['Delivery notes a week', 'delivery_notes_per_week'], ['Stock system', 'stock_system'],
+    ['Minutes per document', 'minutes_per_document'], ['Monthly staff cost', 'monthly_staff_cost'],
+    ['Error rate %', 'error_rate_percent'], ['Short deliveries %', 'short_delivery_percent'],
+    ['Monthly supplier spend', 'monthly_supplier_spend'], ['Documents a month', 'documents_per_month'],
+    ['Hours saved', 'hours_saved'], ['Monthly net', 'monthly_net'], ['Break-even month', 'break_even_month']
+  ];
+  var DESCRIPTION_ATTR = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'landing_page', 'referrer'];
+  // Pure: lead object in, Zoho webform fields out. Tested in docs/test-lead.js.
+  T.zohoFields = function (lead, attr) {
+    attr = attr || {};
+    var p = new URLSearchParams();
+    for (var h in ZOHO.hidden) p.append(h, ZOHO.hidden[h]);
+    function add(name, v) {
+      v = (v === undefined || v === null || v === false) ? '' : String(v).trim();
+      if (v) p.append(name, v.slice(0, ZOHO.fields[name]));
+    }
+    var parts = text(lead.name).split(/\s+/).filter(Boolean);
+    var email = text(lead.email);
+    // Zoho needs Last Name and Company. One word goes in Last Name, the way
+    // Saige's Leads are kept; no name at all falls back to the email's local part.
+    if (parts.length > 1) add('First Name', parts.slice(0, -1).join(' '));
+    add('Last Name', parts.length ? parts[parts.length - 1] : (email.split('@')[0] || 'Unknown'));
+    add('Company', text(lead.company) || 'Unknown');
+    add('Email', email);
+    add('Phone', lead.phone);
+    add('Lead Source', ZOHO.leadSource[lead.variant] || ZOHO.leadSource.other);
+    add('LEADCF1', attr.utm_source);
+    add('LEADCF2', attr.utm_medium);
+    add('LEADCF3', attr.utm_campaign);
+    var lines = DESCRIPTION.map(function (d) { return [d[0], lead[d[1]]]; })
+      .concat(DESCRIPTION_ATTR.map(function (k) { return [k, attr[k]]; }))
+      .filter(function (l) { return text(l[1]); })
+      .map(function (l) { return l[0] + ': ' + text(l[1]); });
+    add('Description', lines.join('\n'));
+    return p;
+  };
+  // Zoho answers 200 with a redirect script even when it drops a submission
+  // (it silently drops any not posted from lightindustrial.co.za, the form's
+  // location URL, so localhost tests never arrive). The response proves nothing,
+  // so the post is no-cors and a fetch that does not throw counts as sent.
+  function postZoho(lead, attr) {
+    return window.fetch(ZOHO.action, { method: 'POST', mode: 'no-cors', body: T.zohoFields(lead, attr) });
+  }
+
+  // Zoho and HubSpot in parallel (HubSpot is the backup for now). Resolves when
+  // either has the lead; rejects only when both fail, so the caller's mailto
+  // fallback still catches a total failure.
+  T.sendLead = function (lead) {
+    var attr = T.attribution();
+    return Promise.any([postZoho(lead, attr), postHubSpot(lead, attr)]);
   };
 
   // Calendly keeps utm_* from its link on the booking, and its HubSpot
