@@ -766,7 +766,7 @@ function show(i,push=true){
   document.getElementById('progFill').style.width=pct+'%';document.getElementById('progDot').style.left=pct+'%';
   document.getElementById('prevBtn').disabled=i===0;document.getElementById('nextBtn').disabled=i===slides.length-1;
   if(push)history.replaceState(null,'','#'+slides[i].dataset.id);
-  (window.dataLayer=window.dataLayer||[]).push({event:'deck_slide',slide_id:slides[i].dataset.id,slide_no:i+1});
+  (window.dataLayer=window.dataLayer||[]).push({event:'deck_slide',slide_id:slides[i].dataset.id,slide_no:i+1,deck_to:new URLSearchParams(location.search).get('to')||'direct'});
 }
 const step=d=>show(cur+d);
 const root=document.documentElement,lookLbl=document.getElementById('lookLbl');
