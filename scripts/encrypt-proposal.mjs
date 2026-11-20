@@ -23,7 +23,10 @@ const pick = (alphabet, n) => {
   return out;
 };
 const code = opt('--code') || pick('abcdefghijklmnopqrstuvwxyz0123456789', 6);
-const password = opt('--password') || pick('ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789', 16);
+// Plain everyday words; five of them from this list is about 40 bits, fine behind 600k PBKDF2 rounds.
+const WORDS = `amber anchor apple arch atlas autumn badge baker bamboo barley basin beacon bench berry birch blanket bloom boulder branch brass breeze brick bridge brook bucket cabin cable canal candle canvas canyon carbon cargo carpet castle cedar chalk channel cherry chimney cider cinder clay cliff clock cloud clover coast cobalt comet copper coral cotton crane crater creek crest crystal current cypress daisy delta desert dial dock dune eagle ember engine falcon feather fence fern ferry field flint forest fossil fountain frost garden garnet gate glacier granite gravel grove harbour harvest hazel heron hill hollow honey horizon island ivory jasper jetty kettle lagoon lantern lattice lemon level linen locket lodge maple marble meadow mesa mill mint mirror moss mountain native nickel north oak oasis ocean olive orbit orchard otter paddle panel parcel pebble pepper pewter pier pine planet plaster plum pond poplar prairie quarry quartz quill rail raven reef ridge river robin rope rowan saddle sage salt sand satin shore signal silver slate spruce stone storm summit sunset swallow table thistle thunder timber topaz tower trail tulip tundra valley velvet violet walnut willow window winter wren yarrow zinc`.split(' ');
+const words = (n) => Array.from(crypto.getRandomValues(new Uint32Array(n)), (x) => WORDS[x % WORDS.length]).join('-');
+const password = opt('--password') || words(5);
 if (!/^[a-z0-9-]{4,40}$/.test(code)) { console.error('Code must be 4-40 chars of a-z, 0-9, -'); process.exit(1); }
 const outDir = join(root, 'proposal', code);
 if (existsSync(outDir) && !args.includes('--force')) { console.error(`proposal/${code} exists. Pass --force to overwrite.`); process.exit(1); }

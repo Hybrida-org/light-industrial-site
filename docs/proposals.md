@@ -14,7 +14,7 @@ password the proposal can't be read, in the browser, the page source or this rep
    node scripts/encrypt-proposal.mjs <path-to-client-copy.html>
    ```
 
-   It makes a random 6-character code and a 16-character password, writes
+   It makes a random 6-character code and a five-word password (for example `cedar-quartz-river-lantern-mint`), writes
    `proposal/<code>/index.html`, checks it decrypts and holds no plain text, and prints the URL
    and password. The password is never saved. Copy it straight into the password manager.
    Optional: `--code <code>`, `--password <password>`, `--force` to overwrite.
