@@ -76,8 +76,14 @@ ul,ol{margin:0;padding:0;list-style:none}
 .slide.on .rise{animation:rise .7s var(--ease) both}
 .slide.on .rise.d2{animation-delay:.08s}.slide.on .rise.d3{animation-delay:.16s}.slide.on .rise.d4{animation-delay:.24s}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.zone{position:absolute;top:0;bottom:0;width:10%;z-index:5;opacity:0}
-.zone.l{left:0;cursor:w-resize}.zone.r{right:0;cursor:e-resize}
+.zone{position:absolute;top:0;bottom:64px;width:9%;z-index:5;display:grid;align-items:center;transition:opacity .3s var(--ease)}
+.zone.l{left:0;justify-items:start;padding-left:28px}.zone.r{right:0;justify-items:end;padding-right:28px}
+.zone .arw{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);background:var(--foot-bg);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--soft);opacity:.55;transition:opacity .3s var(--ease),transform .4s var(--ease),border-color .3s,color .3s}
+.zone .arw svg{width:20px;height:20px}
+.zone:hover .arw,.zone:focus-visible .arw{opacity:1;color:var(--text);border-color:var(--bronze)}
+.zone.l:hover .arw{transform:translateX(-4px)}.zone.r:hover .arw{transform:translateX(4px)}
+.zone:focus-visible{outline:none}
+.zone:disabled{opacity:0;pointer-events:none}
 
 /* type */
 .kicker{font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bronze-ink)}
@@ -600,8 +606,8 @@ body:not(.notes-open) #notes{visibility:hidden}
 <div id="fit">
 <div id="stage">
 <main id="deck" aria-live="polite">
-<button class="zone l" id="zl" aria-label="Previous slide"></button>
-<button class="zone r" id="zr" aria-label="Next slide"></button>
+<button class="zone l" id="zl" aria-label="Previous slide"><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></span></button>
+<button class="zone r" id="zr" aria-label="Next slide"><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></span></button>
 <section class="slide centre" data-id="title">
 <div class="bg" aria-hidden="true"></div>
   <div class="orb rise"><svg class="mark" viewBox="0 0 1033 1065" aria-hidden="true"><rect x="722" width="311" height="321" rx="40" fill="var(--brick)"/><rect y="744" width="311" height="321" rx="40" fill="var(--mark-base)"/><rect x="361" y="744" width="311" height="321" rx="40" fill="var(--bronze)"/><rect x="722" y="371" width="311" height="694" rx="40" fill="var(--bronze)"/><rect x="361" y="373" width="311" height="321" rx="40" fill="var(--mark-base)"/></svg></div>
@@ -764,7 +770,7 @@ function show(i,push=true){
   document.getElementById('num').textContent=pad(i+1)+' / '+pad(slides.length);
   const pct=i/(slides.length-1)*100;
   document.getElementById('progFill').style.width=pct+'%';document.getElementById('progDot').style.left=pct+'%';
-  document.getElementById('prevBtn').disabled=i===0;document.getElementById('nextBtn').disabled=i===slides.length-1;
+  document.getElementById('prevBtn').disabled=i===0;document.getElementById('nextBtn').disabled=i===slides.length-1;document.getElementById('zl').disabled=i===0;document.getElementById('zr').disabled=i===slides.length-1;
   if(push)history.replaceState(null,'','#'+slides[i].dataset.id);
   (window.dataLayer=window.dataLayer||[]).push({event:'deck_slide',slide_id:slides[i].dataset.id,slide_no:i+1,deck_to:new URLSearchParams(location.search).get('to')||'direct'});
 }
@@ -786,6 +792,8 @@ document.getElementById('prevBtn').onclick=()=>step(-1);document.getElementById(
 document.getElementById('zl').onclick=()=>step(-1);document.getElementById('zr').onclick=()=>step(1);
 let tx=null,ty=0;addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
 addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;tx=null;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)step(dx<0?1:-1);},{passive:true});
+// trackpad two-finger swipe: one slide per gesture
+let wl=0;addEventListener('wheel',e=>{if(Math.abs(e.deltaX)<Math.abs(e.deltaY)*1.5||Math.abs(e.deltaX)<30)return;e.preventDefault();const t=Date.now();if(t-wl<700){wl=t;return;}wl=t;step(e.deltaX>0?1:-1);},{passive:false});
 addEventListener('keydown',e=>{
   const k=e.key;
   if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();step(1);}
