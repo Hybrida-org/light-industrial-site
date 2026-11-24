@@ -287,7 +287,7 @@ body:not(.notes-open) #notes{visibility:hidden}
 .st.end b{color:var(--sage-hi)}
 .ln{flex:1;height:2px;margin:31px -28px 0;position:relative;overflow:hidden;background:linear-gradient(90deg,var(--wire),var(--sage-hi));opacity:.55;border-radius:2px}
 .ln::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,transparent,var(--dot),transparent);transform:translateX(-120%)}
-@media (prefers-reduced-motion:no-preference){.slide.on .ln::after{animation:ln-run 2.2s var(--ease) infinite}.slide.on .ln:nth-of-type(4)::after{animation-delay:.4s}.slide.on .ln:nth-of-type(6)::after{animation-delay:.8s}}
+@media (prefers-reduced-motion:no-preference){.slide.on .ln::after{animation:ln-run 2.2s var(--ease) 2}.slide.on .ln:nth-of-type(4)::after{animation-delay:.4s}.slide.on .ln:nth-of-type(6)::after{animation-delay:.8s}}
 @keyframes ln-run{to{transform:translateX(320%)}}
 .g.callout{flex-direction:row;align-items:center;gap:18px;padding:20px 24px}
 .g.callout p{font-family:var(--head);font-weight:500;font-size:21px;line-height:1.4;color:var(--text)}
@@ -333,7 +333,7 @@ body:not(.notes-open) #notes{visibility:hidden}
   box-shadow:0 0 0 1px var(--core-ring),0 0 0 14px var(--halo-soft),0 0 0 30px rgb(168 138 109 / .03),0 0 120px var(--halo)}
 .orb::before,.fx-core::before{content:"";position:absolute;inset:-1px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 70%,var(--dot) 88%,transparent 100%);
   -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px))}
-@media (prefers-reduced-motion:no-preference){.slide.on .orb::before,.slide.on .fx-core::before{animation:fx-spin 7s linear infinite}}
+@media (prefers-reduced-motion:no-preference){.slide.on .orb::before,.slide.on .fx-core::before{animation:fx-spin 4s var(--ease) 1}}
 .orb .mark{width:64px;height:66px}
 .orb.sm{width:120px;height:120px}.orb.sm .mark{width:52px;height:54px}
 .g.contact{flex-direction:row;align-items:center;gap:18px;padding:16px 26px 16px 18px;margin-top:10px;text-align:left}
@@ -349,7 +349,7 @@ body:not(.notes-open) #notes{visibility:hidden}
 .fx-w{fill:none;stroke:var(--wire);stroke-width:1.6;opacity:.85}
 .fx-dash{stroke-dasharray:4 6;opacity:.6}.fx-back{marker-end:none}
 .fx-dot{fill:var(--dot);filter:drop-shadow(0 0 6px var(--dot));offset-distance:0%;opacity:0}
-@media (prefers-reduced-motion:no-preference){.slide.on .fx-dot{animation:fx-run 2.4s var(--ease) infinite}}
+@media (prefers-reduced-motion:no-preference){.slide.on .fx-dot{animation:fx-run 2.4s var(--ease) 1}}
 @keyframes fx-run{0%{offset-distance:0%;opacity:0}15%{opacity:1}85%{opacity:1}100%{offset-distance:100%;opacity:0}}
 @keyframes fx-spin{to{transform:rotate(1turn)}}
 .fx-card,.fx-make,.fx-acc{position:absolute;border:1px solid transparent;border-radius:22px;background:linear-gradient(180deg,var(--g-top),var(--g-bot)) padding-box,var(--g-edge) border-box;box-shadow:var(--g-shadow)}
@@ -411,7 +411,7 @@ body:not(.notes-open) #notes{visibility:hidden}
 .g.dst{padding:32px 22px;gap:18px}
 .g.dst b{font-size:19px}
 .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sage-hi);box-shadow:0 0 0 3px var(--sage-b),0 0 10px var(--sage-hi)}
-@media (prefers-reduced-motion:no-preference){.slide.on .live{animation:live 2s ease-in-out infinite}}
+@media (prefers-reduced-motion:no-preference){.slide.on .live{animation:live 2s ease-in-out 2}}
 @keyframes live{50%{box-shadow:0 0 0 6px transparent,0 0 14px var(--sage-hi)}}
 .g.contact{padding:18px 30px}
 .g.contact::before{left:30px;right:30px}
@@ -595,8 +595,8 @@ body:not(.notes-open) #notes{visibility:hidden}
   .g.stat .big small{font-size:.4em}
 }
 @media (max-width:900px) and (orientation:portrait) and (prefers-reduced-motion:no-preference),(max-width:600px) and (prefers-reduced-motion:no-preference){
-  .slide.on .m-core::before{animation:fx-spin 7s linear infinite}
-  .slide.on .m-ar i{animation:m-run 1.6s var(--ease) infinite}
+  .slide.on .m-core::before{animation:fx-spin 4s var(--ease) 1}
+  .slide.on .m-ar i{animation:m-run 1.6s var(--ease) 3}
   .slide.on .m-ar:nth-of-type(odd) i{animation-delay:.5s}
 }
 @keyframes m-run{from{transform:translateY(-6px);opacity:0}30%{opacity:1}to{transform:translateY(20px);opacity:0}}
@@ -613,7 +613,7 @@ body:not(.notes-open) #notes{visibility:hidden}
   <div class="orb rise"><svg class="mark" viewBox="0 0 1033 1065" aria-hidden="true"><rect x="722" width="311" height="321" rx="40" fill="var(--brick)"/><rect y="744" width="311" height="321" rx="40" fill="var(--mark-base)"/><rect x="361" y="744" width="311" height="321" rx="40" fill="var(--bronze)"/><rect x="722" y="371" width="311" height="694" rx="40" fill="var(--bronze)"/><rect x="361" y="373" width="311" height="321" rx="40" fill="var(--mark-base)"/></svg></div>
   <h1 class="display title rise d2" style="margin-top:28px">Light Industrial</h1>
   <p class="lead rise d3" style="font-size:26px;color:var(--text)">Procurement, stock and operations software for South African manufacturers, workshops and merchants.</p>
-  <p class="chip rise d4" style="margin-top:22px">Capabilities · 2026</p>
+  <p class="chip rise d4" style="margin-top:22px">Overview · 2026</p>
 </section>
 
 <section class="slide" data-id="fit">
@@ -739,7 +739,7 @@ let cur=0;
 function scale(){const r=fit.getBoundingClientRect();stage.style.setProperty('--s',Math.min(r.width/1600,r.height/900));}
 function show(i,push=true){
   i=Math.max(0,Math.min(slides.length-1,i));cur=i;
-  slides.forEach((s,j)=>{const on=j===i;s.classList.toggle('on',on);if(on)s.querySelectorAll('.c-pulse,.c-node,.rise').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation='';});});
+  slides.forEach(s=>s.classList.remove('on'));void stage.offsetWidth;slides[i].classList.add('on');
   notes.forEach(n=>n.classList.toggle('on',n.dataset.for===slides[i].dataset.id));
   document.getElementById('num').textContent=pad(i+1)+' / '+pad(slides.length);
   const pct=i/(slides.length-1)*100;
